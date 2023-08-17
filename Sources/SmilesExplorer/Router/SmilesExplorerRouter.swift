@@ -17,7 +17,7 @@ public final class SmilesExplorerRouter: NSObject {
     
     private override init() {}
     
-    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?, model: SmilesExplorerMembershipResponseModel?,sourceScreen: SourceScreen = .success) {
+    func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?, model: SmilesExplorerSubscriptionInfoResponse?,sourceScreen: SourceScreen = .success) {
         
         let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(model: model,sourceScreen: sourceScreen)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)

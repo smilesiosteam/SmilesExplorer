@@ -29,7 +29,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     
     // MARK: - Properties -
     
-    private var model: SmilesExplorerMembershipResponseModel?
+    private var model: SmilesExplorerSubscriptionInfoResponse?
     
 
     // MARK: - ViewController Lifecycle -
@@ -41,7 +41,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(model: SmilesExplorerMembershipResponseModel?,sourceScreen: SourceScreen = .freePassSuccess) {
+    init(model: SmilesExplorerSubscriptionInfoResponse?,sourceScreen: SourceScreen = .freePassSuccess) {
         
         self.model = model
         super.init(nibName: "SmilesExplorerMembershipSuccessViewController", bundle: .module)
@@ -62,6 +62,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setUpNavigationBar()
     }
+    
     private func setUpNavigationBar() {
         
         let appearance = UINavigationBarAppearance()
@@ -70,7 +71,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
         let locationNavBarTitle = UILabel()
-        locationNavBarTitle.text =  self.model?.themeResources.explorerSubscriptionTitle ?? ""
+        locationNavBarTitle.text =  self.model?.themeResources?.explorerSubscriptionTitle ?? ""
         locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         self.navigationItem.titleView = locationNavBarTitle
@@ -96,8 +97,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         dateORLinkButton.fontTextStyle = .smilesTitle1
         actionButton.fontTextStyle = .smilesTitle1
         actionButton.setTitle( "ContinueTitle".localizedString.capitalized, for: .normal)
-        congratulationLabel.text = self.model?.themeResources.explorerPurchaseSuccessTitle
-        if let urlStr = self.model?.themeResources.explorerPurchaseSuccessImage, !urlStr.isEmpty {
+        congratulationLabel.text = self.model?.themeResources?.explorerPurchaseSuccessTitle
+        if let urlStr = self.model?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
             imgView.isHidden = false
             if urlStr.hasSuffix(".json") {
                 LottieAnimationManager.showAnimationFromUrl(FromUrl: urlStr, animationBackgroundView: self.imgView, removeFromSuper: false, loopMode: .loop, shouldAnimate: true) { _ in }
@@ -108,8 +109,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             imgView.isHidden = true
         }
         
-        detailLabel.text =  (self.model?.themeResources.passPurchaseSuccessMsg ?? "") +  (self.model?.themeResources.explorerSubscriptionSubTitle ?? "")
-        if let expiryDateString =  self.model?.lifestyleOffers.first?.expiryDate {
+        detailLabel.text =  (self.model?.themeResources?.passPurchaseSuccessMsg ?? "") +  (self.model?.themeResources?.explorerSubscriptionSubTitle ?? "")
+        if let expiryDateString =  self.model?.lifestyleOffers?.first?.expiryDate {
             let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy", to: "dd MMM YYYY")
             dateORLinkButton.setTitle(outputDateString, for: .normal)
         }
