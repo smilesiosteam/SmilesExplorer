@@ -42,7 +42,8 @@ extension TableViewDataSource where Model == GetTopOffersResponseModel {
             isDummy: isDummy
         ) { (topOffers, cell, data, indexPath) in
             guard let cell = cell as? TopOffersTableViewCell else {return}
-            cell.showPageControl = false
+            // need to uncomment below line after testing functionality
+           // cell.showPageControl = false
             cell.sliderTimeInterval = topOffers.sliderTimeout
             cell.collectionsData = topOffers.ads
             cell.setBackGroundColor(color: UIColor(hexString: data))
