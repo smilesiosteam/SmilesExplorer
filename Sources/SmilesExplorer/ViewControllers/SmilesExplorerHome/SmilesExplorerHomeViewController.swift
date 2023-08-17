@@ -239,6 +239,7 @@ extension SmilesExplorerHomeViewController {
                     cell.setupValues(url: url)
                     cell.getMembership = { [weak self] in
                         // Setup navigation for membership
+                        SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self?.navigationController)
                     }
                 })
                 configureDataSource()

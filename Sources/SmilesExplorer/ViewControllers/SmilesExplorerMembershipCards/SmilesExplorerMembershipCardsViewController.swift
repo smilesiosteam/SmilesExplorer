@@ -24,25 +24,20 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     //MARK: IBoutlet
     @IBOutlet var smilesExplorerLabel: UILabel!
     @IBOutlet var pickPassTypeLabel: UILabel!
-    
-    
     @IBOutlet var membershipTableView: UITableView!
     
-    
-    
     // MARK: - VIEW LIFECYCLE -
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        
-       
     }
-    public override func viewWillAppear(_ animated: Bool) {
+    
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpNavigationBar()
     }
     
-    public override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }

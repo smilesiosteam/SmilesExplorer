@@ -12,7 +12,7 @@
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
-        <array key="Montserrat-Bold.otf">
+        <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-SemiBold.otf">
@@ -22,8 +22,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerMembershipCardsViewController" customModule="SmilesExplorer">
             <connections>
-                <outlet property="memberShipSelectionTableView" destination="WrG-nQ-9ff" id="eRK-Ck-UPA"/>
-                <outlet property="membershipTableView" destination="WrG-nQ-9ff" id="mzi-ch-Tqm"/>
+                <outlet property="membershipTableView" destination="WrG-nQ-9ff" id="5PA-Cd-8FW"/>
                 <outlet property="pickPassTypeLabel" destination="oe6-8w-Cb8" id="65M-l6-Si9"/>
                 <outlet property="smilesExplorerLabel" destination="766-6x-fcA" id="B2t-dV-RBH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -161,47 +160,8 @@
             </constraints>
             <point key="canvasLocation" x="113.74045801526717" y="19.718309859154932"/>
         </view>
-        <view contentMode="scaleToFill" id="ApL-eH-vvI">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SubAddPromo" translatesAutoresizingMaskIntoConstraints="NO" id="tJk-XQ-AsJ">
-                    <rect key="frame" x="16" y="25.666666666666668" width="9" height="9.0000000000000036"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="9" id="rCJ-Zc-Nh9"/>
-                        <constraint firstAttribute="width" constant="9" id="rLS-LS-Aq9"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply promo code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgW-Pw-jM4">
-                    <rect key="frame" x="45" y="22.666666666666668" width="332" height="15.000000000000004"/>
-                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
-                    <color key="textColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kB-74-lPf">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                </button>
-            </subviews>
-            <viewLayoutGuide key="safeArea" id="vfk-40-Dvs"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="vgW-Pw-jM4" firstAttribute="centerY" secondItem="tJk-XQ-AsJ" secondAttribute="centerY" id="3VO-3g-XoR"/>
-                <constraint firstItem="3kB-74-lPf" firstAttribute="leading" secondItem="ApL-eH-vvI" secondAttribute="leading" id="9Oc-78-mGD"/>
-                <constraint firstItem="tJk-XQ-AsJ" firstAttribute="leading" secondItem="ApL-eH-vvI" secondAttribute="leading" constant="16" id="GSS-cv-RdG"/>
-                <constraint firstItem="tJk-XQ-AsJ" firstAttribute="centerY" secondItem="ApL-eH-vvI" secondAttribute="centerY" id="HQh-w2-rKt"/>
-                <constraint firstAttribute="trailing" secondItem="vgW-Pw-jM4" secondAttribute="trailing" constant="16" id="IGl-oB-RGM"/>
-                <constraint firstItem="vgW-Pw-jM4" firstAttribute="leading" secondItem="tJk-XQ-AsJ" secondAttribute="trailing" constant="20" id="Z8m-gk-lEH"/>
-                <constraint firstItem="3kB-74-lPf" firstAttribute="top" secondItem="ApL-eH-vvI" secondAttribute="top" id="fUk-8k-wzY"/>
-                <constraint firstAttribute="trailing" secondItem="3kB-74-lPf" secondAttribute="trailing" id="kkK-2L-MeM"/>
-                <constraint firstAttribute="bottom" secondItem="3kB-74-lPf" secondAttribute="bottom" id="t9S-bq-YeP"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="122.90076335877862" y="645.77464788732402"/>
-        </view>
     </objects>
     <resources>
-        <image name="SubAddPromo" width="10" height="10"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
