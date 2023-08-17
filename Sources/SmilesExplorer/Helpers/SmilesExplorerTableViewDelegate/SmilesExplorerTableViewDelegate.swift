@@ -29,7 +29,7 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
-            if sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.topPlaceholder.rawValue {
+            if sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.footer.rawValue {
                 let header = SmilesExplorerHeader()
                 header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""))
                 
@@ -60,11 +60,11 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
             }
         }
         
-//        if let offerListingSectionIndex = getSectionIndex(for: .offerListing), offerListingSectionIndex == section {
-//            if let dataSource = (self.dataSource?.dataSources?[safe: offerListingSectionIndex] as? TableViewDataSource<OfferDO>) {
-//                showHide(isDummy: dataSource.isDummy)
-//            }
-//        }
+        if let ticketsSectionIndex = getSectionIndex(for: .tickets), ticketsSectionIndex == section {
+            if let dataSource = (self.dataSource?.dataSources?[safe: ticketsSectionIndex] as? TableViewDataSource<OfferDO>) {
+                showHide(isDummy: dataSource.isDummy)
+            }
+        }
         
     }
     

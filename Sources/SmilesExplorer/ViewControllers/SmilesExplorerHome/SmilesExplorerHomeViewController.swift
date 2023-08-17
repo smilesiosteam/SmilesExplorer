@@ -206,6 +206,8 @@ extension SmilesExplorerHomeViewController {
                 switch SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) {
                 case .header:
                     configureHeaderSection()
+                case .footer:
+                    configureFooterSection()
                 default: break
                 }
             }
@@ -222,6 +224,25 @@ extension SmilesExplorerHomeViewController {
         if let headerSectionIndex = getSectionIndex(for: .header) {
             dataSource?.dataSources?[headerSectionIndex] = TableViewDataSource(models: [], reuseIdentifier: "", data: "#FFFFFF", cellConfigurator: { _, _, _, _ in })
             configureDataSource()
+        }
+        
+    }
+    
+    private func configureFooterSection() {
+        
+        if let footerSectionIndex = getSectionIndex(for: .footer) {
+            if let footer = smilesExplorerSections?.sectionDetails?.first(where: { section in
+                return section.sectionIdentifier == SmilesExplorerSectionIdentifier.footer.rawValue
+            }), let backgroundImage = footer.backgroundImage {
+                dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource(models: [backgroundImage], reuseIdentifier: "SmilesExplorerFooterTableViewCell", data: "#FFFFFF", cellConfigurator: { (url, cell, data, indexPath) in
+                    guard let cell = cell as? SmilesExplorerFooterTableViewCell else { return }
+                    cell.setupValues(url: url)
+                    cell.getMembership = { [weak self] in
+                        // Setup navigation for membership
+                    }
+                })
+                configureDataSource()
+            }
         }
         
     }
