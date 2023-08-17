@@ -12,8 +12,7 @@ import UIKit
 struct SmilesExplorerHomeCellRegistration: CellRegisterable {
     
     func register(for tableView: UITableView) {
-        
-        
+        tableView.registerCellFromNib(SmilesExplorerFooterTableViewCell.self, withIdentifier: "SmilesExplorerFooterTableViewCell", bundle: .module)
     }
     
 }
