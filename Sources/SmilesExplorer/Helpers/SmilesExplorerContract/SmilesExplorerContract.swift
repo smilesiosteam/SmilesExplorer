@@ -14,7 +14,8 @@ import SmilesBanners
 extension SmilesExplorerHomeViewModel {
     
     enum Input {
-        case getSections(categoryID: Int)
+        case getSections(categoryID: Int, type: String)
+        case getRewardPoints
         case getFiltersData(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?)
         case removeAndSaveFilters(filter: FiltersCollectionViewCellRevampModel)
         case getSortingList
@@ -29,6 +30,9 @@ extension SmilesExplorerHomeViewModel {
         
         case fetchFiltersDataSuccess(filters: [FiltersCollectionViewCellRevampModel], selectedSortingTableViewCellModel: FilterDO?)
         case fetchAllSavedFiltersSuccess(filtersList: [RestaurantRequestFilter], filtersSavedList: [RestaurantRequestWithNameFilter])
+        
+        case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel, shouldLogout: Bool?)
+        case fetchRewardPointsDidFail(error: Error)
         
         case fetchSavedFiltersAfterSuccess(filtersSavedList: [RestaurantRequestWithNameFilter])
         case fetchContentForSortingItems(baseRowModels: [BaseRowModel])

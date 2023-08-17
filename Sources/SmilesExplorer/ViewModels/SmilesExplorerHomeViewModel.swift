@@ -11,6 +11,7 @@ import SmilesSharedServices
 import SmilesUtilities
 import SmilesOffers
 import SmilesBanners
+import SmilesLocationHandler
 
 class SmilesExplorerHomeViewModel: NSObject {
     
@@ -20,8 +21,10 @@ class SmilesExplorerHomeViewModel: NSObject {
     
     // MARK: - VIEWMODELS -
     private let sectionsViewModel = SectionsViewModel()
+    private let rewardPointsViewModel = RewardPointsViewModel()
     
     private var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
+    private var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
     
     private var filtersSavedList: [RestaurantRequestWithNameFilter]?
     private var filtersList: [RestaurantRequestFilter]?
@@ -29,6 +32,13 @@ class SmilesExplorerHomeViewModel: NSObject {
     private var selectedSort: String?
     
     // MARK: - METHODS -
+    private func logoutUser() {
+        UserDefaults.standard.set(false, forKey: .notFirstTime)
+        UserDefaults.standard.set(true, forKey: .isLoggedOut)
+        UserDefaults.standard.removeObject(forKey: .loyaltyID)
+        LocationStateSaver.removeLocation()
+        LocationStateSaver.removeRecentLocations()
+    }
     
 }
 
@@ -39,9 +49,9 @@ extension SmilesExplorerHomeViewModel {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {
-            case .getSections(categoryID: let categoryID):
+            case .getSections(categoryID: let categoryID, let type):
                 self?.bind(to: self?.sectionsViewModel ?? SectionsViewModel())
-                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser))
+                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type))
                 
             case .getFiltersData(let filtersSavedList, let isFilterAllowed, let isSortAllowed):
                 break
@@ -66,6 +76,9 @@ extension SmilesExplorerHomeViewModel {
 //            case .getTopOffers(bannerType: let bannerType, categoryId: let categoryId):
 //                self?.bind(to: self?.topOffersViewModel ?? TopOffersViewModel())
 //                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: nil, bannerType: bannerType, categoryId: categoryId, bannerSubType: nil, isGuestUser: false, baseUrl: AppCommonMethods.serviceBaseUrl))
+            case .getRewardPoints:
+                self?.bind(to: self?.rewardPointsViewModel ?? RewardPointsViewModel())
+                self?.rewardPointsUseCaseInput.send(.getRewardPoints(baseUrl: AppCommonMethods.serviceBaseUrl))
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
@@ -86,21 +99,28 @@ extension SmilesExplorerHomeViewModel {
             }.store(in: &cancellables)
     }
     
-    // TopOffers ViewModel Binding
-//    func bind(to topOffersViewModel: TopOffersViewModel) {
-//        topOffersUseCaseInput = PassthroughSubject<TopOffersViewModel.Input, Never>()
-//        let output = topOffersViewModel.transform(input: topOffersUseCaseInput.eraseToAnyPublisher())
-//        output
-//            .sink { [weak self] event in
-//                switch event {
-//                case .fetchTopOffersDidSucceed(let topOffersResponse):
-//                    debugPrint(topOffersResponse)
-//                    self?.output.send(.fetchTopOffersDidSucceed(response: topOffersResponse))
-//                case .fetchTopOffersDidFail(let error):
-//                    self?.output.send(.fetchTopOffersDidFail(error: error))
-//                }
-//            }.store(in: &cancellables)
-//    }
+    func bind(to rewardPointsViewModel: RewardPointsViewModel) {
+        rewardPointsUseCaseInput = PassthroughSubject<RewardPointsViewModel.Input, Never>()
+        let output = rewardPointsViewModel.transform(input: rewardPointsUseCaseInput.eraseToAnyPublisher())
+        output
+            .sink { [weak self] event in
+                switch event {
+                case .fetchRewardPointsDidSucceed(let response, _):
+                    if let responseCode = response.responseCode {
+                        if responseCode == "101" || responseCode == "0000252" {
+                            self?.logoutUser()
+                            self?.output.send(.fetchRewardPointsDidSucceed(response: response, shouldLogout: true))
+                        }
+                    } else {
+                        if response.totalPoints != nil {
+                            self?.output.send(.fetchRewardPointsDidSucceed(response: response, shouldLogout: false))
+                        }
+                    }
+                case .fetchRewardPointsDidFail(let error):
+                    self?.output.send(.fetchRewardPointsDidFail(error: error))
+                }
+            }.store(in: &cancellables)
+    }
     
 }
 
