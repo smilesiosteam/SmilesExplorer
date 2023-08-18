@@ -14,10 +14,9 @@ struct SmilesExplorerHomeCellRegistration: CellRegisterable {
     
     func register(for tableView: UITableView) {
         tableView.registerCellFromNib(SmilesExplorerFooterTableViewCell.self, withIdentifier: "SmilesExplorerFooterTableViewCell", bundle: .module)
-        
-        tableView.registerCellFromNib(SmilesExplorerMembershipCardsTableViewCell.self, withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self), bundle: .module)
-        
-        
+
+        tableView.registerCellFromNib(SmilesExplorerHomeTicketsTableViewCell.self, withIdentifier: "SmilesExplorerHomeTicketsTableViewCell", bundle: .module)
+
     }
     
 }

@@ -47,4 +47,21 @@ extension TableViewDataSource where Model == BOGODetailsResponseLifestyleOffer {
     }
 }
 
-
+extension TableViewDataSource where Model == ExplorerOfferResponse {
+    static func make(forOffers collectionsObject: ExplorerOfferResponse,
+                     reuseIdentifier: String = "SmilesExplorerHomeTicketsTableViewCell", data: String, isDummy: Bool = false, completion:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
+            reuseIdentifier: reuseIdentifier,
+            data : data,
+            isDummy:isDummy
+        ) { (offer, cell, data, indexPath) in
+            guard let cell = cell as? SmilesExplorerHomeTicketsTableViewCell else {return}
+            cell.collectionsData = offer.offers
+            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.callBack = { offer in
+                completion?(offer)
+            }
+        }
+    }
+}

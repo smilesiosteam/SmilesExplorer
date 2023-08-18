@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="CircularXXTT-Bold.ttf">
+            <string>CircularXXTT-Bold</string>
+        </array>
+        <array key="CircularXXTT-Book.ttf">
+            <string>CircularXXTT-Book</string>
+        </array>
+        <array key="CircularXXTT-Medium.ttf">
+            <string>CircularXXTT-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SmilesExplorerHomeTicketsCollectionViewCell" id="gTV-IL-0wX" customClass="SmilesExplorerHomeTicketsCollectionViewCell" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="128"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="96" height="128"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vaJ-hy-6H4" userLabel="MainView">
+                        <rect key="frame" x="0.0" y="0.0" width="96" height="128"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2P-iu-Jfk" userLabel="ImageViewContainerView">
+                                <rect key="frame" x="12" y="0.0" width="72" height="72"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Burj Khalifa - png 0" translatesAutoresizingMaskIntoConstraints="NO" id="KFj-hq-hQ8">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="0al-qh-2JL"/>
+                                    <constraint firstItem="KFj-hq-hQ8" firstAttribute="leading" secondItem="g2P-iu-Jfk" secondAttribute="leading" id="81s-e2-A2d"/>
+                                    <constraint firstAttribute="trailing" secondItem="KFj-hq-hQ8" secondAttribute="trailing" id="AK5-fR-ylv"/>
+                                    <constraint firstAttribute="bottom" secondItem="KFj-hq-hQ8" secondAttribute="bottom" id="cZ4-Ia-cyN"/>
+                                    <constraint firstAttribute="height" constant="72" id="fjG-BP-hDB"/>
+                                    <constraint firstItem="KFj-hq-hQ8" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="top" id="gxr-37-dTR"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2">
+                                <rect key="frame" x="12" y="76" width="72" height="16"/>
+                                <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-rM-4ra">
+                                <rect key="frame" x="12" y="96" width="72" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="LGR-mm-0A6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CircularXXTT-Book" family="CircularXX TT" pointSize="12"/>
+                                <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 AED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzb-Fw-jdT">
+                                <rect key="frame" x="12" y="114" width="72" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="HdQ-SN-VdR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CircularXXTT-Bold" family="CircularXX TT" pointSize="11"/>
+                                <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cr4-rM-4ra" secondAttribute="trailing" constant="12" id="1OU-kA-Ozk"/>
+                            <constraint firstAttribute="bottom" secondItem="tzb-Fw-jdT" secondAttribute="bottom" id="8uV-Rz-x1X"/>
+                            <constraint firstItem="cr4-rM-4ra" firstAttribute="top" secondItem="77D-37-DM2" secondAttribute="bottom" constant="4" id="DmD-Ao-z14"/>
+                            <constraint firstItem="77D-37-DM2" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="SH1-qt-r6K"/>
+                            <constraint firstItem="g2P-iu-Jfk" firstAttribute="centerX" secondItem="vaJ-hy-6H4" secondAttribute="centerX" id="ckw-q0-t2k"/>
+                            <constraint firstAttribute="trailing" secondItem="tzb-Fw-jdT" secondAttribute="trailing" constant="12" id="dcV-KS-Oka"/>
+                            <constraint firstItem="cr4-rM-4ra" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="fEY-sL-PwQ"/>
+                            <constraint firstItem="tzb-Fw-jdT" firstAttribute="top" secondItem="cr4-rM-4ra" secondAttribute="bottom" constant="4" id="kr9-Q2-yKg"/>
+                            <constraint firstItem="tzb-Fw-jdT" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="ktx-9g-5GC"/>
+                            <constraint firstAttribute="trailing" secondItem="77D-37-DM2" secondAttribute="trailing" constant="12" id="lhc-Oc-13B"/>
+                            <constraint firstItem="77D-37-DM2" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="bottom" constant="4" id="n0N-d4-e2F"/>
+                            <constraint firstItem="g2P-iu-Jfk" firstAttribute="top" secondItem="vaJ-hy-6H4" secondAttribute="top" id="yqH-EQ-paM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vaJ-hy-6H4" secondAttribute="bottom" id="Bbo-3a-BLH"/>
+                <constraint firstItem="vaJ-hy-6H4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="S5A-xV-wwe"/>
+                <constraint firstItem="vaJ-hy-6H4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YEM-yx-bpC"/>
+                <constraint firstAttribute="trailing" secondItem="vaJ-hy-6H4" secondAttribute="trailing" id="kfV-9h-BhU"/>
+            </constraints>
+            <size key="customSize" width="75" height="111"/>
+            <connections>
+                <outlet property="amountLabel" destination="tzb-Fw-jdT" id="1Ds-2W-aaJ"/>
+                <outlet property="brandLogoImageView" destination="KFj-hq-hQ8" id="uNe-gM-i5Z"/>
+                <outlet property="brandTitleLabel" destination="77D-37-DM2" id="G3K-bK-2qh"/>
+                <outlet property="imageContainerView" destination="g2P-iu-Jfk" id="cIn-rd-00h"/>
+                <outlet property="typeLabel" destination="cr4-rM-4ra" id="Smb-eT-HT0"/>
+            </connections>
+            <point key="canvasLocation" x="82.44274809160305" y="21.126760563380284"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Burj Khalifa - png 0" width="72" height="72"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
