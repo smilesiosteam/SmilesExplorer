@@ -8,6 +8,7 @@
 import UIKit
 
 class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
+    
     //MARK: - IBOutlets -
     @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var brandLogoImageView: UIImageView!
@@ -15,12 +16,14 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     //MARK: - Variables
+    
     //MARK: - CellView LifeCycel
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
         // Initialization code
     }
+    
     //MARK: - Helper Function
     private func setupUI() {
         self.imageContainerView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], cornerRadius: 12.0)
@@ -32,4 +35,9 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         self.amountLabel.textColor = .appRevampSubtitleColor
         self.amountLabel.attributedText = "".strikoutString(strikeOutColor: .appGreyColor_128)
     }
+    
+    func configure(offer: ExplorerOffer) {
+        
+    }
+    
 }
