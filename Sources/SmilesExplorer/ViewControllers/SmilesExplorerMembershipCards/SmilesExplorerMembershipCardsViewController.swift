@@ -74,7 +74,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 1
         tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.dataSource = self
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerSubscriptionCellRegistration()
         smilesExplorerCellRegistrable.register(for: tableView)
         
@@ -182,14 +182,14 @@ extension SmilesExplorerMembershipCardsViewController {
     
 }
 
-extension SmilesExplorerMembershipCardsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self)) as? SmilesExplorerMembershipCardsTableViewCell ?? UITableViewCell()
-        return cell
-    }
-}
+//extension SmilesExplorerMembershipCardsViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 2
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self)) as? SmilesExplorerMembershipCardsTableViewCell ?? UITableViewCell()
+//        return cell
+//    }
+//}
