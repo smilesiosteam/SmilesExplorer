@@ -62,4 +62,9 @@
             <point key="canvasLocation" x="245.03816793893128" y="189.43661971830986"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="hBo-pN-Mls">
+            <size key="intrinsicContentSize" width="114" height="30"/>
+        </designable>
+    </designables>
 </document>

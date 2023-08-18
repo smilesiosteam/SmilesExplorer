@@ -22,13 +22,28 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     }()
     
     //MARK: IBoutlet
-    @IBOutlet var smilesExplorerLabel: UILabel!
-    @IBOutlet var pickPassTypeLabel: UILabel!
-    @IBOutlet var membershipTableView: UITableView!
+    @IBOutlet weak var smilesExplorerLabel: UILabel!
+    @IBOutlet weak var pickPassTypeLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var continueButtonView: UIView!{
+        didSet{
+            continueButtonView.layer.cornerRadius = 32.0
+        }
+    }
+    
+     init() {
+        super.init(nibName: "SmilesExplorerMembershipCardsViewController", bundle: .module)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - VIEW LIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBar()
         setupViews()
     }
     
@@ -52,22 +67,23 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     }
     
     private func setupTableView() {
-        membershipTableView.sectionFooterHeight = .leastNormalMagnitude
+        tableView.sectionFooterHeight = .leastNormalMagnitude
         if #available(iOS 15.0, *) {
-            membershipTableView.sectionHeaderTopPadding = CGFloat(0)
+            tableView.sectionHeaderTopPadding = CGFloat(0)
         }
-        membershipTableView.sectionHeaderHeight = UITableView.automaticDimension
-        membershipTableView.estimatedSectionHeaderHeight = 1
-//        membershipTableView.delegate = self
-        let manCityCellRegistrable: CellRegisterable = SmilesExplorerHomeCellRegistration()
-        manCityCellRegistrable.register(for: membershipTableView)
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 1
+        tableView.delegate = self
+        tableView.dataSource = self
+        let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerSubscriptionCellRegistration()
+        smilesExplorerCellRegistrable.register(for: tableView)
         
     }
     
     fileprivate func configureDataSource() {
-        self.membershipTableView.dataSource = self.dataSource
+        self.tableView.dataSource = self.dataSource
         DispatchQueue.main.async {
-            self.membershipTableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -93,7 +109,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
 
         let locationNavBarTitle = UILabel()
-        locationNavBarTitle.text = response?.themeResources?.explorerTopPlaceholderTitle
+        locationNavBarTitle.text = response?.themeResources?.explorerTopPlaceholderTitle ?? "Smiles Explorer"
         locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         let hStack = UIStackView(arrangedSubviews: [imageView, locationNavBarTitle])
@@ -103,7 +119,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
 
         let btnBack: UIButton = UIButton(type: .custom)
         btnBack.backgroundColor = UIColor(red: 226.0 / 255.0, green: 226.0 / 255.0, blue: 226.0 / 255.0, alpha: 1.0)
-        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_icon", in: .module, compatibleWith: nil), for: .normal)
+        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_Icon", in: .module, compatibleWith: nil), for: .normal)
         btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
         btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         btnBack.layer.cornerRadius = btnBack.frame.height / 2
@@ -138,7 +154,7 @@ extension SmilesExplorerMembershipCardsViewController {
                 switch event {
                 case .fetchSubscriptionInfoDidSucceed(response: let response):
                     self?.configureSmilesExplorerSubscriptions(with: response)
-                    
+                    self?.response = response
                 case .fetchSubscriptionInfoDidFail(error: let error):
                     debugPrint(error.localizedDescription)
                 default: break
@@ -160,8 +176,20 @@ extension SmilesExplorerMembershipCardsViewController {
             let dataSource = TableViewDataSource.make(forSubscriptions: offers, data: "#FFFFFF")
             self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
             self.dataSource?.dataSources?[0] = dataSource
-            self.configureDataSource()
+//            self.configureDataSource()
         }
     }
     
+}
+
+extension SmilesExplorerMembershipCardsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self)) as? SmilesExplorerMembershipCardsTableViewCell ?? UITableViewCell()
+        return cell
+    }
 }

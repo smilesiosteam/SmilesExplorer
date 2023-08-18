@@ -12,19 +12,20 @@
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
-        <array key="Montserrat-Bold.ttf">
+        <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
-        <array key="Montserrat-SemiBold.otf">
+        <array key="Montserrat-SemiBold.ttf">
             <string>Montserrat-SemiBold</string>
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerMembershipCardsViewController" customModule="SmilesExplorer">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerMembershipCardsViewController" customModuleProvider="target">
             <connections>
-                <outlet property="membershipTableView" destination="WrG-nQ-9ff" id="5PA-Cd-8FW"/>
+                <outlet property="continueButtonView" destination="Xiz-wu-30I" id="jjE-Ze-7rL"/>
                 <outlet property="pickPassTypeLabel" destination="oe6-8w-Cb8" id="65M-l6-Si9"/>
                 <outlet property="smilesExplorerLabel" destination="766-6x-fcA" id="B2t-dV-RBH"/>
+                <outlet property="tableView" destination="WrG-nQ-9ff" id="9aR-uG-4uT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,7 +34,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WrG-nQ-9ff">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="60" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WrG-nQ-9ff">
                     <rect key="frame" x="0.0" y="167.66666666666669" width="393" height="684.33333333333326"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
@@ -68,7 +69,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="lnX-yz-bUb" firstAttribute="centerY" secondItem="r7T-Nz-Qae" secondAttribute="centerY" id="24s-3B-22N"/>
                                                 <constraint firstItem="lnX-yz-bUb" firstAttribute="leading" secondItem="r7T-Nz-Qae" secondAttribute="trailing" constant="4" id="H3L-IE-bTS"/>
@@ -90,7 +91,7 @@
                                                     <state key="normal" title="Continue"/>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="qsn-6A-paM" secondAttribute="trailing" constant="5" id="HDS-9x-YPq"/>
                                                 <constraint firstAttribute="bottom" secondItem="qsn-6A-paM" secondAttribute="bottom" constant="5" id="iY2-3E-t3S"/>
@@ -109,6 +110,11 @@
                                 <constraint firstAttribute="trailing" secondItem="FKW-cd-3wM" secondAttribute="trailing" constant="5" id="LT6-iC-Wgd"/>
                                 <constraint firstAttribute="bottom" secondItem="FKW-cd-3wM" secondAttribute="bottom" constant="5" id="brQ-oK-k8X"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="32"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -119,6 +125,11 @@
                         <constraint firstAttribute="trailing" secondItem="Xiz-wu-30I" secondAttribute="trailing" constant="16" id="avl-fZ-rtR"/>
                         <constraint firstItem="Xiz-wu-30I" firstAttribute="top" secondItem="nZk-oD-MM1" secondAttribute="top" id="fnb-SP-ZGp"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="32"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick pass type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oe6-8w-Cb8">
                     <rect key="frame" x="16" y="83" width="361" height="20.333333333333329"/>

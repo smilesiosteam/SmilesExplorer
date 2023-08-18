@@ -16,7 +16,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MembershipTableViewFooterview" customModule="SmilesExplorer">
             <connections>
-                <outlet property="smilesExplorerLabel" destination="mTZ-Wy-Fm8" id="X1u-EK-8wi"/>
+                <outlet property="applyPromoCodeLabel" destination="3eC-9G-NXe" id="Ojk-bK-Kjk"/>
+                <outlet property="button" destination="4U0-fk-3Pe" id="kfW-8B-Y3u"/>
+                <outlet property="imgSubAddPromo" destination="yOi-2s-ALj" id="XmF-0B-VrY"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -32,7 +34,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply promo code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eC-9G-NXe">
-                    <rect key="frame" x="45" y="22.666666666666668" width="332" height="15.000000000000004"/>
+                    <rect key="frame" x="45" y="23" width="332" height="14"/>
                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                     <color key="textColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
