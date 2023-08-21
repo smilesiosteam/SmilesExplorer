@@ -33,6 +33,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     
     private var model: SmilesExplorerSubscriptionInfoResponse?
     private let sourceScreen: SourceScreen
+    lazy  var backButton: UIButton = UIButton(type: .custom)
     
     // MARK: - ViewController Lifecycle -
    
@@ -58,25 +59,48 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setUpNavigationBar()
+        
+        self.setUpNavigationBar(self.sourceScreen == .freePassSuccess ? true: false)
     }
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    private func setUpNavigationBar() {
+    private func setUpNavigationBar(_ showBackButton: Bool = false) {
        
+    
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .clear
-        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .white
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
+        
         let locationNavBarTitle = UILabel()
-        locationNavBarTitle.text =  self.model?.themeResources?.explorerSubscriptionTitle ?? "Success"
-        locationNavBarTitle.textColor = .appRevampPurpleMainColor
+        
+        locationNavBarTitle.text = self.model?.themeResources?.explorerSubscriptionTitle ?? "Success"
+        locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
+        locationNavBarTitle.textColor = .appRevampPurpleMainColor
+        
+
         self.navigationItem.titleView = locationNavBarTitle
+        /// Back Button Show
+        
+            self.backButton = UIButton(type: .custom)
+            // btnBack.backgroundColor = UIColor(red: 226.0 / 255.0, green: 226.0 / 255.0, blue: 226.0 / 255.0, alpha: 1.0)
+            self.backButton.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "purple_back_arrow_ar" : "purple_back_arrow", in: .module, compatibleWith: nil), for: .normal)
+            self.backButton.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
+            self.backButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+            self.backButton.layer.cornerRadius = self.backButton.frame.height / 2
+            self.backButton.clipsToBounds = true
+            
+            let barButton = UIBarButtonItem(customView: self.backButton)
+            self.navigationItem.leftBarButtonItem = barButton
+        if (!showBackButton) {
+            self.backButton.isHidden = true
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        
         
     }
     private func styleFontAndTextColor() {
@@ -122,6 +146,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         
         switch self.sourceScreen {
         case.freePassSuccess:
+            self.backButton.isHidden = false
             self.exploreButton.isHidden = false
             self.continueButton.isHidden = true
             let underLineAttributes: [NSAttributedString.Key: Any] = [
@@ -138,6 +163,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             self.dateORLinkButton.isUserInteractionEnabled = true
             self.linkArrowImageView.isHidden = false
         case.success:
+            self.backButton.isHidden = true
             self.exploreButton.isHidden = true
             self.continueButton.isHidden = false
             if let expiryDateString =  self.model?.lifestyleOffers?.first?.expiryDate {
@@ -156,5 +182,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     }
     @IBAction func exploreButtonDidTab(_ sender: UIButton) {
         
+    }
+    @objc func onClickBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
