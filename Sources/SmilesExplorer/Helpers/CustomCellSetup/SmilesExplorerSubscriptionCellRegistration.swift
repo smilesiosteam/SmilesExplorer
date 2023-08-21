@@ -16,6 +16,8 @@ struct SmilesExplorerSubscriptionCellRegistration: CellRegisterable {
         
         tableView.registerCellFromNib(SmilesExplorerMembershipCardsTableViewCell.self, withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self), bundle: .module)
         
+        tableView.register(SubscriptionTableFooterView.self, forHeaderFooterViewReuseIdentifier: "SubscriptionTableFooterView")
+        
     }
     
 }

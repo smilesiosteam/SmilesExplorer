@@ -20,7 +20,8 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60
+        return 60.0
+        
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -29,19 +30,15 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
         return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
     }
     
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        
-//        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MembershipTableViewFooterview") as! MembershipTableViewFooterview
-//                
-//                // Customize or set actions for the button here
-//                footerView.button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//
-//                return footerView
-//        
-//        footerView.button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//
-//            return footerView
-//        }
+    
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+       let footerView = SubscriptionTableFooterView(reuseIdentifier: "SubscriptionTableFooterView")
+        footerView.backgroundColor = .clear
+        return footerView
+        
+    }
 
         @objc func buttonTapped() {
             // Handle button tap action here

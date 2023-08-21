@@ -25,10 +25,11 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     func pushSubscriptionVC(navVC: UINavigationController?) {
-        
         let subVC = SmilesExplorerMembershipCardsViewController()
         navVC?.pushViewController(subVC, animated: true)
         
     }
+    
+    
     
 }

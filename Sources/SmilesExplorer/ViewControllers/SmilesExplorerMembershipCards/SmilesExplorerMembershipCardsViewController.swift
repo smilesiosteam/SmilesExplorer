@@ -67,6 +67,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     }
     
     private func setupTableView() {
+        
         tableView.sectionFooterHeight = .leastNormalMagnitude
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = CGFloat(0)
@@ -87,8 +88,6 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
     }
     
-    
-
    //MARK: Navigation Bar Setup
     func setUpNavigationBar() {
 
@@ -132,7 +131,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     
     //MARK: Actions
     @IBAction func membershipSelectPressed(_ sender: UIButton) {
-        
+        SmilesExplorerRouter.shared.pushSmilesExplorerMembershipSuccessVC(navVC: self.navigationController, model: self.response,sourceScreen: .success)
             
     }
     
@@ -157,7 +156,6 @@ extension SmilesExplorerMembershipCardsViewController {
                     self?.response = response
                 case .fetchSubscriptionInfoDidFail(error: let error):
                     debugPrint(error.localizedDescription)
-                default: break
                 }
             }.store(in: &cancellables)
     }
@@ -176,7 +174,7 @@ extension SmilesExplorerMembershipCardsViewController {
             let dataSource = TableViewDataSource.make(forSubscriptions: offers, data: "#FFFFFF")
             self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
             self.dataSource?.dataSources?[0] = dataSource
-//            self.configureDataSource()
+            self.configureDataSource()
         }
     }
     
@@ -186,9 +184,9 @@ extension SmilesExplorerMembershipCardsViewController {
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return 2
 //    }
-//    
+//
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        
+//
 //        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self)) as? SmilesExplorerMembershipCardsTableViewCell ?? UITableViewCell()
 //        return cell
 //    }
