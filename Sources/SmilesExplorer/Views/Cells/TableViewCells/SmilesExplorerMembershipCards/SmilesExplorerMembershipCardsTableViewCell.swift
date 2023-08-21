@@ -34,11 +34,11 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
     
     // Example method to configure cell content
     func configureCell(with data: BOGODetailsResponseLifestyleOffer) {
-        platinumExplorerLabel.text = data.whatYouGetText
-        choiceTicketLabel.text = data.whatYouGetText
-        exclusiveOfferLabel.text = data.whatYouGetText
+        platinumExplorerLabel.text = data.offerTitle
+        choiceTicketLabel.text = data.whatYouGetTitle
+        exclusiveOfferLabel.text = data.offerTitle
         buy1Get1Label.text = data.whatYouGetText
-        priceLabel.text = data.whatYouGetText
+        priceLabel.text = String(data.price ?? 0.0)
         
         
     }
