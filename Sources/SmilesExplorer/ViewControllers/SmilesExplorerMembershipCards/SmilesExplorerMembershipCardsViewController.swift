@@ -169,6 +169,7 @@ extension SmilesExplorerMembershipCardsViewController {
     private func configureSmilesExplorerSubscriptions(with response: SmilesExplorerSubscriptionInfoResponse) {
         self.pickPassTypeLabel.text = response.themeResources?.explorerSubscriptionTitle ?? ""
         self.smilesExplorerLabel.text = response.themeResources?.explorerSubscriptionSubTitle ?? ""
+        self.response = response
         self.setUpNavigationBar()
         if let offers = response.lifestyleOffers {
             let dataSource = TableViewDataSource.make(forSubscriptions: offers, data: "#FFFFFF")
@@ -180,14 +181,3 @@ extension SmilesExplorerMembershipCardsViewController {
     
 }
 
-//extension SmilesExplorerMembershipCardsViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 2
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SmilesExplorerMembershipCardsTableViewCell.self)) as? SmilesExplorerMembershipCardsTableViewCell ?? UITableViewCell()
-//        return cell
-//    }
-//}
