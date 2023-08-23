@@ -32,23 +32,36 @@ extension TableViewDataSource where Model == OfferDO {
     }
 }
 
-//extension TableViewDataSource where Model == GetTopOffersResponseModel {
-//    static func make(forTopOffers collectionsObject: GetTopOffersResponseModel,
-//                     reuseIdentifier: String = "TopOffersTableViewCell", data : String, isDummy:Bool = false, completion:((GetTopOffersResponseModel.TopOfferAdsDO) -> ())?) -> TableViewDataSource {
-//        return TableViewDataSource(
-//            models: [collectionsObject].filter({$0.ads?.count ?? 0 > 0}),
-//            reuseIdentifier: reuseIdentifier,
-//            data: data,
-//            isDummy: isDummy
-//        ) { (topOffers, cell, data, indexPath) in
-//            guard let cell = cell as? TopOffersTableViewCell else {return}
-//            cell.showPageControl = false
-//            cell.sliderTimeInterval = topOffers.sliderTimeout
-//            cell.collectionsData = topOffers.ads
-//            cell.setBackGroundColor(color: UIColor(hexString: data))
-//            cell.callBack = { data in
-//                completion?(data)
-//            }
-//        }
-//    }
-//}
+extension TableViewDataSource where Model == BOGODetailsResponseLifestyleOffer {
+    static func make(forSubscriptions subscriptions: [BOGODetailsResponseLifestyleOffer],
+                     reuseIdentifier: String = String(describing: SmilesExplorerMembershipCardsTableViewCell.self), data: String, isDummy: Bool = false) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: subscriptions,
+            reuseIdentifier: reuseIdentifier,
+            data: data,
+            isDummy: isDummy
+        ) { (subscription, cell, data, indexPath) in
+            guard let cell = cell as? SmilesExplorerMembershipCardsTableViewCell else { return }
+            cell.configureCell(with: subscription)
+        }
+    }
+}
+
+extension TableViewDataSource where Model == ExplorerOfferResponse {
+    static func make(forOffers collectionsObject: ExplorerOfferResponse,
+                     reuseIdentifier: String = "SmilesExplorerHomeTicketsTableViewCell", data: String, isDummy: Bool = false, completion:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
+            reuseIdentifier: reuseIdentifier,
+            data : data,
+            isDummy:isDummy
+        ) { (offer, cell, data, indexPath) in
+            guard let cell = cell as? SmilesExplorerHomeTicketsTableViewCell else {return}
+            cell.collectionsData = offer.offers
+            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.callBack = { offer in
+                completion?(offer)
+            }
+        }
+    }
+}

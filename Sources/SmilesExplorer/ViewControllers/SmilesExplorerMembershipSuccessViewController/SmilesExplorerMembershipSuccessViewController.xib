@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="CircularXXTT-Bold.ttf">
+            <string>CircularXXTT-Bold</string>
+        </array>
+        <array key="CircularXXTT-Book.ttf">
+            <string>CircularXXTT-Book</string>
+        </array>
+        <array key="CircularXXTT-Medium.ttf">
+            <string>CircularXXTT-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerMembershipSuccessViewController" customModuleProvider="target">
+            <connections>
+                <outlet property="congratulationLabel" destination="cTh-xz-hAb" id="96J-cT-xrf"/>
+                <outlet property="continueButton" destination="gJa-hr-yZa" id="0Xs-z6-1cV"/>
+                <outlet property="dateORLinkButton" destination="ANz-Ah-hdQ" id="p0L-6n-9Tz"/>
+                <outlet property="detailLabel" destination="wiy-x1-Pag" id="9xO-mH-G3t"/>
+                <outlet property="exploreButton" destination="4eb-4b-tbv" id="ORj-67-4Gf"/>
+                <outlet property="imgView" destination="4KK-6k-3KP" id="CjY-eF-7t3"/>
+                <outlet property="linkArrowImageView" destination="K4Q-UA-Z1c" id="4Sc-gv-7n7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="SmilesExplorerMembershipSuccessViewController" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TrA-6i-RpV">
+                    <rect key="frame" x="65" y="269" width="263" height="199"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="memberShipIllustration" translatesAutoresizingMaskIntoConstraints="NO" id="4KK-6k-3KP">
+                            <rect key="frame" x="0.0" y="0.0" width="263" height="199"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="199" id="FgK-Zi-CIK"/>
+                        <constraint firstAttribute="width" constant="263" id="Yri-e6-etA"/>
+                        <constraint firstAttribute="bottom" secondItem="4KK-6k-3KP" secondAttribute="bottom" id="abr-UT-fJc"/>
+                        <constraint firstItem="4KK-6k-3KP" firstAttribute="top" secondItem="TrA-6i-RpV" secondAttribute="top" id="bct-vD-KPy"/>
+                        <constraint firstItem="4KK-6k-3KP" firstAttribute="leading" secondItem="TrA-6i-RpV" secondAttribute="leading" id="frt-Us-YDi"/>
+                        <constraint firstAttribute="trailing" secondItem="4KK-6k-3KP" secondAttribute="trailing" id="mhI-UC-Brf"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTh-xz-hAb" customClass="UILocalizableLabel" customModule="SmilesUtilities">
+                    <rect key="frame" x="132.66666666666666" y="517.33333333333337" width="127.66666666666666" height="20"/>
+                    <fontDescription key="fontDescription" name="CircularXXTT-Bold" family="CircularXX TT" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your purchase of the Smiles Explorer Gold Pass" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiy-x1-Pag" customClass="UILocalizableLabel" customModule="SmilesUtilities">
+                    <rect key="frame" x="32" y="553.33333333333337" width="325" height="43.333333333333371"/>
+                    <fontDescription key="fontDescription" name="CircularXXTT-Book" family="CircularXX TT" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJa-hr-yZa" customClass="UICustomButton" customModule="SmilesUtilities">
+                    <rect key="frame" x="16" y="744" width="361" height="48"/>
+                    <color key="backgroundColor" red="0.47450980390000003" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="2eU-cF-VkC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="16"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Continue"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgThemIdentifier" value="ButtonBgColor"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="titleThemIdentifier" value="ButtonPrimaryTitleColor"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Continue"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="continueButtonDidTab:" destination="-1" eventType="touchUpInside" id="ZFt-RG-3zA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANz-Ah-hdQ">
+                    <rect key="frame" x="119.66666666666669" y="613.33333333333337" width="154" height="27"/>
+                    <fontDescription key="fontDescription" name="CircularXXTT-Book" family="CircularXX TT" pointSize="12"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="*Valid till 23rd March, 2023*">
+                        <color key="titleColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eb-4b-tbv" customClass="UICustomButton" customModule="SmilesUtilities">
+                    <rect key="frame" x="115" y="744" width="163" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="52l-fH-COP"/>
+                        <constraint firstAttribute="width" constant="163" id="DpP-hH-t36"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Go to explorer">
+                        <color key="titleColor" red="0.47450980390000003" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Go to explorer"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.47450980390000003" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="exploreButtonDidTab:" destination="-1" eventType="touchUpInside" id="ETI-l2-vvZ"/>
+                    </connections>
+                </button>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="K4Q-UA-Z1c">
+                    <rect key="frame" x="283.66666666666669" y="615" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="4ZT-u4-c8i"/>
+                        <constraint firstAttribute="width" constant="24" id="TkA-NS-Cov"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4eb-4b-tbv" secondAttribute="bottom" constant="26" id="5b0-9y-EdX"/>
+                <constraint firstItem="ANz-Ah-hdQ" firstAttribute="top" secondItem="wiy-x1-Pag" secondAttribute="bottom" constant="16.699999999999999" id="9jY-u4-iQS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wiy-x1-Pag" secondAttribute="trailing" constant="36" id="HsF-oO-L8y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gJa-hr-yZa" secondAttribute="bottom" constant="26" id="L1L-j2-slG"/>
+                <constraint firstItem="cTh-xz-hAb" firstAttribute="top" secondItem="TrA-6i-RpV" secondAttribute="bottom" constant="49.299999999999997" id="MNK-xV-HaF"/>
+                <constraint firstItem="TrA-6i-RpV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="N9e-X6-8aq"/>
+                <constraint firstItem="cTh-xz-hAb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="O7g-p6-vsU"/>
+                <constraint firstItem="4eb-4b-tbv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PVd-mv-0bE"/>
+                <constraint firstItem="wiy-x1-Pag" firstAttribute="top" secondItem="cTh-xz-hAb" secondAttribute="bottom" constant="16" id="frt-cs-Psa"/>
+                <constraint firstItem="gJa-hr-yZa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ivA-Y1-4Mb"/>
+                <constraint firstItem="wiy-x1-Pag" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="jrp-0P-NqB"/>
+                <constraint firstItem="K4Q-UA-Z1c" firstAttribute="leading" secondItem="ANz-Ah-hdQ" secondAttribute="trailing" constant="10" id="qne-Vy-djF"/>
+                <constraint firstItem="K4Q-UA-Z1c" firstAttribute="centerY" secondItem="ANz-Ah-hdQ" secondAttribute="centerY" id="s2f-NP-lR3"/>
+                <constraint firstItem="TrA-6i-RpV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="210" id="sEF-Ow-znQ"/>
+                <constraint firstItem="ANz-Ah-hdQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="t2F-KJ-dZH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gJa-hr-yZa" secondAttribute="trailing" constant="16" id="uka-Xp-Xnt"/>
+            </constraints>
+            <point key="canvasLocation" x="58.778625954198468" y="20.422535211267608"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="4eb-4b-tbv">
+            <size key="intrinsicContentSize" width="98" height="30"/>
+        </designable>
+        <designable name="cTh-xz-hAb">
+            <size key="intrinsicContentSize" width="127.66666666666667" height="20.666666666666668"/>
+        </designable>
+        <designable name="gJa-hr-yZa">
+            <size key="intrinsicContentSize" width="68" height="32"/>
+        </designable>
+        <designable name="wiy-x1-Pag">
+            <size key="intrinsicContentSize" width="380.33333333333331" height="21.666666666666668"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="link_arrow" width="24" height="24"/>
+        <image name="memberShipIllustration" width="526" height="396"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

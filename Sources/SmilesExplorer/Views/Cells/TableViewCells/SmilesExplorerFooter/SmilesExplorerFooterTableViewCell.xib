@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="582" id="KGk-i7-Jjw" customClass="SmilesExplorerFooterTableViewCell" customModule="SmilesExplorer">
+            <rect key="frame" x="0.0" y="0.0" width="459" height="582"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="459" height="582"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b6z-ns-N2z">
+                        <rect key="frame" x="0.0" y="0.0" width="459" height="427"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="427" id="K9M-qA-yiX"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBo-pN-Mls" customClass="UICustomButton" customModule="SmilesUtilities">
+                        <rect key="frame" x="16" y="459" width="427" height="48"/>
+                        <color key="backgroundColor" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="kjb-fm-R1c"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Get membership">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="24"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="getMembershipPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jwq-hH-fgU"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="b6z-ns-N2z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1ab-wb-j9m"/>
+                    <constraint firstAttribute="bottom" secondItem="hBo-pN-Mls" secondAttribute="bottom" id="4Mf-id-XkO"/>
+                    <constraint firstItem="b6z-ns-N2z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Yex-iz-dW3"/>
+                    <constraint firstAttribute="trailing" secondItem="hBo-pN-Mls" secondAttribute="trailing" constant="16" id="aou-na-7bz"/>
+                    <constraint firstAttribute="trailing" secondItem="b6z-ns-N2z" secondAttribute="trailing" id="bkK-kd-dbz"/>
+                    <constraint firstItem="hBo-pN-Mls" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sYv-RW-S7S"/>
+                    <constraint firstItem="hBo-pN-Mls" firstAttribute="top" secondItem="b6z-ns-N2z" secondAttribute="bottom" constant="32" id="uZ0-EI-L1E"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="subscriptionImageView" destination="b6z-ns-N2z" id="Hqh-6D-4Vd"/>
+            </connections>
+            <point key="canvasLocation" x="245.03816793893128" y="189.43661971830986"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="hBo-pN-Mls">
+            <size key="intrinsicContentSize" width="114" height="30"/>
+        </designable>
+    </designables>
+</document>

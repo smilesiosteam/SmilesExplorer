@@ -22,6 +22,8 @@ extension SmilesExplorerHomeViewModel {
         case generateActionContentForSortingItems(sortingModel: GetSortingListResponseModel?)
         case setFiltersSavedList(filtersSavedList: [RestaurantRequestWithNameFilter]?, filtersList: [RestaurantRequestFilter]?)
         case setSelectedSort(sortTitle: String?)
+///        The value of Tag is the Section Identifier.
+        case exclusiveDeals(categoryId: Int?, tag: String?,pageNo:Int?)
     }
     
     enum Output {
@@ -38,8 +40,13 @@ extension SmilesExplorerHomeViewModel {
         case fetchContentForSortingItems(baseRowModels: [BaseRowModel])
         
         case fetchSortingListDidSucceed
+        case fetchSortingListDidFail(error: Error)
         
         case fetchTopOffersDidSucceed(response: GetTopOffersResponseModel)
+        case fetchTopOffersDidFail(error: Error)
+        
+        case fetchExclusiveOffersDidSucceed(response: ExplorerOfferResponse)
+        case fetchExclusiveOffersDidFail(error: Error)
     }
     
 }

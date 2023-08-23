@@ -22,9 +22,11 @@ class SmilesExplorerHomeViewModel: NSObject {
     // MARK: - VIEWMODELS -
     private let sectionsViewModel = SectionsViewModel()
     private let rewardPointsViewModel = RewardPointsViewModel()
+    private let smilesExplorerGetOffersViewModel = SmilesExplorerGetOffersViewModel()
     
     private var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
     private var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
+    private var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
     
     private var filtersSavedList: [RestaurantRequestWithNameFilter]?
     private var filtersList: [RestaurantRequestFilter]?
@@ -77,9 +79,15 @@ extension SmilesExplorerHomeViewModel {
 //                self?.bind(to: self?.topOffersViewModel ?? TopOffersViewModel())
 //                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: nil, bannerType: bannerType, categoryId: categoryId, bannerSubType: nil, isGuestUser: false, baseUrl: AppCommonMethods.serviceBaseUrl))
             case .getRewardPoints:
+                
                 self?.bind(to: self?.rewardPointsViewModel ?? RewardPointsViewModel())
                 self?.rewardPointsUseCaseInput.send(.getRewardPoints(baseUrl: AppCommonMethods.serviceBaseUrl))
-            }
+                
+            case .exclusiveDeals(categoryId: let categoryId, tag: let tag, pageNo: _):
+                
+                self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
+                self?.exclusiveOffersUseCaseInput.send(.getExclusiveOffersList(categoryId: categoryId, tag: tag))}
+            
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
     }
@@ -118,6 +126,21 @@ extension SmilesExplorerHomeViewModel {
                     }
                 case .fetchRewardPointsDidFail(let error):
                     self?.output.send(.fetchRewardPointsDidFail(error: error))
+                }
+            }.store(in: &cancellables)
+    }
+    
+    func bind(to exclusiveOffersViewMode: SmilesExplorerGetOffersViewModel) {
+        exclusiveOffersUseCaseInput = PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never>()
+        let output = exclusiveOffersViewMode.transform(input: exclusiveOffersUseCaseInput.eraseToAnyPublisher())
+        output
+            .sink { [weak self] event in
+                switch event {
+                case .fetchExclusiveOffersDidSucceed(let response):
+                    debugPrint(response)
+                    self?.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                case .fetchExclusiveOffersDidFail(error: let error):
+                    self?.output.send(.fetchExclusiveOffersDidFail(error: error))
                 }
             }.store(in: &cancellables)
     }

@@ -9,10 +9,13 @@ import Foundation
 import SmilesUtilities
 import UIKit
 
+
 struct SmilesExplorerHomeCellRegistration: CellRegisterable {
     
     func register(for tableView: UITableView) {
-        
+        tableView.registerCellFromNib(SmilesExplorerFooterTableViewCell.self, withIdentifier: "SmilesExplorerFooterTableViewCell", bundle: .module)
+
+        tableView.registerCellFromNib(SmilesExplorerHomeTicketsTableViewCell.self, withIdentifier: "SmilesExplorerHomeTicketsTableViewCell", bundle: .module)
         
     }
     
