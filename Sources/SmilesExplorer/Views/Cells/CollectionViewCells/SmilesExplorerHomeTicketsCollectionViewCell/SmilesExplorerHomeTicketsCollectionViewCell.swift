@@ -37,7 +37,7 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(offer: ExplorerOffer) {
-        
+        print(offer)
     }
     
 }

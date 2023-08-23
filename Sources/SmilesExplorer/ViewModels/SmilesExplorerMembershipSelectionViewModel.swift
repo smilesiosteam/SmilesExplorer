@@ -48,8 +48,7 @@ extension SmilesExplorerMembershipSelectionViewModel {
         let request = SmilesExplorerSubscriptionInfoRequest()
         let service = SmilesExplorerSubscriptionInfoRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60),
-            baseUrl: AppCommonMethods.serviceBaseUrl
-        )
+            baseUrl: AppCommonMethods.serviceBaseUrl, endpoint: .subscriptionInfo)
         service.getSubscriptionInfoService(request: request)
             .sink { [weak self] completion in
                 debugPrint(completion)

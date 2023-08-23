@@ -15,6 +15,10 @@ class ExplorerOfferResponse: BaseMainResponse {
     var listTitle, listSubtitle: String?
     var offers: [ExplorerOffer]?
     var offersCount: Int?
+    
+    override init() {
+        super.init()
+    }
 
     enum CodingKeys: String, CodingKey {
         case listTitle, listSubtitle, offers, offersCount

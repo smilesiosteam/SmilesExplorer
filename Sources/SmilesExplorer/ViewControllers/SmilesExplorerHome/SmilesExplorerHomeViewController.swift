@@ -11,6 +11,7 @@ import Combine
 import SmilesUtilities
 import SmilesSharedServices
 import SmilesLocationHandler
+import SmilesOffers
 
 public class SmilesExplorerHomeViewController: UIViewController {
 
@@ -32,6 +33,17 @@ public class SmilesExplorerHomeViewController: UIViewController {
     private var voucherCode: String?
     var smilesExplorerSections: GetSectionsResponseModel?
     var sections = [SmilesExplorerSectionData]()
+    
+    var offersListing: ExplorerOfferResponse?
+    var offersPage = 1 // For offers list pagination
+    var dodOffersPage = 1 // For DOD offers list pagination
+    var offers = [ExplorerOffer]()
+    var dodOffers = [OfferDO]()
+    private var selectedIndexPath: IndexPath?
+    
+    var categoryDetailsSections: GetSectionsResponseModel?
+    
+    var mutatingSectionDetails = [SectionDetailDO]()
     
     // MARK: - ACTIONS -
     
@@ -163,8 +175,8 @@ extension SmilesExplorerHomeViewController {
                 case .fetchSavedFiltersAfterSuccess(let filtersSavedList):
 //                    self?.filtersSavedList = filtersSavedList
                     break
-                case .fetchSortingListDidSucceed:
-//                    self?.configureSortingData()
+                case .fetchExclusiveOffersDidSucceed(let exclusiveOffers):
+                    self?.configureExclusiveOffers(with: exclusiveOffers)
                     break
                 case .fetchContentForSortingItems(let baseRowModels):
 //                    self?.sortingListRowModels = baseRowModels
@@ -208,6 +220,17 @@ extension SmilesExplorerHomeViewController {
                     configureHeaderSection()
                 case .footer:
                     configureFooterSection()
+                    
+                case .exclusiveDeals:
+                    self.input.send(.exclusiveDeals(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
+                    break
+                case .bogoOffers:
+                    break
+                case .tickets:
+                    break
+                case .topPlaceholder:
+                    break
+                    
                 default: break
                 }
             }
@@ -248,6 +271,56 @@ extension SmilesExplorerHomeViewController {
         
     }
     
+    fileprivate func configureExclusiveOffers(with exclusiveOffersResponse: ExplorerOfferResponse) {
+        self.offersListing = exclusiveOffersResponse
+        self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
+//        let offers = getAllOffers(exclusiveOffersResponse: exclusiveOffersResponse)
+        if !offers.isEmpty {
+            if let offersCategoryIndex = getSectionIndex(for: .exclusiveDeals) {
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
+                    print(explorerOffer)
+                    
+                })
+                self.configureDataSource()
+            }
+        } else {
+            if self.offers.isEmpty {
+                self.configureHideSection(for: .exclusiveDeals, dataSource: ExplorerOffer.self)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+//    private func getAllOffers(exclusiveOffersResponse: ExplorerOfferResponse) -> [ExplorerOffer] {
+//
+//        let featuredOffers = exclusiveOffersResponse.offers?.map({ offer in
+//            var _offer = offer
+//            _offer.isFeatured = true
+//            return _offer
+//        })
+//        var offers = [ExplorerOffer]()
+//        if self.offersPage == 1 {
+//            offers.append(contentsOf: featuredOffers ?? [])
+//        }
+//        offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
+//        return offers
+//
+//    }
+    
+    fileprivate func configureHideSection<T>(for section: SmilesExplorerSectionIdentifier, dataSource: T.Type) {
+        if let index = getSectionIndex(for: section) {
+            (self.dataSource?.dataSources?[index] as? TableViewDataSource<T>)?.models = []
+            (self.dataSource?.dataSources?[index] as? TableViewDataSource<T>)?.isDummy = false
+            self.mutatingSectionDetails.removeAll(where: { $0.sectionIdentifier == section.rawValue })
+            
+            self.configureDataSource()
+        }
+    }
 }
 
 // MARK: - APP HEADER DELEGATE -

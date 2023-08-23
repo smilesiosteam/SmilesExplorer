@@ -11,7 +11,7 @@ import NetworkingLayer
 enum SmilesExplorerSubscriptionInfoRequestBuilder {
     
     case getSubscriptionInfo(request: SmilesExplorerSubscriptionInfoRequest)
-    
+    case getExclusiceOffer(request: ExplorerGetExclusiveOfferRequest)
     
     // gave a default timeout but can be different for each.
     var requestTimeOut: Int {
@@ -23,18 +23,20 @@ enum SmilesExplorerSubscriptionInfoRequestBuilder {
         switch self {
         case .getSubscriptionInfo:
             return .POST
+        case .getExclusiceOffer:
+            return .POST
         }
     }
     
     // compose the NetworkRequest
-    func createRequest(baseUrl: String) -> NetworkRequest {
+    func createRequest(baseUrl: String, endpoint: SmilesExplorerEndpoints) -> NetworkRequest {
         var headers: [String: String] = [:]
 
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         headers["CUSTOM_HEADER"] = "pre_prod"
         
-        return NetworkRequest(url: getURL(baseUrl: baseUrl), headers: headers, reqBody: requestBody, httpMethod: httpMethod)
+        return NetworkRequest(url: getURL(baseUrl: baseUrl, endPoints: endpoint), headers: headers, reqBody: requestBody, httpMethod: httpMethod)
     }
     
     // encodable request body for POST
@@ -43,11 +45,20 @@ enum SmilesExplorerSubscriptionInfoRequestBuilder {
         case .getSubscriptionInfo(let request):
             return request
         
+        case .getExclusiceOffer(request: let request):
+            return request
         }
     }
     
     // compose urls for each request
-    func getURL(baseUrl: String) -> String {
-        return baseUrl + "explorer/subscription"
+    func getURL(baseUrl: String, endPoints: SmilesExplorerEndpoints) -> String {
+        switch self {
+        case .getSubscriptionInfo:
+            return baseUrl + endPoints.serviceEndPoints
+        case .getExclusiceOffer:
+            return baseUrl + endPoints.serviceEndPoints
+        }
+        
+        
     }
 }

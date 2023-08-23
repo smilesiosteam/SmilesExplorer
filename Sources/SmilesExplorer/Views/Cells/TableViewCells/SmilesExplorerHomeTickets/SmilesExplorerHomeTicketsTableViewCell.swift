@@ -65,7 +65,7 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
 }
 
 // MARK: - COLLECTIONVIEW DELEGATE & DATASOURCE -
-extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionsData?.count ?? 0
@@ -76,6 +76,7 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
         if let data = collectionsData?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerHomeTicketsCollectionViewCell", for: indexPath) as? SmilesExplorerHomeTicketsCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(offer: data)
+            cell.backgroundColor = .systemRed
             return cell
         }
         return UICollectionViewCell()
@@ -89,5 +90,22 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
         }
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.width/4, height: 140)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        // Set the section insets
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 20.0
+    }
+    
+    
     
 }
