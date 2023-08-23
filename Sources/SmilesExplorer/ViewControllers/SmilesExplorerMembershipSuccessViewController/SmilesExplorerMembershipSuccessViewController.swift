@@ -138,7 +138,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             imgView.isHidden = true
         }
         
-        detailLabel.text =  (self.model?.themeResources?.passPurchaseSuccessMsg ?? "") +  (self.model?.themeResources?.explorerSubscriptionSubTitle ?? "")
+        detailLabel.text =  (self.model?.themeResources?.passPurchaseSuccessMsg ?? "") + " " + (self.model?.themeResources?.explorerSubscriptionSubTitle ?? "")
         
         
     }
