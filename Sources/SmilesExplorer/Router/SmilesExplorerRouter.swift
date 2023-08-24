@@ -16,6 +16,10 @@ public final class SmilesExplorerRouter: NSObject {
     public static let shared = SmilesExplorerRouter()
     
     private override init() {}
+    public func pushOffersVC(navVC:UINavigationController){
+        let vc = SmilesExplorerOffersViewController()
+        navVC.pushViewController(vc, animated: true)
+    }
     
     func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?, model: SmilesExplorerSubscriptionInfoResponse?,sourceScreen: SourceScreen = .success) {
         
@@ -29,7 +33,4 @@ public final class SmilesExplorerRouter: NSObject {
         navVC?.pushViewController(subVC, animated: true)
         
     }
-    
-    
-    
 }
