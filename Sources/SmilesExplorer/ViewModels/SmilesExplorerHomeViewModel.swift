@@ -86,7 +86,19 @@ extension SmilesExplorerHomeViewModel {
             case .exclusiveDeals(categoryId: let categoryId, tag: let tag, pageNo: _):
                 
                 self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
-                self?.exclusiveOffersUseCaseInput.send(.getExclusiveOffersList(categoryId: categoryId, tag: tag))}
+                self?.exclusiveOffersUseCaseInput.send(.getExclusiveOffersList(categoryId: categoryId, tag: tag))
+                
+            case .getTickets(categoryId: let categoryId, tag: let tag, pageNo: _):
+                
+                self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
+                self?.exclusiveOffersUseCaseInput.send(.getTickets(categoryId: categoryId, tag: tag))
+            
+            case .getBogo(categoryId: let categoryId, tag: let tag, pageNo: _):
+            
+                self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
+                self?.exclusiveOffersUseCaseInput.send(.getBogo(categoryId: categoryId, tag: tag))
+                
+            }
             
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
@@ -141,6 +153,14 @@ extension SmilesExplorerHomeViewModel {
                     self?.output.send(.fetchExclusiveOffersDidSucceed(response: response))
                 case .fetchExclusiveOffersDidFail(error: let error):
                     self?.output.send(.fetchExclusiveOffersDidFail(error: error))
+                case .fetchTicketsDidSucceed(response: let response):
+                    self?.output.send(.fetchTicketsDidSucceed(response: response))
+                case .fetchTicketDidFail(error: let error):
+                    self?.output.send(.fetchTicketDidFail(error: error))
+                case .fetchBogoDidSucceed(response: let response):
+                    self?.output.send(.fetchBogoDidSucceed(response: response))
+                case .fetchBogoDidFail(error: let error):
+                    self?.output.send(.fetchBogoDidFail(error: error))
                 }
             }.store(in: &cancellables)
     }
