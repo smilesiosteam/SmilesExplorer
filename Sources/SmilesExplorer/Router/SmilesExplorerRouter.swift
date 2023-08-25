@@ -21,7 +21,7 @@ public final class SmilesExplorerRouter: NSObject {
         navVC.pushViewController(vc, animated: true)
     }
     
-    func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?, model: SmilesExplorerSubscriptionInfoResponse?,sourceScreen: SourceScreen = .success) {
+    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?, model: SmilesExplorerSubscriptionInfoResponse?,sourceScreen: SourceScreen = .success) {
         
         let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(model: model,sourceScreen: sourceScreen)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
@@ -33,7 +33,7 @@ public final class SmilesExplorerRouter: NSObject {
         navVC?.pushViewController(subVC, animated: true)
         
     }
-    @objc func showPickTicketPop(viewcontroller: UIViewController)  {
+    public   @objc func showPickTicketPop(viewcontroller: UIViewController)  {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
         viewcontroller.present(picTicketPopUp)
     }
