@@ -120,12 +120,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
        
         setButtonsAndDateORLinkUI()
         
-        congratulationLabel.fontTextStyle = .smilesHeadline3
-        detailLabel.fontTextStyle = .smilesBody3
-        dateORLinkButton.fontTextStyle = .smilesTitle1
-        continueButton.fontTextStyle = .smilesTitle1
-        exploreButton.fontTextStyle = .smilesTitle1
         continueButton.setTitle( "ContinueTitle".localizedString.capitalized, for: .normal)
+        self.exploreButton.setTitle("Go to explorer", for: .normal)
         congratulationLabel.text = self.model?.themeResources?.explorerPurchaseSuccessTitle
         if let urlStr = self.model?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
             imgView.isHidden = false
@@ -155,7 +151,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
                   .underlineStyle: NSUnderlineStyle.single.rawValue
               ] //
             let attributeString = NSMutableAttributedString(
-                    string: "View free pass",
+                string: "View free pass".localizedString,
                     attributes: underLineAttributes
                  )
             self.dateORLinkButton.setAttributedTitle(attributeString, for: .normal)
@@ -178,7 +174,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     
     // MARK: - IBActions -
     @IBAction func continueButtonDidTab(_ sender: UIButton) {
-        
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self)
     }
     @IBAction func exploreButtonDidTab(_ sender: UIButton) {
         
