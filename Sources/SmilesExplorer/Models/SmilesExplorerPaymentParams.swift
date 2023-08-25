@@ -21,6 +21,4 @@ public struct SmilesExplorerPaymentParams {
     public var isComingFromTreasureChest: Bool
     
 }
-public struct ThemeResources{
-    
-}
+

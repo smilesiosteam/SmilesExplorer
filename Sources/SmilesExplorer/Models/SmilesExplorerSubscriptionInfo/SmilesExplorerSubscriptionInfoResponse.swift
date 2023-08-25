@@ -29,13 +29,4 @@ class SmilesExplorerSubscriptionInfoResponse: BaseMainResponse {
     
 }
 
-class ThemeResources: Codable {
-    var explorerTopPlaceholderTitle: String?
-    var explorerTopPlaceholderIcon: String?
-    var explorerSubscriptionTitle: String?
-    var explorerSubscriptionSubTitle: String?
-    var explorerPurchaseSuccessImage: String?
-    var explorerPurchaseSuccessTitle: String?
-    var passPurchaseSuccessMsg: String?
-    var ticketPurchaseSuccessMsg: String?
-}
+

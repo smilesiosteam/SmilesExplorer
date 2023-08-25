@@ -45,15 +45,16 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
     
     private func setupCollectionViewLayout() ->  UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(130)))
             item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
             
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .absolute(128), heightDimension: .fractionalHeight(1)), subitems: [item])
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(130)), subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             section.contentInsets.leading = 16
-            section.contentInsets.trailing = 0
+            section.contentInsets.trailing = 16
+            
             return section
         }
     }
@@ -90,22 +91,4 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
         }
         
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.frame.width/4, height: 140)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        // Set the section insets
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    }
-
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20.0
-    }
-    
-    
-    
 }
