@@ -33,7 +33,7 @@ public final class SmilesExplorerRouter: NSObject {
         navVC?.pushViewController(subVC, animated: true)
         
     }
-    public   @objc func showPickTicketPop(viewcontroller: UIViewController)  {
+    public func showPickTicketPop(viewcontroller: UIViewController)  {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
         viewcontroller.present(picTicketPopUp)
     }

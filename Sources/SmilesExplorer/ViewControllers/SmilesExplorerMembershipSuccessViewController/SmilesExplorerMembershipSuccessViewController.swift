@@ -14,8 +14,8 @@ import SmilesFontsManager
 import SmilesLoader
 
 public enum SourceScreen {
-   public case success
-   public case freePassSuccess
+    case success
+    case freePassSuccess
 }
 
 public class SmilesExplorerMembershipSuccessViewController: UIViewController {
