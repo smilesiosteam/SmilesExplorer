@@ -37,6 +37,10 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
     private func setupCollectionView() {
         
         collectionView.register(UINib(nibName: String(describing: SmilesExplorerHomeTicketsCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: SmilesExplorerHomeTicketsCollectionViewCell.self))
+        
+        collectionView.register(UINib(nibName: String(describing: SmilesExplorerDealsAndOffersCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: SmilesExplorerDealsAndOffersCollectionViewCell.self))
+        
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = setupCollectionViewLayout()
@@ -77,7 +81,7 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
         if let data = collectionsData?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerHomeTicketsCollectionViewCell", for: indexPath) as? SmilesExplorerHomeTicketsCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(offer: data)
-            cell.backgroundColor = .systemRed
+//            cell.backgroundColor = .systemRed
             return cell
         }
         return UICollectionViewCell()

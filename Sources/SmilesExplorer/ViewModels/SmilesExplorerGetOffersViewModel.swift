@@ -76,28 +76,22 @@ extension SmilesExplorerGetOffersViewModel {
                 }
             } receiveValue: { [weak self] response in
                 debugPrint("got my response here \(response)")
-                let tg = SuccessOutput(rawValue: tag)
-                switch tg {
-                case .fetchExclusiveOffers:
-                    self?.output.send(.fetchExclusiveOffersDidSucceed(response: response))
-                case .getTickets:
-                    self?.output.send(.fetchTicketsDidSucceed(response: response))
-                    break
-                case .getBogo:
-                    self?.output.send(.fetchBogoDidSucceed(response: response))
-                    break
-                default:
-                    break
-                }
                 
+                if let section = SmilesExplorerSectionIdentifier(rawValue: tag){
+                    switch section {
+                    case .exclusiveDeals:
+                        self?.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                    case .tickets:
+                        self?.output.send(.fetchTicketsDidSucceed(response: response))
+                        break
+                    case .bogoOffers:
+                        self?.output.send(.fetchBogoDidSucceed(response: response))
+                        break
+                    default:
+                        break
+                    }
+                }
             }
         .store(in: &cancellables)
     }
-}
-
-
-enum SuccessOutput: String {
-    case fetchExclusiveOffers = "EXCLUSIVE_DEALS"
-    case getTickets = "TICKETS"
-    case getBogo = "BOGO_OFFERS"
 }

@@ -174,15 +174,14 @@ extension SmilesExplorerHomeViewController {
 //                    self?.configureDataSource()
 //                    self?.configureFiltersData()
                     break
+                case .fetchTicketsDidSucceed(let exclusiveOffers):
+                    self?.configureTickets(with: exclusiveOffers)
+                    break
                 case .fetchSavedFiltersAfterSuccess(_):
 //                    self?.filtersSavedList = filtersSavedList
                     break
                 case .fetchExclusiveOffersDidSucceed(let exclusiveOffers):
                     self?.configureExclusiveOffers(with: exclusiveOffers)
-                   
-                    break
-                case .fetchTicketsDidSucceed(let exclusiveOffers):
-                    self?.configureTickets(with: exclusiveOffers)
                    
                     break
                     
@@ -231,14 +230,14 @@ extension SmilesExplorerHomeViewController {
                     configureHeaderSection()
                 case .footer:
                     configureFooterSection()
+                case .tickets:
+                    self.input.send(.getTickets(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
+                    break
                 case .exclusiveDeals:
                     self.input.send(.exclusiveDeals(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .bogoOffers:
                     self.input.send(.getBogo(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
-                    break
-                case .tickets:
-                    self.input.send(.getTickets(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .topPlaceholder:
                     break

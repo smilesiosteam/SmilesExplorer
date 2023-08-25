@@ -41,11 +41,11 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         self.amountLabel.text = offer.pointsValue
         self.brandTitleLabel.text = offer.offerTitle
         self.typeLabel.text = offer.offerType
-//        brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(), backgroundColor: .white) { image in
-//            if let image = image {
-//                self.brandLogoImageView.image = image
-//            }
-//        }
+        brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(), backgroundColor: .white) { image in
+            if let image = image {
+                self.brandLogoImageView.image = image
+            }
+        }
         
     }
     

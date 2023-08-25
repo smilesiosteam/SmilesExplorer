@@ -24,8 +24,18 @@ class SmilesExplorerDealsAndOffersCollectionViewCell: UICollectionViewCell {
     private func setupUI() {
         self.imageContainerView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], cornerRadius: 12.0)
         self.brandTitleLabel.fontTextStyle = .smilesTitle2
-       
         self.brandTitleLabel.textColor = .appRevampLocationTextColor
+        
+    }
+    
+    func configure(offer: ExplorerOffer) {
+        print(offer)
+        self.brandTitleLabel.text = offer.offerTitle
+        brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(), backgroundColor: .white) { image in
+            if let image = image {
+                self.brandLogoImageView.image = image
+            }
+        }
         
     }
 }
