@@ -6,10 +6,9 @@
 //
 
 import Foundation
-
-public protocol SmilesExplorerDelegate: AnyObject {
+public protocol SmilesExplorerHomeDelegate {
     
     func proceedToPayment(params: SmilesExplorerPaymentParams)
-    func handleLinkRedirection(redirectionUrl: String)
-    
+
+    func handleDeepLinkRedirection(redirectionUrl: String)
 }
