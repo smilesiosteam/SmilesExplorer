@@ -131,8 +131,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     
     //MARK: Actions
     @IBAction func membershipSelectPressed(_ sender: UIButton) {
-        SmilesExplorerRouter.shared.pushSmilesExplorerMembershipSuccessVC(navVC: self.navigationController, model: self.response,sourceScreen: .success)
-            
+        
     }
     
     @objc func onClickBack() {

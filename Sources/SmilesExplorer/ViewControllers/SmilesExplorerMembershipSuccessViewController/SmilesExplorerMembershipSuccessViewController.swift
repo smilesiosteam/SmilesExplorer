@@ -31,36 +31,55 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     
     // MARK: - Properties -
     
-    private var model: SmilesExplorerSubscriptionInfoResponse?
+   // private var model: SmilesExplorerSubscriptionInfoResponse?
     private let sourceScreen: SourceScreen
     lazy  var backButton: UIButton = UIButton(type: .custom)
+    
+    private var response: SmilesExplorerSubscriptionInfoResponse?
+    private var input: PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never> = .init()
+    private var cancellables = Set<AnyCancellable>()
+    private lazy var viewModel: SmilesExplorerMembershipSelectionViewModel = {
+        return SmilesExplorerMembershipSelectionViewModel()
+    }()
     
     // MARK: - ViewController Lifecycle -
    
     public override func viewDidLoad() {
         super.viewDidLoad()
             styleFontAndTextColor()
-        
+        bind(to: viewModel)
+        input.send(.getSubscriptionInfo)
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(model: SmilesExplorerSubscriptionInfoResponse?,sourceScreen: SourceScreen) {
+    init(_ sourceScreen: SourceScreen) {
         
-        self.model = model
         self.sourceScreen = sourceScreen
         super.init(nibName: "SmilesExplorerMembershipSuccessViewController", bundle: .module)
-        
-        
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    func bind(to viewModel: SmilesExplorerMembershipSelectionViewModel) {
+        input = PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never>()
+        let output = viewModel.transform(input: input.eraseToAnyPublisher())
+        output
+            .sink { [weak self] event in
+                switch event {
+                case .fetchSubscriptionInfoDidSucceed(response: let response):
+                    self?.response = response
+                    self?.setupUI()
+                    
+                case .fetchSubscriptionInfoDidFail(error: let error):
+                    debugPrint(error.localizedDescription)
+                }
+            }.store(in: &cancellables)
+    }
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setUpNavigationBar(self.sourceScreen == .freePassSuccess ? true: false)
     }
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -68,7 +87,6 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     }
     private func setUpNavigationBar(_ showBackButton: Bool = false) {
        
-    
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         self.navigationItem.standardAppearance = appearance
@@ -76,7 +94,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         
         let locationNavBarTitle = UILabel()
         
-        locationNavBarTitle.text = self.model?.themeResources?.explorerSubscriptionTitle ?? "Success"
+        locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success"
         locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         locationNavBarTitle.textColor = .appRevampPurpleMainColor
@@ -113,17 +131,17 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         self.detailLabel.textColor = .appDarkGrayColor
         self.congratulationLabel.textColor = .appDarkGrayColor
         self.dateORLinkButton.titleLabel?.textColor = .appRevampSubtitleColor
-        self.setupUI()
+        
     }
     
     private func setupUI() {
-       
+        self.setUpNavigationBar(self.sourceScreen == .freePassSuccess ? true: false)
         setButtonsAndDateORLinkUI()
         
         continueButton.setTitle( "ContinueTitle".localizedString.capitalized, for: .normal)
         self.exploreButton.setTitle("Go to explorer", for: .normal)
-        congratulationLabel.text = self.model?.themeResources?.explorerPurchaseSuccessTitle
-        if let urlStr = self.model?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
+        congratulationLabel.text = self.response?.themeResources?.explorerPurchaseSuccessTitle
+        if let urlStr = self.response?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
             imgView.isHidden = false
             if urlStr.hasSuffix(".json") {
                 LottieAnimationManager.showAnimationFromUrl(FromUrl: urlStr, animationBackgroundView: self.imgView, removeFromSuper: false, loopMode: .loop, shouldAnimate: true) { _ in }
@@ -134,7 +152,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             imgView.isHidden = true
         }
         
-        detailLabel.text =  (self.model?.themeResources?.passPurchaseSuccessMsg ?? "") + " " + (self.model?.themeResources?.explorerSubscriptionSubTitle ?? "")
+        detailLabel.text =  (self.response?.themeResources?.passPurchaseSuccessMsg ?? "") + " " + (self.response?.themeResources?.explorerSubscriptionSubTitle ?? "")
         
         
     }
@@ -162,9 +180,10 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             self.backButton.isHidden = true
             self.exploreButton.isHidden = true
             self.continueButton.isHidden = false
-            if let expiryDateString =  self.model?.lifestyleOffers?.first?.expiryDate {
-                let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy", to: "dd MMM YYYY")
-                dateORLinkButton.setTitle(outputDateString, for: .normal)
+            if let expiryDateString =  self.response?.lifestyleOffers?.first?.expiryDate {
+                let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MMM, YYYY")
+                let finalDateString = "Valid til".localizedString + " " + outputDateString
+                dateORLinkButton.setTitle(finalDateString, for: .normal)
             }
             
         }
