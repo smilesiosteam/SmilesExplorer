@@ -30,7 +30,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     @IBOutlet weak var exploreButton: UIButton!
     
     // MARK: - Properties -
-    
+    private var onContinue:()->Void = {}
    // private var model: SmilesExplorerSubscriptionInfoResponse?
     
     lazy  var backButton: UIButton = UIButton(type: .custom)
@@ -54,8 +54,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(_ sourceScreen: SourceScreen) {
-        
+    init(_ sourceScreen: SourceScreen, onContinue:@escaping ()->Void) {
+        self.onContinue = onContinue
         self.sourceScreen = sourceScreen
         super.init(nibName: "SmilesExplorerMembershipSuccessViewController", bundle: .module)
 
@@ -184,7 +184,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             self.continueButton.isHidden = false
             if let expiryDateString =  self.response?.lifestyleOffers?.first?.expiryDate {
                 let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MMM, YYYY")
-                let finalDateString = "Valid til".localizedString + " " + outputDateString
+                let finalDateString = "*" + "Valid til".localizedString + " " + outputDateString
                 dateORLinkButton.setTitle(finalDateString, for: .normal)
             }
             
@@ -195,10 +195,12 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     
     // MARK: - IBActions -
     @IBAction func continueButtonDidTab(_ sender: UIButton) {
-        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self)
+        self.onContinue()
     }
     @IBAction func exploreButtonDidTab(_ sender: UIButton) {
-        
+        if let navController = self.navigationController {
+            SmilesExplorerRouter.shared.popToSmilesExplorerHomeViewController(navVC: navController)
+        }
     }
     @objc func onClickBack() {
         self.navigationController?.popViewController(animated: true)
