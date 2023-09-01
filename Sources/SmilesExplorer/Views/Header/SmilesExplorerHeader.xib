@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="478" height="175"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pIl-4Z-Hjn">
-                            <rect key="frame" x="16" y="15.999999999999996" width="446" height="44.666666666666657"/>
+                            <rect key="frame" x="16" y="25.999999999999996" width="446" height="44.666666666666657"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exclusive offers for you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poZ-xV-ABP" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                     <rect key="frame" x="0.0" y="0.0" width="446" height="20.333333333333332"/>
@@ -51,8 +51,8 @@
                     <constraints>
                         <constraint firstItem="pIl-4Z-Hjn" firstAttribute="leading" secondItem="mAo-dy-FlF" secondAttribute="leading" constant="16" id="QGa-Oo-1MM"/>
                         <constraint firstAttribute="trailing" secondItem="pIl-4Z-Hjn" secondAttribute="trailing" constant="16" id="ZkQ-EI-vWA"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pIl-4Z-Hjn" secondAttribute="bottom" constant="16" id="dlc-CC-ScO"/>
-                        <constraint firstItem="pIl-4Z-Hjn" firstAttribute="top" secondItem="mAo-dy-FlF" secondAttribute="top" constant="16" id="qaR-9e-wRp"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pIl-4Z-Hjn" secondAttribute="bottom" constant="20" id="dlc-CC-ScO"/>
+                        <constraint firstItem="pIl-4Z-Hjn" firstAttribute="top" secondItem="mAo-dy-FlF" secondAttribute="top" constant="26" id="qaR-9e-wRp"/>
                     </constraints>
                 </view>
             </subviews>

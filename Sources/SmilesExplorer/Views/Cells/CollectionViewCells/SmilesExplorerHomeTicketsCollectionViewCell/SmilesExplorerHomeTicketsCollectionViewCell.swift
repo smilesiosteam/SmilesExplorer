@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import SmilesUtilities
 
 class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - IBOutlets -
     @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var brandLogoImageView: UIImageView!
-    @IBOutlet weak var brandTitleLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var brandTitleLabel: UILocalizableLabel!
+    @IBOutlet weak var typeLabel: UILocalizableLabel!
+    @IBOutlet weak var amountLabel: UILocalizableLabel!
     //MARK: - Variables
     
     //MARK: - CellView LifeCycel
@@ -38,14 +39,18 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     
     func configure(offer: ExplorerOffer) {
         print(offer)
-        self.amountLabel.text = offer.pointsValue
-        self.brandTitleLabel.text = offer.offerTitle
-        self.typeLabel.text = offer.offerType
-        brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(), backgroundColor: .white) { image in
+        self.amountLabel.localizedString = offer.dirhamValue ?? ""
+        self.brandTitleLabel.localizedString = offer.offerTitle ?? ""
+        self.typeLabel.localizedString = offer.offerType ?? ""
+        brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in
             if let image = image {
                 self.brandLogoImageView.image = image
             }
         }
+        
+        amountLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+        brandTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+        typeLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         
     }
     

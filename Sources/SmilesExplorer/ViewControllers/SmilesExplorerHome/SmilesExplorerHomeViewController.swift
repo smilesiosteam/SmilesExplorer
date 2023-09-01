@@ -12,6 +12,7 @@ import SmilesUtilities
 import SmilesSharedServices
 import SmilesLocationHandler
 import SmilesOffers
+import SmilesLoader
 
 public class SmilesExplorerHomeViewController: UIViewController {
 
@@ -54,6 +55,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     // MARK: - METHODS -
     public override func viewDidLoad() {
         super.viewDidLoad()
+        SmilesLoader.show(on: self.view)
         setupViews()
     }
     
@@ -187,6 +189,7 @@ extension SmilesExplorerHomeViewController {
                     break
                     
                 case .fetchBogoDidSucceed(let exclusiveOffers):
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureBogoOffers(with: exclusiveOffers)
                     
                 case .fetchContentForSortingItems(_):
@@ -271,6 +274,7 @@ extension SmilesExplorerHomeViewController {
             }), let backgroundImage = footer.backgroundImage {
                 dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource(models: [backgroundImage], reuseIdentifier: "SmilesExplorerFooterTableViewCell", data: "#FFFFFF", cellConfigurator: { (url, cell, data, indexPath) in
                     guard let cell = cell as? SmilesExplorerFooterTableViewCell else { return }
+                    cell.footerconfiguration = self.smilesExplorerSections?.sectionDetails?.last
                     cell.setupValues(url: url)
                     cell.getMembership = { [weak self] in
                         // Setup navigation for membership
@@ -307,7 +311,7 @@ extension SmilesExplorerHomeViewController {
         self.tickets.append(contentsOf: exclusiveOffersResponse.offers ?? [])
         if !tickets.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .tickets) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#555555", completion: { [weak self] explorerOffer in
                     print(explorerOffer)
                     
                 })

@@ -19,6 +19,7 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
             self.collectionView?.reloadData()
         }
     }
+     var index: Int?
     var callBack: ((ExplorerOffer) -> ())?
     
     // MARK: - ACTIONS -
@@ -31,6 +32,9 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
+        mainView.backgroundColor = .clear
+        collectionView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+        
         setupCollectionView()
     }
     
@@ -43,16 +47,16 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.collectionViewLayout = setupCollectionViewLayout()
+//        collectionView.collectionViewLayout = setupCollectionViewLayout()
         
     }
     
     private func setupCollectionViewLayout() ->  UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(130)))
-            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(128)))
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 8)
             
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(130)), subitems: [item])
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(128)), subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
@@ -81,7 +85,6 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
         if let data = collectionsData?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerHomeTicketsCollectionViewCell", for: indexPath) as? SmilesExplorerHomeTicketsCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(offer: data)
-//            cell.backgroundColor = .systemRed
             return cell
         }
         return UICollectionViewCell()
@@ -94,5 +97,9 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
             callBack?(data)
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 96.0, height: 128.0)
     }
 }

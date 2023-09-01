@@ -35,14 +35,19 @@ class SmilesExplorerHeader: UIView {
         mainView.bindFrameToSuperviewBounds()
     }
     
-    func setupData(title: String?, subTitle: String?, color: UIColor?) {
+    func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?) {
         titleLabel.localizedString = title ?? ""
         subTitleLabel.localizedString = subTitle ?? ""
-        if let color {
-            mainView.backgroundColor = color
-        } else {
-            mainView.backgroundColor = .white
+        if section == 2 {
+            mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
         }
+        if let color,section == 1{
+            print(color)
+            mainView.backgroundColor = .white
+        }else {
+            mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+        }
+        
         subTitleLabel.isHidden = subTitle == nil
         titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         subTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight

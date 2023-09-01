@@ -33,9 +33,11 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     var transactionId: String?
     private var onContinue:((String?) -> Void)?
    // private var model: SmilesExplorerSubscriptionInfoResponse?
-    private let sourceScreen: SourceScreen
-    lazy  var backButton: UIButton = UIButton(type: .custom)
     
+    lazy  var backButton: UIButton = UIButton(type: .custom)
+    var membershipPicked:((BOGODetailsResponseLifestyleOffer)->Void)? = nil
+    
+    private let sourceScreen: SourceScreen
     private var response: SmilesExplorerSubscriptionInfoResponse?
     private var input: PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()

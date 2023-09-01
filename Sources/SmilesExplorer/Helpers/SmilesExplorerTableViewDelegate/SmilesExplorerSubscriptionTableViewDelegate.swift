@@ -7,12 +7,18 @@
 
 import Foundation
 import UIKit
+import SmilesUtilities
 
 
 extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("pressed")
         
+        if let membership = (self.dataSource?.dataSources?.first as? TableViewDataSource<BOGODetailsResponseLifestyleOffer>)?.models?[safe: indexPath.row] {
+            self.membershipPicked = membership
+        
+        }
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -20,7 +26,7 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60.0
+        return 0.0
         
     }
     
