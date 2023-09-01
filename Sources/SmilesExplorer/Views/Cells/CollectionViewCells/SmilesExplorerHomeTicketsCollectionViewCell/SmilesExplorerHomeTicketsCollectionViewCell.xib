@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -37,9 +36,10 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Burj Khalifa - png 0" translatesAutoresizingMaskIntoConstraints="NO" id="KFj-hq-hQ8">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="0al-qh-2JL"/>
                                     <constraint firstItem="KFj-hq-hQ8" firstAttribute="leading" secondItem="g2P-iu-Jfk" secondAttribute="leading" id="81s-e2-A2d"/>
@@ -49,13 +49,13 @@
                                     <constraint firstItem="KFj-hq-hQ8" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="top" id="gxr-37-dTR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                 <rect key="frame" x="12" y="76" width="72" height="16"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-rM-4ra">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-rM-4ra" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                 <rect key="frame" x="12" y="96" width="72" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="LGR-mm-0A6"/>
@@ -64,8 +64,9 @@
                                 <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 AED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzb-Fw-jdT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 AED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzb-Fw-jdT" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                 <rect key="frame" x="12" y="114" width="72" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="HdQ-SN-VdR"/>
                                 </constraints>
@@ -74,7 +75,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="cr4-rM-4ra" secondAttribute="trailing" constant="12" id="1OU-kA-Ozk"/>
                             <constraint firstAttribute="bottom" secondItem="tzb-Fw-jdT" secondAttribute="bottom" id="8uV-Rz-x1X"/>
@@ -101,19 +102,16 @@
             </constraints>
             <size key="customSize" width="75" height="111"/>
             <connections>
-                <outlet property="amountLabel" destination="tzb-Fw-jdT" id="1Ds-2W-aaJ"/>
+                <outlet property="amountLabel" destination="tzb-Fw-jdT" id="l5u-Gx-A8q"/>
                 <outlet property="brandLogoImageView" destination="KFj-hq-hQ8" id="uNe-gM-i5Z"/>
-                <outlet property="brandTitleLabel" destination="77D-37-DM2" id="G3K-bK-2qh"/>
+                <outlet property="brandTitleLabel" destination="77D-37-DM2" id="ZfV-yw-x8I"/>
                 <outlet property="imageContainerView" destination="g2P-iu-Jfk" id="cIn-rd-00h"/>
-                <outlet property="typeLabel" destination="cr4-rM-4ra" id="Smb-eT-HT0"/>
+                <outlet property="typeLabel" destination="cr4-rM-4ra" id="i0d-1m-JHH"/>
             </connections>
             <point key="canvasLocation" x="82.44274809160305" y="21.126760563380284"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="Burj Khalifa - png 0" width="72" height="72"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

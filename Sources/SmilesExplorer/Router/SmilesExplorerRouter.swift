@@ -16,10 +16,12 @@ public final class SmilesExplorerRouter: NSObject {
     public static let shared = SmilesExplorerRouter()
     
     private override init() {}
+    
     public func pushOffersVC(navVC:UINavigationController){
         let vc = SmilesExplorerOffersViewController()
         navVC.pushViewController(vc, animated: true)
     }
+ 
     
     public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success) {
         let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen)
@@ -35,4 +37,6 @@ public final class SmilesExplorerRouter: NSObject {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
         viewcontroller.present(picTicketPopUp)
     }
+    
+    
 }

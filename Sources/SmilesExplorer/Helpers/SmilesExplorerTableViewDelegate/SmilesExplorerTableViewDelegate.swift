@@ -31,8 +31,7 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             if sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.footer.rawValue {
                 let header = SmilesExplorerHeader()
-                header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""))
-                
+                header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
                 configureHeaderForShimmer(section: section, headerView: header)
                 return header
             }
@@ -46,7 +45,13 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
+        
+        switch self.smilesExplorerSections?.sectionDetails?[safe: section]?.sectionIdentifier {
+        case SmilesExplorerSectionIdentifier.footer.rawValue:
+            return 0.0
+        default:
+            return UITableView.automaticDimension
+        }
     }
     
     func configureHeaderForShimmer(section: Int, headerView: UIView) {

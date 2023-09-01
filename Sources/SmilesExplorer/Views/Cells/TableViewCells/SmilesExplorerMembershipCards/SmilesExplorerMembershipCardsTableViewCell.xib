@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="349" height="240"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7V-L2-KQ2" customClass="UICustomView" customModule="SmilesUtilities">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7V-L2-KQ2">
                         <rect key="frame" x="16" y="8" width="317" height="185"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Money" translatesAutoresizingMaskIntoConstraints="NO" id="4KG-QB-W71">
@@ -30,7 +30,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1h0-5N-wwk">
                                 <rect key="frame" x="60" y="24" width="189" height="137"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Platinum Explorer Pass" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj9-ow-Ke0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Platinum Explorer Pass" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj9-ow-Ke0" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                         <rect key="frame" x="0.0" y="0.0" width="189" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -39,7 +39,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline3"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Any one ticket of your choice free" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vo5-zR-Ks8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Any one ticket of your choice free" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vo5-zR-Ks8" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                         <rect key="frame" x="0.0" y="30.333333333333336" width="189" height="28.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -48,7 +48,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle3"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exclusive offers and discounts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWR-rr-ssE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exclusive offers and discounts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWR-rr-ssE" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                         <rect key="frame" x="0.0" y="69" width="189" height="14.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -57,7 +57,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle3"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy 1 get 1  free pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwZ-df-T8Z">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy 1 get 1  free pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwZ-df-T8Z" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                         <rect key="frame" x="0.0" y="93.333333333333329" width="189" height="14.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -66,7 +66,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle3"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="300 AED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDD-PK-aCu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="300 AED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDD-PK-aCu" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                         <rect key="frame" x="0.0" y="117.66666666666666" width="189" height="19.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
@@ -77,7 +77,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jb4-zV-DFp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jb4-zV-DFp">
                                 <rect key="frame" x="273" y="24" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="0nd-PD-jTn"/>
@@ -104,29 +104,48 @@
                                 <real key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.0060808634020618202" green="0.0060808634020618202" blue="0.0060808634020618202" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.0078431372549019607" green="0.0078431372549019607" blue="0.0078431372549019607" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isUserInteractionDisabledWhenSkeletonIsActive" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJP-NQ-jMh">
+                        <rect key="frame" x="0.0" y="0.0" width="349" height="240"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="selectinoButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5Xn-4T-9SO"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="y7V-L2-KQ2" secondAttribute="trailing" constant="16" id="F9v-Zq-3zR"/>
+                    <constraint firstItem="KJP-NQ-jMh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="X2o-pC-Uyr"/>
+                    <constraint firstAttribute="bottom" secondItem="KJP-NQ-jMh" secondAttribute="bottom" id="hJF-UN-y7E"/>
                     <constraint firstItem="y7V-L2-KQ2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="hq1-tq-q3A"/>
+                    <constraint firstItem="KJP-NQ-jMh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nu3-SE-cTs"/>
+                    <constraint firstAttribute="trailing" secondItem="KJP-NQ-jMh" secondAttribute="trailing" id="pLG-rU-RNs"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="y7V-L2-KQ2" secondAttribute="bottom" constant="8" id="xu0-EW-CK3"/>
                     <constraint firstItem="y7V-L2-KQ2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zUL-eH-Wf8"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="subviews">
+                        <exclude reference="KJP-NQ-jMh"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="buy1Get1Label" destination="YwZ-df-T8Z" id="1LV-KH-aIr"/>
+                <outlet property="cardView" destination="y7V-L2-KQ2" id="f05-P7-Bj2"/>
                 <outlet property="cellImageView" destination="4KG-QB-W71" id="kVs-ZZ-lzl"/>
                 <outlet property="choiceTicketLabel" destination="Vo5-zR-Ks8" id="Abd-dl-4mZ"/>
                 <outlet property="exclusiveOfferLabel" destination="eWR-rr-ssE" id="XZh-6J-FbH"/>
                 <outlet property="platinumExplorerLabel" destination="gj9-ow-Ke0" id="vU5-BJ-W1v"/>
                 <outlet property="priceLabel" destination="oDD-PK-aCu" id="aq2-xj-bXE"/>
+                <outlet property="selectionButton" destination="KJP-NQ-jMh" id="5ge-ms-AMf"/>
                 <outlet property="toggleButton" destination="jb4-zV-DFp" id="5P8-Sk-JyS"/>
             </connections>
             <point key="canvasLocation" x="165.64885496183206" y="82.394366197183103"/>

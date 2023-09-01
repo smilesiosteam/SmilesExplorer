@@ -9,17 +9,22 @@ import UIKit
 import SmilesLanguageManager
 import SmilesUtilities
 import Combine
+import SmilesLoader
+
 
 class SmilesExplorerMembershipCardsViewController: UIViewController {
     
     //MARK: Properties
-    private var dataSource: SectionedTableViewDataSource?
-    private var response: SmilesExplorerSubscriptionInfoResponse?
+    var dataSource: SectionedTableViewDataSource?
+    
+    var membershipPicked:BOGODetailsResponseLifestyleOffer?
+    var response: SmilesExplorerSubscriptionInfoResponse?
     private var input: PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     private lazy var viewModel: SmilesExplorerMembershipSelectionViewModel = {
         return SmilesExplorerMembershipSelectionViewModel()
     }()
+    public var delegate: SmilesExplorerHomeDelegate?
     
     //MARK: IBoutlet
     @IBOutlet weak var smilesExplorerLabel: UILabel!
@@ -32,7 +37,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
     }
     
-     init() {
+    init() {
         super.init(nibName: "SmilesExplorerMembershipCardsViewController", bundle: .module)
     }
     
@@ -44,6 +49,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
+        SmilesLoader.show(on: self.view)
         setupViews()
     }
     
@@ -56,7 +62,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+    
     
     private func setupViews() {
         
@@ -74,8 +80,9 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 1
+        
         tableView.delegate = self
-//        tableView.dataSource = self
+        //        tableView.dataSource = self
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerSubscriptionCellRegistration()
         smilesExplorerCellRegistrable.register(for: tableView)
         
@@ -88,9 +95,9 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
     }
     
-   //MARK: Navigation Bar Setup
+    //MARK: Navigation Bar Setup
     func setUpNavigationBar() {
-
+        
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.configureWithTransparentBackground()
@@ -106,7 +113,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         imageView.sd_setImage(with: URL(string: response?.themeResources?.explorerTopPlaceholderIcon ?? "")) { image, _, _, _ in
             imageView.image = image?.withRenderingMode(.alwaysTemplate)
         }
-
+        
         let locationNavBarTitle = UILabel()
         locationNavBarTitle.text = response?.themeResources?.explorerTopPlaceholderTitle ?? "Smiles Explorer"
         locationNavBarTitle.textColor = .black
@@ -115,7 +122,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         hStack.spacing = 4
         hStack.alignment = .center
         self.navigationItem.titleView = hStack
-
+        
         let btnBack: UIButton = UIButton(type: .custom)
         btnBack.backgroundColor = UIColor(red: 226.0 / 255.0, green: 226.0 / 255.0, blue: 226.0 / 255.0, alpha: 1.0)
         btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_Icon", in: .module, compatibleWith: nil), for: .normal)
@@ -126,12 +133,15 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: btnBack)
         self.navigationItem.leftBarButtonItem = barButton
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-
+        
     }
     
     //MARK: Actions
     @IBAction func membershipSelectPressed(_ sender: UIButton) {
         
+        guard let membership = self.membershipPicked else { return }
+        let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(lifeStyleOffer: membership, playerID: "", referralCode: "", hasAttendedSmilesExplorerGame: false, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
+        delegate?.proceedToPayment(params: objSmilesExplorerPaymentParams)
     }
     
     @objc func onClickBack() {
@@ -151,6 +161,7 @@ extension SmilesExplorerMembershipCardsViewController {
             .sink { [weak self] event in
                 switch event {
                 case .fetchSubscriptionInfoDidSucceed(response: let response):
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureSmilesExplorerSubscriptions(with: response)
                     self?.response = response
                 case .fetchSubscriptionInfoDidFail(error: let error):
