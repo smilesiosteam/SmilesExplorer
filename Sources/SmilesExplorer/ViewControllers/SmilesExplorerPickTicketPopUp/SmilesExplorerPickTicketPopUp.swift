@@ -29,6 +29,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
         return SmilesExplorerPickTicketViewModel()
     }()
     private var response:OffersCategoryResponseModel?
+     var paymentDelegate: SmilesExplorerHomeDelegate?
 
     var currentPage = 1
     var isLoading = false
@@ -114,7 +115,9 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func upgradeButtonDidTab(_ sender: UIButton) {
-        
+//        let offers = self.response?.offers
+//        let param = SmilesExplorerPaymentParams(lifeStyleOffer: , playerID: <#T##String#>, referralCode: <#T##String#>, hasAttendedSmilesExplorerGame: <#T##Bool#>, isComingFromSpecialOffer: <#T##Bool#>, isComingFromTreasureChest: <#T##Bool#>)
+//        self.paymentDelegate?.proceedToPayment(params: )
     }
     @IBAction func crossButtonDidTab(_ sender: UIButton) {
         self.dismiss(animated: true)

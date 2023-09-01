@@ -30,7 +30,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     @IBOutlet weak var exploreButton: UIButton!
     
     // MARK: - Properties -
-    private var onContinue:()->Void = {}
+    var transactionId: String?
+    private var onContinue:((String?) -> Void)?
    // private var model: SmilesExplorerSubscriptionInfoResponse?
     private let sourceScreen: SourceScreen
     lazy  var backButton: UIButton = UIButton(type: .custom)
@@ -52,11 +53,10 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(_ sourceScreen: SourceScreen, onContinue:@escaping ()->Void) {
+    init(_ sourceScreen: SourceScreen, onContinue: ((String?) -> Void)?) {
         self.onContinue = onContinue
         self.sourceScreen = sourceScreen
         super.init(nibName: "SmilesExplorerMembershipSuccessViewController", bundle: .module)
-
     }
     
     required init?(coder: NSCoder) {
@@ -192,8 +192,13 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     }
     
     // MARK: - IBActions -
+    @IBAction func viewFreePassDidTab(_ sender: UIButton) {
+        if let id = self.transactionId {
+            self.onContinue?(id)
+        }
+    }
     @IBAction func continueButtonDidTab(_ sender: UIButton) {
-        self.onContinue()
+        self.onContinue?(nil)
     }
     @IBAction func exploreButtonDidTab(_ sender: UIButton) {
         if let navController = self.navigationController {

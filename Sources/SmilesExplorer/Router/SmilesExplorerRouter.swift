@@ -21,7 +21,7 @@ public final class SmilesExplorerRouter: NSObject {
         navVC.pushViewController(vc, animated: true)
     }
     
-    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,onContinue:@escaping ()->Void) {
+    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,onContinue:((String?) -> Void)?) {
         let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,onContinue: onContinue)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
