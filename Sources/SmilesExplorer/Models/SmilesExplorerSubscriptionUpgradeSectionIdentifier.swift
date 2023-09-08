@@ -11,6 +11,7 @@ enum SmilesExplorerSubscriptionUpgradeSectionIdentifier: String {
     
     case topPlaceholder = "TOP_PLACEHOLDER"
     case upgradeBanner = "UPGRADE_BANNER"
+    case freetickets = "FREE_TICKET"
     case stories = "STORIES"
     case offerListing = "OFFER_LISTING"
     

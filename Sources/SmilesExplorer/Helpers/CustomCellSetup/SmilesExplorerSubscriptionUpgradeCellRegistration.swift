@@ -13,8 +13,8 @@ import SmilesOffers
 struct SmilesExplorerSubscriptionUpgradeCellRegistration: CellRegisterable {
     
     func register(for tableView: UITableView) {
-        tableView.registerCellFromNib(StoriesTableViewCell.self, withIdentifier: String(describing: StoriesTableViewCell.self))
-        
+        tableView.registerCellFromNib(SmilesExplorerStoriesTVC.self, bundle: .module)
+        tableView.registerCellFromNib(UpgradeBannerTVC.self, bundle: .module)
         tableView.registerCellFromNib(RestaurantsRevampTableViewCell.self, bundle: RestaurantsRevampTableViewCell.module)
     }
 }

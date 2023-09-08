@@ -11,6 +11,7 @@ import SmilesSharedServices
 import UIKit
 import SmilesOffers
 import SmilesBanners
+import SmilesStoriesManager
 
 extension TableViewDataSource where Model == OfferDO {
     static func make(forNearbyOffers nearbyOffersObjects: [OfferDO], offerCellType: RestaurantsRevampTableViewCell.OfferCellType = .manCity,
@@ -68,6 +69,65 @@ extension TableViewDataSource where Model == ExplorerOfferResponse {
             cell.setBackGroundColor(color: UIColor(hexString: data))
             cell.callBack = { offer in
                 completion?(offer)
+            }
+        }
+    }
+}
+
+extension TableViewDataSource where Model == ExplorerOfferResponse {
+    static func make(forStories collectionsObject: ExplorerOfferResponse,
+                     reuseIdentifier: String = "SmilesExplorerStoriesTVC", data : String, isDummy:Bool = false, onClick:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
+            reuseIdentifier: reuseIdentifier,
+            data: data,
+            isDummy: isDummy
+        ) { (storiesOffer, cell, data, indexPath) in
+            guard let cell = cell as? SmilesExplorerStoriesTVC else {return}
+            cell.collectionsData = storiesOffer.offers
+            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.callBack = { data in
+                      debugPrint(data)
+                onClick?(data)
+            }
+        }
+    }
+}
+
+extension TableViewDataSource where Model == SectionDetailDO {
+    static func make(forUpgradeBanner collectionsObject: SectionDetailDO,
+                     reuseIdentifier: String = "UpgradeBannerTVC", data : String, isDummy:Bool = false, onClick:((SectionDetailDO) -> ())?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [collectionsObject].filter({$0.backgroundImage != nil}),
+            reuseIdentifier: reuseIdentifier,
+            data: data,
+            isDummy: isDummy
+        ) { (sectionDetail, cell, data, indexPath) in
+            guard let cell = cell as? UpgradeBannerTVC else {return}
+            cell.sectionData = sectionDetail
+            
+            
+        }
+    }
+}
+
+
+
+extension TableViewDataSource where Model == OfferDO {
+    static func make(forBogoOffers offers: [OfferDO], offerCellType: RestaurantsRevampTableViewCell.OfferCellType = .smilesExplorer,
+                     reuseIdentifier: String = "RestaurantsRevampTableViewCell", data: String, isDummy: Bool = false, completion: ((Bool, String, IndexPath?) -> ())?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: offers,
+            reuseIdentifier: reuseIdentifier,
+            data: data,
+            isDummy: isDummy
+        ) { (offer, cell, data, indexPath) in
+            guard let cell = cell as? RestaurantsRevampTableViewCell else { return }
+            cell.configureCell(with: offer)
+            cell.offerCellType = offerCellType
+            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.favoriteCallback = { isFavorite, offerId in
+                completion?(isFavorite, offerId, indexPath)
             }
         }
     }

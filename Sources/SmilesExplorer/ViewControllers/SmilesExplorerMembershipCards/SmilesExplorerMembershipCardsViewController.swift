@@ -95,7 +95,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
     }
     
-    //MARK: Navigation Bar Setup
+    //MARK: - Navigation Bar Setup
     func setUpNavigationBar() {
         
         let appearance = UINavigationBarAppearance()

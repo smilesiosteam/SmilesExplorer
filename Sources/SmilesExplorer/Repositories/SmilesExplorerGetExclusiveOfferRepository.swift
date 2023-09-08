@@ -14,11 +14,14 @@ import SmilesOffers
 
 protocol SmilesExplorerGetExclusiveOfferServiceable {
     func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<ExplorerOfferResponse, NetworkError>
+    func getBogoOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     
 }
 
 // GetCuisinesRepository
 class SmilesExplorerGetExclusiveOfferRepository: SmilesExplorerGetExclusiveOfferServiceable {
+    
+    
     
     
     
@@ -43,5 +46,10 @@ class SmilesExplorerGetExclusiveOfferRepository: SmilesExplorerGetExclusiveOffer
         
     }
     
+    func getBogoOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
+        let endPoint = SmilesExplorerSubscriptionInfoRequestBuilder.getExclusiceOffer(request: request)
+        let request = endPoint.createRequest(baseUrl: baseUrl, endpoint: self.endpoint)
+        return self.networkRequest.request(request)
+    }
 }
 

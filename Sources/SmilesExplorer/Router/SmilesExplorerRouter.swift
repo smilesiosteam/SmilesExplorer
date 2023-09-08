@@ -46,5 +46,20 @@ public final class SmilesExplorerRouter: NSObject {
             }
         }
     }
+    
+    public func popToSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController) {
+        for controller in navVC.viewControllers as Array {
+            if controller.isKind(of: SmilesExplorerSubscriptionUpgradeViewController.self) {
+                navVC.popToViewController(controller, animated: true)
+                break
+            }
+        }
+    }
+    
+    
+    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
+        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "")
+        navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
+    }
 
 }
