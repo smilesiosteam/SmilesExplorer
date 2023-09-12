@@ -66,11 +66,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public override func viewDidLoad() {
         setupTableView()
         bind(to: viewModel)
-        if subscriptionType == .platinum {
+//        if subscriptionType == .platinum {
             setupHeaderView(headerTitle: nil)
-        }else{
-            setUpNavigationBar()
-        }
+//        }else{
+//            setUpNavigationBar()
+//        }
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
     }
@@ -215,7 +215,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
     private func getSections(isSubscribed: Bool) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: ExplorerPackage(rawValue: "Platinum") ?? .platinum))
+        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: self.subscriptionType ?? .platinum))
     }
     
     
