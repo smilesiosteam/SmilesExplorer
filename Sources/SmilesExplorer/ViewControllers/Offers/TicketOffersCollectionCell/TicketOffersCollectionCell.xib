@@ -23,23 +23,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TicketOffersCollectionCell" id="2DC-sl-XTM" customClass="TicketOffersCollectionCell" customModule="SmilesExplorer">
-            <rect key="frame" x="0.0" y="0.0" width="268" height="471"/>
+            <rect key="frame" x="0.0" y="0.0" width="199" height="261"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="E9X-ob-sqK">
-                <rect key="frame" x="0.0" y="0.0" width="268" height="471"/>
+                <rect key="frame" x="0.0" y="0.0" width="199" height="261"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXe-3s-dix">
-                        <rect key="frame" x="0.0" y="8" width="268" height="455"/>
+                        <rect key="frame" x="0.0" y="8" width="199" height="245"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdd-wD-kUM">
-                                <rect key="frame" x="16" y="8" width="236" height="171.5"/>
+                                <rect key="frame" x="16" y="8" width="167" height="121.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vdd-wD-kUM" secondAttribute="height" multiplier="1.375:1" id="TBk-ig-uT9"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Burj Khalifa" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1x5-ot-JIi" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                <rect key="frame" x="16" y="187.5" width="236" height="17"/>
+                                <rect key="frame" x="16" y="137.5" width="167" height="17"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 line description of the offer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPO-CJ-6Zl">
-                                <rect key="frame" x="16" y="208.5" width="236" height="120.5"/>
+                                <rect key="frame" x="16" y="158.5" width="167" height="21"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Book" family="CircularXX TT" pointSize="14"/>
                                 <color key="textColor" red="0.47450980392156861" green="0.49019607843137253" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -57,62 +57,13 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-hJ-xGt">
-                                <rect key="frame" x="16" y="333" width="236" height="74"/>
+                                <rect key="frame" x="16" y="183.5" width="167" height="13.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTs-9V-4Tg">
-                                        <rect key="frame" x="0.0" y="0.0" width="178" height="24"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Cym-CZ-Zwe">
-                                                <rect key="frame" x="0.0" y="0.0" width="235" height="24"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QPD-UQ-evE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="QPD-UQ-evE" secondAttribute="height" id="Fbw-8i-cQw"/>
-                                                            <constraint firstAttribute="width" constant="24" id="nVS-HK-KUC"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-hC-Xhn">
-                                                        <rect key="frame" x="32" y="0.0" width="24" height="24"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="K6P-0y-Yp0"/>
-                                                            <constraint firstAttribute="width" constant="24" id="eWv-TL-fuP"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000 PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ep-80-PlG">
-                                                        <rect key="frame" x="64" y="0.0" width="81" height="24"/>
-                                                        <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="18"/>
-                                                        <color key="textColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4w-G9-d7N">
-                                                        <rect key="frame" x="153" y="0.0" width="13.5" height="24"/>
-                                                        <fontDescription key="fontDescription" name="CircularXXTT-Book" family="CircularXX TT" pointSize="14"/>
-                                                        <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 AED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRS-7S-0A6">
-                                                        <rect key="frame" x="174.5" y="0.0" width="60.5" height="24"/>
-                                                        <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="18"/>
-                                                        <color key="textColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="JGs-dP-mgi"/>
-                                            <constraint firstItem="Cym-CZ-Zwe" firstAttribute="leading" secondItem="bTs-9V-4Tg" secondAttribute="leading" id="bYH-2I-4Aj"/>
-                                            <constraint firstItem="Cym-CZ-Zwe" firstAttribute="centerY" secondItem="bTs-9V-4Tg" secondAttribute="centerY" id="sHl-0C-ju2"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZz-8x-2T0">
-                                        <rect key="frame" x="0.0" y="24" width="54" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="13.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Free" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zoW-TR-gYe">
-                                                <rect key="frame" x="0.0" y="0.0" width="23" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="23" height="13.5"/>
                                                 <fontDescription key="fontDescription" name="CircularXXTT-Bold" family="CircularXX TT" pointSize="11"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -121,7 +72,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Free" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJL-VB-Ipv">
-                                                <rect key="frame" x="31" y="0.0" width="23" height="50"/>
+                                                <rect key="frame" x="31" y="0.0" width="23" height="13.5"/>
                                                 <fontDescription key="fontDescription" name="CircularXXTT-Bold" family="CircularXX TT" pointSize="11"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -144,7 +95,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radio_button_selected" translatesAutoresizingMaskIntoConstraints="NO" id="c5Z-Ub-01I">
-                                <rect key="frame" x="119" y="411" width="30" height="30"/>
+                                <rect key="frame" x="84.5" y="201" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="c5Z-Ub-01I" secondAttribute="height" multiplier="1:1" id="XPH-Ll-kgg"/>
                                     <constraint firstAttribute="height" constant="30" id="j4y-qe-vAV"/>
@@ -178,24 +129,17 @@
                     <constraint firstItem="NXe-3s-dix" firstAttribute="top" secondItem="E9X-ob-sqK" secondAttribute="top" constant="8" id="ZwP-ZL-tmy"/>
                 </constraints>
             </collectionViewCellContentView>
-            <size key="customSize" width="260" height="463"/>
+            <size key="customSize" width="191" height="253"/>
             <connections>
+                <outlet property="currentPriceLbl" destination="zoW-TR-gYe" id="gSP-tx-2yj"/>
                 <outlet property="descLbl" destination="EPO-CJ-6Zl" id="8va-D0-19Q"/>
-                <outlet property="freeLbl" destination="zoW-TR-gYe" id="pTU-BS-eNQ"/>
-                <outlet property="freeView" destination="SZz-8x-2T0" id="Lxd-GR-rwH"/>
                 <outlet property="imageView" destination="vdd-wD-kUM" id="2J6-9P-Rsw"/>
-                <outlet property="lottieAnimationView" destination="rRL-hC-Xhn" id="pIR-ro-x9f"/>
                 <outlet property="mainView" destination="NXe-3s-dix" id="WTI-Ku-USn"/>
-                <outlet property="offerOrSeparatorLabel" destination="l4w-G9-d7N" id="zIs-N6-pou"/>
-                <outlet property="offerPointsLabel" destination="1Ep-80-PlG" id="n8D-NE-YNA"/>
-                <outlet property="offerPriceLabel" destination="yRS-7S-0A6" id="Xj6-CT-t46"/>
                 <outlet property="originalPriceLbl" destination="MJL-VB-Ipv" id="WVr-Bo-Gbr"/>
-                <outlet property="pointsIcon" destination="QPD-UQ-evE" id="xj0-yo-Qcf"/>
                 <outlet property="radioBtnImageView" destination="c5Z-Ub-01I" id="A8x-9r-PXJ"/>
-                <outlet property="smileyPointsView" destination="bTs-9V-4Tg" id="bA3-CW-wQ1"/>
                 <outlet property="titleLbl" destination="1x5-ot-JIi" id="amv-ei-Nfa"/>
             </connections>
-            <point key="canvasLocation" x="224.63768115942031" y="98.772321428571431"/>
+            <point key="canvasLocation" x="174.63768115942031" y="28.459821428571427"/>
         </collectionViewCell>
     </objects>
     <designables>

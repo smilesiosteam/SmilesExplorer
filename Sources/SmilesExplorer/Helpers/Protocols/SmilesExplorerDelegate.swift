@@ -6,9 +6,13 @@
 //
 
 import Foundation
+public enum SmilesExplorerHomeNavigationType {
+    case payment, withTextPromo, withQRPromo
+}
+
 public protocol SmilesExplorerHomeDelegate {
     
-    func proceedToPayment(params: SmilesExplorerPaymentParams)
+    func proceedToPayment(params: SmilesExplorerPaymentParams, navigationType:SmilesExplorerHomeNavigationType)
 
     func handleDeepLinkRedirection(redirectionUrl: String)
 }

@@ -8,6 +8,7 @@ import Foundation
 
 public enum SmilesExplorerOffersEndPoints: String, CaseIterable {
     case fetchOffersList
+    case validateGift
 }
 
 extension SmilesExplorerOffersEndPoints{
@@ -15,6 +16,8 @@ extension SmilesExplorerOffersEndPoints{
         switch self {
         case .fetchOffersList:
             return "explorer/offers"
+        case .validateGift:
+            return "lifestyle/v1/validate-gift-code"
         }
     }
 }

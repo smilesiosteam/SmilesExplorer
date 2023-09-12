@@ -26,7 +26,7 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.0
+        return 40.0
         
     }
     
@@ -40,7 +40,17 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-       let footerView = SubscriptionTableFooterView(reuseIdentifier: "SubscriptionTableFooterView")
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SubscriptionTableFooterView") as! SubscriptionTableFooterView
+        
+        footerView.promoCodeLabel.text = "EnterGiftDetails".localizedString
+        footerView.onClick = {
+            guard self.membershipPicked != nil else {return}
+            self.delegate?.proceedToPayment(params: SmilesExplorerPaymentParams(lifeStyleOffer: self.membershipPicked, isComingFromSpecialOffer: false, isComingFromTreasureChest: false), navigationType: .withTextPromo)
+        }
+        footerView.onClickQR = {
+            guard self.membershipPicked != nil else {return}
+            self.delegate?.proceedToPayment(params: SmilesExplorerPaymentParams(lifeStyleOffer: self.membershipPicked, isComingFromSpecialOffer: false, isComingFromTreasureChest: false), navigationType: .withQRPromo)
+        }
         footerView.backgroundColor = .clear
         return footerView
         
@@ -58,9 +68,4 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-
-    
-
-    
 }

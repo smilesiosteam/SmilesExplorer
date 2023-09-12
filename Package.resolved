@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "smilesappheader",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesAppHeader.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d4351847c0d8f03130dd7f798be738557933ed9c"
+      }
+    },
+    {
       "identity" : "smilesbanners",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesBanners.git",
@@ -150,7 +159,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesOffers.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c16ae8175558176087534ff1d5626d8ce23e9135"
+        "revision" : "655b44c27bfad9d8ad281c08f00b4930185e22b9"
       }
     },
     {
