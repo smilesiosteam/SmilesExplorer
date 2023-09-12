@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerSubscriptionUpgradeViewController" customModule="SmilesExplorer">
+            <connections>
+                <outlet property="tableView" destination="1Ij-2j-lAS" id="nr3-Bd-rSW"/>
+                <outlet property="topHeaderView" destination="4ag-rw-1KC" id="QUp-5c-UcR"/>
+                <outlet property="upgradeNowButton" destination="KCJ-VS-Vmp" id="HUq-gw-WPC"/>
+                <outlet property="view" destination="Ed8-dm-bKg" id="eye-aL-GND"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Ed8-dm-bKg">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ag-rw-1KC" customClass="AppHeaderView" customModule="AppHeader">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="228"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="228" id="dRl-Tu-gAr"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1Ij-2j-lAS">
+                    <rect key="frame" x="0.0" y="212" width="393" height="558"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goC-wK-yOV">
+                    <rect key="frame" x="0.0" y="770" width="393" height="82"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCJ-VS-Vmp" customClass="CustomButton">
+                            <rect key="frame" x="16" y="1" width="361" height="48"/>
+                            <color key="backgroundColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="7Td-os-BZ3"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Upgrade Now">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="KCJ-VS-Vmp" secondAttribute="bottom" constant="33" id="F3i-qV-Coe"/>
+                        <constraint firstAttribute="height" constant="82" id="g8L-Pn-BJQ"/>
+                        <constraint firstAttribute="trailing" secondItem="KCJ-VS-Vmp" secondAttribute="trailing" constant="16" id="gQ2-a7-5Ig"/>
+                        <constraint firstItem="KCJ-VS-Vmp" firstAttribute="leading" secondItem="goC-wK-yOV" secondAttribute="leading" constant="16" id="pH5-Fd-LRC"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="7Za-dP-IiH"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="1Ij-2j-lAS" firstAttribute="leading" secondItem="7Za-dP-IiH" secondAttribute="leading" id="5Qe-Fd-PyP"/>
+                <constraint firstItem="4ag-rw-1KC" firstAttribute="top" secondItem="Ed8-dm-bKg" secondAttribute="top" id="5Yc-Qf-Axf"/>
+                <constraint firstAttribute="bottom" secondItem="goC-wK-yOV" secondAttribute="bottom" id="Ph2-OO-v5p"/>
+                <constraint firstItem="goC-wK-yOV" firstAttribute="trailing" secondItem="7Za-dP-IiH" secondAttribute="trailing" id="TJa-pG-iMM"/>
+                <constraint firstItem="goC-wK-yOV" firstAttribute="leading" secondItem="7Za-dP-IiH" secondAttribute="leading" id="dpp-qF-l8I"/>
+                <constraint firstItem="goC-wK-yOV" firstAttribute="top" secondItem="1Ij-2j-lAS" secondAttribute="bottom" id="gJT-za-xkH"/>
+                <constraint firstItem="1Ij-2j-lAS" firstAttribute="trailing" secondItem="7Za-dP-IiH" secondAttribute="trailing" id="gd4-3s-B8u"/>
+                <constraint firstItem="4ag-rw-1KC" firstAttribute="trailing" secondItem="7Za-dP-IiH" secondAttribute="trailing" id="ou4-hY-aFl"/>
+                <constraint firstItem="1Ij-2j-lAS" firstAttribute="top" secondItem="4ag-rw-1KC" secondAttribute="bottom" priority="750" constant="-16" id="qSL-Wh-DFC"/>
+                <constraint firstItem="4ag-rw-1KC" firstAttribute="leading" secondItem="7Za-dP-IiH" secondAttribute="leading" id="xNE-ny-Wxc"/>
+            </constraints>
+            <point key="canvasLocation" x="147.32824427480915" y="55.633802816901408"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="KCJ-VS-Vmp">
+            <size key="intrinsicContentSize" width="95" height="30"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
