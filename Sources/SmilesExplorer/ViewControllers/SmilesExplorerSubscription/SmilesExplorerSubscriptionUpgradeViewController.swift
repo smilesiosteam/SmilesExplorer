@@ -54,7 +54,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
         self.isUserSubscribed = isUserSubscribed
-        self.subscriptionType = .Platinum
+        self.subscriptionType = subscriptionType
         self.voucherCode = voucherCode
         super.init(nibName: "SmilesExplorerSubscriptionUpgradeViewController", bundle: Bundle.module)
     }
@@ -66,7 +66,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public override func viewDidLoad() {
         setupTableView()
         bind(to: viewModel)
-        if subscriptionType == .Platinum {
+        if subscriptionType == .platinum {
             setupHeaderView(headerTitle: nil)
         }else{
             setUpNavigationBar()
@@ -215,7 +215,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
     private func getSections(isSubscribed: Bool) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: ExplorerPackage(rawValue: "Platinum") ?? .Platinum))
+        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: ExplorerPackage(rawValue: "Platinum") ?? .platinum))
     }
     
     
@@ -271,7 +271,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         }
         
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
-            if subscriptionType == .Platinum {
+            if subscriptionType == .platinum {
                 setupHeaderView(headerTitle: topPlaceholderSection.title)
                 topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
             }else {
