@@ -142,10 +142,12 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     @objc func onClickBack() {
-        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self ,delegate: delegate)
-        //self.navigationController?.popViewController(animated: true)
+        
+        self.navigationController?.popViewController(animated: true)
     }
-    
+    @IBAction func onUpgradeBannerButtonClick() {
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self ,delegate: delegate)
+    }
     fileprivate func configureDataSource() {
         self.tableView.dataSource = self.dataSource
         DispatchQueue.main.async {
