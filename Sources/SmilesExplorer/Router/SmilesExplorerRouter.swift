@@ -28,13 +28,22 @@ public final class SmilesExplorerRouter: NSObject {
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
     
-    func pushSubscriptionVC(navVC: UINavigationController?) {
+    func pushSubscriptionVC(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate?) {
         let subVC = SmilesExplorerMembershipCardsViewController()
+        subVC.delegate = delegate
         navVC?.pushViewController(subVC, animated: true)
         
     }
-    public func showPickTicketPop(viewcontroller: UIViewController)  {
+    
+    func pushQRScannerVC(navVC: UINavigationController) {
+        let subVC = UIStoryboard(name: "SmilesExplorerQRCodeScanner", bundle: .module).instantiateViewController(withIdentifier: "SmilesExplorerQRCodeScannerViewController")
+        navVC.pushViewController(subVC, animated: true)
+    }
+    
+    
+    public func showPickTicketPop(viewcontroller: UIViewController,delegate:SmilesExplorerHomeDelegate?)  {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
+        picTicketPopUp.paymentDelegate = delegate
         viewcontroller.present(picTicketPopUp)
     }
 

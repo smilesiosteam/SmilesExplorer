@@ -68,7 +68,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         
         setupTableView()
         bind(to: viewModel)
-        input.send(.getSubscriptionInfo)
+        input.send(.getSubscriptionInfo())
         
     }
     
@@ -140,8 +140,8 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     @IBAction func membershipSelectPressed(_ sender: UIButton) {
         
         guard let membership = self.membershipPicked else { return }
-        let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(lifeStyleOffer: membership, playerID: "", referralCode: "", hasAttendedSmilesExplorerGame: false, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
-        delegate?.proceedToPayment(params: objSmilesExplorerPaymentParams)
+        let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(lifeStyleOffer: membership, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
+        delegate?.proceedToPayment(params: objSmilesExplorerPaymentParams, navigationType: .payment)
     }
     
     @objc func onClickBack() {

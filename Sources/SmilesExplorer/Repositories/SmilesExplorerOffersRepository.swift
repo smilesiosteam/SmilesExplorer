@@ -13,6 +13,7 @@ import SmilesBaseMainRequestManager
 
 protocol SmilesExplorerOffersServiceable {
     func smilesExplorerOffersService(request: SmilesBaseMainRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
+    func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkError>
 }
 
 class SmilesExplorerOffersRepository: SmilesExplorerOffersServiceable {
@@ -31,6 +32,12 @@ class SmilesExplorerOffersRepository: SmilesExplorerOffersServiceable {
     func smilesExplorerOffersService(request: SmilesBaseMainRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
         let endPoint = SmilesExplorerOffersRequestBuilder.getSmilesExplorerOffers(request: request)
         let request = endPoint.createRequest(baseUrl: baseUrl, endPoint: .fetchOffersList)
+        
+        return self.networkRequest.request(request)
+    }
+    func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkError> {
+        let endPoint = SmilesExplorerOffersRequestBuilder.validateSmilesExplorerGift(request: request)
+        let request = endPoint.createRequest(baseUrl: baseUrl, endPoint: .validateGift)
         
         return self.networkRequest.request(request)
     }

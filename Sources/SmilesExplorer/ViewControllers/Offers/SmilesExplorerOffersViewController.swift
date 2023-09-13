@@ -17,7 +17,7 @@ import SmilesOffers
 class SmilesExplorerOffersViewController: UIViewController {
 
     // MARK: - OUTLETS -
-    
+    var selectedOffer:OfferDO?
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var detailsLbl: UILabel!
     @IBOutlet weak var confirmBtn: UICustomButton!
@@ -76,6 +76,7 @@ class SmilesExplorerOffersViewController: UIViewController {
         detailsLbl.text = response?.listSubtitle
         skipBtn.layer.borderColor = #colorLiteral(red: 0.431372549, green: 0.2352941176, blue: 0.5098039216, alpha: 1)
         setupCollectionView()
+        setConfirmBtnUI(enabled: false)
     }
     private func setUpNavigationBar() {
         
@@ -135,10 +136,19 @@ class SmilesExplorerOffersViewController: UIViewController {
         isLoading = true
         input.send(.fetchSmilesExplorerOffers(page: currentPage))
     }
-    
+    func setConfirmBtnUI(enabled:Bool){
+        confirmBtn.isUserInteractionEnabled = enabled
+        confirmBtn.setTitleColor(enabled ? .white : UIColor(white: 0, alpha: 0.5), for: .normal)
+        confirmBtn.setBackgroundColor(enabled ? .appRevampPurpleMainColor : UIColor(white:0, alpha: 0.1), for: .normal)
+    }
     
 }
 extension SmilesExplorerOffersViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedOffer = self.response?.offers?[indexPath.row]
+        setConfirmBtnUI(enabled: true)
+        self.collectionView.reloadData()
+    }
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.response?.offers?.count ?? 0
     }
@@ -151,6 +161,8 @@ extension SmilesExplorerOffersViewController: UICollectionViewDelegate, UICollec
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TicketOffersCollectionCell", for: indexPath) as! TicketOffersCollectionCell
         cell.offer = self.response?.offers?[indexPath.row]
+        let selected = cell.offer.offerId == self.selectedOffer?.offerId
+        cell.radioBtnImageView.image = UIImage(named: selected ? "radio_button_selected" : "radio_button_unselected", in: .module, with: nil)
         return cell
     }
     func setupCollectionView(){

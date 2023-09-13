@@ -1,24 +1,31 @@
 //
-//  File.swift
+//  ValidateGiftCardRequestModel.swift
 //  
 //
-//  Created by Abdul Rehman Amjad on 03/07/2023.
+//  Created by Shmeel Ahmed on 11/09/2023.
 //
 
+import Foundation
+import SmilesUtilities
 import SmilesBaseMainRequestManager
 
-class SmilesExplorerSubscriptionInfoRequest: SmilesBaseMainRequest {
-    var packageType: String?
+class ValidateGiftCardRequestModel: SmilesBaseMainRequest {
+    
+    // MARK: - Model Variables
+    
+    let giftCode: String
+    
     
     // MARK: - Model Keys
     
     enum CodingKeys: CodingKey {
-        case packageType
+        case giftCode
+        
     }
     
-    public init(packageType: String? = nil) {
+    public init(giftCode: String) {
+        self.giftCode = giftCode
         super.init()
-        self.packageType = packageType
     }
     
     required init(from decoder: Decoder) throws {
@@ -28,7 +35,6 @@ class SmilesExplorerSubscriptionInfoRequest: SmilesBaseMainRequest {
     public override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(self.packageType, forKey: .packageType)
+        try container.encodeIfPresent(self.giftCode, forKey: .giftCode)
     }
-    
 }

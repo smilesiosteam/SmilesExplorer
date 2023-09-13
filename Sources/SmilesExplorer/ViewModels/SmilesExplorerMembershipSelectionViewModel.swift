@@ -14,7 +14,7 @@ class SmilesExplorerMembershipSelectionViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
     public enum Input {
-        case getSubscriptionInfo
+        case getSubscriptionInfo(_ packageType: String? = nil)
     }
     
     public enum Output {
@@ -35,17 +35,20 @@ extension SmilesExplorerMembershipSelectionViewModel {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {
-            case .getSubscriptionInfo:
-                self?.getSubscriptionInfo()
+            case .getSubscriptionInfo(let pakcageType):
+                self?.getSubscriptionInfo(packageType: pakcageType)
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
     }
     
     // Get All Sections
-    private func getSubscriptionInfo() {
+    private func getSubscriptionInfo(packageType: String?) {
         
         let request = SmilesExplorerSubscriptionInfoRequest()
+        if let packageType = packageType {
+            request.packageType = packageType
+        }
         let service = SmilesExplorerSubscriptionInfoRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60),
             baseUrl: AppCommonMethods.serviceBaseUrl, endpoint: .subscriptionInfo)

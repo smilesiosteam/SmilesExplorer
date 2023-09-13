@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Smiles ExplorerQR Code Scanner View Controller-->
+        <scene sceneID="SbF-7Z-xXh">
+            <objects>
+                <viewController storyboardIdentifier="SmilesExplorerQRCodeScannerViewController" id="BZO-RZ-Lp6" customClass="SmilesExplorerQRCodeScannerViewController" customModule="SmilesExplorer" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZJJ-0O-gcw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmV-4z-P2s">
+                                <rect key="frame" x="16" y="15" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="KEs-zn-fxw"/>
+                                    <constraint firstAttribute="width" constant="40" id="kDc-dQ-XKJ"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="icon_BackWithBG"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="BZO-RZ-Lp6" eventType="touchUpInside" id="7HJ-V5-QiA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RsR-Wb-zLG"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xmV-4z-P2s" firstAttribute="top" secondItem="RsR-Wb-zLG" secondAttribute="top" constant="15" id="9DJ-XL-1Du"/>
+                            <constraint firstItem="xmV-4z-P2s" firstAttribute="leading" secondItem="RsR-Wb-zLG" secondAttribute="leading" constant="16" id="dmQ-7X-nqs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="xmV-4z-P2s" id="J7D-aE-9XK"/>
+                        <outlet property="exitButton" destination="xmV-4z-P2s" id="vt4-pv-KPx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ama-h5-f0V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-490.39999999999998" y="-188.45577211394306"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_BackWithBG" width="44" height="44"/>
+    </resources>
+</document>
