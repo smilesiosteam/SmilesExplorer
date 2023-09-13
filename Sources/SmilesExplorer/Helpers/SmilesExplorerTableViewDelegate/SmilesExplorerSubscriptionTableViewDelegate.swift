@@ -17,7 +17,8 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
         
         if let membership = (self.dataSource?.dataSources?.first as? TableViewDataSource<BOGODetailsResponseLifestyleOffer>)?.models?[safe: indexPath.row] {
             self.membershipPicked = membership
-        
+            self.enableContinueButton(enable: true)
+            
         }
     }
     

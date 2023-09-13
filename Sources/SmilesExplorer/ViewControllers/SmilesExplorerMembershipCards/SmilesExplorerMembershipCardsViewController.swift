@@ -31,6 +31,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     @IBOutlet weak var pickPassTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var continueButtonView: UIView!{
         didSet{
             continueButtonView.layer.cornerRadius = 32.0
@@ -69,7 +70,21 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         input.send(.getSubscriptionInfo())
+        enableContinueButton(enable: false)
         
+    }
+    
+    func enableContinueButton(enable: Bool) {
+        if enable {
+            btnContinue.isEnabled = true
+            continueButtonView.isUserInteractionEnabled = true
+            continueButtonView.backgroundColor = UIColor(named: "UILabel.TriAPrimary")
+        }
+        else {
+            btnContinue.isEnabled = false
+            continueButtonView.isUserInteractionEnabled = false
+            continueButtonView.backgroundColor = UIColor(named: "ButtonBgDisableColor")
+        }
     }
     
     private func setupTableView() {

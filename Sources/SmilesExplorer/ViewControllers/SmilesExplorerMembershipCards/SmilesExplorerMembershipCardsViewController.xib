@@ -22,6 +22,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerMembershipCardsViewController" customModuleProvider="target">
             <connections>
+                <outlet property="btnContinue" destination="qsn-6A-paM" id="JfO-oQ-LWa"/>
                 <outlet property="continueButtonView" destination="Xiz-wu-30I" id="jjE-Ze-7rL"/>
                 <outlet property="pickPassTypeLabel" destination="oe6-8w-Cb8" id="65M-l6-Si9"/>
                 <outlet property="smilesExplorerLabel" destination="766-6x-fcA" id="B2t-dV-RBH"/>
@@ -51,19 +52,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZM-GE-xn1" userLabel="Total">
-                                                    <rect key="frame" x="16" y="10" width="21.666666666666671" height="10.666666666666664"/>
+                                                    <rect key="frame" x="16" y="10" width="26" height="11"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="9"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0 AED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7T-Nz-Qae">
-                                                    <rect key="frame" x="16.000000000000004" y="22.666666666666629" width="46.333333333333343" height="17.666666666666671"/>
+                                                    <rect key="frame" x="16.000000000000004" y="23" width="52.333333333333343" height="18.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5% VAT included" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnX-yz-bUb">
-                                                    <rect key="frame" x="66.333333333333329" y="24.666666666666629" width="94.999999999999986" height="14"/>
+                                                    <rect key="frame" x="72.333333333333329" y="25.000000000000004" width="89.999999999999986" height="14.666666666666668"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
