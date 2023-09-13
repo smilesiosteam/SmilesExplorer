@@ -140,6 +140,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     @IBAction func upgradeButtonDidTab(_ sender: UIButton) {
         let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(lifeStyleOffer: self.responseMemberShip?.lifestyleOffers?.first, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
         paymentDelegate?.proceedToPayment(params: objSmilesExplorerPaymentParams, navigationType: .payment)
+        self.dismiss(animated: true)
     }
     @IBAction func crossButtonDidTab(_ sender: UIButton) {
         self.dismiss(animated: true)
