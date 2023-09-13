@@ -51,11 +51,19 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
     }
     
     func configureCell(with data: BOGODetailsResponseLifestyleOffer) {
-        platinumExplorerLabel.localizedString = data.whatYouGetTitle ?? ""
-        choiceTicketLabel.localizedString = data.whatYouGetTextList?.first ?? ""
-        exclusiveOfferLabel.localizedString = data.whatYouGetTextList?[1] ?? ""
-        buy1Get1Label.localizedString = data.whatYouGetTextList?[2] ?? ""
-        priceLabel.localizedString = data.monthlyPrice ?? ""
+        platinumExplorerLabel.text = data.whatYouGetTitle ?? ""        
+        let labels = [choiceTicketLabel, exclusiveOfferLabel, buy1Get1Label]
+        let texts = data.whatYouGetTextList ?? []
+
+        for (index, label) in labels.enumerated() {
+            if index < texts.count {
+                label?.text = texts[index]
+            } else {
+                label?.isHidden = true
+            }
+        }
+
+        priceLabel.text = data.monthlyPrice ?? ""
         cellImageView.setImageWithUrlString(data.subscribeImage ?? "")
         
         platinumExplorerLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
