@@ -35,13 +35,22 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     var isLoading = false
     var hasMoreData = true
     
+    
+    //
+    private var responseMemberShip: SmilesExplorerSubscriptionInfoResponse?
+    private var inputMemberShip: PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never> = .init()
+    private lazy var viewModelMenberShip: SmilesExplorerMembershipSelectionViewModel = {
+        return SmilesExplorerMembershipSelectionViewModel()
+    }()
+    
     //MARK: - View Controller Lifecycle -
     public override func viewDidLoad() {
         super.viewDidLoad()
         styleFontAndTextColor()
         setupUI()
+        self.bindMemberShip(to: self.viewModelMenberShip)
         self.bind(to: viewModel)
-        
+        self.inputMemberShip.send(.getSubscriptionInfo)
         // Do any additional setup after loading the view.
     }
     override public func viewWillAppear(_ animated: Bool) {
@@ -97,7 +106,21 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
                 }
             }.store(in: &cancellables)
     }
-    
+    func bindMemberShip(to viewModel: SmilesExplorerMembershipSelectionViewModel) {
+        inputMemberShip = PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never>()
+        let output = viewModelMenberShip.transform(input: inputMemberShip.eraseToAnyPublisher())
+        output
+            .sink { [weak self] event in
+                switch event {
+                case .fetchSubscriptionInfoDidSucceed(response: let response):
+                    self?.responseMemberShip = response
+                    
+                    
+                case .fetchSubscriptionInfoDidFail(error: let error):
+                    debugPrint(error.localizedDescription)
+                }
+            }.store(in: &cancellables)
+    }
     // MARK: - Pagination
     
     func loadMoreItems() {
