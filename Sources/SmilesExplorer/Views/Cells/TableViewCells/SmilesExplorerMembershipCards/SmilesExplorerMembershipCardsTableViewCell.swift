@@ -54,7 +54,7 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
         platinumExplorerLabel.localizedString = data.whatYouGetTitle ?? ""
         choiceTicketLabel.localizedString = data.whatYouGetTextList?.first ?? ""
         exclusiveOfferLabel.localizedString = data.whatYouGetTextList?[1] ?? ""
-        buy1Get1Label.localizedString = data.whatYouGetTextList?[2] ?? ""
+        buy1Get1Label.localizedString = data.whatYouGetTextList?[safe:2] ?? ""
         priceLabel.localizedString = data.monthlyPrice ?? ""
         cellImageView.setImageWithUrlString(data.subscribeImage ?? "")
         

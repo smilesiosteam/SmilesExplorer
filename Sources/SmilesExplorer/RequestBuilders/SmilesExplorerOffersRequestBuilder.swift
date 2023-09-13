@@ -14,6 +14,7 @@ enum SmilesExplorerOffersRequestBuilder {
     
     
     case getSmilesExplorerOffers(request: SmilesBaseMainRequest)
+    case validateSmilesExplorerGift(request: ValidateGiftCardRequestModel)
     
     
     var requestTimeOut: Int {
@@ -23,7 +24,7 @@ enum SmilesExplorerOffersRequestBuilder {
     
     var httpMethod: SmilesHTTPMethod {
         switch self {
-        case .getSmilesExplorerOffers:
+        case .getSmilesExplorerOffers,.validateSmilesExplorerGift:
             return .POST
         }
     }
@@ -43,6 +44,8 @@ enum SmilesExplorerOffersRequestBuilder {
     var requestBody: Encodable? {
         switch self {
         case .getSmilesExplorerOffers(let request):
+            return request
+        case .validateSmilesExplorerGift(request: let request):
             return request
         }
     }
