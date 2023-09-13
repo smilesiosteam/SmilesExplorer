@@ -68,7 +68,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         
         setupTableView()
         bind(to: viewModel)
-        input.send(.getSubscriptionInfo)
+        input.send(.getSubscriptionInfo())
         
     }
     

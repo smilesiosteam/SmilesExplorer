@@ -50,7 +50,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
         setupUI()
         self.bindMemberShip(to: self.viewModelMenberShip)
         self.bind(to: viewModel)
-        self.inputMemberShip.send(.getSubscriptionInfo)
+        self.inputMemberShip.send(.getSubscriptionInfo("platinum"))
         // Do any additional setup after loading the view.
     }
     override public func viewWillAppear(_ animated: Bool) {
