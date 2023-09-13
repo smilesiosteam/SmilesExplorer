@@ -142,7 +142,8 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     @objc func onClickBack() {
-        self.navigationController?.popViewController(animated: true)
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self ,delegate: delegate)
+        //self.navigationController?.popViewController(animated: true)
     }
     
     fileprivate func configureDataSource() {
