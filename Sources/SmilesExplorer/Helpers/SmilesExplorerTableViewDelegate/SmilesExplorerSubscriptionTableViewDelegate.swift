@@ -18,6 +18,8 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
         if let membership = (self.dataSource?.dataSources?.first as? TableViewDataSource<BOGODetailsResponseLifestyleOffer>)?.models?[safe: indexPath.row] {
             self.membershipPicked = membership
             self.totalValue.text = membership.monthlyPriceCost.asStringOrEmpty() + " " + "AED".localizedString
+            self.enableContinueButton(enable: true)
+            
         }
     }
     
