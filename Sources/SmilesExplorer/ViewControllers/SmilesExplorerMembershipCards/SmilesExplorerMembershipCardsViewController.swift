@@ -79,12 +79,12 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         if !enable {
             btnContinue.isEnabled = false
             continueButtonView.isUserInteractionEnabled = false
-            continueButtonView.backgroundColor = UIColor.appRevampPurpleMainColor
+            continueButtonView.backgroundColor = UIColor.applightGrey
         }
         else {
             btnContinue.isEnabled = true
             continueButtonView.isUserInteractionEnabled = true
-            continueButtonView.backgroundColor = UIColor.applightGrey
+            continueButtonView.backgroundColor = UIColor.appRevampPurpleMainColor
         }
     }
     
