@@ -35,13 +35,22 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     var isLoading = false
     var hasMoreData = true
     
+    
+    //
+    private var responseMemberShip: SmilesExplorerSubscriptionInfoResponse?
+    private var inputMemberShip: PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never> = .init()
+    private lazy var viewModelMenberShip: SmilesExplorerMembershipSelectionViewModel = {
+        return SmilesExplorerMembershipSelectionViewModel()
+    }()
+    
     //MARK: - View Controller Lifecycle -
     public override func viewDidLoad() {
         super.viewDidLoad()
         styleFontAndTextColor()
         setupUI()
+        self.bindMemberShip(to: self.viewModelMenberShip)
         self.bind(to: viewModel)
-        
+        self.inputMemberShip.send(.getSubscriptionInfo("platinum"))
         // Do any additional setup after loading the view.
     }
     override public func viewWillAppear(_ animated: Bool) {
@@ -97,7 +106,21 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
                 }
             }.store(in: &cancellables)
     }
-    
+    func bindMemberShip(to viewModel: SmilesExplorerMembershipSelectionViewModel) {
+        inputMemberShip = PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never>()
+        let output = viewModelMenberShip.transform(input: inputMemberShip.eraseToAnyPublisher())
+        output
+            .sink { [weak self] event in
+                switch event {
+                case .fetchSubscriptionInfoDidSucceed(response: let response):
+                    self?.responseMemberShip = response
+                    
+                    
+                case .fetchSubscriptionInfoDidFail(error: let error):
+                    debugPrint(error.localizedDescription)
+                }
+            }.store(in: &cancellables)
+    }
     // MARK: - Pagination
     
     func loadMoreItems() {
@@ -115,9 +138,9 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func upgradeButtonDidTab(_ sender: UIButton) {
-//        let offers = self.response?.offers
-//        let param = SmilesExplorerPaymentParams(lifeStyleOffer: , playerID: <#T##String#>, referralCode: <#T##String#>, hasAttendedSmilesExplorerGame: <#T##Bool#>, isComingFromSpecialOffer: <#T##Bool#>, isComingFromTreasureChest: <#T##Bool#>)
-//        self.paymentDelegate?.proceedToPayment(params: )
+        let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(lifeStyleOffer: self.responseMemberShip?.lifestyleOffers?.first, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
+        paymentDelegate?.proceedToPayment(params: objSmilesExplorerPaymentParams, navigationType: .payment)
+        self.dismiss(animated: true)
     }
     @IBAction func crossButtonDidTab(_ sender: UIButton) {
         self.dismiss(animated: true)

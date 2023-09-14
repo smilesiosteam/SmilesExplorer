@@ -51,7 +51,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         super.viewDidLoad()
             styleFontAndTextColor()
         bind(to: viewModel)
-        input.send(.getSubscriptionInfo)
+        input.send(.getSubscriptionInfo())
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -

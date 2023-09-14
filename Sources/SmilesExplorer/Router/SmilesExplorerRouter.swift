@@ -41,8 +41,9 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     
-    public func showPickTicketPop(viewcontroller: UIViewController)  {
+    public func showPickTicketPop(viewcontroller: UIViewController,delegate:SmilesExplorerHomeDelegate?)  {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
+        picTicketPopUp.paymentDelegate = delegate
         viewcontroller.present(picTicketPopUp)
     }
 

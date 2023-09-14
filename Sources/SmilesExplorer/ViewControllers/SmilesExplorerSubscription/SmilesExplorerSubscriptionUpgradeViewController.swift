@@ -15,6 +15,8 @@ import SmilesOffers
 import SmilesLoader
 import SmilesStoriesManager
 import AnalyticsSmiles
+import SmilesBanners
+
 
 
 public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
@@ -50,6 +52,23 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     var offers = [ExplorerOffer]()
     var bogoOffers = [OfferDO]()
     
+    public var filtersSavedList: [RestaurantRequestWithNameFilter]?
+    public var filtersData: [FiltersCollectionViewCellRevampModel]?
+    public var savedFilters: [RestaurantRequestFilter]?
+    public var restaurantSortingResponseModel: GetSortingListResponseModel?
+    public var selectedSortingTableViewCellModel: FilterDO?
+    
+    
+    private var onFilterClick:(() -> Void)?
+    
+    
+    public var filtersList: [RestaurantRequestFilter]?
+    
+    public var selectedSort: String?
+
+    
+    var restaurants = [Restaurant]()
+    
     public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil) {
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
@@ -75,6 +94,10 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         getSections(isSubscribed: true)
     }
     
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
     // MARK: - Helping Functions
     
     func setupTableView() {
@@ -142,9 +165,12 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     @objc func onClickBack() {
+        
         self.navigationController?.popViewController(animated: true)
     }
-    
+    @IBAction func onUpgradeBannerButtonClick() {
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self ,delegate: delegate)
+    }
     fileprivate func configureDataSource() {
         self.tableView.dataSource = self.dataSource
         DispatchQueue.main.async {
@@ -168,6 +194,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
         topHeaderView.setupHeaderView(backgroundColor: .appRevampEnableStateColor, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+    }
+    
+    fileprivate func configureFiltersData() {
+//        showShimmer(identifier: .RESTAURANTLISTING)
+//        self.input.send(.getRestaurantList(pageNo: 0, filtersList: self.savedFilters, selectedSortingTableViewCellModel: self.viewModel.selectedSortingTableViewCellModel))
     }
 }
 
@@ -315,20 +346,19 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 case .fetchRewardPointsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
                     
-                case .fetchFiltersDataSuccess(_, _):
-                    //                    self?.filtersData = filters
-                    //                    self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
+                case .fetchFiltersDataSuccess(let filters):
+                    self?.filtersData = filters
                     break
-                case .fetchAllSavedFiltersSuccess(_, _):
-                    //                    self?.savedFilters = filtersList
-                    //                    self?.filtersSavedList = savedFilters
-                    //                    self?.offers.removeAll()
-                    //                    self?.configureDataSource()
-                    //                    self?.configureFiltersData()
+                case .fetchAllSavedFiltersSuccess(let filtersList, let savedFilters):
+                                        self?.savedFilters = filtersList
+                                        self?.filtersSavedList = savedFilters
+                                        self?.offers.removeAll()
+                                        self?.configureDataSource()
+//                                        self?.configureFiltersData()
                     break
                     
-                case .fetchSavedFiltersAfterSuccess(_):
-                    //                    self?.filtersSavedList = filtersSavedList
+                case .fetchSavedFiltersAfterSuccess(let filtersSavedList):
+                    self?.filtersSavedList = filtersSavedList
                     break
                     
                     
@@ -485,3 +515,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
 }
 
 
+extension SmilesExplorerSubscriptionUpgradeViewController {
+    func redirectToRestaurantFilters() {
+//        self.foodOrderHomeCoordinator?.navigateToFiltersVC(filterType: .All, menuType: RestaurantMenuType.DELIVERY, viewModel: self.viewModel)
+        
+        
+    }
+    
+    
+}
