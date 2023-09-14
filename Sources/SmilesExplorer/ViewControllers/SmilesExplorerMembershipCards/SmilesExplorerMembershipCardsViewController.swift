@@ -76,14 +76,14 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     
     func enableContinueButton(enable: Bool) {
         if enable {
-            btnContinue.isEnabled = true
-            continueButtonView.isUserInteractionEnabled = true
-            continueButtonView.backgroundColor = UIColor(named: "UILabel.TriAPrimary")
-        }
-        else {
             btnContinue.isEnabled = false
             continueButtonView.isUserInteractionEnabled = false
-            continueButtonView.backgroundColor = UIColor(named: "ButtonBgDisableColor")
+            continueButtonView.backgroundColor = UIColor.appRevampPurpleMainColor
+        }
+        else {
+            btnContinue.isEnabled = true
+            continueButtonView.isUserInteractionEnabled = true
+            continueButtonView.backgroundColor = UIColor.applightGrey
         }
     }
     

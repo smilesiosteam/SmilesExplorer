@@ -12,6 +12,7 @@ import SmilesUtilities
 import SmilesOffers
 import SmilesBanners
 import SmilesLocationHandler
+import SmilesStoriesManager
 
 class SmilesExplorerHomeUpgradeViewModel: NSObject {
     
@@ -37,8 +38,8 @@ class SmilesExplorerHomeUpgradeViewModel: NSObject {
     
     private var filtersSavedList: [RestaurantRequestWithNameFilter]?
     private var filtersList: [RestaurantRequestFilter]?
-    private var selectedSortingTableViewCellModel: FilterDO?
     private var selectedSort: String?
+    var selectedSortingTableViewCellModel: FilterDO?
     
     // MARK: - METHODS -
     private func logoutUser() {
@@ -63,6 +64,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType))
                 
             case .getFiltersData(let filtersSavedList, let isFilterAllowed, let isSortAllowed):
+                self?.createFiltersData(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed)
                 break
                 
             case .removeAndSaveFilters(let filter):
@@ -116,6 +118,9 @@ extension SmilesExplorerHomeUpgradeViewModel {
             case .updateOfferWishlistStatus(let operation, let offerId):
                 self?.bind(to: self?.wishListViewModel ?? WishListViewModel())
                 self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
+            case .getRestaurantList(pageNo: let pageNo, filtersList: let filtersList, selectedSortingTableViewCellModel: let selectedSortingTableViewCellModel):
+                break
+                
             }
             
         }.store(in: &cancellables)
@@ -270,39 +275,37 @@ extension SmilesExplorerHomeUpgradeViewModel {
             }
         }
         
-        self.output.send(.fetchFiltersDataSuccess(filters: filters, selectedSortingTableViewCellModel: self.selectedSortingTableViewCellModel)) // Send filters back to VC
+        self.output.send(.fetchFiltersDataSuccess(filters: filters)) // Send filters back to VC
     }
     
     // Get saved filters
-//    func getSavedFilters() -> [RestaurantRequestFilter] {
-//        if let savedFilters = UserDefaults.standard.object([RestaurantRequestWithNameFilter].self, with: FilterDictTags.FiltersDict.rawValue) {
-//            if savedFilters.count > 0 {
-//                let uniqueUnordered = Array(Set(savedFilters))
-//
-//                filtersSavedList = uniqueUnordered
-//
-//                filtersList = [RestaurantRequestFilter]()
-//
-//                if let savedFilters = filtersSavedList {
-//                    for filter in savedFilters {
-//                        let restaurantRequestFilter = RestaurantRequestFilter()
-//                        restaurantRequestFilter.filterKey = filter.filterKey
-//                        restaurantRequestFilter.filterValue = filter.filterValue
-//
-//                        filtersList?.append(restaurantRequestFilter)
-//                    }
-//                }
-//
-//                defer {
-//                    self.output.send(.fetchSavedFiltersAfterSuccess(filtersSavedList: filtersSavedList ?? []))
-//                }
-//
-//                return filtersList ?? []
-//
-//            }
-//        }
-//        return []
-//    }
+    func getSavedFilters() -> [RestaurantRequestFilter] {
+        if let savedFilters = UserDefaults.standard.object([RestaurantRequestWithNameFilter].self, with: FilterDictTags.FiltersDict.rawValue) {
+            if savedFilters.count > 0 {
+                let uniqueUnordered = Array(Set(savedFilters))
+                filtersSavedList = uniqueUnordered
+
+                filtersList = [RestaurantRequestFilter]()
+
+                if let savedFilters = filtersSavedList {
+                    for filter in savedFilters {
+                        let restaurantRequestFilter = RestaurantRequestFilter()
+                        restaurantRequestFilter.filterKey = filter.filterKey
+                        restaurantRequestFilter.filterValue = filter.filterValue
+                        filtersList?.append(restaurantRequestFilter)
+                    }
+                }
+
+                defer {
+                    self.output.send(.fetchSavedFiltersAfterSuccess(filtersSavedList: filtersSavedList ?? []))
+                }
+
+                return filtersList ?? []
+
+            }
+        }
+        return []
+    }
     
     func removeAndSaveFilters(filter: FiltersCollectionViewCellRevampModel) {
         // Remove all saved Filters
@@ -322,8 +325,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
         if let isFilteredNameIndex = isFilteredNameIndex {
             filtersList?.remove(at: isFilteredNameIndex)
         }
-        
-//        self.output.send(.emptyOffersListDidSucceed)
+                
         self.output.send(.fetchAllSavedFiltersSuccess(filtersList: filtersList ?? [], filtersSavedList: filtersSavedList ?? []))
     }
     
@@ -365,6 +367,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
 //        items.append(SortingTableViewCell.rowModel(model: SortingTableViewCellModel(title: sorting.name.asStringOrEmpty(), mode: .SingleSelection, isSelected: isSelected, multiChoiceUpTo: 1, isSelectionMandatory: true, sortingModel: sorting, bottomLineHidden: isBottomLineHidden)))
     }
 }
+
 
 
 
