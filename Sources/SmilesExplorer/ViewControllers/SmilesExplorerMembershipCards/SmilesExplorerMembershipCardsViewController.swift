@@ -27,6 +27,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     public var delegate: SmilesExplorerHomeDelegate?
     
     //MARK: IBoutlet
+    @IBOutlet weak var totalValue: UILabel!
     @IBOutlet weak var smilesExplorerLabel: UILabel!
     @IBOutlet weak var pickPassTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -70,7 +71,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         input.send(.getSubscriptionInfo())
-        enableContinueButton(enable: false)
+//        enableContinueButton(enable: false)
         
     }
     
