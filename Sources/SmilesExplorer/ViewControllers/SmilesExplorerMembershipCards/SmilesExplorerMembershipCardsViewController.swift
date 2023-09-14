@@ -71,7 +71,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         input.send(.getSubscriptionInfo())
-//        enableContinueButton(enable: false)
+        enableContinueButton(enable: false)
         
     }
     
