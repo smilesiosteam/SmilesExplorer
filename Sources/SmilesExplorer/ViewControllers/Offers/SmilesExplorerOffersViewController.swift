@@ -25,6 +25,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var categoryId = 973 //TODO: init it -1
     
+    public var delegate: SmilesExplorerHomeDelegate?
     // MARK: - PROPERTIES -
     private var input: PassthroughSubject<SmilesExplorerOffersViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
@@ -41,11 +42,14 @@ class SmilesExplorerOffersViewController: UIViewController {
 
     
     @IBAction func confirmPressed(_ sender: UIButton) {
+        guard let selectedOffer else {return}
+        let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(freeOffer: selectedOffer, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
 
+        delegate?.proceedToPayment(params: objSmilesExplorerPaymentParams, navigationType: .freeTicket)
     }
     
     @IBAction func skipPressed(_ sender: UIButton) {
-
+        SmilesExplorerRouter.shared.popToSmilesExplorerHomeViewController(navVC: navigationController!)
     }
     
     // MARK: - METHODS -
