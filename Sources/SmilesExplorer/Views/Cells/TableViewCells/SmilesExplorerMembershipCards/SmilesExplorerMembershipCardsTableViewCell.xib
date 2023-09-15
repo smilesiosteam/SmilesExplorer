@@ -151,6 +151,23 @@
             <point key="canvasLocation" x="165.64885496183206" y="82.394366197183103"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="Vo5-zR-Ks8">
+            <size key="intrinsicContentSize" width="190.33333333333334" height="14.333333333333334"/>
+        </designable>
+        <designable name="YwZ-df-T8Z">
+            <size key="intrinsicContentSize" width="120.33333333333333" height="14.333333333333334"/>
+        </designable>
+        <designable name="eWR-rr-ssE">
+            <size key="intrinsicContentSize" width="171.66666666666666" height="14.333333333333334"/>
+        </designable>
+        <designable name="gj9-ow-Ke0">
+            <size key="intrinsicContentSize" width="173.33333333333334" height="20.333333333333332"/>
+        </designable>
+        <designable name="oDD-PK-aCu">
+            <size key="intrinsicContentSize" width="64.666666666666671" height="19.333333333333332"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Money" width="24" height="24"/>
         <image name="Radio_Button_filled" width="30" height="30"/>

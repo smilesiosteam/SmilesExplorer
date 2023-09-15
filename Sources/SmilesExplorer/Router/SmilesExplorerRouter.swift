@@ -41,6 +41,20 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     
+    func pushSmilesExplorerSortingVC(navVC: UINavigationController) {
+        let subVC = UIStoryboard(name: "SmilesExplorerSortingVC", bundle: .module).instantiateViewController(withIdentifier: "SmilesExplorerSortingVC")
+        navVC.present(subVC)
+    }
+    
+    
+    func pushSmilesExplorerOffersFiltersVC(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate?) {
+        let subVC = SmilesExplorerOffersFiltersVC()
+        subVC.homeDelegate = delegate
+        navVC?.pushViewController(subVC, animated: true)
+        
+    }
+    
+    
     public func showPickTicketPop(viewcontroller: UIViewController,delegate:SmilesExplorerHomeDelegate?)  {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
         picTicketPopUp.paymentDelegate = delegate
@@ -71,4 +85,12 @@ public final class SmilesExplorerRouter: NSObject {
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
 
+}
+
+
+public class CustomPresentationController: UIPresentationController {
+    public override var frameOfPresentedViewInContainerView: CGRect {
+        // Customize the frame here as per your requirements
+        return CGRect(x: 20, y: 100, width:UIScreen.main.bounds.width, height: 300)
+    }
 }

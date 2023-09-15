@@ -57,10 +57,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                                 self?.redirectToRestaurantFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
-                                
+//                                self?.redirectToSortingVC()
                             } else {
                                 // Remove and saved filters
-                                self?.input.send(.removeAndSaveFilters(filter: filterData))
+//                                self?.input.send(.removeAndSaveFilters(filter: filterData))
                             }
                         }
                         
