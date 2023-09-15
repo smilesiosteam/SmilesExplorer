@@ -164,9 +164,20 @@ extension SmilesExplorerPickTicketPopUp: UICollectionViewDelegate, UICollectionV
         
         if let data = self.response?.offers?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerHomeTicketsCollectionViewCell", for: indexPath) as? SmilesExplorerHomeTicketsCollectionViewCell else {return UICollectionViewCell()}
-            cell.brandTitleLabel.text = data.offerTitle
-            cell.typeLabel.text = AppCommonMethods.languageIsArabic() ?  data.offerTypeAr:data.offerType
-            cell.brandLogoImageView.setImageWithUrlString(data.imageURL ?? "")
+            
+            
+            cell.brandTitleLabel.localizedString = data.offerTitle ?? ""
+            
+            cell.brandLogoImageView.setImageWithUrlString(data.imageURL.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in
+                if let image = image {
+                    cell.brandLogoImageView.image = image
+                }
+            }
+            
+            cell.amountLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+            cell.brandTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+            cell.typeLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+            cell.typeLabel.localizedString = (AppCommonMethods.languageIsArabic() ?  data.offerTypeAr:data.offerType) ?? ""
             let aed = "AED".localizedString
             cell.amountLabel.attributedText = "\(String(describing: data.originalDirhamValue ?? "")) \(aed)".strikoutString(strikeOutColor: .appGreyColor_128)
             return cell
