@@ -85,11 +85,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public override func viewDidLoad() {
         setupTableView()
         bind(to: viewModel)
-//        if subscriptionType == .platinum {
+        if subscriptionType == .platinum {
             setupHeaderView(headerTitle: nil)
-//        }else{
-//            setUpNavigationBar()
-//        }
+        }else{
+            setUpNavigationBar()
+        }
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
     }
@@ -517,9 +517,13 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     func redirectToRestaurantFilters() {
-//        self.foodOrderHomeCoordinator?.navigateToFiltersVC(filterType: .All, menuType: RestaurantMenuType.DELIVERY, viewModel: self.viewModel)
+        SmilesExplorerRouter.shared.pushSmilesExplorerOffersFiltersVC(navVC: self.navigationController, delegate: self.delegate)
         
+    }
+    
+    func redirectToSortingVC(){
         
+        SmilesExplorerRouter.shared.pushSmilesExplorerSortingVC(navVC: self.navigationController!)
     }
     
     

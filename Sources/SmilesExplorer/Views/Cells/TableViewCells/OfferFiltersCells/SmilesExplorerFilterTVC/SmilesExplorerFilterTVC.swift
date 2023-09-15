@@ -1,13 +1,13 @@
 //
-//  SmilesOffersFiltersTVC.swift
+//  SmilesExplorerFilterTVC.swift
 //  
 //
-//  Created by Habib Rehman on 14/09/2023.
+//  Created by Habib Rehman on 15/09/2023.
 //
 
 import UIKit
 
-class SmilesOffersFiltersTVC: UITableViewCell {
+class SmilesExplorerFilterTVC: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

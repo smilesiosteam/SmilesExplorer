@@ -20,20 +20,32 @@ protocol SmilesExplorerOffersFiltersDelegate: AnyObject {
 }
 
 class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 3
+    
+    @IBOutlet weak var bottomView: UIView!
+    
+    
+    //MARK: -
+    @IBOutlet weak var filtersTableView: UITableView!{
+        didSet{
+            filtersTableView.sectionFooterHeight = .leastNormalMagnitude
+            if #available(iOS 15.0, *) {
+                filtersTableView.sectionHeaderTopPadding = CGFloat(0)
+            }
+            filtersTableView.sectionHeaderHeight = UITableView.automaticDimension
+            filtersTableView.estimatedSectionHeaderHeight = 1
+            
+            filtersTableView.delegate = self
+            filtersTableView.dataSource = self
+            let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerFiltersCellRegistration()
+            smilesExplorerCellRegistrable.register(for: filtersTableView)
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        return cell
-    }
     
-    
-    @IBOutlet weak var filtersTableView: UITableView!
     @IBOutlet weak var clearAllButton: UIButton!
+    
     @IBOutlet weak var applyFilterButton: UIButton!
-
+    
     // MARK: Properties
     
     
@@ -41,6 +53,16 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
     var filterType: FilterType = .All
     var defaultQuickLinkFilter: RestaurantRequestWithNameFilter?
 //    var menuType: RestaurantMenuType?
+    
+    public var homeDelegate: SmilesExplorerHomeDelegate?
+    
+    init() {
+        super.init(nibName: "SmilesExplorerOffersFiltersVC", bundle: .module)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: Lifecycle
     
@@ -51,14 +73,19 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
         navigationController?.view.backgroundColor = UIColor.white
         setUpNavigationBar()
         
-        
+        styleViewUI()
     }
     
      func styleViewUI() {
-        clearAllButton.setTitle("Clearall".localizedString, for: .normal)
+//        clearAllButton.setTitle("Clearall".localizedString, for: .normal)
         applyFilterButton.setTitle("ApplyTitle".localizedString, for: .normal)
-        clearAllButton.titleLabel?.font = .montserratBoldFont(size: 14.0)
+//        clearAllButton.titleLabel?.font = .montserratBoldFont(size: 14.0)
         applyFilterButton.titleLabel?.font = .montserratBoldFont(size: 14.0)
+         bottomView.layer.shadowRadius = 2.0
+         bottomView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+         bottomView.layer.shadowColor = UIColor.applightGrey.cgColor
+         
+         
     }
     
     func setUpNavigationBar() {
@@ -90,12 +117,26 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
         let btnBack: UIButton = UIButton(type: .custom)
         btnBack.backgroundColor = UIColor(red: 226.0 / 255.0, green: 226.0 / 255.0, blue: 226.0 / 255.0, alpha: 1.0)
         btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_Icon", in: .module, compatibleWith: nil), for: .normal)
-//        btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
+        btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
         btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         btnBack.layer.cornerRadius = btnBack.frame.height / 2
         btnBack.clipsToBounds = true
-        let barButton = UIBarButtonItem(customView: btnBack)
-        self.navigationItem.leftBarButtonItem = barButton
+        
+        
+        let btnClear: UIButton = UIButton(type: .custom)
+        btnClear.backgroundColor = .clear
+        btnClear.setTitle("Clear", for: .normal)
+        btnClear.setTitleColor(.appRevampPurpleMainColor, for: .normal)
+        btnClear.addTarget(self, action: #selector(self.onClickClear), for: .touchUpInside)
+        btnClear.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        btnBack.clipsToBounds = true
+        
+        let leftBarButton = UIBarButtonItem(customView: btnBack)
+        self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        let rightbarButton = UIBarButtonItem(customView: btnClear)
+        self.navigationItem.rightBarButtonItem = rightbarButton
+        
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     }
@@ -125,22 +166,24 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     
     //MARK: - ClickBack
-     func onClickBack() {
+    @objc func onClickBack() {
 //        let filterRequest = presenter?.applyFilters()
 //        if let filters = filterRequest, !filters.isEmpty {
 //            if let delegate = self.delegate {
 //                delegate.didReturnRestaurantFilters(filters)
 //            }
 //        }
+         
+         SmilesExplorerRouter.shared.popToSmilesExplorerSubscriptionUpgradeViewController(navVC: self.navigationController!)
     }
     
     //MARK: -  Clear all filters
-    @IBAction func clearAllFiltersAction(_ sender: Any) {
+    @objc func onClickClear() {
 //        presenter?.clearAllFilters()
     }
     
@@ -159,3 +202,19 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
 
 
 
+extension SmilesExplorerOffersFiltersVC {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return 6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: "SmilesExplorerFilterSelectionTVC", for: indexPath) as! SmilesExplorerFilterSelectionTVC
+        
+        let searchBarcell = tableView.dequeueReusableCell(withIdentifier: "SmilesExplorerFilterTVC", for: indexPath) as! SmilesExplorerFilterTVC
+        
+        let cellToReturn = indexPath.row == 0 ? searchBarcell : cell
+        return cellToReturn
+        
+    }
+    
+}
