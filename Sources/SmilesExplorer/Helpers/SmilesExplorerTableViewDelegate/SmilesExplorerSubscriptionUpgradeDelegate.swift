@@ -40,13 +40,50 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
-            if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue {
-                let header = SmilesExplorerHeader()
-                header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
-                configureHeaderForShimmer(section: section, headerView: header)
-                return header
+            if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
+                if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
+                    if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue  {
+                        self.input.send(.getFiltersData(filtersSavedList: self.filtersSavedList, isFilterAllowed: 1, isSortAllowed: 1)) // Get Filters Data
+                        let filtersCell = tableView.dequeueReusableCell(withIdentifier: "FiltersTableViewCell") as! FiltersTableViewCell
+                        filtersCell.title.text = sectionData.title
+                        filtersCell.title.setTextSpacingBy(value: -0.2)
+                        filtersCell.subTitle.text = sectionData.subTitle
+                        filtersCell.filtersData = self.filtersData
+                        filtersCell.backgroundColor = UIColor(hexString: sectionData.backgroundColor ?? "")
+                        
+                        filtersCell.callBack = { [weak self] filterData in
+                            if filterData.tag == RestaurantFiltersType.filters.rawValue {
+                                
+                                self?.redirectToRestaurantFilters()
+                            } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
+                                // Delivery time
+                                
+                            } else {
+                                // Remove and saved filters
+                                self?.input.send(.removeAndSaveFilters(filter: filterData))
+                            }
+                        }
+                        
+                        if let section = self.smilesExplorerSections?.sectionDetails?[safe: section] {
+                            if section.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue {
+                                filtersCell.stackViewTopConstraint.constant = 20
+                            }
+                        }
+                        
+                        self.configureHeaderForShimmer(section: section, headerView: filtersCell)
+                        return filtersCell
+                    }else{
+                        if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
+                            let header = SmilesExplorerHeader()
+                            header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
+                            configureHeaderForShimmer(section: section, headerView: header)
+                            return header
+                        }
+                    }
+                }
             }
         }
+        
         
         return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
     }

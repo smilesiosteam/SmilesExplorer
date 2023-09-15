@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmilesExplorerOffersFiltersVC" customModule="SmilesExplorer">
+            <connections>
+                <outlet property="filtersTableView" destination="tGe-YI-ggt" id="D6S-Ch-icY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="1WD-Jk-6nV">
+                    <rect key="frame" x="9" y="92" width="375" height="667"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tGe-YI-ggt">
+                            <rect key="frame" x="0.0" y="10" width="375" height="560"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="uZ5-KK-hfj"/>
+                            </connections>
+                        </tableView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ghw-37-KXn">
+                            <rect key="frame" x="16" y="607" width="343" height="48"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X47-ey-ksa" customClass="ButtonSecondary" customModule="Smiles" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="164" height="48"/>
+                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="iPo-j7-cAS"/>
+                                    </constraints>
+                                    <state key="normal" title="Clear all">
+                                        <color key="titleColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clearAllFiltersAction:" destination="-1" eventType="touchUpInside" id="i09-4w-2tc"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dad-mc-ouJ" customClass="ButtonPrimary" customModule="Smiles" customModuleProvider="target">
+                                    <rect key="frame" x="179" y="0.0" width="164" height="48"/>
+                                    <color key="backgroundColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Apply">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="applyFilterAction:" destination="-1" eventType="touchUpInside" id="Rz2-A9-YpV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="wng-Nx-hFZ"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="wng-Nx-hFZ" firstAttribute="trailing" secondItem="ghw-37-KXn" secondAttribute="trailing" constant="16" id="BdP-jO-kDs"/>
+                        <constraint firstItem="ghw-37-KXn" firstAttribute="leading" secondItem="wng-Nx-hFZ" secondAttribute="leading" constant="16" id="IYg-Tj-uLF"/>
+                        <constraint firstItem="tGe-YI-ggt" firstAttribute="top" secondItem="wng-Nx-hFZ" secondAttribute="top" constant="10" id="QWH-m3-Sfu"/>
+                        <constraint firstItem="ghw-37-KXn" firstAttribute="top" secondItem="tGe-YI-ggt" secondAttribute="bottom" constant="37" id="c5L-qs-oD3"/>
+                        <constraint firstItem="wng-Nx-hFZ" firstAttribute="bottom" secondItem="ghw-37-KXn" secondAttribute="bottom" constant="12" id="mQ5-VC-YlC"/>
+                        <constraint firstItem="wng-Nx-hFZ" firstAttribute="trailing" secondItem="tGe-YI-ggt" secondAttribute="trailing" id="sjk-xs-ntg"/>
+                        <constraint firstItem="tGe-YI-ggt" firstAttribute="leading" secondItem="wng-Nx-hFZ" secondAttribute="leading" id="slV-RW-yfo"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <point key="canvasLocation" x="140" y="0.0"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="Dad-mc-ouJ">
+            <size key="intrinsicContentSize" width="47" height="34"/>
+        </designable>
+        <designable name="X47-ey-ksa">
+            <size key="intrinsicContentSize" width="65" height="34"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

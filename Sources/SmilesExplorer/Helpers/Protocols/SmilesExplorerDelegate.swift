@@ -7,7 +7,7 @@
 
 import Foundation
 public enum SmilesExplorerHomeNavigationType {
-    case payment, withTextPromo, withQRPromo
+    case payment, withTextPromo, withQRPromo, freeTicket
 }
 
 public protocol SmilesExplorerHomeDelegate {

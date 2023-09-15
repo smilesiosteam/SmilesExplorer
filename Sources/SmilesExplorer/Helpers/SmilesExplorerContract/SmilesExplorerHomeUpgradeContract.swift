@@ -32,6 +32,8 @@ extension SmilesExplorerHomeUpgradeViewModel {
         case getBogoOffers(categoryId: Int?, tag: SectionTypeTag,pageNo:Int?)
         case updateOfferWishlistStatus(operation: Int, offerId: String)
         
+        case getRestaurantList(pageNo : Int = 0, filtersList: [RestaurantRequestFilter]?, selectedSortingTableViewCellModel: FilterDO?)
+        
         
         
     }
@@ -40,7 +42,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
         case fetchSectionsDidSucceed(response: GetSectionsResponseModel)
         case fetchSectionsDidFail(error: Error)
         
-        case fetchFiltersDataSuccess(filters: [FiltersCollectionViewCellRevampModel], selectedSortingTableViewCellModel: FilterDO?)
+        case fetchFiltersDataSuccess(filters: [FiltersCollectionViewCellRevampModel])
         case fetchAllSavedFiltersSuccess(filtersList: [RestaurantRequestFilter], filtersSavedList: [RestaurantRequestWithNameFilter])
         
         case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel, shouldLogout: Bool?)
@@ -71,6 +73,11 @@ extension SmilesExplorerHomeUpgradeViewModel {
         case fetchBogoOffersDidFail(error: Error)
         
         case updateWishlistStatusDidSucceed(response: WishListResponseModel)
+        
+        case fetchRestaurantListDidSucceed(response: GetRestaurantListingDOResponse)
+        case fetchRestaurantListDidFail(error: Error)
+        
+        
     }
     
 }

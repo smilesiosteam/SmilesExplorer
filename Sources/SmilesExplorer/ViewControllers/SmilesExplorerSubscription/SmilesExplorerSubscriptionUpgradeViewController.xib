@@ -28,17 +28,20 @@
                     <constraints>
                         <constraint firstAttribute="height" priority="250" constant="228" id="dRl-Tu-gAr"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1Ij-2j-lAS">
-                    <rect key="frame" x="0.0" y="212" width="393" height="558"/>
+                    <rect key="frame" x="0.0" y="212" width="393" height="559"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goC-wK-yOV">
-                    <rect key="frame" x="0.0" y="770" width="393" height="82"/>
+                    <rect key="frame" x="0.0" y="771" width="393" height="81"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCJ-VS-Vmp" customClass="CustomButton">
-                            <rect key="frame" x="16" y="1" width="361" height="48"/>
-                            <color key="backgroundColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="16" y="0.0" width="361" height="48"/>
+                            <color key="backgroundColor" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="7Td-os-BZ3"/>
                             </constraints>
@@ -48,7 +51,7 @@
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <integer key="value" value="12"/>
+                                    <integer key="value" value="24"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
@@ -56,7 +59,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="KCJ-VS-Vmp" secondAttribute="bottom" constant="33" id="F3i-qV-Coe"/>
-                        <constraint firstAttribute="height" constant="82" id="g8L-Pn-BJQ"/>
+                        <constraint firstAttribute="height" constant="81" id="g8L-Pn-BJQ"/>
                         <constraint firstAttribute="trailing" secondItem="KCJ-VS-Vmp" secondAttribute="trailing" constant="16" id="gQ2-a7-5Ig"/>
                         <constraint firstItem="KCJ-VS-Vmp" firstAttribute="leading" secondItem="goC-wK-yOV" secondAttribute="leading" constant="16" id="pH5-Fd-LRC"/>
                     </constraints>
