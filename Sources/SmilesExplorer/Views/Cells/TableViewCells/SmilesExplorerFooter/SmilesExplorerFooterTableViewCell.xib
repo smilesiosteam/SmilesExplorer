@@ -26,10 +26,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7X7-Cz-sXC">
-                        <rect key="frame" x="0.0" y="20" width="459" height="410"/>
+                        <rect key="frame" x="0.0" y="20" width="459" height="440"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b6z-ns-N2z">
-                                <rect key="frame" x="20" y="165" width="419" height="245"/>
+                                <rect key="frame" x="20" y="195" width="419" height="245"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="282.67000000000002" id="Oxp-9K-JwE"/>
                                     <constraint firstAttribute="height" constant="245" id="woo-CC-LCQ"/>
@@ -50,7 +50,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mq-mh-O7v" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                <rect key="frame" x="17.999999999999996" y="50" width="35.666666666666657" height="20.333333333333329"/>
+                                <rect key="frame" x="17.999999999999996" y="80" width="35.666666666666657" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text=" 250 AED" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhy-HN-LrP" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                <rect key="frame" x="57.666666666666664" y="46.333333333333329" width="71.666666666666686" height="24"/>
+                                <rect key="frame" x="57.666666666666664" y="46.333333333333329" width="71.666666666666686" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.3294117647" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -68,7 +68,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="liP-DQ-91E">
-                                <rect key="frame" x="18" y="84.333333333333329" width="421" height="48.666666666666671"/>
+                                <rect key="frame" x="18" y="114.33333333333336" width="421" height="48.666666666666671"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valid from 30 days upto activation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2p-2Q-fpL" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                         <rect key="frame" x="0.0" y="0.0" width="421" height="20.333333333333332"/>
@@ -80,7 +80,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Savings worth 3x of what you pay &amp; up to 10x benefits" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfN-dN-QGR" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                        <rect key="frame" x="0.0" y="28.333333333333329" width="421" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333314" width="421" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -115,7 +115,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBo-pN-Mls" customClass="UICustomButton" customModule="SmilesUtilities">
-                        <rect key="frame" x="16" y="462" width="427" height="48"/>
+                        <rect key="frame" x="16" y="492" width="427" height="48"/>
                         <color key="backgroundColor" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="kjb-fm-R1c"/>
@@ -137,7 +137,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="hBo-pN-Mls" secondAttribute="bottom" constant="30" id="4Mf-id-XkO"/>
+                    <constraint firstAttribute="bottom" secondItem="hBo-pN-Mls" secondAttribute="bottom" id="4Mf-id-XkO"/>
                     <constraint firstItem="lAf-6h-jw8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5w6-3i-XtI"/>
                     <constraint firstAttribute="trailing" secondItem="7X7-Cz-sXC" secondAttribute="trailing" id="73x-RS-dUM"/>
                     <constraint firstItem="hBo-pN-Mls" firstAttribute="top" secondItem="7X7-Cz-sXC" secondAttribute="bottom" constant="32" id="EL7-Oh-kgA"/>

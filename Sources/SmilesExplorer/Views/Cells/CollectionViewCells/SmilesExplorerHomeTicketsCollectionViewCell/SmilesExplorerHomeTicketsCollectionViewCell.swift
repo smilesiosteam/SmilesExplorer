@@ -27,9 +27,13 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Helper Function
     private func setupUI() {
-        self.imageContainerView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], cornerRadius: 12.0)
+        self.imageContainerView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], cornerRadius: 36.0)
+        imageContainerView.layer.borderWidth = 1.0
+        imageContainerView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+        
+        brandLogoImageView.layer.cornerRadius = 36.0
         self.brandTitleLabel.fontTextStyle = .smilesTitle2
-        self.typeLabel.fontTextStyle = .smilesLabel2
+        self.typeLabel.fontTextStyle = .smilesBody4
         self.amountLabel.fontTextStyle = .smilesLabel1
         self.brandTitleLabel.textColor = .appRevampLocationTextColor
         self.typeLabel.textColor = .appRevampSubtitleColor
@@ -39,7 +43,10 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     
     func configure(offer: ExplorerOffer) {
         print(offer)
-        self.amountLabel.localizedString = offer.dirhamValue ?? ""
+        
+        let attributeString = NSMutableAttributedString(string: "\(offer.dirhamValue ?? "") \("AED".localizedString)")
+        attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
+        amountLabel.attributedText = attributeString
         self.brandTitleLabel.localizedString = offer.offerTitle ?? ""
         self.typeLabel.localizedString = offer.offerType ?? ""
         brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in

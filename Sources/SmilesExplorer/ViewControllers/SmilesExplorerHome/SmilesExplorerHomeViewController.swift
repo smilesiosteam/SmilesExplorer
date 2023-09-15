@@ -331,7 +331,7 @@ extension SmilesExplorerHomeViewController {
 //        let offers = getAllOffers(exclusiveOffersResponse: exclusiveOffersResponse)
         if !bogoOffer.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .bogoOffers) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forBogoHomeOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
                     print(explorerOffer)
                     
                 })

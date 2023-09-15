@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SmilesExplorerHomeDealsAndOffersTVC" rowHeight="108" id="8gQ-iW-412" customClass="SmilesExplorerHomeDealsAndOffersTVC" customModule="SmilesExplorer">
+            <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8gQ-iW-412" id="dCp-NX-gaP">
+                <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gK4-PD-F18">
+                        <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ye2-oI-5d8">
+                                <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="0HJ-7x-NdF"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SKD-Rp-iN4">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="leading" secondItem="gK4-PD-F18" secondAttribute="leading" id="R5o-kn-kTD"/>
+                            <constraint firstAttribute="trailing" secondItem="Ye2-oI-5d8" secondAttribute="trailing" id="Xoy-Lz-VX6"/>
+                            <constraint firstAttribute="bottom" secondItem="Ye2-oI-5d8" secondAttribute="bottom" id="iS9-U2-fgY"/>
+                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="top" secondItem="gK4-PD-F18" secondAttribute="top" id="vD2-zh-CXZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="gK4-PD-F18" firstAttribute="top" secondItem="dCp-NX-gaP" secondAttribute="top" id="2K7-l1-fHH"/>
+                    <constraint firstItem="gK4-PD-F18" firstAttribute="leading" secondItem="dCp-NX-gaP" secondAttribute="leading" id="fAk-1w-WeX"/>
+                    <constraint firstAttribute="bottom" secondItem="gK4-PD-F18" secondAttribute="bottom" id="m4y-SD-VOo"/>
+                    <constraint firstAttribute="trailing" secondItem="gK4-PD-F18" secondAttribute="trailing" id="xfU-9c-sIC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="hYd-T1-NaE"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="collectionView" destination="Ye2-oI-5d8" id="5zA-Bq-LW1"/>
+                <outlet property="mainView" destination="gK4-PD-F18" id="2lV-am-A0n"/>
+            </connections>
+            <point key="canvasLocation" x="109.9236641221374" y="27.464788732394368"/>
+        </tableViewCell>
+    </objects>
+</document>
