@@ -60,7 +60,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         filtersCell.callBack = { [weak self] filterData in
                             if filterData.tag == RestaurantFiltersType.filters.rawValue {
                                 
-                                self?.redirectToRestaurantFilters()
+//                                self?.redirectToRestaurantFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
 //                                self?.redirectToSortingVC()
@@ -74,17 +74,18 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                             if section.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue {
                                 filtersCell.stackViewTopConstraint.constant = 20
                                 
-                                filtersCell.layer.cornerRadius = 12
-                                filtersCell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+                                filtersCell.parentView.layer.cornerRadius = 24
+                                filtersCell.parentView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+                                filtersCell.parentView.backgroundColor = .white
                             }
                         }
-                        filtersCell.backgroundColor = .white
+                        filtersCell.backgroundColor = UIColor(red: 245, green: 247, blue: 249)
                         self.configureHeaderForShimmer(section: section, headerView: filtersCell)
                         return filtersCell
                     }else{
                         if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
                             let header = SmilesExplorerHeader()
-                            header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
+                            header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section, isPostSub: true)
                             header.bgMainView.backgroundColor = .appRevampPurpleMainColor
                             header.backgroundColor = .appRevampPurpleMainColor
                             configureHeaderForShimmer(section: section, headerView: header)

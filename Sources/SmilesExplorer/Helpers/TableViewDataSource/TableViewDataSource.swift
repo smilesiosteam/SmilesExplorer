@@ -144,7 +144,8 @@ extension TableViewDataSource where Model == OfferDO {
             guard let cell = cell as? RestaurantsRevampTableViewCell else { return }
             cell.configureCell(with: offer)
             cell.offerCellType = offerCellType
-            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.selectionStyle = .none
+//            cell.setBackGroundColor(color: UIColor(hexString: data))
             cell.favoriteCallback = { isFavorite, offerId in
                 completion?(isFavorite, offerId, indexPath)
             }

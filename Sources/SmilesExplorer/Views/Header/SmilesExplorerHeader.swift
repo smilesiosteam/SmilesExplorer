@@ -36,9 +36,11 @@ class SmilesExplorerHeader: UIView {
         mainView.bindFrameToSuperviewBounds()
     }
     
-    func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?) {
+    func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?, isPostSub:Bool = false) {
         titleLabel.localizedString = title ?? ""
-        subTitleLabel.localizedString = subTitle ?? ""
+        if !isPostSub {
+            subTitleLabel.localizedString = subTitle ?? ""
+        }
         if section == 2 {
             mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
         }
@@ -50,6 +52,9 @@ class SmilesExplorerHeader: UIView {
         }
         
         subTitleLabel.isHidden = subTitle == nil
+        if isPostSub {
+            subTitleLabel.isHidden = true
+        }
         titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         subTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
     }

@@ -116,7 +116,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         tableView.delegate = self
         let customizable: CellRegisterable? = SmilesExplorerSubscriptionUpgradeCellRegistration()
         customizable?.register(for: self.tableView)
-        
+        self.tableView.backgroundColor = .white
         // ----- Tableview section header hide in case of tableview mode Plain ---
         let dummyViewHeight = CGFloat(150)
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
@@ -477,7 +477,6 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         if !bogoOffers.isEmpty {
             if let offersIndex = getSectionIndex(for: .offerListing) {
                 self.dataSource?.dataSources?[offersIndex] = TableViewDataSource.make(forBogoOffers: self.bogoOffers , data: self.smilesExplorerSections?.sectionDetails?[offersIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] isFavorite, offerId, indexPath  in
-                    
                     self?.selectedIndexPath = indexPath
                     self?.updateOfferWishlistStatus(isFavorite: isFavorite, offerId: offerId)
                 })
