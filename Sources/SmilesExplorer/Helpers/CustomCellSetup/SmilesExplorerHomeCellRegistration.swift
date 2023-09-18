@@ -17,6 +17,8 @@ struct SmilesExplorerHomeCellRegistration: CellRegisterable {
 
         tableView.registerCellFromNib(SmilesExplorerHomeTicketsTableViewCell.self, withIdentifier: "SmilesExplorerHomeTicketsTableViewCell", bundle: .module)
         
+        tableView.registerCellFromNib(SmilesExplorerHomeDealsAndOffersTVC.self, withIdentifier: "SmilesExplorerHomeDealsAndOffersTVC", bundle: .module)
+        
     }
     
 }

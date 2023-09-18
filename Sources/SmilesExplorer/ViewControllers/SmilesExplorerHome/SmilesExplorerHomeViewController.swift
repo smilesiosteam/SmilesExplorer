@@ -22,7 +22,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     // MARK: - PROPERTIES -
     var dataSource: SectionedTableViewDataSource?
-    private var input: PassthroughSubject<SmilesExplorerHomeViewModel.Input, Never> = .init()
+    private var  input: PassthroughSubject<SmilesExplorerHomeViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     private lazy var viewModel: SmilesExplorerHomeViewModel = {
         return SmilesExplorerHomeViewModel()
@@ -156,6 +156,7 @@ extension SmilesExplorerHomeViewController {
                     
                 case .fetchSectionsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
@@ -165,6 +166,7 @@ extension SmilesExplorerHomeViewController {
                     
                 case .fetchRewardPointsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     
                 case .fetchFiltersDataSuccess(_, _):
 //                    self?.filtersData = filters
@@ -192,6 +194,8 @@ extension SmilesExplorerHomeViewController {
                     SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureBogoOffers(with: exclusiveOffers)
                     
+                case .fetchBogoDidFail(error: _):
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 case .fetchContentForSortingItems(_):
 //                    self?.sortingListRowModels = baseRowModels
                     break
@@ -292,11 +296,11 @@ extension SmilesExplorerHomeViewController {
         self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
         if !offers.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .exclusiveDeals) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forBogoHomeOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
                     print(explorerOffer)
                     
                 })
-                self.configureDataSource()
+                self.configureDataSource()  
             }
         } else {
             if self.offers.isEmpty {
@@ -311,7 +315,7 @@ extension SmilesExplorerHomeViewController {
         self.tickets.append(contentsOf: exclusiveOffersResponse.offers ?? [])
         if !tickets.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .tickets) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#555555", completion: { [weak self] explorerOffer in
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
                     print(explorerOffer)
                     
                 })
@@ -331,7 +335,7 @@ extension SmilesExplorerHomeViewController {
 //        let offers = getAllOffers(exclusiveOffersResponse: exclusiveOffersResponse)
         if !bogoOffer.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .bogoOffers) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forBogoHomeOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
                     print(explorerOffer)
                     
                 })

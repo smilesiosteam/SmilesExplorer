@@ -15,4 +15,8 @@ public protocol SmilesExplorerHomeDelegate {
     func proceedToPayment(params: SmilesExplorerPaymentParams, navigationType:SmilesExplorerHomeNavigationType)
 
     func handleDeepLinkRedirection(redirectionUrl: String)
+    
+    func navigateToGlobalSearch()
+    func navigateToLocation()
+    func navigateToRewardPoint(personalizationEventSource: String?)
 }
