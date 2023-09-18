@@ -45,6 +45,8 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     var mutatingSectionDetails = [SectionDetailDO]()
     private var offerFavoriteOperation = 0
     
+    var selectedLocation: String? = nil
+    
     var offersListing: ExplorerOfferResponse?
     var bogooffersListing: OffersCategoryResponseModel?
     var offersPage = 1 // For offers list pagination
@@ -92,11 +94,19 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         }
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
+        selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
     }
     
     
     public override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        
+        if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
+//            self.input.send(.emptyRestaurantList)
+//            self.callFoodOrderServices()
+            selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
+        }
+        
     }
     // MARK: - Helping Functions
     
@@ -185,6 +195,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     private func setupUI() {
+        
         self.tableView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
         self.tableView.backgroundColor = .white
         self.sections.removeAll()
