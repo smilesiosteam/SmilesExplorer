@@ -85,13 +85,19 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public override func viewDidLoad() {
         setupTableView()
         bind(to: viewModel)
-        if subscriptionType == .platinum {
+//        if subscriptionType == .platinum {
             setupHeaderView(headerTitle: nil)
-        }else{
-            setUpNavigationBar()
-        }
+//        }else{
+//            setUpNavigationBar()
+//        }
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
+        
+        self.upgradeNowButton.fontTextStyle = .smilesHeadline4
+        self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
+        if self.subscriptionType == .gold {
+            self.upgradeNowButton.isHidden = true
+        }
     }
     
     
@@ -188,6 +194,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.tableView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
         self.tableView.backgroundColor = .white
         self.sections.removeAll()
+        
 //        self.homeAPICalls()
     }
     

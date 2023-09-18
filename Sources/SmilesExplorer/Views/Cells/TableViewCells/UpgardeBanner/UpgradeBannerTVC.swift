@@ -14,6 +14,9 @@ class UpgradeBannerTVC: UITableViewCell {
 
     @IBOutlet weak var imgBanner: UIImageView!
     
+    
+    var onClickUpgrade: (() -> ())?
+    
     var sectionData:SectionDetailDO?{
         didSet{
             guard let sec = sectionData else {return}
@@ -23,6 +26,8 @@ class UpgradeBannerTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.imgBanner.backgroundColor = .appRevampPurpleMainColor
+        self.imgBanner.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

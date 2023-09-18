@@ -16,7 +16,13 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
+        if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section] {
+            if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue {
+                self.onUpgradeBannerButtonClick()
+            } else if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue {
+                SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!)
+            }
+        }
         
     }
     
@@ -67,15 +73,20 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         if let section = self.smilesExplorerSections?.sectionDetails?[safe: section] {
                             if section.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue {
                                 filtersCell.stackViewTopConstraint.constant = 20
+                                
+                                filtersCell.layer.cornerRadius = 12
+                                filtersCell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
                             }
                         }
-                        
+                        filtersCell.backgroundColor = .white
                         self.configureHeaderForShimmer(section: section, headerView: filtersCell)
                         return filtersCell
                     }else{
                         if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
                             let header = SmilesExplorerHeader()
                             header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
+                            header.bgMainView.backgroundColor = .appRevampPurpleMainColor
+                            header.backgroundColor = .appRevampPurpleMainColor
                             configureHeaderForShimmer(section: section, headerView: header)
                             return header
                         }

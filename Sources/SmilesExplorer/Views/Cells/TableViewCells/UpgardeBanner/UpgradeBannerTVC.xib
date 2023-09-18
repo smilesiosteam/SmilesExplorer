@@ -18,15 +18,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qfx-Ep-cSd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+                        <rect key="frame" x="-4" y="-2" width="326" height="146"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Qfx-Ep-cSd" secondAttribute="bottom" constant="-10" id="1fK-xI-Jbv"/>
-                    <constraint firstItem="Qfx-Ep-cSd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="O50-cM-rBh"/>
-                    <constraint firstItem="Qfx-Ep-cSd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="b2y-dk-HS1"/>
-                    <constraint firstAttribute="trailing" secondItem="Qfx-Ep-cSd" secondAttribute="trailing" id="eZP-ST-ebz"/>
+                    <constraint firstItem="Qfx-Ep-cSd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="-4" id="O50-cM-rBh"/>
+                    <constraint firstItem="Qfx-Ep-cSd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-2" id="b2y-dk-HS1"/>
+                    <constraint firstAttribute="trailing" secondItem="Qfx-Ep-cSd" secondAttribute="trailing" constant="-2" id="eZP-ST-ebz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
