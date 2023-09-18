@@ -45,6 +45,9 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     var mutatingSectionDetails = [SectionDetailDO]()
     private var offerFavoriteOperation = 0
     
+    var selectedLocation: String? = nil
+    var isHeaderExpanding = false
+    
     var offersListing: ExplorerOfferResponse?
     var bogooffersListing: OffersCategoryResponseModel?
     var offersPage = 1 // For offers list pagination
@@ -65,16 +68,23 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public var filtersList: [RestaurantRequestFilter]?
     
     public var selectedSort: String?
+    private var rewardPoint: Int?
+    private var rewardPointIcon: String?
+    private var personalizationEventSource: String?
 
     
     var restaurants = [Restaurant]()
+
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil) {
+    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?) {
+        self.personalizationEventSource =  personalizationEventSource
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
         self.isUserSubscribed = isUserSubscribed
         self.subscriptionType = subscriptionType
         self.voucherCode = voucherCode
+        self.rewardPointIcon = rewardPointIcon
+        self.rewardPoint = rewardPoint
         super.init(nibName: "SmilesExplorerSubscriptionUpgradeViewController", bundle: Bundle.module)
     }
     
@@ -83,6 +93,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     public override func viewDidLoad() {
+        
         setupTableView()
         bind(to: viewModel)
 //        if subscriptionType == .platinum {
@@ -92,17 +103,28 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
 //        }
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
+
+        selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
+
         
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
         if self.subscriptionType == .gold {
             self.upgradeNowButton.isHidden = true
         }
+
     }
     
     
     public override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        
+        if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
+//            self.input.send(.emptyRestaurantList)
+//            self.callFoodOrderServices()
+            selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
+        }
+        
     }
     // MARK: - Helping Functions
     
@@ -191,18 +213,56 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     private func setupUI() {
+        
         self.tableView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
         self.tableView.backgroundColor = .white
         self.sections.removeAll()
         
 //        self.homeAPICalls()
     }
-    
+    // MARK: - Top Header
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
         topHeaderView.setupHeaderView(backgroundColor: .appRevampEnableStateColor, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        displayRewardPoints()
     }
-    
+    func displayRewardPoints() {
+        if let rewardPoints = rewardPoint {
+            self.topHeaderView.setPointsOfUser(with: rewardPoints.numberWithCommas())
+        }
+        
+        if let rewardPointsIcon = self.rewardPointIcon {
+        self.topHeaderView.setPointsIcon(with: rewardPointsIcon, shouldShowAnimation: false)
+        }
+    }
+    func adjustTopHeader(_ scrollView: UIScrollView) {
+        guard isHeaderExpanding == false else {return}
+        if let tableView = scrollView as? UITableView {
+            let items = (0..<tableView.numberOfSections).reduce(into: 0) { partialResult, sectionIndex in
+                partialResult += tableView.numberOfRows(inSection: sectionIndex)
+            }
+            if items == 0 {
+                return
+            }
+        }
+        let isAlreadyCompact = !topHeaderView.bodyViewCompact.isHidden
+        let compact = scrollView.contentOffset.y > 150
+        if compact != isAlreadyCompact {
+            isHeaderExpanding = true
+            topHeaderView.adjustUI(compact: compact)
+            topHeaderView.view_container.backgroundColor = compact ? .white : .appRevampEnableStateColor
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+                self.isHeaderExpanding = false
+            }
+        }
+    }
+    private func updateView(index: Int) {
+
+
+        //self?.adjustTopHeader(scrollView)
+
+    }
     fileprivate func configureFiltersData() {
 //        showShimmer(identifier: .RESTAURANTLISTING)
 //        self.input.send(.getRestaurantList(pageNo: 0, filtersList: self.savedFilters, selectedSortingTableViewCellModel: self.viewModel.selectedSortingTableViewCellModel))
@@ -211,42 +271,38 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
 
 // MARK: - APP HEADER DELEGATE -
 extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
+    
     public func didTapOnBackButton() {
+
         navigationController?.popViewController()
+        
     }
     
     public func didTapOnSearch() {
-        //        self.input.send(.didTapSearch)
-        //        let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-        //        analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.SearchBrandDirectly).name, parameters: [:]))
+        self.delegate?.navigateToGlobalSearch()
+       // self.categoryContainerCoordinator?.navigateToGlobalSearchVC()
     }
     
     public func didTapOnLocation() {
-        //        self.foodOrderHomeCoordinator?.navigateToUpdateLocationVC(confirmLocationRedirection: .toFoodOrder)
+        self.delegate?.navigateToLocation()
+        //self.categoryContainerCoordinator?.navigateToUpdateLocationVC(confirmLocationRedirection: .toCategoryContainer)
     }
     
-    func showPopupForLocationSetting() {
-        LocationManager.shared.showPopupForSettings()
-    }
-    
-    func didTapOnToolTipSearch() {
-        //        redirectToSetUserLocation()
+    func setLocationToolTipPositionView(view: UIImageView) {
+//        self.locationToolTipPosition = view
     }
     
     public func segmentLeftBtnTapped(index: Int) {
-        //        configureOrderType(with: index)
+        updateView(index: index)
     }
     
     public func segmentRightBtnTapped(index: Int) {
-        //        configureOrderType(with: index)
+        updateView(index: index)
     }
     
     public func rewardPointsBtnTapped() {
-        //        self.foodOrderHomeCoordinator?.navigateToTransactionsListViewController()
-    }
-    
-    public func didTapOnBagButton() {
-        //        self.orderHistorViewAll()
+        self.delegate?.navigateToRewardPoint(personalizationEventSource: self.personalizationEventSource)
+       // self.categoryContainerCoordinator?.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
     }
 }
 
@@ -309,12 +365,15 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         }
         
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
-            if subscriptionType == .platinum {
-                setupHeaderView(headerTitle: topPlaceholderSection.title)
-                topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
-            }else {
-                setUpNavigationBar()
-            }
+            setupHeaderView(headerTitle: topPlaceholderSection.title)
+            topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
+            
+//            if subscriptionType == .platinum {
+//                setupHeaderView(headerTitle: topPlaceholderSection.title)
+//                topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
+//            }else {
+//                setUpNavigationBar()
+//            }
         }
         homeAPICalls()
         
@@ -534,3 +593,4 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     
     
 }
+

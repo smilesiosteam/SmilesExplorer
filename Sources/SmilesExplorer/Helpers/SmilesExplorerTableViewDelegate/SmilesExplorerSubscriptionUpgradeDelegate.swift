@@ -145,9 +145,21 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         }
         
     }
-    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        adjustTopHeader(scrollView)
+//        if let indexPath = tableView.indexPath(for: tableView.visibleCells.first ?? UITableViewCell()) {
+//            let backgroundColor = self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.backgroundColor
+//            if let parentViewController = self.parent as? CategoryContainerViewController {
+//                if !parentViewController.shouldAddBillsController {
+//                    parentViewController.topHeaderView.setBackgroundColorForCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
+//                } else {
+//                    parentViewController.topHeaderView.setBackgroundColorForTabsCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
+//                }
+//            }
+//        }
+    }
 //    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
+//
 //        var tableViewHeight = tableView.frame.height
 //        if topHeaderView.alpha == 0 {
 //            tableViewHeight -= 153
@@ -176,12 +188,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
 //                self.topHeaderView.alpha = 1
 //                self.tableViewTopSpaceToHeaderView.priority = .defaultHigh
 //                self.tableViewTopSpaceToSuperView.priority = .defaultLow
-//                
+//
 //                self.tableViewTopSpaceToSuperView.constant = 228
 //                self.view.layoutIfNeeded()
 //            })
 //        }
-//        
+//
 //    }
     
 }
