@@ -119,15 +119,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         
-        if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
-//            self.input.send(.emptyRestaurantList)
-//            self.callFoodOrderServices()
-            selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        }
+//        if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
+////            self.input.send(.emptyRestaurantList)
+////            self.callFoodOrderServices()
+//            selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
+//        }
         
     }
     // MARK: - Helping Functions
-    
     func setupTableView() {
         self.tableView.sectionFooterHeight = .leastNormalMagnitude
         if #available(iOS 15.0, *) {
@@ -263,9 +262,9 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         //self?.adjustTopHeader(scrollView)
 
     }
-    fileprivate func configureFiltersData() {
-//        showShimmer(identifier: .RESTAURANTLISTING)
-//        self.input.send(.getRestaurantList(pageNo: 0, filtersList: self.savedFilters, selectedSortingTableViewCellModel: self.viewModel.selectedSortingTableViewCellModel))
+    public func configureFiltersData() {
+       // showShimmer(identifier: .offers)
+        self.input.send(.getRestaurantList(pageNo: 0, filtersList: self.savedFilters, selectedSortingTableViewCellModel: self.viewModel.selectedSortingTableViewCellModel))
     }
 }
 
@@ -420,7 +419,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                                         self?.filtersSavedList = savedFilters
                                         self?.offers.removeAll()
                                         self?.configureDataSource()
-//                                        self?.configureFiltersData()
+                                        self?.configureFiltersData()
                     break
                     
                 case .fetchSavedFiltersAfterSuccess(let filtersSavedList):
@@ -579,10 +578,11 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     }
 }
 
-
 extension SmilesExplorerSubscriptionUpgradeViewController {
+    
     func redirectToRestaurantFilters() {
-        SmilesExplorerRouter.shared.pushSmilesExplorerOffersFiltersVC(navVC: self.navigationController, delegate: self.delegate)
+        self.delegate?.navigateToFiltersVC(smilesExplorerViewModel: self.viewModel)
+      //  SmilesExplorerRouter.shared.pushSmilesExplorerOffersFiltersVC(navVC: self.navigationController, delegate: self.delegate)
         
     }
     

@@ -60,7 +60,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         filtersCell.callBack = { [weak self] filterData in
                             if filterData.tag == RestaurantFiltersType.filters.rawValue {
                                 
-//                                self?.redirectToRestaurantFilters()
+                                self?.redirectToRestaurantFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
 //                                self?.redirectToSortingVC()
