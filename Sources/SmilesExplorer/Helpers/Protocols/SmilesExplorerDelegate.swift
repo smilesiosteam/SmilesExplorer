@@ -15,7 +15,7 @@ public enum SmilesExplorerHomeNavigationType {
 public protocol SmilesExplorerHomeDelegate {
     
     func proceedToPayment(params: SmilesExplorerPaymentParams, navigationType:SmilesExplorerHomeNavigationType)
-
+    func navigateToFiltersVC(smilesExplorerViewModel: SmilesExplorerHomeUpgradeViewModel?)
     func handleDeepLinkRedirection(redirectionUrl: String)
     
     func navigateToGlobalSearch()

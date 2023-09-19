@@ -14,35 +14,35 @@ import SmilesBanners
 import SmilesLocationHandler
 import SmilesStoriesManager
 
-class SmilesExplorerHomeUpgradeViewModel: NSObject {
+public class SmilesExplorerHomeUpgradeViewModel: NSObject {
     
     // MARK: - PROPERTIES -
-    private var output: PassthroughSubject<Output, Never> = .init()
-    private var cancellables = Set<AnyCancellable>()
+     var output: PassthroughSubject<Output, Never> = .init()
+     var cancellables = Set<AnyCancellable>()
     
     // MARK: - VIEWMODELS -
-    private let sectionsViewModel = SectionsViewModel()
-    private let rewardPointsViewModel = RewardPointsViewModel()
-    private let smilesExplorerGetOffersViewModel = SmilesExplorerGetOffersViewModel()
-    private let smilesExplorerGetOffersStoriesViewModel = SmilesExplorerGetOffersStoriesViewModel()
-    private let wishListViewModel = WishListViewModel()
+    public let sectionsViewModel = SectionsViewModel()
+    public let rewardPointsViewModel = RewardPointsViewModel()
+    public let smilesExplorerGetOffersViewModel = SmilesExplorerGetOffersViewModel()
+    public let smilesExplorerGetOffersStoriesViewModel = SmilesExplorerGetOffersStoriesViewModel()
+    public let wishListViewModel = WishListViewModel()
     
-    private let smilesExplorerGetBogoOffersViewModel = SmilesExplorerGetBogoOffersViewModel()
-    private var wishListUseCaseInput: PassthroughSubject<WishListViewModel.Input, Never> = .init()
+    public let smilesExplorerGetBogoOffersViewModel = SmilesExplorerGetBogoOffersViewModel()
+    public var wishListUseCaseInput: PassthroughSubject<WishListViewModel.Input, Never> = .init()
     
-    private var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
-    private var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
-    private var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
-    private var exclusiveOffersStoriesUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersStoriesViewModel.Input, Never> = .init()
-    private var bogoOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetBogoOffersViewModel.Input, Never> = .init()
+    public var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
+    public var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
+     var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
+     var exclusiveOffersStoriesUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersStoriesViewModel.Input, Never> = .init()
+     var bogoOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetBogoOffersViewModel.Input, Never> = .init()
     
-    private var filtersSavedList: [RestaurantRequestWithNameFilter]?
-    private var filtersList: [RestaurantRequestFilter]?
-    private var selectedSort: String?
-    var selectedSortingTableViewCellModel: FilterDO?
+    public var filtersSavedList: [RestaurantRequestWithNameFilter]?
+    public var filtersList: [RestaurantRequestFilter]?
+    public var selectedSort: String?
+    public var selectedSortingTableViewCellModel: FilterDO?
     
     // MARK: - METHODS -
-    private func logoutUser() {
+    public func logoutUser() {
         UserDefaults.standard.set(false, forKey: .notFirstTime)
         UserDefaults.standard.set(true, forKey: .isLoggedOut)
         UserDefaults.standard.removeObject(forKey: .loyaltyID)
