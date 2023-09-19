@@ -17,14 +17,16 @@ public final class SmilesExplorerRouter: NSObject {
     
     private override init() {}
     
-    public func pushOffersVC(navVC:UINavigationController){
+    public func pushOffersVC(navVC:UINavigationController, delegate: SmilesExplorerHomeDelegate, onSkip: @escaping ()->Void){
         let vc = SmilesExplorerOffersViewController()
+        vc.onSkip = onSkip
+        vc.delegate = delegate
         navVC.pushViewController(vc, animated: true)
     }
  
     
-    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
-        let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,transactionId: transactionId,onContinue: onContinue)
+    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?, onGoToExplorer:(()->Void)?) {
+        let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,transactionId: transactionId,onContinue: onContinue, onGoToExplorer: onGoToExplorer)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
     
@@ -66,8 +68,8 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     
-    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
-        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "")
+    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate, sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
+        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "", delegate: delegate)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
 

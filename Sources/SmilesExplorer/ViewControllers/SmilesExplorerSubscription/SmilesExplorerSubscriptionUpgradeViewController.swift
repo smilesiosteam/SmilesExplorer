@@ -69,12 +69,13 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     
     var restaurants = [Restaurant]()
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil) {
+    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate) {
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
         self.isUserSubscribed = isUserSubscribed
         self.subscriptionType = subscriptionType
         self.voucherCode = voucherCode
+        self.delegate = delegate
         super.init(nibName: "SmilesExplorerSubscriptionUpgradeViewController", bundle: Bundle.module)
     }
     
@@ -237,7 +238,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     public func rewardPointsBtnTapped() {
         //        self.foodOrderHomeCoordinator?.navigateToTransactionsListViewController()
     }
-    
+    @IBAction func upgradeTapped(_ sender: Any){
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self, delegate: self.delegate)
+    }
     public func didTapOnBagButton() {
         //        self.orderHistorViewAll()
     }

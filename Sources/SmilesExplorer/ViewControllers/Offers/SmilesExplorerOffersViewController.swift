@@ -37,7 +37,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     var currentPage = 1
     var isLoading = false
     var hasMoreData = true
-    
+    var onSkip = {}
     // MARK: - ACTIONS -
 
     
@@ -49,7 +49,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     }
     
     @IBAction func skipPressed(_ sender: UIButton) {
-        SmilesExplorerRouter.shared.popToSmilesExplorerHomeViewController(navVC: navigationController!)
+        onSkip()
     }
     
     // MARK: - METHODS -
@@ -143,7 +143,8 @@ class SmilesExplorerOffersViewController: UIViewController {
     func setConfirmBtnUI(enabled:Bool){
         confirmBtn.isUserInteractionEnabled = enabled
         confirmBtn.setTitleColor(enabled ? .white : UIColor(white: 0, alpha: 0.5), for: .normal)
-        confirmBtn.setBackgroundColor(enabled ? .appRevampPurpleMainColor : UIColor(white:0, alpha: 0.1), for: .normal)
+        let diabledColor = #colorLiteral(red: 0.9999999404, green: 1, blue: 1, alpha: 1)
+        confirmBtn.setBackgroundColor(enabled ? .appRevampPurpleMainColor : diabledColor, for: .normal)
     }
     
 }
