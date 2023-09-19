@@ -62,11 +62,9 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-<<<<<<< HEAD
-                                <action selector="upgradeTapped:" destination="-1" eventType="touchUpInside" id="ik6-ee-h1N"/>
-=======
+
                                 <action selector="onUpgradeBannerButtonClick" destination="-1" eventType="touchUpInside" id="hxI-37-1fM"/>
->>>>>>> 223fc23bb4b34518c5ed1d3d7a9b82be268b1f5a
+
                             </connections>
                         </button>
                     </subviews>
