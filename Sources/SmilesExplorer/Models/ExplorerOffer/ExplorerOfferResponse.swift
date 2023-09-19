@@ -19,7 +19,7 @@ class ExplorerOfferResponse: BaseMainResponse {
     override init() {
         super.init()
     }
-
+    
     enum CodingKeys: String, CodingKey {
         case listTitle, listSubtitle, offers, offersCount
     }
@@ -32,22 +32,22 @@ class ExplorerOfferResponse: BaseMainResponse {
         offersCount = try values.decodeIfPresent(Int.self, forKey: .offersCount)
         try super.init(from: decoder)
     }
-
+    
 }
 
 // MARK: - Offer
-class ExplorerOffer: Codable {
-    var offerID, offerTitle, offerDescription, pointsValue: String?
-    var dirhamValue, offerType, categoryID: String?
-    var imageURL: String?
-    var partnerName: String?
-    var isWishlisted: Bool?
-    var partnerImage: String?
-    var smileyPointsURL: String?
-    var redirectionURL: String?
-    var paymentMethods: [PaymentMethod]?
-
-    enum CodingKeys: String, CodingKey {
+public class ExplorerOffer: Codable {
+    public var offerID, offerTitle, offerDescription, pointsValue: String?
+    public var dirhamValue, offerType, categoryID: String?
+    public var imageURL: String?
+    public var partnerName: String?
+    public var isWishlisted: Bool?
+    public var partnerImage: String?
+    public var smileyPointsURL: String?
+    public var redirectionURL: String?
+    public var paymentMethods: [PaymentMethod]?
+    
+    public enum CodingKeys: String, CodingKey {
         case offerID = "offerId"
         case offerTitle, offerDescription, pointsValue, dirhamValue, offerType
         case categoryID = "categoryId"
@@ -55,5 +55,5 @@ class ExplorerOffer: Codable {
         case smileyPointsURL = "smileyPointsUrl"
         case redirectionURL, paymentMethods
     }
-
+    
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 import SmilesOffers
-
+import SmilesStoriesManager
 public enum SmilesExplorerHomeNavigationType {
     case payment, withTextPromo, withQRPromo, freeTicket
 }
@@ -22,4 +22,5 @@ public protocol SmilesExplorerHomeDelegate {
     func navigateToLocation()
     func navigateToRewardPoint(personalizationEventSource: String?)
     func proceedToOfferDetails(offer: OfferDO?)
+    func navigateToStoriesWebView(objStory: ExplorerOffer)
 }

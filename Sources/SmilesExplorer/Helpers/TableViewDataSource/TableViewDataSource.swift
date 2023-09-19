@@ -46,7 +46,7 @@ extension TableViewDataSource where Model == BOGODetailsResponseLifestyleOffer {
             cell.configureCell(with: subscription)
             cell.selectionStyle = .none
             cell.callBack = { () in
-//                cell.toggleButton.isSelected = !cell.toggleButton.isSelected
+                //                cell.toggleButton.isSelected = !cell.toggleButton.isSelected
             }
             
             
@@ -105,8 +105,9 @@ extension TableViewDataSource where Model == ExplorerOfferResponse {
             guard let cell = cell as? SmilesExplorerStoriesTVC else {return}
             cell.collectionsData = storiesOffer.offers
             cell.setBackGroundColor(color: UIColor(hexString: data))
+
             cell.callBack = { data in
-                      debugPrint(data)
+                debugPrint(data)
                 onClick?(data)
             }
         }
@@ -145,10 +146,12 @@ extension TableViewDataSource where Model == OfferDO {
             cell.configureCell(with: offer)
             cell.offerCellType = offerCellType
             cell.selectionStyle = .none
-//            cell.setBackGroundColor(color: UIColor(hexString: data))
+            //            cell.setBackGroundColor(color: UIColor(hexString: data))
             cell.favoriteCallback = { isFavorite, offerId in
                 completion?(isFavorite, offerId, indexPath)
             }
+            
+            
         }
     }
 }

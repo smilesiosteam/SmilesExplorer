@@ -42,7 +42,7 @@
                                     <constraint firstItem="KFj-hq-hQ8" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="top" id="gxr-37-dTR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2">
                                 <rect key="frame" x="12" y="76" width="72" height="32"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="14"/>
                                 <nil key="textColor"/>

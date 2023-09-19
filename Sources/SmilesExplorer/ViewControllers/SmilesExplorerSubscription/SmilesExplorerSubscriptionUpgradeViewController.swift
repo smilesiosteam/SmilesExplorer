@@ -472,10 +472,11 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         if let stories = exclusiveOffersResponse.offers, !stories.isEmpty {
             if let storiesIndex = getSectionIndex(for: .stories) {
                 self.dataSource?.dataSources?[storiesIndex] = TableViewDataSource.make(forStories: exclusiveOffersResponse, data: self.smilesExplorerSections?.sectionDetails?[storiesIndex].backgroundColor ?? "#FFFFFF", onClick: { [weak self] story in
-                    if var stories = ((self?.dataSource?.dataSources?[safe: storiesIndex] as? TableViewDataSource<Stories>)?.models)?.first {
-                        //
-                        
-                    }
+//                    if var stories = ((self?.dataSource?.dataSources?[safe: storiesIndex] as? TableViewDataSource<Stories>)?.models)?.first {
+//                        print(stories,"Stories tapped")
+//                        
+//                    }
+                    self?.delegate?.navigateToStoriesWebView(objStory: story)
                 })
                 self.configureDataSource()
             }
