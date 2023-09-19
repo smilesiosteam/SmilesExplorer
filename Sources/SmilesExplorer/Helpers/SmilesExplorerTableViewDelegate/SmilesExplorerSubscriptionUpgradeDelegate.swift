@@ -19,7 +19,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         if let secID = SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier ?? ""){
             switch secID {
             case .freetickets:
-                SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!,delegate: self.delegate)
+                SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!,delegate: self.delegate!)
                 break
             case .upgradeBanner:
                 self.onUpgradeBannerButtonClick()
