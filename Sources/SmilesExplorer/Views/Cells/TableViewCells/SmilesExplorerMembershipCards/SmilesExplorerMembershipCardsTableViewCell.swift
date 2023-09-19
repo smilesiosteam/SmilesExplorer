@@ -63,7 +63,10 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
             }
         }
 
-        priceLabel.text = data.monthlyPrice ?? ""
+        let pricePkg: String? = Int(exactly: data.price ?? 0.0).map { String($0) }
+
+        
+        priceLabel.text = "\(pricePkg ?? "") \("AED".localizedString)"
         cellImageView.setImageWithUrlString(data.subscribeImage ?? "")
         
         platinumExplorerLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight

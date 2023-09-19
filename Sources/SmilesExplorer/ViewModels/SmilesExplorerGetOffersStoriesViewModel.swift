@@ -11,7 +11,7 @@ import NetworkingLayer
 import SmilesOffers
 import SmilesUtilities
 
-class SmilesExplorerGetOffersStoriesViewModel: NSObject {
+public class SmilesExplorerGetOffersStoriesViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
     enum Input {

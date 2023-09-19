@@ -45,6 +45,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     private lazy var viewModel: SmilesExplorerMembershipSelectionViewModel = {
         return SmilesExplorerMembershipSelectionViewModel()
     }()
+    private var offerTitle: String
     
     // MARK: - ViewController Lifecycle -
    
@@ -56,11 +57,12 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(_ sourceScreen: SourceScreen,transactionId: String?,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
+    init(_ sourceScreen: SourceScreen,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
         self.transactionId = transactionId
         self.onGoToExplorer = onGoToExplorer
         self.onContinue = onContinue
         self.sourceScreen = sourceScreen
+        self.offerTitle = offerTitle
         super.init(nibName: "SmilesExplorerMembershipSuccessViewController", bundle: .module)
     }
     
@@ -98,8 +100,12 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
         
         let locationNavBarTitle = UILabel()
+        if self.sourceScreen == .freePassSuccess {
+            locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success"
+        } else {
+            locationNavBarTitle.text = "Success".localizedString
+        }
         
-        locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success"
         locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         locationNavBarTitle.textColor = .appRevampPurpleMainColor
@@ -156,8 +162,15 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         } else {
             imgView.isHidden = true
         }
-        
-        detailLabel.text =  (self.response?.themeResources?.passPurchaseSuccessMsg ?? "") + " " + (self.response?.themeResources?.explorerSubscriptionSubTitle ?? "")
+        var detailMessage = ""
+        if (sourceScreen == .success) {
+            detailMessage = self.response?.themeResources?.passPurchaseSuccessMsg ?? ""
+            detailMessage =   detailMessage.replacingOccurrences(of:"<<OFFER_TITLE>>" , with: offerTitle)
+        } else {
+            detailMessage = self.response?.themeResources?.ticketPurchaseSuccessMsg ?? ""
+            detailMessage =   detailMessage.replacingOccurrences(of:"<<OFFER_TITLE>>" , with: offerTitle)
+        }
+        detailLabel.text = detailMessage
         
         
     }

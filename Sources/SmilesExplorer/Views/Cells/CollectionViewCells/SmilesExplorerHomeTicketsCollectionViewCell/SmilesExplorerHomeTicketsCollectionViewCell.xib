@@ -11,9 +11,6 @@
         <array key="CircularXXTT-Bold.ttf">
             <string>CircularXXTT-Bold</string>
         </array>
-        <array key="CircularXXTT-Book.ttf">
-            <string>CircularXXTT-Book</string>
-        </array>
         <array key="CircularXXTT-Medium.ttf">
             <string>CircularXXTT-Medium</string>
         </array>
@@ -49,18 +46,19 @@
                                     <constraint firstItem="KFj-hq-hQ8" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="top" id="gxr-37-dTR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                <rect key="frame" x="12" y="76" width="72" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2" customClass="UILocalizableLabel" customModule="SmilesUtilities">
+                                <rect key="frame" x="12" y="76" width="72" height="20"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-rM-4ra" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                <rect key="frame" x="12" y="96" width="72" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqB-RH-Xo8" customClass="UILocalizableLabel" customModule="SmilesUtilities">
+                                <rect key="frame" x="12" y="98" width="72" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="LGR-mm-0A6"/>
+                                    <constraint firstAttribute="height" constant="14" id="hd7-Q5-9Ms"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="CircularXXTT-Book" family="CircularXX TT" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="CircularXXTT-Bold" family="CircularXX TT" pointSize="11"/>
                                 <color key="textColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -77,17 +75,17 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="cr4-rM-4ra" secondAttribute="trailing" constant="12" id="1OU-kA-Ozk"/>
                             <constraint firstAttribute="bottom" secondItem="tzb-Fw-jdT" secondAttribute="bottom" id="8uV-Rz-x1X"/>
-                            <constraint firstItem="cr4-rM-4ra" firstAttribute="top" secondItem="77D-37-DM2" secondAttribute="bottom" constant="4" id="DmD-Ao-z14"/>
+                            <constraint firstItem="OqB-RH-Xo8" firstAttribute="leading" secondItem="77D-37-DM2" secondAttribute="leading" id="Ns2-U7-dXt"/>
                             <constraint firstItem="77D-37-DM2" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="SH1-qt-r6K"/>
                             <constraint firstItem="g2P-iu-Jfk" firstAttribute="centerX" secondItem="vaJ-hy-6H4" secondAttribute="centerX" id="ckw-q0-t2k"/>
                             <constraint firstAttribute="trailing" secondItem="tzb-Fw-jdT" secondAttribute="trailing" constant="12" id="dcV-KS-Oka"/>
-                            <constraint firstItem="cr4-rM-4ra" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="fEY-sL-PwQ"/>
-                            <constraint firstItem="tzb-Fw-jdT" firstAttribute="top" secondItem="cr4-rM-4ra" secondAttribute="bottom" constant="4" id="kr9-Q2-yKg"/>
+                            <constraint firstItem="OqB-RH-Xo8" firstAttribute="trailing" secondItem="77D-37-DM2" secondAttribute="trailing" id="eaH-Vo-ovZ"/>
+                            <constraint firstItem="tzb-Fw-jdT" firstAttribute="top" secondItem="OqB-RH-Xo8" secondAttribute="bottom" constant="2" id="i6b-In-IEH"/>
                             <constraint firstItem="tzb-Fw-jdT" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="ktx-9g-5GC"/>
                             <constraint firstAttribute="trailing" secondItem="77D-37-DM2" secondAttribute="trailing" constant="12" id="lhc-Oc-13B"/>
                             <constraint firstItem="77D-37-DM2" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="bottom" constant="4" id="n0N-d4-e2F"/>
+                            <constraint firstItem="OqB-RH-Xo8" firstAttribute="top" secondItem="77D-37-DM2" secondAttribute="bottom" constant="2" id="wQc-R0-UdM"/>
                             <constraint firstItem="g2P-iu-Jfk" firstAttribute="top" secondItem="vaJ-hy-6H4" secondAttribute="top" id="yqH-EQ-paM"/>
                         </constraints>
                     </view>
@@ -106,13 +104,14 @@
                 <outlet property="brandLogoImageView" destination="KFj-hq-hQ8" id="uNe-gM-i5Z"/>
                 <outlet property="brandTitleLabel" destination="77D-37-DM2" id="ZfV-yw-x8I"/>
                 <outlet property="imageContainerView" destination="g2P-iu-Jfk" id="cIn-rd-00h"/>
-                <outlet property="typeLabel" destination="cr4-rM-4ra" id="i0d-1m-JHH"/>
+                <outlet property="typeLabel" destination="OqB-RH-Xo8" id="3QK-fN-pIe"/>
             </connections>
             <point key="canvasLocation" x="82.44274809160305" y="21.126760563380284"/>
         </collectionViewCell>
     </objects>
     <designables>
         <designable name="77D-37-DM2">
+<<<<<<< HEAD
             <size key="intrinsicContentSize" width="71.666666666666671" height="16.333333333333332"/>
         </designable>
         <designable name="cr4-rM-4ra">
@@ -120,6 +119,15 @@
         </designable>
         <designable name="tzb-Fw-jdT">
             <size key="intrinsicContentSize" width="43" height="13"/>
+=======
+            <size key="intrinsicContentSize" width="74" height="17"/>
+        </designable>
+        <designable name="OqB-RH-Xo8">
+            <size key="intrinsicContentSize" width="26.333333333333332" height="13.333333333333334"/>
+        </designable>
+        <designable name="tzb-Fw-jdT">
+            <size key="intrinsicContentSize" width="45" height="13.333333333333334"/>
+>>>>>>> 223fc23bb4b34518c5ed1d3d7a9b82be268b1f5a
         </designable>
     </designables>
     <resources>

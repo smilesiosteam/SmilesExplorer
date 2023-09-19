@@ -17,16 +17,15 @@ public final class SmilesExplorerRouter: NSObject {
     
     private override init() {}
     
-    public func pushOffersVC(navVC:UINavigationController, delegate: SmilesExplorerHomeDelegate, onSkip: @escaping ()->Void){
+    public func pushOffersVC(navVC:UINavigationController, delegate: SmilesExplorerHomeDelegate){
         let vc = SmilesExplorerOffersViewController()
-        vc.onSkip = onSkip
         vc.delegate = delegate
         navVC.pushViewController(vc, animated: true)
     }
  
     
-    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?, onGoToExplorer:(()->Void)?) {
-        let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,transactionId: transactionId,onContinue: onContinue, onGoToExplorer: onGoToExplorer)
+    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,offerTitle: String ,onContinue:((String?) -> Void)?, onGoToExplorer:(()->Void)?) {
+        let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,transactionId: transactionId, offerTitle: offerTitle,onContinue: onContinue, onGoToExplorer: onGoToExplorer)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
     
@@ -43,8 +42,23 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     
+    func pushSmilesExplorerSortingVC(navVC: UINavigationController) {
+        let subVC = UIStoryboard(name: "SmilesExplorerSortingVC", bundle: .module).instantiateViewController(withIdentifier: "SmilesExplorerSortingVC")
+        navVC.present(subVC)
+    }
+    
+    
+    func pushSmilesExplorerOffersFiltersVC(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate?) {
+        let subVC = SmilesExplorerOffersFiltersVC()
+        subVC.homeDelegate = delegate
+        navVC?.pushViewController(subVC, animated: true)
+        
+    }
+    
+    
     public func showPickTicketPop(viewcontroller: UIViewController,delegate:SmilesExplorerHomeDelegate?)  {
         let picTicketPopUp = SmilesExplorerPickTicketPopUp()
+        picTicketPopUp.modalPresentationStyle = .overFullScreen
         picTicketPopUp.paymentDelegate = delegate
         viewcontroller.present(picTicketPopUp)
     }
@@ -73,4 +87,12 @@ public final class SmilesExplorerRouter: NSObject {
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
 
+}
+
+
+public class CustomPresentationController: UIPresentationController {
+    public override var frameOfPresentedViewInContainerView: CGRect {
+        // Customize the frame here as per your requirements
+        return CGRect(x: 20, y: 100, width:UIScreen.main.bounds.width, height: 300)
+    }
 }

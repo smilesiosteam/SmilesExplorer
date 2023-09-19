@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SmilesOffers
+
 public enum SmilesExplorerHomeNavigationType {
     case payment, withTextPromo, withQRPromo, freeTicket
 }
@@ -13,6 +15,12 @@ public enum SmilesExplorerHomeNavigationType {
 public protocol SmilesExplorerHomeDelegate {
     
     func proceedToPayment(params: SmilesExplorerPaymentParams, navigationType:SmilesExplorerHomeNavigationType)
-
+    func navigateToFiltersVC(smilesExplorerViewModel: SmilesExplorerHomeUpgradeViewModel?)
     func handleDeepLinkRedirection(redirectionUrl: String)
+    
+    func navigateToGlobalSearch()
+    func navigateToLocation()
+    func navigateToRewardPoint(personalizationEventSource: String?)
+    func proceedToOfferDetails(offer: OfferDO?)
+    func navigateToExplorerHome()
 }

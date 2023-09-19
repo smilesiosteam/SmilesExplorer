@@ -71,7 +71,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
         
         case fetchBogoOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchBogoOffersDidFail(error: Error)
-        
+        case updateHeaderView
         case updateWishlistStatusDidSucceed(response: WishListResponseModel)
         
         case fetchRestaurantListDidSucceed(response: GetRestaurantListingDOResponse)

@@ -37,7 +37,6 @@ class SmilesExplorerOffersViewController: UIViewController {
     var currentPage = 1
     var isLoading = false
     var hasMoreData = true
-    var onSkip = {}
     // MARK: - ACTIONS -
 
     
@@ -49,7 +48,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     }
     
     @IBAction func skipPressed(_ sender: UIButton) {
-        onSkip()
+        delegate?.navigateToExplorerHome()
     }
     
     // MARK: - METHODS -

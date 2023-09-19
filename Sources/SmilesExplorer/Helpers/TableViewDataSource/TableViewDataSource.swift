@@ -75,6 +75,25 @@ extension TableViewDataSource where Model == ExplorerOfferResponse {
 }
 
 extension TableViewDataSource where Model == ExplorerOfferResponse {
+    static func make(forBogoHomeOffers collectionsObject: ExplorerOfferResponse,
+                     reuseIdentifier: String = "SmilesExplorerHomeDealsAndOffersTVC", data: String, isDummy: Bool = false, completion:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
+            reuseIdentifier: reuseIdentifier,
+            data : data,
+            isDummy:isDummy
+        ) { (offer, cell, data, indexPath) in
+            guard let cell = cell as? SmilesExplorerHomeDealsAndOffersTVC else {return}
+            cell.collectionsData = offer.offers
+            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.callBack = { offer in
+                completion?(offer)
+            }
+        }
+    }
+}
+
+extension TableViewDataSource where Model == ExplorerOfferResponse {
     static func make(forStories collectionsObject: ExplorerOfferResponse,
                      reuseIdentifier: String = "SmilesExplorerStoriesTVC", data : String, isDummy:Bool = false, onClick:((ExplorerOffer) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
@@ -125,7 +144,8 @@ extension TableViewDataSource where Model == OfferDO {
             guard let cell = cell as? RestaurantsRevampTableViewCell else { return }
             cell.configureCell(with: offer)
             cell.offerCellType = offerCellType
-            cell.setBackGroundColor(color: UIColor(hexString: data))
+            cell.selectionStyle = .none
+//            cell.setBackGroundColor(color: UIColor(hexString: data))
             cell.favoriteCallback = { isFavorite, offerId in
                 completion?(isFavorite, offerId, indexPath)
             }

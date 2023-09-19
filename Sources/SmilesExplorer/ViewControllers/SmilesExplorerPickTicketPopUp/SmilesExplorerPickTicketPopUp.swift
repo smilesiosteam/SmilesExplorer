@@ -46,6 +46,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     //MARK: - View Controller Lifecycle -
     public override func viewDidLoad() {
         super.viewDidLoad()
+        SmilesLoader.show(on: self.view)
         styleFontAndTextColor()
         setupUI()
         self.bindMemberShip(to: self.viewModelMenberShip)
@@ -101,8 +102,10 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
                     self?.isLoading = false
                     self?.currentPage += 1
                     self?.ticketsCollectionView.reloadData()
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 case .getSmilesExplorerTickesDidFail(error: let error):
                     debugPrint(error.localizedDescription)
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 }
             }.store(in: &cancellables)
     }
@@ -114,10 +117,11 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
                 switch event {
                 case .fetchSubscriptionInfoDidSucceed(response: let response):
                     self?.responseMemberShip = response
-                    
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     
                 case .fetchSubscriptionInfoDidFail(error: let error):
                     debugPrint(error.localizedDescription)
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 }
             }.store(in: &cancellables)
     }
@@ -164,9 +168,20 @@ extension SmilesExplorerPickTicketPopUp: UICollectionViewDelegate, UICollectionV
         
         if let data = self.response?.offers?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerHomeTicketsCollectionViewCell", for: indexPath) as? SmilesExplorerHomeTicketsCollectionViewCell else {return UICollectionViewCell()}
-            cell.brandTitleLabel.text = data.offerTitle
-            cell.typeLabel.text = AppCommonMethods.languageIsArabic() ?  data.offerTypeAr:data.offerType
-            cell.brandLogoImageView.setImageWithUrlString(data.imageURL ?? "")
+            
+            
+            cell.brandTitleLabel.localizedString = data.offerTitle ?? ""
+            
+            cell.brandLogoImageView.setImageWithUrlString(data.imageURL.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in
+                if let image = image {
+                    cell.brandLogoImageView.image = image
+                }
+            }
+            
+            cell.amountLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+            cell.brandTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+            cell.typeLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+            cell.typeLabel.localizedString = (AppCommonMethods.languageIsArabic() ?  data.offerTypeAr:data.offerType) ?? ""
             let aed = "AED".localizedString
             cell.amountLabel.attributedText = "\(String(describing: data.originalDirhamValue ?? "")) \(aed)".strikoutString(strikeOutColor: .appGreyColor_128)
             return cell

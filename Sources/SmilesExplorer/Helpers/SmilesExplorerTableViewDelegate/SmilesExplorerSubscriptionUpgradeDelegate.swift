@@ -16,6 +16,28 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if let secID = SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier ?? ""){
+            switch secID {
+            case .freetickets:
+                SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!,delegate: self.delegate)
+                break
+            case .upgradeBanner:
+                self.onUpgradeBannerButtonClick()
+            case .stories:
+                break
+            case .offerListing:
+                if let dataSource = ((self.dataSource?.dataSources?[safe: indexPath.section] as? TableViewDataSource<OfferDO>)) {
+                    if !dataSource.isDummy {
+                        let offer = dataSource.models?[safe: indexPath.row] as? OfferDO
+                        self.delegate?.proceedToOfferDetails(offer: offer)
+                    }
+                }
+                break
+            case .topPlaceholder:
+                break
+            }
+            
+        }
         
         
     }
@@ -54,28 +76,34 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         filtersCell.callBack = { [weak self] filterData in
                             if filterData.tag == RestaurantFiltersType.filters.rawValue {
                                 
-                                self?.redirectToRestaurantFilters()
+//                                self?.redirectToRestaurantFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
-                                
+//                                self?.redirectToSortingVC()
                             } else {
                                 // Remove and saved filters
-                                self?.input.send(.removeAndSaveFilters(filter: filterData))
+//                                self?.input.send(.removeAndSaveFilters(filter: filterData))
                             }
                         }
                         
                         if let section = self.smilesExplorerSections?.sectionDetails?[safe: section] {
                             if section.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue {
                                 filtersCell.stackViewTopConstraint.constant = 20
+                                
+                                filtersCell.parentView.layer.cornerRadius = 24
+                                filtersCell.parentView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+                                filtersCell.parentView.backgroundColor = .white
                             }
                         }
-                        
+                        filtersCell.backgroundColor = UIColor(red: 245, green: 247, blue: 249)
                         self.configureHeaderForShimmer(section: section, headerView: filtersCell)
                         return filtersCell
                     }else{
                         if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
                             let header = SmilesExplorerHeader()
-                            header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
+                            header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section, isPostSub: true)
+                            header.bgMainView.backgroundColor = .appRevampPurpleMainColor
+                            header.backgroundColor = .appRevampPurpleMainColor
                             configureHeaderForShimmer(section: section, headerView: header)
                             return header
                         }
@@ -133,9 +161,21 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         }
         
     }
-    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        adjustTopHeader(scrollView)
+//        if let indexPath = tableView.indexPath(for: tableView.visibleCells.first ?? UITableViewCell()) {
+//            let backgroundColor = self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.backgroundColor
+//            if let parentViewController = self.parent as? CategoryContainerViewController {
+//                if !parentViewController.shouldAddBillsController {
+//                    parentViewController.topHeaderView.setBackgroundColorForCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
+//                } else {
+//                    parentViewController.topHeaderView.setBackgroundColorForTabsCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
+//                }
+//            }
+//        }
+    }
 //    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
+//
 //        var tableViewHeight = tableView.frame.height
 //        if topHeaderView.alpha == 0 {
 //            tableViewHeight -= 153
@@ -164,12 +204,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
 //                self.topHeaderView.alpha = 1
 //                self.tableViewTopSpaceToHeaderView.priority = .defaultHigh
 //                self.tableViewTopSpaceToSuperView.priority = .defaultLow
-//                
+//
 //                self.tableViewTopSpaceToSuperView.constant = 228
 //                self.view.layoutIfNeeded()
 //            })
 //        }
-//        
+//
 //    }
     
 }
