@@ -76,13 +76,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     var restaurants = [Restaurant]()
 
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?) {
+    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?) {
         self.personalizationEventSource =  personalizationEventSource
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
         self.isUserSubscribed = isUserSubscribed
         self.subscriptionType = subscriptionType
         self.voucherCode = voucherCode
+        self.delegate = delegate
         self.rewardPointIcon = rewardPointIcon
         self.rewardPoint = rewardPoint
         super.init(nibName: "SmilesExplorerSubscriptionUpgradeViewController", bundle: Bundle.module)
@@ -96,20 +97,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         
         setupTableView()
         bind(to: viewModel)
-//        if subscriptionType == .platinum {
-            setupHeaderView(headerTitle: nil)
-//        }else{
-//            setUpNavigationBar()
-//        }
+        setupHeaderView(headerTitle: nil)
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
-
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-
         
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
-        if self.subscriptionType == .gold {
+        if self.subscriptionType == .platinum {
             self.upgradeNowButton.isHidden = true
         }
 
@@ -297,6 +292,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     
     public func segmentRightBtnTapped(index: Int) {
         updateView(index: index)
+    }
+    
+    @IBAction func upgradeTapped(_ sender: Any){
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self, delegate: self.delegate)
     }
     
     public func rewardPointsBtnTapped() {

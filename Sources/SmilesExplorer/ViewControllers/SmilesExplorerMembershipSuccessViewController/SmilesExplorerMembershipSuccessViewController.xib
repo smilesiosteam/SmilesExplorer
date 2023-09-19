@@ -94,6 +94,9 @@
                     <state key="normal">
                         <color key="titleColor" red="0.47450980390000003" green="0.49019607840000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </state>
+                    <connections>
+                        <action selector="viewFreePassDidTab:" destination="-1" eventType="touchUpInside" id="OV1-Ao-7l6"/>
+                    </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eb-4b-tbv" customClass="UICustomButton" customModule="SmilesUtilities">
                     <rect key="frame" x="115" y="744" width="163" height="48"/>
