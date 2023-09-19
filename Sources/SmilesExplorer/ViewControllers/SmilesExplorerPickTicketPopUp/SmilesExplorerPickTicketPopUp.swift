@@ -46,6 +46,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     //MARK: - View Controller Lifecycle -
     public override func viewDidLoad() {
         super.viewDidLoad()
+        SmilesLoader.show(on: self.view)
         styleFontAndTextColor()
         setupUI()
         self.bindMemberShip(to: self.viewModelMenberShip)
@@ -101,8 +102,10 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
                     self?.isLoading = false
                     self?.currentPage += 1
                     self?.ticketsCollectionView.reloadData()
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 case .getSmilesExplorerTickesDidFail(error: let error):
                     debugPrint(error.localizedDescription)
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 }
             }.store(in: &cancellables)
     }
@@ -114,10 +117,11 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
                 switch event {
                 case .fetchSubscriptionInfoDidSucceed(response: let response):
                     self?.responseMemberShip = response
-                    
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     
                 case .fetchSubscriptionInfoDidFail(error: let error):
                     debugPrint(error.localizedDescription)
+                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                 }
             }.store(in: &cancellables)
     }

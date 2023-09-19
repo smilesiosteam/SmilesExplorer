@@ -23,8 +23,8 @@ public final class SmilesExplorerRouter: NSObject {
     }
  
     
-    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
-        let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,transactionId: transactionId,onContinue: onContinue)
+    public func pushSmilesExplorerMembershipSuccessVC(navVC: UINavigationController?,sourceScreen: SourceScreen = .success,transactionId: String?,offerTitle: String ,onContinue:((String?) -> Void)?) {
+        let smilesExplorerMembershipSuccess = SmilesExplorerMembershipSuccessViewController(sourceScreen,transactionId: transactionId, offerTitle: offerTitle,onContinue: onContinue)
         navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
     }
     
