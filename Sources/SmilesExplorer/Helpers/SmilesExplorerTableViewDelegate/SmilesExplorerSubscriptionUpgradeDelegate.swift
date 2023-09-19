@@ -16,13 +16,29 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section] {
-            if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue {
-                self.onUpgradeBannerButtonClick()
-            } else if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue {
+        if let secID = SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier ?? ""){
+            switch secID {
+            case .freetickets:
                 SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!)
+                break
+            case .upgradeBanner:
+                self.onUpgradeBannerButtonClick()
+            case .stories:
+                break
+            case .offerListing:
+                if let dataSource = ((self.dataSource?.dataSources?[safe: indexPath.section] as? TableViewDataSource<OfferDO>)) {
+                    if !dataSource.isDummy {
+                        let offer = dataSource.models?[safe: indexPath.row] as? OfferDO
+                        self.delegate?.proceedToOfferDetails(offer: offer)
+                    }
+                }
+                break
+            case .topPlaceholder:
+                break
             }
+            
         }
+        
         
     }
     

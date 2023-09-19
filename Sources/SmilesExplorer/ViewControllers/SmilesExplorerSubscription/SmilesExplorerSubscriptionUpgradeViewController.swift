@@ -96,20 +96,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         
         setupTableView()
         bind(to: viewModel)
-//        if subscriptionType == .platinum {
-            setupHeaderView(headerTitle: nil)
-//        }else{
-//            setUpNavigationBar()
-//        }
+        setupHeaderView(headerTitle: nil)
         SmilesLoader.show(on: self.view)
         getSections(isSubscribed: true)
-
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-
         
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
-        if self.subscriptionType == .gold {
+        if self.subscriptionType == .platinum {
             self.upgradeNowButton.isHidden = true
         }
 
