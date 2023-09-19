@@ -76,13 +76,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     var restaurants = [Restaurant]()
 
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?) {
+    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?) {
         self.personalizationEventSource =  personalizationEventSource
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
         self.isUserSubscribed = isUserSubscribed
         self.subscriptionType = subscriptionType
         self.voucherCode = voucherCode
+        self.delegate = delegate
         self.rewardPointIcon = rewardPointIcon
         self.rewardPoint = rewardPoint
         super.init(nibName: "SmilesExplorerSubscriptionUpgradeViewController", bundle: Bundle.module)
@@ -113,15 +114,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         
-        if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
-//            self.input.send(.emptyRestaurantList)
-//            self.callFoodOrderServices()
-            selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        }
+//        if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
+////            self.input.send(.emptyRestaurantList)
+////            self.callFoodOrderServices()
+//            selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
+//        }
         
     }
     // MARK: - Helping Functions
-    
     func setupTableView() {
         self.tableView.sectionFooterHeight = .leastNormalMagnitude
         if #available(iOS 15.0, *) {
@@ -257,9 +257,9 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         //self?.adjustTopHeader(scrollView)
 
     }
-    fileprivate func configureFiltersData() {
-//        showShimmer(identifier: .RESTAURANTLISTING)
-//        self.input.send(.getRestaurantList(pageNo: 0, filtersList: self.savedFilters, selectedSortingTableViewCellModel: self.viewModel.selectedSortingTableViewCellModel))
+    public func configureFiltersData() {
+       // showShimmer(identifier: .offers)
+        self.input.send(.getRestaurantList(pageNo: 0, filtersList: self.savedFilters, selectedSortingTableViewCellModel: self.viewModel.selectedSortingTableViewCellModel))
     }
 }
 
@@ -292,6 +292,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     
     public func segmentRightBtnTapped(index: Int) {
         updateView(index: index)
+    }
+    
+    @IBAction func upgradeTapped(_ sender: Any){
+        SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self, delegate: self.delegate)
     }
     
     public func rewardPointsBtnTapped() {
@@ -414,7 +418,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                                         self?.filtersSavedList = savedFilters
                                         self?.offers.removeAll()
                                         self?.configureDataSource()
-//                                        self?.configureFiltersData()
+                                        self?.configureFiltersData()
                     break
                     
                 case .fetchSavedFiltersAfterSuccess(let filtersSavedList):
@@ -574,10 +578,11 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     }
 }
 
-
 extension SmilesExplorerSubscriptionUpgradeViewController {
+    
     func redirectToRestaurantFilters() {
-        SmilesExplorerRouter.shared.pushSmilesExplorerOffersFiltersVC(navVC: self.navigationController, delegate: self.delegate)
+        self.delegate?.navigateToFiltersVC(smilesExplorerViewModel: self.viewModel)
+      //  SmilesExplorerRouter.shared.pushSmilesExplorerOffersFiltersVC(navVC: self.navigationController, delegate: self.delegate)
         
     }
     

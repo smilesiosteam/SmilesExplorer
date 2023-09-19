@@ -32,6 +32,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     // MARK: - Properties -
     var transactionId: String?
     private var onContinue:((String?) -> Void)?
+    private var onGoToExplorer:(() -> Void)?
    // private var model: SmilesExplorerSubscriptionInfoResponse?
     
     lazy  var backButton: UIButton = UIButton(type: .custom)
@@ -56,8 +57,9 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(_ sourceScreen: SourceScreen,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?) {
+    init(_ sourceScreen: SourceScreen,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
         self.transactionId = transactionId
+        self.onGoToExplorer = onGoToExplorer
         self.onContinue = onContinue
         self.sourceScreen = sourceScreen
         self.offerTitle = offerTitle
@@ -217,9 +219,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         self.onContinue?(nil)
     }
     @IBAction func exploreButtonDidTab(_ sender: UIButton) {
-        if let navController = self.navigationController {
-            SmilesExplorerRouter.shared.popToSmilesExplorerHomeViewController(navVC: navController)
-        }
+        self.onGoToExplorer?()
     }
     @objc func onClickBack() {
         self.navigationController?.popViewController(animated: true)

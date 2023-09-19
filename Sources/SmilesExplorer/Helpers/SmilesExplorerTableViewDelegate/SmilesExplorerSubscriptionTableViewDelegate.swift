@@ -47,12 +47,10 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
         
         footerView.promoCodeLabel.text = "EnterGiftDetails".localizedString
         footerView.onClick = {
-            guard self.membershipPicked != nil else {return}
-            self.delegate?.proceedToPayment(params: SmilesExplorerPaymentParams(lifeStyleOffer: self.membershipPicked, isComingFromSpecialOffer: false, isComingFromTreasureChest: false), navigationType: .withTextPromo)
+            self.delegate?.proceedToPayment(params: SmilesExplorerPaymentParams(lifeStyleOffer: nil, isComingFromSpecialOffer: false, isComingFromTreasureChest: false), navigationType: .withTextPromo)
         }
         footerView.onClickQR = {
-            guard self.membershipPicked != nil else {return}
-            self.delegate?.proceedToPayment(params: SmilesExplorerPaymentParams(lifeStyleOffer: self.membershipPicked, isComingFromSpecialOffer: false, isComingFromTreasureChest: false), navigationType: .withQRPromo)
+            self.delegate?.proceedToPayment(params: SmilesExplorerPaymentParams(lifeStyleOffer: nil, isComingFromSpecialOffer: false, isComingFromTreasureChest: false), navigationType: .withQRPromo)
         }
         footerView.backgroundColor = .clear
         return footerView

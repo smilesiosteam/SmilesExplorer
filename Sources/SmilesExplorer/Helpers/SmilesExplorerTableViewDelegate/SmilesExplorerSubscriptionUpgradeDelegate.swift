@@ -19,7 +19,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         if let secID = SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier ?? ""){
             switch secID {
             case .freetickets:
-                SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!)
+                SmilesExplorerRouter.shared.pushOffersVC(navVC: self.navigationController!,delegate: self.delegate!)
                 break
             case .upgradeBanner:
                 self.onUpgradeBannerButtonClick()
@@ -76,7 +76,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         filtersCell.callBack = { [weak self] filterData in
                             if filterData.tag == RestaurantFiltersType.filters.rawValue {
                                 
-//                                self?.redirectToRestaurantFilters()
+                                self?.redirectToRestaurantFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
 //                                self?.redirectToSortingVC()

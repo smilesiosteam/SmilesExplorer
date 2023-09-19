@@ -23,4 +23,6 @@ public protocol SmilesExplorerHomeDelegate {
     func navigateToRewardPoint(personalizationEventSource: String?)
     func proceedToOfferDetails(offer: OfferDO?)
     func navigateToStoriesWebView(objStory: ExplorerOffer)
+    func navigateToExplorerHome()
+
 }
