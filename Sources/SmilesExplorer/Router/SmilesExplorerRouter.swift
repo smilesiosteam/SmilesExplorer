@@ -82,10 +82,10 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     
-    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate, sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
-        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "", delegate: delegate)
-        navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
-    }
+//    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate, sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
+//        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "", delegate: delegate)
+//        navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
+//    }
 
 }
 
