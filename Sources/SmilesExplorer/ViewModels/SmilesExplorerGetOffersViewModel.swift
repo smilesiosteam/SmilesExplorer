@@ -15,7 +15,7 @@ import SmilesUtilities
 public class SmilesExplorerGetOffersViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+ public   enum Input {
         case getExclusiveOffersList(categoryId: Int?, tag: String?,page:Int = 1)
         
         case getTickets(categoryId: Int?, tag: String?,page:Int = 1)

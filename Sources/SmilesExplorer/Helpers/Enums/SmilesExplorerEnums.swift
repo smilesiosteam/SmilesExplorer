@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SectionTypeTag: String {
+public enum SectionTypeTag: String {
     case exclusiveDealsStories = "EXCLUSIVE_DEALS"
     case exclusiveDealsBogoOffers = "BOGO_OFFERS"
 }

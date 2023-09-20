@@ -32,9 +32,9 @@ public class SmilesExplorerHomeUpgradeViewModel: NSObject {
     
     public var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
     public var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
-     var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
-     var exclusiveOffersStoriesUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersStoriesViewModel.Input, Never> = .init()
-     var bogoOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetBogoOffersViewModel.Input, Never> = .init()
+   public  var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
+   public  var exclusiveOffersStoriesUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersStoriesViewModel.Input, Never> = .init()
+    public var bogoOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetBogoOffersViewModel.Input, Never> = .init()
     
     public var filtersSavedList: [RestaurantRequestWithNameFilter]?
     public var filtersList: [RestaurantRequestFilter]?
@@ -119,6 +119,10 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 self?.bind(to: self?.wishListViewModel ?? WishListViewModel())
                 self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
             case .getRestaurantList(pageNo: let pageNo, filtersList: let filtersList, selectedSortingTableViewCellModel: let selectedSortingTableViewCellModel):
+                self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
+//                self?.bind(to: self?.restaurantListModel ?? RestaurantListViewModel())
+//                let filters = self?.getSavedFilters()
+//                self?.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: pageNo, filtersList: (filtersList ?? []).isEmpty ? filters : filtersList))
                 break
                 
             }
