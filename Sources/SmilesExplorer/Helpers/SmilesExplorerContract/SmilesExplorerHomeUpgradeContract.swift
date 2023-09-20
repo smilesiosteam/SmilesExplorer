@@ -14,7 +14,7 @@ import SmilesBanners
 extension SmilesExplorerHomeUpgradeViewModel {
     
     enum Input {
-        case getSections(categoryID: Int, type: String, explorerPackageType:ExplorerPackage)
+        case getSections(categoryID: Int, type: String, explorerPackageType:ExplorerPackage,freeTicketAvailed:Bool)
         case getRewardPoints
         case getFiltersData(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?)
         case removeAndSaveFilters(filter: FiltersCollectionViewCellRevampModel)

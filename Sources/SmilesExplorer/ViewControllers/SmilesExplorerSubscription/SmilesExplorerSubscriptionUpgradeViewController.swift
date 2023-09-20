@@ -99,14 +99,18 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         bind(to: viewModel)
         setupHeaderView(headerTitle: nil)
         SmilesLoader.show(on: self.view)
-        getSections(isSubscribed: true)
+        
+        if let isUserSubscribed {
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold)
+        } else {
+            self.input.send(.getRewardPoints)
+        }
+        
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
         
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
-        if self.subscriptionType == .platinum {
-            self.upgradeNowButton.isHidden = true
-        }
+        
 
     }
     
@@ -306,8 +310,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
-    private func getSections(isSubscribed: Bool) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: self.subscriptionType ?? .platinum))
+    private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage) {
+        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: self.voucherCode != nil ? true : false))
     }
     
     
@@ -365,14 +369,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
             setupHeaderView(headerTitle: topPlaceholderSection.title)
             topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
-            
-//            if subscriptionType == .platinum {
-//                setupHeaderView(headerTitle: topPlaceholderSection.title)
-//                topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
-//            }else {
-//                setUpNavigationBar()
-//            }
         }
+        if self.subscriptionType == .platinum {self.upgradeNowButton.isHidden = true}
         homeAPICalls()
         
     }
@@ -403,9 +401,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
-                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false)
+                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold)
                     self?.subscriptionType = response.explorerPackageType
                     self?.voucherCode = response.explorerVoucherCode
+                    if response.explorerPackageType ?? .gold == .platinum {
+                        self?.upgradeNowButton.isHidden = true
+                    }
                     
                 case .fetchRewardPointsDidFail(error: let error):
                     debugPrint(error.localizedDescription)

@@ -27,7 +27,7 @@ class UpgradeBannerTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imgBanner.backgroundColor = .appRevampPurpleMainColor
-        self.imgBanner.contentMode = .scaleAspectFill
+        self.imgBanner.contentMode = .scaleToFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

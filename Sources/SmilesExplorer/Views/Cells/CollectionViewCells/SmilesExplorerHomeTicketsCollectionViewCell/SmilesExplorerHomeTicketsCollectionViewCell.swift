@@ -49,7 +49,7 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         amountLabel.attributedText = attributeString
         self.brandTitleLabel.localizedString = offer.offerTitle ?? ""
         self.typeLabel.localizedString = offer.offerType ?? ""
-        brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in
+        brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(),defaultImage: "", backgroundColor: .white) { image in
             if let image = image {
                 self.brandLogoImageView.image = image
             }
