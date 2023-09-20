@@ -17,7 +17,10 @@ public class SmilesExplorerStoriesTVC: UITableViewCell {
             self.collectionView?.reloadData()
         }
     }
-     var callBack: ((ExplorerOffer) -> ())?
+    
+    var callBack: ((ExplorerOffer) -> ())?
+    var StoriesCallBacK:((ExplorerOffer) -> ())?
+    
     public override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -72,7 +75,10 @@ extension SmilesExplorerStoriesTVC: UICollectionViewDelegate, UICollectionViewDa
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let data = collectionsData?[indexPath.row] {
             callBack?(data)
+            StoriesCallBacK?(data)
         }
+        
+        
     }
     
     

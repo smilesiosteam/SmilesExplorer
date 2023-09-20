@@ -34,7 +34,7 @@ class SmilesExplorerDealsAndOffersCollectionViewCell: UICollectionViewCell {
     func configure(offer: ExplorerOffer) {
         print(offer)
         self.brandTitleLabel.text = offer.offerTitle
-        brandLogoImageView.setImageWithUrlString(offer.imageURL.asStringOrEmpty(), backgroundColor: .white) { image in
+        brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(), backgroundColor: .white) { image in
             if let image = image {
                 self.brandLogoImageView.image = image
             }
