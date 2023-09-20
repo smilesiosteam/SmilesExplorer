@@ -123,6 +123,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
+        self.upgradeNowButton.setTitle("Upgrade Now".localizedString, for: .normal)
         
 
     }
