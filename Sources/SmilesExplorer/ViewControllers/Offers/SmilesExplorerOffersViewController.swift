@@ -142,7 +142,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     func setConfirmBtnUI(enabled:Bool){
         confirmBtn.isUserInteractionEnabled = enabled
         confirmBtn.setTitleColor(enabled ? .white : UIColor(white: 0, alpha: 0.5), for: .normal)
-        let diabledColor = #colorLiteral(red: 0.9999999404, green: 1, blue: 1, alpha: 1)
+        let diabledColor = #colorLiteral(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         confirmBtn.setBackgroundColor(enabled ? .appRevampPurpleMainColor : diabledColor, for: .normal)
     }
     
