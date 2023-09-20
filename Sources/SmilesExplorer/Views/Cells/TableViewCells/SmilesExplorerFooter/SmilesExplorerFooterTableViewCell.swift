@@ -19,7 +19,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILocalizableLabel!
     @IBOutlet weak var validityLabel: UILocalizableLabel!
     @IBOutlet weak var benefitsLable: UILocalizableLabel!
-    
+    @IBOutlet weak var getMemberShipButton: UIButton!
     @IBOutlet weak var fromLabel: UILocalizableLabel!
     // MARK: - PROPERTIES -
     var getMembership: (() -> Void)?
@@ -33,6 +33,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
     // MARK: - METHODS -
     override func awakeFromNib() {
         super.awakeFromNib()
+        getMemberShipButton.setTitle("Get membership".localizedString, for: .normal)
         topView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
         // Initialization code
     }
@@ -51,7 +52,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
 
     private func setupFooterUI(model: SectionDetailDO) {
        
-        self.explorerMembershipLabel.localizedString = model.title?.components(separatedBy: "\n").first ?? ""
+        self.explorerMembershipLabel.text = model.title?.components(separatedBy: "\n").first ?? ""
         self.fromLabel.localizedString = (model.title?.components(separatedBy: "\n").last ?? "").components(separatedBy: " ").first ?? "from"
         self.priceLabel.localizedString = (model.title?.components(separatedBy: "\n").last ?? "").components(separatedBy: "from").last ?? ""
         self.validityLabel.localizedString = model.subTitle?.components(separatedBy: "\n").first ?? ""
