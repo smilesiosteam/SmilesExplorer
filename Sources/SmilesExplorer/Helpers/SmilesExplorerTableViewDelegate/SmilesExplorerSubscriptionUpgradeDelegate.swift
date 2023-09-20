@@ -64,8 +64,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
                 if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
-                    if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue  {
-                        self.input.send(.getFiltersData(filtersSavedList: self.filtersSavedList, isFilterAllowed: 1, isSortAllowed: 1)) // Get Filters Data
+                    
+                    if (sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue) && (sectionData.isFilterAllowed != 0 || sectionData.isSortAllowed != 0) {
+                        self.input.send(.getFiltersData(filtersSavedList: self.filtersSavedList, isFilterAllowed: sectionData.isFilterAllowed, isSortAllowed: sectionData.isSortAllowed)) // Get Filters Data
                         let filtersCell = tableView.dequeueReusableCell(withIdentifier: "FiltersTableViewCell") as! FiltersTableViewCell
                         filtersCell.title.text = sectionData.title
                         filtersCell.title.setTextSpacingBy(value: -0.2)
@@ -75,14 +76,14 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         
                         filtersCell.callBack = { [weak self] filterData in
                             if filterData.tag == RestaurantFiltersType.filters.rawValue {
-                                
-                                self?.redirectToRestaurantFilters()
+                                //self?.redirectToOffersFilters()
+                                self?.redirectToFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
-//                                self?.redirectToSortingVC()
+                                // self?.redirectToSortingVC()
                             } else {
                                 // Remove and saved filters
-//                                self?.input.send(.removeAndSaveFilters(filter: filterData))
+                                self?.input.send(.removeAndSaveFilters(filter: filterData))
                             }
                         }
                         
@@ -163,53 +164,53 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         adjustTopHeader(scrollView)
-//        if let indexPath = tableView.indexPath(for: tableView.visibleCells.first ?? UITableViewCell()) {
-//            let backgroundColor = self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.backgroundColor
-//            if let parentViewController = self.parent as? CategoryContainerViewController {
-//                if !parentViewController.shouldAddBillsController {
-//                    parentViewController.topHeaderView.setBackgroundColorForCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
-//                } else {
-//                    parentViewController.topHeaderView.setBackgroundColorForTabsCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
-//                }
-//            }
-//        }
+        //        if let indexPath = tableView.indexPath(for: tableView.visibleCells.first ?? UITableViewCell()) {
+        //            let backgroundColor = self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.backgroundColor
+        //            if let parentViewController = self.parent as? CategoryContainerViewController {
+        //                if !parentViewController.shouldAddBillsController {
+        //                    parentViewController.topHeaderView.setBackgroundColorForCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
+        //                } else {
+        //                    parentViewController.topHeaderView.setBackgroundColorForTabsCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
+        //                }
+        //            }
+        //        }
     }
-//    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//        var tableViewHeight = tableView.frame.height
-//        if topHeaderView.alpha == 0 {
-//            tableViewHeight -= 153
-//        }
-//        guard scrollView.contentSize.height > tableViewHeight else { return }
-//        var compact: Bool?
-//        if scrollView.contentOffset.y > 90 {
-//           compact = true
-//        } else if scrollView.contentOffset.y < 0 {
-//            compact = false
-//        }
-//        guard let compact, compact != (topHeaderView.alpha == 0) else { return }
-//        if compact {
-//            self.setUpNavigationBar()
-////            self.setUpNavigationBar(isLightContent: false)
-//            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
-//                self.topHeaderView.alpha = 0
-//                self.tableViewTopSpaceToHeaderView.priority = .defaultLow
-//                self.tableViewTopSpaceToSuperView.priority = .defaultHigh
-//                self.tableViewTopSpaceToSuperView.constant = 100
-//                self.view.layoutIfNeeded()
-//            })
-//        } else {
-//            self.setUpNavigationBar()
-//            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
-//                self.topHeaderView.alpha = 1
-//                self.tableViewTopSpaceToHeaderView.priority = .defaultHigh
-//                self.tableViewTopSpaceToSuperView.priority = .defaultLow
-//
-//                self.tableViewTopSpaceToSuperView.constant = 228
-//                self.view.layoutIfNeeded()
-//            })
-//        }
-//
-//    }
+    //    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //
+    //        var tableViewHeight = tableView.frame.height
+    //        if topHeaderView.alpha == 0 {
+    //            tableViewHeight -= 153
+    //        }
+    //        guard scrollView.contentSize.height > tableViewHeight else { return }
+    //        var compact: Bool?
+    //        if scrollView.contentOffset.y > 90 {
+    //           compact = true
+    //        } else if scrollView.contentOffset.y < 0 {
+    //            compact = false
+    //        }
+    //        guard let compact, compact != (topHeaderView.alpha == 0) else { return }
+    //        if compact {
+    //            self.setUpNavigationBar()
+    ////            self.setUpNavigationBar(isLightContent: false)
+    //            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
+    //                self.topHeaderView.alpha = 0
+    //                self.tableViewTopSpaceToHeaderView.priority = .defaultLow
+    //                self.tableViewTopSpaceToSuperView.priority = .defaultHigh
+    //                self.tableViewTopSpaceToSuperView.constant = 100
+    //                self.view.layoutIfNeeded()
+    //            })
+    //        } else {
+    //            self.setUpNavigationBar()
+    //            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
+    //                self.topHeaderView.alpha = 1
+    //                self.tableViewTopSpaceToHeaderView.priority = .defaultHigh
+    //                self.tableViewTopSpaceToSuperView.priority = .defaultLow
+    //
+    //                self.tableViewTopSpaceToSuperView.constant = 228
+    //                self.view.layoutIfNeeded()
+    //            })
+    //        }
+    //
+    //    }
     
 }

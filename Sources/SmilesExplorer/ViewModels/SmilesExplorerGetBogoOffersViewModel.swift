@@ -18,7 +18,7 @@ import SmilesUtilities
 public class SmilesExplorerGetBogoOffersViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
-    enum Input {
+  public  enum Input {
         case getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int = 1)
     }
     
