@@ -205,7 +205,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             }
             
         }
-        self.exploreButton.titleLabel?.textColor = .appRevampFilterCountBGColor
+        self.exploreButton.titleLabel?.textColor = .appRevampPurpleMainColor
 
     }
     

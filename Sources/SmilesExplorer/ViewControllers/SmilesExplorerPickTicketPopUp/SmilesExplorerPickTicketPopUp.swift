@@ -172,7 +172,7 @@ extension SmilesExplorerPickTicketPopUp: UICollectionViewDelegate, UICollectionV
             
             cell.brandTitleLabel.localizedString = data.offerTitle ?? ""
             
-            cell.brandLogoImageView.setImageWithUrlString(data.imageURL.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in
+            cell.brandLogoImageView.setImageWithUrlString(data.partnerImage.asStringOrEmpty(),defaultImage: "Burj Khalifa - png 0", backgroundColor: .white) { image in
                 if let image = image {
                     cell.brandLogoImageView.image = image
                 }
