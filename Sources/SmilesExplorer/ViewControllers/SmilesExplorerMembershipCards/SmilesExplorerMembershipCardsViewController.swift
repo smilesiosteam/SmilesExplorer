@@ -50,6 +50,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     // MARK: - VIEW LIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnContinue.setTitle("ContinueTitle".localizedString, for: .normal)
         setUpNavigationBar()
         SmilesLoader.show(on: self.view)
         setupViews()
