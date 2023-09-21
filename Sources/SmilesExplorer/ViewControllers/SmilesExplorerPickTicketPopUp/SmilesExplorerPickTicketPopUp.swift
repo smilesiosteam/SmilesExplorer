@@ -182,8 +182,20 @@ extension SmilesExplorerPickTicketPopUp: UICollectionViewDelegate, UICollectionV
             cell.brandTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
             cell.typeLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
             cell.typeLabel.localizedString = (AppCommonMethods.languageIsArabic() ?  data.offerTypeAr:data.offerType) ?? ""
+            
             let aed = "AED".localizedString
             cell.amountLabel.attributedText = "\(String(describing: data.originalDirhamValue ?? "")) \(aed)".strikoutString(strikeOutColor: .appGreyColor_128)
+            
+            if  let price = data.dirhamValue, price != "0" && price != "0.00" {
+                cell.typeLabel.text = (data.dirhamValue ?? "") + aed
+                
+            } else {
+                cell.amountLabel.attributedText = "\(String(describing: data.originalDirhamValue ?? "")) \(aed)".strikoutString(strikeOutColor: .appGreyColor_128)
+                cell.typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
+                
+            }
+            
+            
             return cell
         }
         return UICollectionViewCell()
