@@ -48,11 +48,20 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
         amountLabel.attributedText = attributeString
         self.brandTitleLabel.localizedString = offer.offerTitle ?? ""
-        self.typeLabel.localizedString = offer.offerType ?? ""
+      //  self.typeLabel.localizedString = offer.offerType ?? ""
         brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(),defaultImage: "", backgroundColor: .white) { image in
             if let image = image {
                 self.brandLogoImageView.image = image
             }
+        }
+        
+        if  let price = offer.dirhamValue, price != "0" && price != "0.00" {
+            self.typeLabel.text = (offer.dirhamValue ?? "") + "AED".localizedString
+            
+        } else {
+           
+            self.typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
+            
         }
         
         amountLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight

@@ -101,7 +101,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         
         let locationNavBarTitle = UILabel()
         if self.sourceScreen == .freePassSuccess {
-            locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success"
+            locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success".localizedString
         } else {
             locationNavBarTitle.text = "Success".localizedString
         }
@@ -136,7 +136,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
        
         self.congratulationLabel.fontTextStyle = .smilesHeadline3
         self.detailLabel.fontTextStyle = .smilesBody3
-        self.dateORLinkButton.fontTextStyle = .smilesBody4
+        self.dateORLinkButton.fontTextStyle = .smilesBody3
         self.continueButton.fontTextStyle = .smilesHeadline4
         self.exploreButton.fontTextStyle = .smilesHeadline4
         self.detailLabel.textColor = .appDarkGrayColor
@@ -150,7 +150,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         setButtonsAndDateORLinkUI()
         
         continueButton.setTitle( "ContinueTitle".localizedString.capitalized, for: .normal)
-        self.exploreButton.setTitle("Go to explorer", for: .normal)
+        self.exploreButton.setTitle("Go to explorer".localizedString, for: .normal)
         congratulationLabel.text = self.response?.themeResources?.explorerPurchaseSuccessTitle
         if let urlStr = self.response?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
             imgView.isHidden = false
@@ -205,7 +205,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             }
             
         }
-        self.exploreButton.titleLabel?.textColor = .appRevampFilterCountBGColor
+        self.exploreButton.titleLabel?.textColor = .appRevampPurpleMainColor
 
     }
     

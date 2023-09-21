@@ -155,6 +155,7 @@
                 <outlet property="explorerMembershipLabel" destination="SMt-1f-4zs" id="d5k-7l-IaX"/>
                 <outlet property="footerBgView" destination="7X7-Cz-sXC" id="dC7-ef-NSh"/>
                 <outlet property="fromLabel" destination="7mq-mh-O7v" id="IEC-Jq-C31"/>
+                <outlet property="getMemberShipButton" destination="hBo-pN-Mls" id="wKd-fZ-Rfl"/>
                 <outlet property="priceLabel" destination="yhy-HN-LrP" id="4NA-PV-bGx"/>
                 <outlet property="subscriptionImageView" destination="b6z-ns-N2z" id="Hqh-6D-4Vd"/>
                 <outlet property="topView" destination="lAf-6h-jw8" id="qTH-Pt-YP9"/>
