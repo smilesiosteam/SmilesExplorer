@@ -107,11 +107,48 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
                             let header = SmilesExplorerHeader()
                             header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section, isPostSub: true)
-                            header.bgMainView.backgroundColor = .appRevampPurpleMainColor
-                            header.backgroundColor = .appRevampPurpleMainColor
+                            
+                            
+                            switch self.smilesExplorerSections?.sectionDetails?[safe: section]?.sectionIdentifier {
+                            case SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue:
+                                header.bgMainView.backgroundColor = .appRevampPurpleMainColor
+                                header.backgroundColor = .appRevampPurpleMainColor
+                               
+                            case SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue:
+                                header.bgMainView.backgroundColor = .appRevampPurpleMainColor
+                                header.backgroundColor = .appRevampPurpleMainColor
+                                
+                            case SmilesExplorerSubscriptionUpgradeSectionIdentifier.stories.rawValue:
+                                if let _ = self.smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue || $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue}) {
+                                    header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+                                    header.bgMainView.backgroundColor = .appRevampPurpleMainColor
+                                    header.backgroundColor = .appRevampPurpleMainColor
+                                }else{
+                                    header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+                                    header.bgMainView.backgroundColor = .white
+                                    header.backgroundColor = .white
+                                }
+                                
+                                header.mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
+                                
+                            case SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue:
+                                header.bgMainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+                                header.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+                                header.mainView.backgroundColor = .white
+                                header.mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
+                                 
+                            default:
+                                header.mainView.backgroundColor = .white
+                                
+                            }
+                            
+                            
                             configureHeaderForShimmer(section: section, headerView: header)
                             return header
                         }
+                        
+                        
+                        
                     }
                 }
             }

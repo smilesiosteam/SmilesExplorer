@@ -41,15 +41,8 @@ class SmilesExplorerHeader: UIView {
         if !isPostSub {
             subTitleLabel.localizedString = subTitle ?? ""
         }
-        if section == 2 {
-            mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
-        }
-        if let color,section == 1{
-            print(color)
-            mainView.backgroundColor = .white
-        }else {
-            mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
-        }
+        
+        
         
         subTitleLabel.isHidden = subTitle == nil
         if isPostSub {

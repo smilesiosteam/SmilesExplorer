@@ -111,12 +111,10 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         setupHeaderView(headerTitle: nil)
-//        SmilesLoader.show(on: self.view)
-        
         if let isUserSubscribed {
-            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold)
-        } else {
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != "" ? true:false)
             
+        } else {
             self.input.send(.getRewardPoints)
         }
         
@@ -339,8 +337,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
-    private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: self.voucherCode != nil ? true : false))
+    private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage,freeTicketAvailed:Bool) {
+        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed))
     }
     
     
@@ -441,7 +439,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
-                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold)
+                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold, freeTicketAvailed: response.explorerVoucherCode != "" ? true:false)
                     self?.subscriptionType = response.explorerPackageType
                     self?.voucherCode = response.explorerVoucherCode
                     if response.explorerPackageType ?? .gold == .platinum {
