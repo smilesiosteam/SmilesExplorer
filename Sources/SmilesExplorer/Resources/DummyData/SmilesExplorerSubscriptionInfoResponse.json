@@ -1,0 +1,305 @@
+{
+ "lifestyleOffers" : [
+   {
+     "subscriptionStatus" : "Subscribed",
+     "freeBogoOffer" : false,
+     "whatYouGet" : [
+       {
+         "text" : "Enjoy one free ticket of your choice"
+       },
+       {
+         "text" : "70+ exclusive discounts on iconic attractions "
+       },
+       {
+         "text" : "Free subscription to Unlimited BOGO"
+       },
+       {
+         "text" : "One time subscription"
+       }
+     ],
+     "lifeStyleLinkedOffer" : {
+       "isPromoCodeAllow" : true,
+       "title" : "Tourist Platinum",
+       "description" : "Unlock a free ticket, 70+ exclusive offers, and unlimited BOGO subscription.",
+       "offerDetails" : [
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/HRDS.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/HRDS\/Hardees",
+           "partnerTitle" : "Hardees"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/KRSP.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/KRSP\/Krispy Kreme",
+           "partnerTitle" : "Krispy Kreme"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/BBUS.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/BBUS\/Big Bus Tours (Dubai)",
+           "partnerTitle" : "Big Bus Tours (Dubai)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/BBST.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/BBST\/Big Bus Tours (Abu Dhabi)",
+           "partnerTitle" : "Big Bus Tours (Abu Dhabi)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DAUZ.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DAUZ\/Dubai Aquarium & Underwater Zoo",
+           "partnerTitle" : "Dubai Aquarium & Underwater Zoo"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DSTS.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DSTS\/Desert Safari (Dubai)",
+           "partnerTitle" : "Desert Safari (Dubai)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DTSF.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DTSF\/Desert Safari (Abu Dhabi)",
+           "partnerTitle" : "Desert Safari (Abu Dhabi)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DHCR.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DHCR\/Dhow Cruise",
+           "partnerTitle" : "Dhow Cruise"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/ATBK.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/ATBK\/At The Top Burj Khalifa",
+           "partnerTitle" : "At The Top Burj Khalifa"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/TLTC.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/TLTC\/The Lost Chambers",
+           "partnerTitle" : "The Lost Chambers"
+         }
+       ]
+     },
+     "pointsValue" : 24875,
+     "subscriptionChannel" : "SAPP",
+     "duration" : 30,
+     "monthlyPrice" : "AED 199 per month",
+     "whatYouGetText" : "• Enjoy one free ticket of your choice  •  70+ exclusive discounts on iconic attractions  • Free subscription to Unlimited BOGO • One time subscription",
+     "offerTitle" : "Tourist Platinum",
+     "subscriptionId" : "64f08ad0a26fa9030d8d690a",
+     "subscribedOfferTitle" : "Tourist Platinum",
+     "subscriptionSavings" : 0,
+     "paymentMethods" : [
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullPoints.png",
+         "paymentMethodId" : "1",
+         "title" : "Smiles points",
+         "titleAr" : "نقاط الابتسامات",
+         "paymentType" : "ONLINE",
+         "paymentTypeText" : "Online Payment",
+         "description" : "fullPoints"
+       },
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullCreditCard.png",
+         "paymentMethodId" : "2",
+         "title" : "Credit\/Debit Card",
+         "titleAr" : "بطاقة الائتمان \/ الخصم",
+         "paymentType" : "ONLINE",
+         "paymentTypeText" : "Online Payment",
+         "description" : "fullCreditCard"
+       },
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/addToBill.png",
+         "paymentMethodId" : "3",
+         "title" : "Add to bill",
+         "titleAr" : "أضف إلى الفاتورة",
+         "paymentType" : "OTHERS",
+         "paymentTypeText" : "Other Options",
+         "description" : "addToBill"
+       },
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/applePay.png",
+         "paymentMethodId" : "8",
+         "title" : "Apple Pay",
+         "titleAr" : "Apple Pay",
+         "paymentType" : "OTHERS",
+         "paymentTypeText" : "Other Options",
+         "description" : "applePay"
+       }
+     ],
+     "monthlyPriceCost" : "199",
+     "subscriptionSegment" : "smilesExplorer",
+     "whatYouGetTitle" : "Benefits",
+     "whatYouGetTextList" : [
+       "Enjoy one free ticket of your choice",
+       "70+ exclusive discounts on iconic attractions ",
+       "Free subscription to Unlimited BOGO",
+       "One time subscription"
+     ],
+     "termsAndConditions" : "xx",
+     "subscriptionAccountNumber" : "0543934888",
+     "subscriptionSavingsFactor" : 1,
+     "isSubscription" : true,
+     "voucherCode" : "RACQ0C0PUSX1",
+     "expiryDate" : "29-08-2024 20:00:00",
+     "price" : 199,
+     "subscribedSegment" : "ACTIVE",
+     "freePeriod" : false,
+     "autoRenewable" : false,
+     "fullDuration" : "30 Days",
+     "subscribeImage" : "https:\/\/www.smilesuae.ae\/images\/APP\/LIFESTYLE\/OnTheGo.png",
+     "offerId" : "SMILES_EXPLORER_PLATINUM",
+     "paymentDetails" : {
+       "subType" : "Visa",
+       "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullCreditCard.png",
+       "paymentMethodId" : "2",
+       "title" : "Credit\/Debit Card",
+       "titleAr" : "بطاقة الائتمان \/ الخصم",
+       "cardNumber" : "408565******9462",
+       "cardImg" : "https:\/\/smilesuae.ae\/images\/APP\/CREDIT_CARD\/visa.png",
+       "description" : "fullCreditCard"
+     },
+     "offerDescription" : "Unlimited free Smiles discount vouchers across the UAE.",
+     "packageType" : "platinum"
+   },
+   {
+     "whatYouGet" : [
+       {
+         "text" : "70+ exclusive discounts on iconic attractions"
+       },
+       {
+         "text" : "Free subscription to Unlimited BOGO"
+       },
+       {
+         "text" : "One time subscription"
+       }
+     ],
+     "pointsValue" : 9875,
+     "subscribedOfferTitle" : "Tourist Gold",
+     "duration" : 30,
+     "paymentMethods" : [
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullPoints.png",
+         "paymentMethodId" : "1",
+         "title" : "Smiles points",
+         "titleAr" : "نقاط الابتسامات",
+         "paymentType" : "ONLINE",
+         "paymentTypeText" : "Online Payment",
+         "description" : "fullPoints"
+       },
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullCreditCard.png",
+         "paymentMethodId" : "2",
+         "title" : "Credit\/Debit Card",
+         "titleAr" : "بطاقة الائتمان \/ الخصم",
+         "paymentType" : "ONLINE",
+         "paymentTypeText" : "Online Payment",
+         "description" : "fullCreditCard"
+       },
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/addToBill.png",
+         "paymentMethodId" : "3",
+         "title" : "Add to bill",
+         "titleAr" : "أضف إلى الفاتورة",
+         "paymentType" : "OTHERS",
+         "paymentTypeText" : "Other Options",
+         "description" : "addToBill"
+       },
+       {
+         "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/applePay.png",
+         "paymentMethodId" : "8",
+         "title" : "Apple Pay",
+         "titleAr" : "Apple Pay",
+         "paymentType" : "OTHERS",
+         "paymentTypeText" : "Other Options",
+         "description" : "applePay"
+       }
+     ],
+     "subscribeImage" : "https:\/\/www.smilesuae.ae\/images\/APP\/LIFESTYLE\/OnTheGo.png",
+     "termsAndConditions" : "xx",
+     "freeBogoOffer" : false,
+     "whatYouGetTitle" : "Benefits",
+     "offerTitle" : "Tourist Gold",
+     "subscriptionSegment" : "smilesExplorer",
+     "lifeStyleLinkedOffer" : {
+       "isPromoCodeAllow" : true,
+       "title" : "Tourist Gold",
+       "description" : "Unlock 70+ exclusive offers, and unlimited BOGO subscription.",
+       "offerDetails" : [
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/HRDS.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/HRDS\/Hardees",
+           "partnerTitle" : "Hardees"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/KRSP.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/KRSP\/Krispy Kreme",
+           "partnerTitle" : "Krispy Kreme"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/BBUS.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/BBUS\/Big Bus Tours (Dubai)",
+           "partnerTitle" : "Big Bus Tours (Dubai)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/BBST.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/BBST\/Big Bus Tours (Abu Dhabi)",
+           "partnerTitle" : "Big Bus Tours (Abu Dhabi)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DAUZ.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DAUZ\/Dubai Aquarium & Underwater Zoo",
+           "partnerTitle" : "Dubai Aquarium & Underwater Zoo"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DSTS.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DSTS\/Desert Safari (Dubai)",
+           "partnerTitle" : "Desert Safari (Dubai)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DTSF.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DTSF\/Desert Safari (Abu Dhabi)",
+           "partnerTitle" : "Desert Safari (Abu Dhabi)"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/DHCR.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/DHCR\/Dhow Cruise",
+           "partnerTitle" : "Dhow Cruise"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/ATBK.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/ATBK\/At The Top Burj Khalifa",
+           "partnerTitle" : "At The Top Burj Khalifa"
+         },
+         {
+           "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/LIST_LOGO\/TLTC.jpg?",
+           "redirectionUrl" : "smiles:\/\/partneroffers\/TLTC\/The Lost Chambers",
+           "partnerTitle" : "The Lost Chambers"
+         }
+       ]
+     },
+     "fullDuration" : "30 Days",
+     "monthlyPrice" : "AED 79 per month",
+     "whatYouGetText" : "• 70+ exclusive discounts on iconic attractions  • Free subscription to Unlimited BOGO • One time subscription",
+     "offerDescription" : "Unlimited free Smiles discount vouchers across the UAE.",
+     "monthlyPriceCost" : "79",
+     "autoRenewable" : false,
+     "packageType" : "gold",
+     "offerId" : "SMILES_EXPLORER_GOLD",
+     "price" : 79,
+     "whatYouGetTextList" : [
+       "70+ exclusive discounts on iconic attractions",
+       "Free subscription to Unlimited BOGO",
+       "One time subscription"
+     ],
+     "expiryDate" : "30-12-2142 20:00:00",
+     "isSubscription" : false
+   }
+ ],
+ "isCustomerElgibile" : true,
+ "extTransactionId" : "4330793587561",
+ "themeResources" : {
+   "explorerTopPlaceholderIcon" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/EXPLORER\/ICONS\/SmilesExplorer.png",
+   "passPurchaseSuccessMsg" : "Your Purchase of the Smiles <<OFFER_TITLE>>",
+   "explorerSubscriptionSubTitle" : "Here is what you  get with the smiles explorer",
+   "explorerPurchaseSuccessTitle" : "Congratulations",
+   "explorerPurchaseSuccessImage" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/EXPLORER\/PurchaseSuccess.png",
+   "explorerTopPlaceholderTitle" : "Smiles Explorer",
+   "explorerSubscriptionTitle" : "Pick Pass Type",
+   "ticketPurchaseSuccessMsg" : "Your Free Pass to <<OFFER_TITLE>> will now be available in Vouchers"
+ }
+}

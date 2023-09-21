@@ -33,6 +33,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
     // MARK: - METHODS -
     override func awakeFromNib() {
         super.awakeFromNib()
+        subscriptionImageView.contentMode = .scaleAspectFit
         topView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
         // Initialization code
     }
@@ -56,7 +57,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         self.priceLabel.localizedString = (model.title?.components(separatedBy: "\n").last ?? "").components(separatedBy: "from").last ?? ""
         self.validityLabel.localizedString = model.subTitle?.components(separatedBy: "\n").first ?? ""
         self.benefitsLable.localizedString = model.subTitle?.components(separatedBy: "\n\n")[1] ?? ""
-        self.footerBgView.backgroundColor = UIColor(hexString: model.backgroundColor ?? "")
+//        self.footerBgView.backgroundColor = UIColor(hexString: model.backgroundColor ?? "")
         
         explorerMembershipLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         priceLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight

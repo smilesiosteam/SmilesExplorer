@@ -19,7 +19,13 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        switch self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier {
+        case SmilesExplorerSectionIdentifier.footer.rawValue:
+            return 540
+        default:
+            return UITableView.automaticDimension
+        }
+        
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
