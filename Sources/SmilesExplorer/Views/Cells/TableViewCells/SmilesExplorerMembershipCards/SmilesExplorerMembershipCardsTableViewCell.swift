@@ -57,7 +57,7 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
 
         for (index, label) in labels.enumerated() {
             if index < texts.count {
-                label?.text = texts[index]
+                label?.text = "• " + texts[index]
             } else {
                 label?.isHidden = true
             }
@@ -68,7 +68,7 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
         
         priceLabel.text = "\(pricePkg ?? "") \("AED".localizedString)"
         cellImageView.setImageWithUrlString(data.subscribeImage ?? "")
-        
+        cellImageView.backgroundColor = .clear
         platinumExplorerLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         choiceTicketLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         exclusiveOfferLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight

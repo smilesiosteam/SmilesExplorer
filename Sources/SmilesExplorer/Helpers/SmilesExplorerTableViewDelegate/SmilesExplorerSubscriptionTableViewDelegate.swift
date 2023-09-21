@@ -19,6 +19,7 @@ extension SmilesExplorerMembershipCardsViewController: UITableViewDelegate {
             let pricePkg: String? = Int(exactly: membership.price ?? 0.0).map { String($0) }
             self.membershipPicked = membership
             self.totalValue.text = "\(pricePkg.asStringOrEmpty()) \("AED".localizedString)"
+            self.itemLabel.text = "1 " + "item"
             self.enableContinueButton(enable: true)
             
         }

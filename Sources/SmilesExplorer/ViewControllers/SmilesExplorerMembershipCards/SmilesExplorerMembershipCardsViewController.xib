@@ -15,7 +15,7 @@
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
-        <array key="Montserrat-SemiBold.ttf">
+        <array key="Montserrat-SemiBold.otf">
             <string>Montserrat-SemiBold</string>
         </array>
     </customFonts>
@@ -24,6 +24,7 @@
             <connections>
                 <outlet property="btnContinue" destination="qsn-6A-paM" id="JfO-oQ-LWa"/>
                 <outlet property="continueButtonView" destination="Xiz-wu-30I" id="jjE-Ze-7rL"/>
+                <outlet property="itemLabel" destination="4ZM-GE-xn1" id="YIo-6g-MR0"/>
                 <outlet property="pickPassTypeLabel" destination="oe6-8w-Cb8" id="65M-l6-Si9"/>
                 <outlet property="smilesExplorerLabel" destination="766-6x-fcA" id="B2t-dV-RBH"/>
                 <outlet property="tableView" destination="WrG-nQ-9ff" id="9aR-uG-4uT"/>
@@ -52,20 +53,20 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOw-6y-UkV">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZM-GE-xn1" userLabel="Total">
-                                                    <rect key="frame" x="16" y="10" width="26" height="11"/>
-                                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="9"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZM-GE-xn1" userLabel="Total">
+                                                    <rect key="frame" x="15.999999999999998" y="10" width="24.333333333333329" height="12.333333333333336"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0 AED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7T-Nz-Qae">
-                                                    <rect key="frame" x="16.000000000000004" y="23" width="52.333333333333343" height="18.333333333333329"/>
+                                                    <rect key="frame" x="16.000000000000004" y="24.333333333333371" width="52.333333333333343" height="18.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5% VAT included" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnX-yz-bUb">
-                                                    <rect key="frame" x="72.333333333333329" y="25.000000000000004" width="89.999999999999986" height="14.666666666666668"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5% VAT included" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnX-yz-bUb">
+                                                    <rect key="frame" x="72.333333333333329" y="26.333333333333375" width="89.999999999999986" height="14.666666666666668"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -90,7 +91,7 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Continue"/>
+                                                    <state key="normal" title="Buy Now"/>
                                                     <connections>
                                                         <action selector="membershipSelectPressed:" destination="-1" eventType="touchUpInside" id="NzW-u8-mib"/>
                                                     </connections>

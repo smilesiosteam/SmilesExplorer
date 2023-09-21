@@ -17,6 +17,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     //MARK: Properties
     var dataSource: SectionedTableViewDataSource?
     
+    @IBOutlet weak var itemLabel: UILabel!
     var membershipPicked:BOGODetailsResponseLifestyleOffer?
     var response: SmilesExplorerSubscriptionInfoResponse?
     private var input: PassthroughSubject<SmilesExplorerMembershipSelectionViewModel.Input, Never> = .init()
@@ -50,7 +51,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     // MARK: - VIEW LIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnContinue.setTitle("ContinueTitle".localizedString, for: .normal)
+        btnContinue.setTitle("BUY NOW".localizedString, for: .normal)
         setUpNavigationBar()
 //        SmilesLoader.show(on: self.view)
         setupViews()
@@ -83,11 +84,13 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     
     func enableContinueButton(enable: Bool) {
         if !enable {
+            itemLabel.isEnabled = false
             btnContinue.isEnabled = false
             continueButtonView.isUserInteractionEnabled = false
             continueButtonView.backgroundColor = UIColor.applightGrey
         }
         else {
+            itemLabel.isEnabled = true
             btnContinue.isEnabled = true
             continueButtonView.isUserInteractionEnabled = true
             continueButtonView.backgroundColor = UIColor.appRevampPurpleMainColor
