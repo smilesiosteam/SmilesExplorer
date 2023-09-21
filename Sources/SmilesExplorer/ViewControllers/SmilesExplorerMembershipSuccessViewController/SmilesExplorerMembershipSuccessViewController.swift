@@ -101,7 +101,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         
         let locationNavBarTitle = UILabel()
         if self.sourceScreen == .freePassSuccess {
-            locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success"
+            locationNavBarTitle.text = self.response?.themeResources?.explorerSubscriptionTitle ?? "Success".localizedString
         } else {
             locationNavBarTitle.text = "Success".localizedString
         }

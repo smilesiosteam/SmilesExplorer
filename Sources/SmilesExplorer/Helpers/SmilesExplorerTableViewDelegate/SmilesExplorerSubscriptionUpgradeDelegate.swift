@@ -44,15 +44,19 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        
-        if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section] {
-            if sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue || sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue {
-                return 150
-            }else {
-                return UITableView.automaticDimension
-            }
+        switch self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier {
+        case SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue:
+            return 134
+        case SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue:
+            return 190
+        case SmilesExplorerSubscriptionUpgradeSectionIdentifier.stories.rawValue:
+            return UITableView.automaticDimension
+            
+        case SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue:
+             return UITableView.automaticDimension
+        default:
+            return UITableView.automaticDimension
         }
-        return UITableView.automaticDimension
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

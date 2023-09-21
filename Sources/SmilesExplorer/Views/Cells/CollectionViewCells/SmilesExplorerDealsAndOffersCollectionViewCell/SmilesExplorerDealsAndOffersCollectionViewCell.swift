@@ -22,10 +22,10 @@ class SmilesExplorerDealsAndOffersCollectionViewCell: UICollectionViewCell {
     }
     //MARK: - Helper Function
     private func setupUI() {
-        self.imageContainerView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], cornerRadius: 36.0)
+        self.imageContainerView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], cornerRadius: self.imageContainerView.frame.height/2)
         imageContainerView.layer.borderWidth = 1.0
         imageContainerView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-        brandLogoImageView.layer.cornerRadius = 36.0
+        brandLogoImageView.layer.cornerRadius =  self.brandLogoImageView.frame.height/2
         self.brandTitleLabel.fontTextStyle = .smilesTitle2
         self.brandTitleLabel.textColor = .appRevampLocationTextColor
         

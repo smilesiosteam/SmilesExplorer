@@ -55,7 +55,6 @@ public class SmilesExplorerHomeViewController: UIViewController {
     // MARK: - METHODS -
     public override func viewDidLoad() {
         super.viewDidLoad()
-        SmilesLoader.show(on: self.view)
         setupViews()
     }
     
@@ -239,12 +238,21 @@ extension SmilesExplorerHomeViewController {
                 case .footer:
                     configureFooterSection()
                 case .tickets:
+                    if let response = ExplorerOfferResponse.fromModuleFile() {
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
+                    }
                     self.input.send(.getTickets(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .exclusiveDeals:
+                    if let response = ExplorerOfferResponse.fromModuleFile() {
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoHomeOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
+                    }
                     self.input.send(.exclusiveDeals(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .bogoOffers:
+                    if let response = ExplorerOfferResponse.fromModuleFile() {
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoHomeOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
+                    }
                     self.input.send(.getBogo(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .topPlaceholder:
@@ -323,7 +331,7 @@ extension SmilesExplorerHomeViewController {
             }
         } else {
             if self.tickets.isEmpty {
-                self.configureHideSection(for: .exclusiveDeals, dataSource: ExplorerOffer.self)
+                self.configureHideSection(for: .tickets, dataSource: ExplorerOffer.self)
             }
         }
     }
@@ -332,7 +340,7 @@ extension SmilesExplorerHomeViewController {
     fileprivate func configureBogoOffers(with exclusiveOffersResponse: ExplorerOfferResponse) {
         self.offersListing = exclusiveOffersResponse
         self.bogoOffer.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-//        let offers = getAllOffers(exclusiveOffersResponse: exclusiveOffersResponse)
+
         if !bogoOffer.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .bogoOffers) {
                 self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forBogoHomeOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in

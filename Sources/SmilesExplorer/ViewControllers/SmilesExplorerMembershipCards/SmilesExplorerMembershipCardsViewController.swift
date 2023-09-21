@@ -52,7 +52,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         super.viewDidLoad()
         btnContinue.setTitle("ContinueTitle".localizedString, for: .normal)
         setUpNavigationBar()
-        SmilesLoader.show(on: self.view)
+//        SmilesLoader.show(on: self.view)
         setupViews()
     }
     
@@ -71,6 +71,11 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         
         setupTableView()
         bind(to: viewModel)
+        self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
+        if let response = SmilesExplorerSubscriptionInfoResponse.fromModuleFile() {
+            self.dataSource?.dataSources?[0] = TableViewDataSource.make(forSubscriptions: response.lifestyleOffers ?? [], data: "#FFFFFF", isDummy: true)
+        }
+        configureDataSource()
         input.send(.getSubscriptionInfo())
         enableContinueButton(enable: false)
         

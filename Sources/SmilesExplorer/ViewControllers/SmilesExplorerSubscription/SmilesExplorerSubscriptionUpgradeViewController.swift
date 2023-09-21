@@ -111,11 +111,12 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         setupHeaderView(headerTitle: nil)
-        SmilesLoader.show(on: self.view)
+//        SmilesLoader.show(on: self.view)
         
         if let isUserSubscribed {
             getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold)
         } else {
+            
             self.input.send(.getRewardPoints)
         }
         
@@ -371,11 +372,19 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     }
                     break
                 case .stories:
-                    configureHeaderSection()
+                    
+                    if let response = ExplorerOfferResponse.fromModuleFile() {
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forStories: response, data:"#FFFFFF", isDummy: true, onClick:nil)
+                    }
+                    
                     self.input.send(.getExclusiveDealsStories(categoryId: self.categoryId, tag: .exclusiveDealsStories, pageNo: 1))
                     
                     break
                 case .offerListing:
+                    
+                    if let response = OfferDO.fromModuleFile() {
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoOffers: [response], data:"#FFFFFF", isDummy: true, completion:nil)
+                    }
                     self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1))
                     break
                     
@@ -394,11 +403,14 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
             self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: sectionDetailsArray.count))
         }
         
+        
+        
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
             setupHeaderView(headerTitle: topPlaceholderSection.title)
             topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
         }
         if self.subscriptionType == .platinum {self.upgradeNowButton.isHidden = true}
+        self.configureDataSource()
         homeAPICalls()
         
     }
@@ -505,10 +517,6 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         if let stories = exclusiveOffersResponse.offers, !stories.isEmpty {
             if let storiesIndex = getSectionIndex(for: .stories) {
                 self.dataSource?.dataSources?[storiesIndex] = TableViewDataSource.make(forStories: exclusiveOffersResponse, data: self.smilesExplorerSections?.sectionDetails?[storiesIndex].backgroundColor ?? "#FFFFFF", onClick: { [weak self] story in
-//                    if var stories = ((self?.dataSource?.dataSources?[safe: storiesIndex] as? TableViewDataSource<Stories>)?.models)?.first {
-//                        print(stories,"Stories tapped")
-//                        
-//                    }
                     self?.delegate?.navigateToStoriesWebView(objStory: story)
                 })
                 self.configureDataSource()

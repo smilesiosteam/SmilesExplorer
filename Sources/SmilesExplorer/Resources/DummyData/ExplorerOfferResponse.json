@@ -1,0 +1,44 @@
+{
+ "offers" : [
+     {
+       "cinemaOfferFlag" : false,
+       "offerDescription" : "------",
+       "dirhamValue" : "------",
+       "categoryOrder" : 2,
+       "offerTypeAr" : "------",
+       "smileyPointsUrl" : "------",
+       "recommendationModel" : "------",
+       "offerTitle" : "------",
+       "originalPointsValue" : "------",
+       "imageURL" : "------",
+       "offerId" : "------",
+       "offerType" : "------",
+       "isWishlisted" : false,
+       "originalDirhamValue" : "------",
+       "redirectionUrL" : "------",
+       "partnerImage" : "------",
+       "pointsValue" : "------"
+     },
+   {
+     "cinemaOfferFlag" : false,
+     "offerDescription" : "------",
+     "dirhamValue" : "------",
+     "categoryOrder" : 2,
+     "offerTypeAr" : "------",
+     "smileyPointsUrl" : "------",
+     "recommendationModel" : "------",
+     "offerTitle" : "------",
+     "originalPointsValue" : "------",
+     "imageURL" : "------",
+     "offerId" : "------",
+     "offerType" : "------",
+     "isWishlisted" : false,
+     "originalDirhamValue" : "------",
+     "redirectionUrL" : "------",
+     "partnerImage" : "------",
+     "pointsValue" : "------"
+   }
+ ],
+ "offersCount" : 2,
+ "extTransactionId" : "------"
+}

@@ -51,7 +51,7 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
     }
     
     func configureCell(with data: BOGODetailsResponseLifestyleOffer) {
-        platinumExplorerLabel.text = data.whatYouGetTitle ?? ""        
+        platinumExplorerLabel.text = data.offerTitle ?? ""
         let labels = [choiceTicketLabel, exclusiveOfferLabel, buy1Get1Label]
         let texts = data.whatYouGetTextList ?? []
 

@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,10 +28,10 @@
                         <rect key="frame" x="0.0" y="20" width="459" height="440"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b6z-ns-N2z">
-                                <rect key="frame" x="20" y="195" width="419" height="245"/>
+                                <rect key="frame" x="0.0" y="-20" width="459" height="460"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="282.67000000000002" id="Oxp-9K-JwE"/>
-                                    <constraint firstAttribute="height" constant="245" id="woo-CC-LCQ"/>
+                                    <constraint firstAttribute="height" constant="460" id="woo-CC-LCQ"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -91,14 +90,14 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="explorerLightPrimary"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yhy-HN-LrP" firstAttribute="top" secondItem="SMt-1f-4zs" secondAttribute="bottom" constant="6" id="6Av-ts-SyV"/>
-                            <constraint firstItem="b6z-ns-N2z" firstAttribute="leading" secondItem="7X7-Cz-sXC" secondAttribute="leading" constant="20" id="8mU-0n-6Ac"/>
-                            <constraint firstAttribute="trailing" secondItem="b6z-ns-N2z" secondAttribute="trailing" constant="20" id="E54-Ly-Ed2"/>
+                            <constraint firstItem="b6z-ns-N2z" firstAttribute="leading" secondItem="7X7-Cz-sXC" secondAttribute="leading" id="8mU-0n-6Ac"/>
+                            <constraint firstAttribute="trailing" secondItem="b6z-ns-N2z" secondAttribute="trailing" id="E54-Ly-Ed2"/>
                             <constraint firstItem="yhy-HN-LrP" firstAttribute="leading" secondItem="7mq-mh-O7v" secondAttribute="trailing" constant="4" id="Ebs-DV-wzK"/>
                             <constraint firstAttribute="bottom" secondItem="b6z-ns-N2z" secondAttribute="bottom" id="Szl-x8-MN7"/>
-                            <constraint firstItem="b6z-ns-N2z" firstAttribute="top" secondItem="liP-DQ-91E" secondAttribute="bottom" constant="32" id="X6v-dn-TdJ"/>
+                            <constraint firstItem="b6z-ns-N2z" firstAttribute="top" secondItem="liP-DQ-91E" secondAttribute="bottom" constant="-183.00000000000003" id="X6v-dn-TdJ"/>
                             <constraint firstItem="SMt-1f-4zs" firstAttribute="top" secondItem="7X7-Cz-sXC" secondAttribute="top" constant="20" id="cTX-9i-87a"/>
                             <constraint firstItem="7mq-mh-O7v" firstAttribute="leading" secondItem="SMt-1f-4zs" secondAttribute="leading" id="ff9-s0-UxN"/>
                             <constraint firstAttribute="trailing" secondItem="liP-DQ-91E" secondAttribute="trailing" constant="20" id="hAM-yq-CbP"/>
@@ -185,9 +184,4 @@
             <size key="intrinsicContentSize" width="71.666666666666671" height="20.333333333333332"/>
         </designable>
     </designables>
-    <resources>
-        <namedColor name="explorerLightPrimary">
-            <color red="0.9649999737739563" green="0.9179999828338623" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>
