@@ -39,6 +39,19 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
                 let header = SmilesExplorerHeader()
                 header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
                 configureHeaderForShimmer(section: section, headerView: header)
+                
+                
+                if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
+                    switch SmilesExplorerSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
+                    case .tickets:
+                        header.mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
+                        header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+                    case .header:
+                        header.mainView.backgroundColor = .white
+                    default:
+                        header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
+                    }
+                }
                 return header
             }
         }
