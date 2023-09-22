@@ -14,7 +14,7 @@ import SmilesFontsManager
 import SmilesLoader
 import SmilesOffers
 
-class SmilesExplorerOffersViewController: UIViewController {
+public class SmilesExplorerOffersViewController: UIViewController {
 
     // MARK: - OUTLETS -
     var selectedOffer:OfferDO?
@@ -52,7 +52,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     }
     
     // MARK: - METHODS -
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         self.bind(to: viewModel)
@@ -61,7 +61,7 @@ class SmilesExplorerOffersViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    init() {
+  public  init() {
         super.init(nibName: "SmilesExplorerOffersViewController", bundle: .module)
     }
     
@@ -69,7 +69,7 @@ class SmilesExplorerOffersViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpNavigationBar()
     }
@@ -148,7 +148,7 @@ class SmilesExplorerOffersViewController: UIViewController {
     
 }
 extension SmilesExplorerOffersViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedOffer = self.response?.offers?[indexPath.row]
         setConfirmBtnUI(enabled: true)
         self.collectionView.reloadData()
@@ -156,7 +156,7 @@ extension SmilesExplorerOffersViewController: UICollectionViewDelegate, UICollec
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.response?.offers?.count ?? 0
     }
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    public  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let currentCount = response?.offers?.count ?? 0
         if currentCount > 0 && indexPath.row == currentCount - 1 && !isLoading && hasMoreData {
             loadMoreItems()
