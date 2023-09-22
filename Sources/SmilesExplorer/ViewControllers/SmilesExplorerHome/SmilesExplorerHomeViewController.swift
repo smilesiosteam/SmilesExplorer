@@ -15,7 +15,7 @@ import SmilesOffers
 import SmilesLoader
 
 public class SmilesExplorerHomeViewController: UIViewController {
-
+    
     // MARK: - OUTLETS -
     @IBOutlet weak var topHeaderView: AppHeaderView!
     @IBOutlet weak var contentTableView: UITableView!
@@ -76,11 +76,11 @@ public class SmilesExplorerHomeViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         setupHeaderView(headerTitle: nil)
-//        if let isUserSubscribed {
-            getSections(isSubscribed: false)
-//        } else {
-//            self.input.send(.getRewardPoints)
-//        }
+        //        if let isUserSubscribed {
+        getSections(isSubscribed: false)
+        //        } else {
+        //            self.input.send(.getRewardPoints)
+        //        }
         
     }
     
@@ -138,7 +138,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
         })?.index
         
     }
-
+    
 }
 
 // MARK: - VIEWMODEL BINDING -
@@ -181,30 +181,28 @@ extension SmilesExplorerHomeViewController {
                 case .fetchTicketsDidSucceed(let exclusiveOffers):
                     self?.configureTickets(with: exclusiveOffers)
                     break
+                case .fetchTicketDidFail(_):
+                    self?.configureHideSection(for: .tickets, dataSource: ExplorerOffer.self)
+                    break
                 case .fetchSavedFiltersAfterSuccess(_):
 //                    self?.filtersSavedList = filtersSavedList
                     break
                 case .fetchExclusiveOffersDidSucceed(let exclusiveOffers):
                     self?.configureExclusiveOffers(with: exclusiveOffers)
-                   
+                    break
+                    
+                case .fetchExclusiveOffersDidFail( _):
+                    self?.configureHideSection(for: .exclusiveDeals, dataSource: ExplorerOffer.self)
                     break
                     
                 case .fetchBogoDidSucceed(let exclusiveOffers):
-                    SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureBogoOffers(with: exclusiveOffers)
-                    
-                case .fetchBogoDidFail(error: _):
-                    SmilesLoader.dismiss(from: self?.view ?? UIView())
+                case .fetchBogoDidFail(_):
+                    self?.configureHideSection(for: .bogoOffers, dataSource: ExplorerOffer.self)
                 case .fetchContentForSortingItems(_):
-//                    self?.sortingListRowModels = baseRowModels
+                    //                    self?.sortingListRowModels = baseRowModels
                     break
-//                case .updateWishlistStatusDidSucceed(let updateWishlistResponse):
-//                    self?.configureWishListData(with: updateWishlistResponse)
-                    
-//                case .updateWishlistStatusDidFail(let error):
-//                    print(error.localizedDescription)
                 case .fetchTopOffersDidSucceed(response: _):
-//                    self?.configureBannersData(with: response, sectionIdentifier: .inviteFriends)
                     break
                     
                 default: break
@@ -308,7 +306,7 @@ extension SmilesExplorerHomeViewController {
                     print(explorerOffer)
                     
                 })
-                self.configureDataSource()  
+                self.configureDataSource()
             }
         } else {
             if self.offers.isEmpty {
@@ -321,7 +319,7 @@ extension SmilesExplorerHomeViewController {
     fileprivate func configureTickets(with exclusiveOffersResponse: ExplorerOfferResponse) {
         self.offersListing = exclusiveOffersResponse
         self.tickets.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-        if !tickets.isEmpty {
+        if !self.tickets.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .tickets) {
                 self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
                     print(explorerOffer)
@@ -340,8 +338,8 @@ extension SmilesExplorerHomeViewController {
     fileprivate func configureBogoOffers(with exclusiveOffersResponse: ExplorerOfferResponse) {
         self.offersListing = exclusiveOffersResponse
         self.bogoOffer.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-
-        if !bogoOffer.isEmpty {
+        
+        if !self.bogoOffer.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .bogoOffers) {
                 self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forBogoHomeOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
                     print(explorerOffer)
@@ -351,7 +349,7 @@ extension SmilesExplorerHomeViewController {
             }
         } else {
             if self.bogoOffer.isEmpty {
-                self.configureHideSection(for: .exclusiveDeals, dataSource: ExplorerOffer.self)
+                self.configureHideSection(for: .bogoOffers, dataSource: ExplorerOffer.self)
             }
         }
     }
@@ -360,21 +358,21 @@ extension SmilesExplorerHomeViewController {
     
     
     
-//    private func getAllOffers(exclusiveOffersResponse: ExplorerOfferResponse) -> [ExplorerOffer] {
-//
-//        let featuredOffers = exclusiveOffersResponse.offers?.map({ offer in
-//            var _offer = offer
-//            _offer.isFeatured = true
-//            return _offer
-//        })
-//        var offers = [ExplorerOffer]()
-//        if self.offersPage == 1 {
-//            offers.append(contentsOf: featuredOffers ?? [])
-//        }
-//        offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-//        return offers
-//
-//    }
+    //    private func getAllOffers(exclusiveOffersResponse: ExplorerOfferResponse) -> [ExplorerOffer] {
+    //
+    //        let featuredOffers = exclusiveOffersResponse.offers?.map({ offer in
+    //            var _offer = offer
+    //            _offer.isFeatured = true
+    //            return _offer
+    //        })
+    //        var offers = [ExplorerOffer]()
+    //        if self.offersPage == 1 {
+    //            offers.append(contentsOf: featuredOffers ?? [])
+    //        }
+    //        offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
+    //        return offers
+    //
+    //    }
     
     fileprivate func configureHideSection<T>(for section: SmilesExplorerSectionIdentifier, dataSource: T.Type) {
         if let index = getSectionIndex(for: section) {
@@ -394,13 +392,13 @@ extension SmilesExplorerHomeViewController: AppHeaderDelegate {
     }
     
     public func didTapOnSearch() {
-//        self.input.send(.didTapSearch)
-//        let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
-//        analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.SearchBrandDirectly).name, parameters: [:]))
+        //        self.input.send(.didTapSearch)
+        //        let analyticsSmiles = AnalyticsSmiles(service: FirebaseAnalyticsService())
+        //        analyticsSmiles.sendAnalyticTracker(trackerData: Tracker(eventType: AnalyticsEvent.firebaseEvent(.SearchBrandDirectly).name, parameters: [:]))
     }
     
     public func didTapOnLocation() {
-//        self.foodOrderHomeCoordinator?.navigateToUpdateLocationVC(confirmLocationRedirection: .toFoodOrder)
+        //        self.foodOrderHomeCoordinator?.navigateToUpdateLocationVC(confirmLocationRedirection: .toFoodOrder)
     }
     
     func showPopupForLocationSetting() {
@@ -408,23 +406,23 @@ extension SmilesExplorerHomeViewController: AppHeaderDelegate {
     }
     
     func didTapOnToolTipSearch() {
-//        redirectToSetUserLocation()
+        //        redirectToSetUserLocation()
     }
     
     public func segmentLeftBtnTapped(index: Int) {
-//        configureOrderType(with: index)
+        //        configureOrderType(with: index)
     }
     
     public func segmentRightBtnTapped(index: Int) {
-//        configureOrderType(with: index)
+        //        configureOrderType(with: index)
     }
     
     public func rewardPointsBtnTapped() {
-//        self.foodOrderHomeCoordinator?.navigateToTransactionsListViewController()
+        //        self.foodOrderHomeCoordinator?.navigateToTransactionsListViewController()
     }
     
     public func didTapOnBagButton() {
-//        self.orderHistorViewAll()
+        //        self.orderHistorViewAll()
     }
 }
 

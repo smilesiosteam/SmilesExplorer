@@ -112,7 +112,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         bind(to: viewModel)
         setupHeaderView(headerTitle: nil)
         if let isUserSubscribed {
-            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != "" ? true:false)
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false)
             
         } else {
             self.input.send(.getRewardPoints)
@@ -439,7 +439,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
-                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold, freeTicketAvailed: response.explorerVoucherCode != "" ? true:false)
+                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold, freeTicketAvailed: response.explorerVoucherCode != nil ? true:false)
                     self?.subscriptionType = response.explorerPackageType
                     self?.voucherCode = response.explorerVoucherCode
                     if response.explorerPackageType ?? .gold == .platinum {
@@ -480,12 +480,13 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     
                 case .fetchExclusiveOffersStoriesDidFail(let error):
                     debugPrint(error.localizedDescription)
-                    
+                    self?.configureHideSection(for: .stories, dataSource: ExplorerOffer.self)
                 case .fetchBogoOffersDidSucceed(response: let bogoOffers):
                     SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureBogoOffers(with: bogoOffers)
                     
                 case .fetchBogoOffersDidFail(error: let error):
+                    self?.configureHideSection(for: .offerListing, dataSource: OfferDO.self)
                     debugPrint(error.localizedDescription)
                 default: break
                 }
@@ -520,11 +521,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 self.configureDataSource()
             }
         } else {
-            self.configureHideSection(for: .stories, dataSource: Stories.self)
+            self.configureHideSection(for: .stories, dataSource: ExplorerOffer.self)
         }
         
-        
-        print(exclusiveOffersResponse.offers)
+    
     }
     
     
@@ -538,7 +538,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
             self.configureDataSource()
             
         } else {
-            self.configureHideSection(for: .stories, dataSource: Stories.self)
+            self.configureHideSection(for: .upgradeBanner, dataSource: SectionDetailDO.self)
         }
         
         
