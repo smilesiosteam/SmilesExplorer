@@ -56,7 +56,7 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
             }
         }
         
-        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
+        return nil
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
@@ -65,6 +65,9 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            return CGFloat.leastNormalMagnitude
+        }
         switch self.smilesExplorerSections?.sectionDetails?[safe: section]?.sectionIdentifier {
         case SmilesExplorerSectionIdentifier.footer.rawValue:
             return 0.0
@@ -84,12 +87,29 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
             }
         }
         
-        if let ticketsSectionIndex = getSectionIndex(for: .tickets), ticketsSectionIndex == section {
-            if let dataSource = (self.dataSource?.dataSources?[safe: ticketsSectionIndex] as? TableViewDataSource<OfferDO>) {
-                showHide(isDummy: dataSource.isDummy)
+        if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
+            switch SmilesExplorerSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
+            case .tickets:
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+            case .exclusiveDeals:
+                
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+            case .bogoOffers:
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+                
+            
+            default:
+                break
             }
         }
         
+
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {

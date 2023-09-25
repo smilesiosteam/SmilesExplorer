@@ -480,7 +480,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     
                 case .fetchExclusiveOffersStoriesDidFail(let error):
                     debugPrint(error.localizedDescription)
-                    self?.configureHideSection(for: .stories, dataSource: ExplorerOffer.self)
+                    self?.configureHideSection(for: .stories, dataSource: ExplorerOfferResponse.self)
                 case .fetchBogoOffersDidSucceed(response: let bogoOffers):
                     SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureBogoOffers(with: bogoOffers)
@@ -512,8 +512,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
         self.offersListing = exclusiveOffersResponse
         self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-        
-        if let stories = exclusiveOffersResponse.offers, !stories.isEmpty {
+        if  !self.offers.isEmpty {
             if let storiesIndex = getSectionIndex(for: .stories) {
                 self.dataSource?.dataSources?[storiesIndex] = TableViewDataSource.make(forStories: exclusiveOffersResponse, data: self.smilesExplorerSections?.sectionDetails?[storiesIndex].backgroundColor ?? "#FFFFFF", onClick: { [weak self] story in
                     self?.delegate?.navigateToStoriesWebView(objStory: story)
@@ -521,7 +520,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 self.configureDataSource()
             }
         } else {
-            self.configureHideSection(for: .stories, dataSource: ExplorerOffer.self)
+            if self.offers.isEmpty {
+                self.configureHideSection(for: .stories, dataSource: ExplorerOfferResponse.self)
+            }
         }
         
     
@@ -559,7 +560,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
             }
         } else {
             if self.offers.isEmpty {
-                self.configureHideSection(for: .offerListing, dataSource: ExplorerOffer.self)
+                self.configureHideSection(for: .offerListing, dataSource: ExplorerOfferResponse.self)
             }
         }
     }

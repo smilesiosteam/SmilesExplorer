@@ -155,7 +155,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         }
         
         
-        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
+        return nil
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
@@ -163,7 +163,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            return CGFloat.leastNormalMagnitude
+        }
         return UITableView.automaticDimension
     }
     
@@ -192,13 +194,22 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
             }
         }
         
-        if let storiesSectionIndex = getSectionIndex(for: .stories), storiesSectionIndex == section {
-            if let dataSource = (self.dataSource?.dataSources?[safe: storiesSectionIndex] as? TableViewDataSource<Stories>) {
-                showHide(isDummy: dataSource.isDummy)
-            }
-        }else if let offerListingSectionIndex = getSectionIndex(for: .offerListing), offerListingSectionIndex == section {
-            if let dataSource = (self.dataSource?.dataSources?[safe: offerListingSectionIndex] as? TableViewDataSource<OfferDO>) {
-                showHide(isDummy: dataSource.isDummy)
+        
+        if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
+            switch SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
+            case .stories:
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+            case .offerListing:
+                
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OfferDO>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+           
+            
+            default:
+                break
             }
         }
         
