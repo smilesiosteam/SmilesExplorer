@@ -34,6 +34,8 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {return nil}
+        
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             if sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.footer.rawValue {
                 let header = SmilesExplorerHeader()
