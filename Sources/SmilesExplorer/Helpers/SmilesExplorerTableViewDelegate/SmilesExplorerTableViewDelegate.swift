@@ -105,6 +105,11 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
                     showHide(isDummy: dataSource.isDummy)
                 }
                 
+            case .footer:
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<SectionDetailDO>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+                
             
             default:
                 break

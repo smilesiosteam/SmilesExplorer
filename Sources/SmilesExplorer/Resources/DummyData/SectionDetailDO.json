@@ -1,0 +1,70 @@
+{
+ "sectionDetails" : [
+   {
+     "isFilterAllowed" : 0,
+     "isSortAllowed" : 0,
+     "iconUrl" : "",
+     "title" : "Smiles Explorer",
+     "sectionId" : 9,
+     "categoryId" : 973,
+     "sectionIdentifier" : "TOP_PLACEHOLDER",
+     "colorDirection" : "#",
+     "backgroundColor" : "#eff0f9"
+   },
+   {
+     "isFilterAllowed" : 0,
+     "isSortAllowed" : 0,
+     "iconUrl" : "N?A",
+     "title" : "The best of UAE at the Best of Prices",
+     "sectionId" : 18,
+     "categoryId" : 973,
+     "sectionIdentifier" : "HEADER",
+     "colorDirection" : "#",
+     "subTitle" : "Here is what you get with the smiles eplorer",
+     "backgroundColor" : "#ffffff"
+   },
+   {
+     "isFilterAllowed" : 0,
+     "isSortAllowed" : 0,
+     "title" : "Any one ticket of your choice free",
+     "sectionId" : 19,
+     "categoryId" : 973,
+     "sectionIdentifier" : "TICKETS",
+     "colorDirection" : "#",
+     "subTitle" : "Choose from Burj Khalifa, IMG World Atlantis etc",
+     "backgroundColor" : "#ffffff"
+   },
+   {
+     "isFilterAllowed" : 0,
+     "isSortAllowed" : 0,
+     "title" : "Unlock Exclusive Deals",
+     "sectionId" : 20,
+     "categoryId" : 973,
+     "sectionIdentifier" : "EXCLUSIVE_DEALS",
+     "colorDirection" : "#",
+     "subTitle" : "Across travel, shopping, food and entertainment",
+     "backgroundColor" : "#ffffff"
+   },
+   {
+     "isFilterAllowed" : 0,
+     "isSortAllowed" : 0,
+     "title" : "Buy one Get one Free",
+     "sectionId" : 21,
+     "categoryId" : 973,
+     "sectionIdentifier" : "BOGO_OFFERS",
+     "colorDirection" : "#",
+     "subTitle" : "Across travel, shopping, food and entertainment",
+     "backgroundColor" : "#ffffff"
+   },
+   {
+     "isFilterAllowed" : 0,
+     "isSortAllowed" : 0,
+     "colorDirection" : "#",
+     "sectionId" : 23,
+     "categoryId" : 973,
+     "sectionIdentifier" : "FOOTER",
+     "backgroundImage" : ""
+   }
+ ],
+ "extTransactionId" : "7607895733088"
+}

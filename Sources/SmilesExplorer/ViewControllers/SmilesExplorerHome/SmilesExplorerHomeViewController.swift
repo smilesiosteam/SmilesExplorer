@@ -155,8 +155,8 @@ extension SmilesExplorerHomeViewController {
                     
                 case .fetchSectionsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
-                    SmilesLoader.dismiss(from: self?.view ?? UIView())
-                    
+                    self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
+                    self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
                     self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false)
@@ -284,7 +284,7 @@ extension SmilesExplorerHomeViewController {
             }), let backgroundImage = footer.backgroundImage {
                 dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource(models: [backgroundImage], reuseIdentifier: "SmilesExplorerFooterTableViewCell", data: "#FFFFFF", cellConfigurator: { (url, cell, data, indexPath) in
                     guard let cell = cell as? SmilesExplorerFooterTableViewCell else { return }
-                    cell.footerconfiguration = self.smilesExplorerSections?.sectionDetails?.last
+                    cell.footerconfiguration = self.smilesExplorerSections?.sectionDetails?[footerSectionIndex]
                     cell.setupValues(url: url)
                     cell.getMembership = { [weak self] in
                         // Setup navigation for membership
@@ -293,6 +293,8 @@ extension SmilesExplorerHomeViewController {
                 })
                 configureDataSource()
             }
+        }else{
+                self.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
         }
         
     }
@@ -354,25 +356,7 @@ extension SmilesExplorerHomeViewController {
     }
     
     
-    
-    
-    
-    //    private func getAllOffers(exclusiveOffersResponse: ExplorerOfferResponse) -> [ExplorerOffer] {
-    //
-    //        let featuredOffers = exclusiveOffersResponse.offers?.map({ offer in
-    //            var _offer = offer
-    //            _offer.isFeatured = true
-    //            return _offer
-    //        })
-    //        var offers = [ExplorerOffer]()
-    //        if self.offersPage == 1 {
-    //            offers.append(contentsOf: featuredOffers ?? [])
-    //        }
-    //        offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-    //        return offers
-    //
-    //    }
-    
+
     fileprivate func configureHideSection<T>(for section: SmilesExplorerSectionIdentifier, dataSource: T.Type) {
         if let index = getSectionIndex(for: section) {
             (self.dataSource?.dataSources?[index] as? TableViewDataSource<T>)?.models = []
