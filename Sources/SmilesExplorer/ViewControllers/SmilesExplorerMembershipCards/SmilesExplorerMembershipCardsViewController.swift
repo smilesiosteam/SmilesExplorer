@@ -51,7 +51,8 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     // MARK: - VIEW LIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnContinue.setTitle("BUY NOW".localizedString, for: .normal)
+        self.btnContinue.setTitle("ExplorerBuyNow".localizedString, for: .normal)
+        self.btnContinue.fontTextStyle = .smilesHeadline4
         setUpNavigationBar()
 //        SmilesLoader.show(on: self.view)
         setupViews()
