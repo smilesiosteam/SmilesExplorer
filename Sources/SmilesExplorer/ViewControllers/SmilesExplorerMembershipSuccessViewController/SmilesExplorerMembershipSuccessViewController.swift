@@ -46,7 +46,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         return SmilesExplorerMembershipSelectionViewModel()
     }()
     private var offerTitle: String
-    
+    private var lifeStyleOffer: BOGODetailsResponseLifestyleOffer?
     // MARK: - ViewController Lifecycle -
    
     public override func viewDidLoad() {
@@ -57,7 +57,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(_ sourceScreen: SourceScreen,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
+    init(_ sourceScreen: SourceScreen,lifeStyleOffer: BOGODetailsResponseLifestyleOffer? ,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
+        self.lifeStyleOffer = lifeStyleOffer
         self.transactionId = transactionId
         self.onGoToExplorer = onGoToExplorer
         self.onContinue = onContinue
@@ -198,7 +199,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             self.backButton.isHidden = true
             self.exploreButton.isHidden = true
             self.continueButton.isHidden = false
-            if let expiryDateString =  self.response?.lifestyleOffers?.first?.expiryDate {
+            if let expiryDateString =  self.lifeStyleOffer?.expiryDate {
                 let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MMM, YYYY")
                 let finalDateString = "*" + "Valid til".localizedString + " " + outputDateString
                 dateORLinkButton.setTitle(finalDateString, for: .normal)
