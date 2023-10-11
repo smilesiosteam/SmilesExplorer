@@ -34,6 +34,12 @@ class SmilesExplorerHeader: UIView {
         addSubview(mainView)
         mainView.frame = bounds
         mainView.bindFrameToSuperviewBounds()
+        titleLabel.fontTextStyle = .smilesHeadline2
+        subTitleLabel.fontTextStyle = .smilesBody3
+        
+        titleLabel.textColor = .black
+        subTitleLabel.textColor = .black.withAlphaComponent(0.8)
+        
     }
     
     func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?, isPostSub:Bool = false) {
