@@ -202,7 +202,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             for item in self.response?.lifestyleOffers ?? [] {
                 if (item.packageType == self.packageType) {
                     if let expiryDateString =  item.expiryDate {
-                        let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MM, YYYY")
+                        let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MMM, YYYY")
                         let finalDateString = "*" + "Valid til".localizedString + " " + outputDateString
                         dateORLinkButton.setTitle(finalDateString, for: .normal)
                     }
