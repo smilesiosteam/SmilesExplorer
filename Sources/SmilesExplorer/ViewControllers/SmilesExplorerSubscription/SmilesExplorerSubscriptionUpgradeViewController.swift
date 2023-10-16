@@ -110,19 +110,18 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         
         setupTableView()
         bind(to: viewModel)
-        setupHeaderView(headerTitle: nil)
+        
         if let isUserSubscribed {
             getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false)
-            
         } else {
             self.input.send(.getRewardPoints)
         }
         
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
         self.upgradeNowButton.setTitle("Upgrade Now".localizedString, for: .normal)
+        if self.subscriptionType == .gold {setupHeaderView(headerTitle: nil)}else{self.setUpNavigationBar()}
         
 
     }
@@ -173,11 +172,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: 24)
         ])
         imageView.tintColor = .black
-        var toptitle: String = "Smiles Explorer"
+        var toptitle: String = "Smiles Tourist"
         if let topPlaceholderSection = self.smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
             imageView.sd_setImage(with: URL(string: topPlaceholderSection.iconUrl ?? "")) { image, _, _, _ in
                 imageView.image = image?.withRenderingMode(.alwaysTemplate)
-                toptitle = topPlaceholderSection.title ?? "Smiles Explorer"
+                toptitle = topPlaceholderSection.title ?? toptitle
             }
         }
         
@@ -404,10 +403,14 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
         
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
+            
+        if self.subscriptionType == .platinum {
             setupHeaderView(headerTitle: topPlaceholderSection.title)
             topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
+            self.upgradeNowButton.isHidden = true
+        }else{
+            setUpNavigationBar()
         }
-        if self.subscriptionType == .platinum {self.upgradeNowButton.isHidden = true}
         self.configureDataSource()
         homeAPICalls()
         
