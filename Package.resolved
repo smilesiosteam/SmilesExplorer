@@ -190,6 +190,15 @@
       }
     },
     {
+      "identity" : "smilesstoriesmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesStoriesManager.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ae8ffd5247f9ac6b4dde8072d3dedcfe68a07e5b"
+      }
+    },
+    {
       "identity" : "smilesutilities",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesUtilities.git",

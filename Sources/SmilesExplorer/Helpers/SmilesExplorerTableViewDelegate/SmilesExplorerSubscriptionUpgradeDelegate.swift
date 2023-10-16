@@ -46,7 +46,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         
         switch self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier {
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue:
-            return 134
+            return UITableView.automaticDimension
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue:
             return 190
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.stories.rawValue:
