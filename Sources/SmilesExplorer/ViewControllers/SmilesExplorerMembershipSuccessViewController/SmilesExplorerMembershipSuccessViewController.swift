@@ -182,17 +182,18 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             self.backButton.isHidden = false
             self.exploreButton.isHidden = false
             self.continueButton.isHidden = true
-            let underLineAttributes: [NSAttributedString.Key: Any] = [
-                .font: SmilesFonts.lato.getFont(style: .medium, size: 16) ,
-                  .foregroundColor: UIColor.appRevampFilterCountBGColor,
-                  .underlineStyle: NSUnderlineStyle.single.rawValue
-              ] //
-            let attributeString = NSMutableAttributedString(
-                string: "View free pass".localizedString,
-                    attributes: underLineAttributes
-                 )
-            self.dateORLinkButton.setAttributedTitle(attributeString, for: .normal)
-            
+//            let underLineAttributes: [NSAttributedString.Key: Any] = [
+//                .font: SmilesFonts.lato.getFont(style: .medium, size: 16) ,
+//                  .foregroundColor: UIColor.appRevampFilterCountBGColor,
+//                  .underlineStyle: NSUnderlineStyle.single.rawValue
+//              ] //
+//            let attributeString = NSMutableAttributedString(
+//                string: "View free pass".localizedString,
+//                    attributes: underLineAttributes
+//                 )
+            self.dateORLinkButton.fontTextStyle = .smilesHeadline4
+            self.dateORLinkButton.setTitle("View free pass".localizedString, for: .normal)
+            self.dateORLinkButton.setTitleColor(UIColor(red: 66/255.0, green: 76/255.0, blue: 156/255.0 , alpha: 1), for: .normal)
             self.dateORLinkButton.isUserInteractionEnabled = true
             self.linkArrowImageView.isHidden = false
         case.success:

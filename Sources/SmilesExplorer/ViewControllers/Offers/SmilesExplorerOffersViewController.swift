@@ -75,6 +75,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
     }
     
     func setupUI(){
+        print(response?.listTitle,response?.listSubtitle)
         titleLbl.text = response?.listTitle
         detailsLbl.text = response?.listSubtitle
         skipBtn.layer.borderColor = #colorLiteral(red: 0.431372549, green: 0.2352941176, blue: 0.5098039216, alpha: 1)
