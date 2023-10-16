@@ -123,6 +123,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
                     }
                     response.offers?.append(contentsOf: self?.response?.offers ?? [])
                     self?.response = response
+                    self?.setupUI()
                     self?.hasMoreData = self?.response?.offersCount ?? 0 > self?.response?.offers?.count ?? 0
                     self?.isLoading = false
                     self?.currentPage += 1
