@@ -46,7 +46,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         return SmilesExplorerMembershipSelectionViewModel()
     }()
     private var offerTitle: String
-    
+    private var packageType: String?
     // MARK: - ViewController Lifecycle -
    
     public override func viewDidLoad() {
@@ -57,7 +57,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     // MARK: - Methods -
-    init(_ sourceScreen: SourceScreen,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
+    init(_ sourceScreen: SourceScreen,packageType: String? ,transactionId: String?,offerTitle: String,onContinue: ((String?) -> Void)?,onGoToExplorer: (() -> Void)?) {
+        self.packageType = packageType
         self.transactionId = transactionId
         self.onGoToExplorer = onGoToExplorer
         self.onContinue = onContinue
@@ -181,28 +182,34 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
             self.backButton.isHidden = false
             self.exploreButton.isHidden = false
             self.continueButton.isHidden = true
-            let underLineAttributes: [NSAttributedString.Key: Any] = [
-                .font: SmilesFonts.lato.getFont(style: .medium, size: 16) ,
-                  .foregroundColor: UIColor.appRevampFilterCountBGColor,
-                  .underlineStyle: NSUnderlineStyle.single.rawValue
-              ] //
-            let attributeString = NSMutableAttributedString(
-                string: "View free pass".localizedString,
-                    attributes: underLineAttributes
-                 )
-            self.dateORLinkButton.setAttributedTitle(attributeString, for: .normal)
-            
+//            let underLineAttributes: [NSAttributedString.Key: Any] = [
+//                .font: SmilesFonts.lato.getFont(style: .medium, size: 16) ,
+//                  .foregroundColor: UIColor.appRevampFilterCountBGColor,
+//                  .underlineStyle: NSUnderlineStyle.single.rawValue
+//              ] //
+//            let attributeString = NSMutableAttributedString(
+//                string: "View free pass".localizedString,
+//                    attributes: underLineAttributes
+//                 )
+            self.dateORLinkButton.fontTextStyle = .smilesHeadline4
+            self.dateORLinkButton.setTitle("View free pass".localizedString, for: .normal)
+            self.dateORLinkButton.setTitleColor(UIColor(red: 66/255.0, green: 76/255.0, blue: 156/255.0 , alpha: 1), for: .normal)
             self.dateORLinkButton.isUserInteractionEnabled = true
             self.linkArrowImageView.isHidden = false
         case.success:
             self.backButton.isHidden = true
             self.exploreButton.isHidden = true
             self.continueButton.isHidden = false
-            if let expiryDateString =  self.response?.lifestyleOffers?.first?.expiryDate {
-                let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MMM, YYYY")
-                let finalDateString = "*" + "Valid til".localizedString + " " + outputDateString
-                dateORLinkButton.setTitle(finalDateString, for: .normal)
+            for item in self.response?.lifestyleOffers ?? [] {
+                if (item.packageType == self.packageType) {
+                    if let expiryDateString =  item.expiryDate {
+                        let outputDateString = expiryDateString.convertDate(from: "dd-MM-yyyy HH:mm:ss", to: "dd MMMM, YYYY")
+                        let finalDateString = "*" + "Valid til".localizedString + " " + outputDateString
+                        dateORLinkButton.setTitle(finalDateString, for: .normal)
+                    }
+                }
             }
+            
             
         }
         self.exploreButton.titleLabel?.textColor = .appRevampPurpleMainColor

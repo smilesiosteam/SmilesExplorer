@@ -233,7 +233,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     // MARK: - Top Header
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .appRevampEnableStateColor, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        topHeaderView.setupHeaderView(backgroundColor: .appRevampFilterCountBGColor.withAlphaComponent(0.1), searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
         displayRewardPoints()
     }
     func displayRewardPoints() {

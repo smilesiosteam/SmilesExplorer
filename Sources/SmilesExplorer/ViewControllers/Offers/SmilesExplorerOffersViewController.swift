@@ -74,7 +74,8 @@ public class SmilesExplorerOffersViewController: UIViewController {
         setUpNavigationBar()
     }
     
-    func setupUI(){
+    func setupUI() {
+    
         titleLbl.text = response?.listTitle
         detailsLbl.text = response?.listSubtitle
         skipBtn.layer.borderColor = #colorLiteral(red: 0.431372549, green: 0.2352941176, blue: 0.5098039216, alpha: 1)
@@ -122,6 +123,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
                     }
                     response.offers?.append(contentsOf: self?.response?.offers ?? [])
                     self?.response = response
+                    self?.setupUI()
                     self?.hasMoreData = self?.response?.offersCount ?? 0 > self?.response?.offers?.count ?? 0
                     self?.isLoading = false
                     self?.currentPage += 1
