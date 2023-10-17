@@ -361,7 +361,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                         guard let bannerSectionData = self.smilesExplorerSections?.sectionDetails?[bannerIndex] else {return}
                         self.configureUpgardeBanner(with: bannerSectionData, index: bannerIndex)
                     }
-                
+                    
                 case .freetickets:
                     if let bannerIndex = getSectionIndex(for: .freetickets) {
                         guard let bannerSectionData = self.smilesExplorerSections?.sectionDetails?[bannerIndex] else {return}
@@ -404,15 +404,17 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
             
-        if self.subscriptionType == .platinum {
-            setupHeaderView(headerTitle: topPlaceholderSection.title)
-            topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
-            self.upgradeNowButton.isHidden = true
-        }else{
-            setUpNavigationBar()
+            if self.subscriptionType == .platinum {
+                setupHeaderView(headerTitle: topPlaceholderSection.title)
+                topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
+                self.upgradeNowButton.isHidden = true
+            }else{
+                setUpNavigationBar()
+            }
+            self.configureDataSource()
+            homeAPICalls()
+            
         }
-        self.configureDataSource()
-        homeAPICalls()
         
     }
     

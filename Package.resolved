@@ -159,7 +159,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesOffers.git",
       "state" : {
         "branch" : "main",
-        "revision" : "655b44c27bfad9d8ad281c08f00b4930185e22b9"
+        "revision" : "a34a6bee6f6951f01b594e8a6f6d8286eb16f257"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesSharedServices.git",
       "state" : {
         "branch" : "main",
-        "revision" : "115b4f8dbfc528e17b3549c76e8156da03ca6e8d"
+        "revision" : "4a34099e46bb4041d353fccffa4a0664868d287a"
       }
     },
     {
@@ -195,7 +195,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesStoriesManager.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ae8ffd5247f9ac6b4dde8072d3dedcfe68a07e5b"
+        "revision" : "e0a63acbd8770d234039af5386ca2b3de14564a2"
       }
     },
     {
@@ -204,7 +204,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesUtilities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "7abe33e587e5167185b6d644afa0579ff314e060"
+        "revision" : "4f60e1cc8c59935708ad10b34c01e19cd81091aa"
       }
     }
   ],
