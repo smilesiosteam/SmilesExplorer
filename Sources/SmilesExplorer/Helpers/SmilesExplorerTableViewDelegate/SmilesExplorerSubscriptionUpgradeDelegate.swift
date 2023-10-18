@@ -46,7 +46,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         
         switch self.smilesExplorerSections?.sectionDetails?[safe: indexPath.section]?.sectionIdentifier {
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue:
-            return UITableView.automaticDimension
+            return 130
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue:
             return 190
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.stories.rawValue:
@@ -126,7 +126,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                                 }else{
                                     header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
                                     header.bgMainView.backgroundColor = .white
-                                    header.backgroundColor = .white
+                                    header.backgroundColor = .appRevampFilterCountBGColor.withAlphaComponent(0.1)
                                 }
                                 
                                 header.mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
@@ -159,6 +159,11 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        if let offersIndex = getSectionIndex(for: .upgradeBanner) {
+            if section == offersIndex {
+                return 0
+            }
+        }
         return CGFloat.leastNormalMagnitude
     }
     
@@ -215,54 +220,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        adjustTopHeader(scrollView)
-        //        if let indexPath = tableView.indexPath(for: tableView.visibleCells.first ?? UITableViewCell()) {
-        //            let backgroundColor = self.categoryDetailsSections?.sectionDetails?[safe: indexPath.section]?.backgroundColor
-        //            if let parentViewController = self.parent as? CategoryContainerViewController {
-        //                if !parentViewController.shouldAddBillsController {
-        //                    parentViewController.topHeaderView.setBackgroundColorForCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
-        //                } else {
-        //                    parentViewController.topHeaderView.setBackgroundColorForTabsCurveView(color: UIColor(hexString: backgroundColor.asStringOrEmpty()))
-        //                }
-        //            }
-        //        }
+        if self.subscriptionType == .platinum {
+            adjustTopHeader(scrollView)
+        }
     }
-    //    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //
-    //        var tableViewHeight = tableView.frame.height
-    //        if topHeaderView.alpha == 0 {
-    //            tableViewHeight -= 153
-    //        }
-    //        guard scrollView.contentSize.height > tableViewHeight else { return }
-    //        var compact: Bool?
-    //        if scrollView.contentOffset.y > 90 {
-    //           compact = true
-    //        } else if scrollView.contentOffset.y < 0 {
-    //            compact = false
-    //        }
-    //        guard let compact, compact != (topHeaderView.alpha == 0) else { return }
-    //        if compact {
-    //            self.setUpNavigationBar()
-    ////            self.setUpNavigationBar(isLightContent: false)
-    //            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
-    //                self.topHeaderView.alpha = 0
-    //                self.tableViewTopSpaceToHeaderView.priority = .defaultLow
-    //                self.tableViewTopSpaceToSuperView.priority = .defaultHigh
-    //                self.tableViewTopSpaceToSuperView.constant = 100
-    //                self.view.layoutIfNeeded()
-    //            })
-    //        } else {
-    //            self.setUpNavigationBar()
-    //            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
-    //                self.topHeaderView.alpha = 1
-    //                self.tableViewTopSpaceToHeaderView.priority = .defaultHigh
-    //                self.tableViewTopSpaceToSuperView.priority = .defaultLow
-    //
-    //                self.tableViewTopSpaceToSuperView.constant = 228
-    //                self.view.layoutIfNeeded()
-    //            })
-    //        }
-    //
-    //    }
     
 }

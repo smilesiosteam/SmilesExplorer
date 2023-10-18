@@ -25,6 +25,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var upgradeNowButton: UIButton!
     
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
   public  var input: PassthroughSubject<SmilesExplorerHomeUpgradeViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
@@ -38,7 +39,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     let categoryId: Int
     private let isGuestUser: Bool
     private var isUserSubscribed: Bool?
-    private var subscriptionType: ExplorerPackage?
+    var subscriptionType: ExplorerPackage?
     private var voucherCode: String?
     public var delegate:SmilesExplorerHomeDelegate? = nil
     private var selectedIndexPath: IndexPath?
@@ -121,9 +122,15 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.upgradeNowButton.fontTextStyle = .smilesHeadline4
         self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
         self.upgradeNowButton.setTitle("Upgrade Now".localizedString, for: .normal)
-        if self.subscriptionType == .gold {setupHeaderView(headerTitle: nil)}else{self.setUpNavigationBar()}
-        
-
+        if self.subscriptionType == .platinum {
+            topHeaderView.isHidden = false
+            self.tableViewTopConstraint.constant = -16
+            self.setupHeaderView(headerTitle: "")
+        }else{
+            self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)))
+            self.topHeaderView.isHidden = true
+            
+        }
     }
     
     
@@ -190,14 +197,17 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.navigationItem.titleView = hStack
         
         let btnBack: UIButton = UIButton(type: .custom)
-        btnBack.backgroundColor = UIColor(red: 226.0 / 255.0, green: 226.0 / 255.0, blue: 226.0 / 255.0, alpha: 1.0)
-        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_Icon", in: .module, compatibleWith: nil), for: .normal)
+        btnBack.backgroundColor = UIColor.clear
+        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow", in: .module, compatibleWith: nil), for: .normal)
         btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
         btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         btnBack.layer.cornerRadius = btnBack.frame.height / 2
         btnBack.clipsToBounds = true
         let barButton = UIBarButtonItem(customView: btnBack)
         self.navigationItem.leftBarButtonItem = barButton
+        self.topHeaderView.isHidden = true
+        self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)))
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     }
@@ -405,10 +415,17 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
             
             if self.subscriptionType == .platinum {
+                self.topHeaderView.isHidden = false
+                self.upgradeNowButton.isHidden = true
                 setupHeaderView(headerTitle: topPlaceholderSection.title)
-                topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
+                
+                if let iconURL = topPlaceholderSection.iconUrl {
+                    self.topHeaderView.headerTitleImageView.isHidden = false
+                    self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
+                }
                 self.upgradeNowButton.isHidden = true
             }else{
+                topHeaderView.isHidden = true
                 setUpNavigationBar()
             }
             self.configureDataSource()
