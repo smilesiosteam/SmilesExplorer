@@ -118,7 +118,11 @@ public class SmilesExplorerHomeViewController: UIViewController {
         }
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue }) {
             setupHeaderView(headerTitle: topPlaceholderSection.title)
-            topHeaderView.setHeaderTitleIcon(iconURL: topPlaceholderSection.iconUrl)
+            if let iconURL = topPlaceholderSection.iconUrl {
+                self.topHeaderView.headerTitleImageView.isHidden = false
+                self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
+            }
+            
         }
         homeAPICalls()
         
