@@ -100,7 +100,9 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .appRevampEnableStateColor, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+        self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
     }
     
     fileprivate func configureDataSource() {
@@ -160,7 +162,7 @@ extension SmilesExplorerHomeViewController {
                 case .fetchSectionsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
                     self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
-                    self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
+//                    self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
                     self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false)

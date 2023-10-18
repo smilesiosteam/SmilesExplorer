@@ -150,8 +150,8 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         self.navigationItem.titleView = hStack
         
         let btnBack: UIButton = UIButton(type: .custom)
-        btnBack.backgroundColor = UIColor(red: 226.0 / 255.0, green: 226.0 / 255.0, blue: 226.0 / 255.0, alpha: 1.0)
-        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_Icon", in: .module, compatibleWith: nil), for: .normal)
+        btnBack.backgroundColor = UIColor.clear
+        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow", in: .module, compatibleWith: nil), for: .normal)
         btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
         btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         btnBack.layer.cornerRadius = btnBack.frame.height / 2
@@ -205,6 +205,7 @@ extension SmilesExplorerMembershipCardsViewController {
     private func configureSmilesExplorerSubscriptions(with response: SmilesExplorerSubscriptionInfoResponse) {
         self.pickPassTypeLabel.text = response.themeResources?.explorerSubscriptionTitle ?? ""
         self.smilesExplorerLabel.text = response.themeResources?.explorerSubscriptionSubTitle ?? ""
+        self.smilesExplorerLabel.fontTextStyle = .smilesBody3
         self.response = response
         self.setUpNavigationBar()
         if let offers = response.lifestyleOffers {

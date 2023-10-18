@@ -34,14 +34,21 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {return nil}
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            
+            if self.smilesExplorerSections?.sectionDetails?[safe: section]?.sectionIdentifier != SmilesExplorerSectionIdentifier.header.rawValue {
+                return nil
+            }
+            
+        }
         
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             if sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSectionIdentifier.footer.rawValue {
+                
                 let header = SmilesExplorerHeader()
                 header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
                 configureHeaderForShimmer(section: section, headerView: header)
-                
+                header.subTitleLabel.textColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.6)
                 
                 if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
                     switch SmilesExplorerSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
@@ -49,6 +56,8 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
                         header.mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
                         header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
                     case .header:
+                        header.setupData(title: sectionData.title, subTitle: sectionData.subTitle, color: UIColor(hexString: sectionData.backgroundColor ?? ""), section: section)
+                        header.subTitleLabel.textColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.6)
                         header.mainView.backgroundColor = .white
                     default:
                         header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
@@ -68,7 +77,13 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
-            return CGFloat.leastNormalMagnitude
+            switch self.smilesExplorerSections?.sectionDetails?[safe: section]?.sectionIdentifier {
+            case SmilesExplorerSectionIdentifier.header.rawValue:
+              return 130
+            default:
+                return CGFloat.leastNormalMagnitude
+            }
+            
         }
         switch self.smilesExplorerSections?.sectionDetails?[safe: section]?.sectionIdentifier {
         case SmilesExplorerSectionIdentifier.footer.rawValue:
@@ -96,7 +111,6 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
                     showHide(isDummy: dataSource.isDummy)
                 }
             case .exclusiveDeals:
-                
                 if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
@@ -110,6 +124,11 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
                     showHide(isDummy: dataSource.isDummy)
                 }
                 
+            case .header:
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<SectionDetailDO>) {
+                    showHide(isDummy: dataSource.isDummy)
+                }
+                
             
             default:
                 break
@@ -119,38 +138,6 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
 
     }
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-//        var tableViewHeight = contentTableView.frame.height
-//        if headerView.alpha == 0 {
-//            tableViewHeight -= 153
-//        }
-//        guard scrollView.contentSize.height > tableViewHeight else { return }
-//        var compact: Bool?
-//        if scrollView.contentOffset.y > 90 {
-//           compact = true
-//        } else if scrollView.contentOffset.y < 0 {
-//            compact = false
-//        }
-//        guard let compact, compact != (headerView.alpha == 0) else { return }
-//        if compact {
-//            self.setUpNavigationBar(isLightContent: false)
-//            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
-//                self.headerView.alpha = 0
-//                self.tableViewTopSpaceToHeaderView.priority = .defaultLow
-//                self.tableViewTopSpaceToSuperView.priority = .defaultHigh
-//                self.view.layoutIfNeeded()
-//            })
-//        } else {
-//            self.setUpNavigationBar()
-//            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
-//                self.headerView.alpha = 1
-//                self.tableViewTopSpaceToHeaderView.priority = .defaultHigh
-//                self.tableViewTopSpaceToSuperView.priority = .defaultLow
-//                self.view.layoutIfNeeded()
-//            })
-//        }
-        
-    }
+    
     
 }

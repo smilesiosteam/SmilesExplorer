@@ -126,7 +126,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                                 }else{
                                     header.mainView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
                                     header.bgMainView.backgroundColor = .white
-                                    header.backgroundColor = .appRevampFilterCountBGColor.withAlphaComponent(0.1)
+                                    header.backgroundColor = .white
                                 }
                                 
                                 header.mainView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)

@@ -126,6 +126,8 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
             topHeaderView.isHidden = false
             self.tableViewTopConstraint.constant = -16
             self.setupHeaderView(headerTitle: "")
+            let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+            self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
         }else{
             self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)))
             self.topHeaderView.isHidden = true
@@ -243,7 +245,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     // MARK: - Top Header
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .appRevampFilterCountBGColor.withAlphaComponent(0.1), searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
         displayRewardPoints()
     }
     func displayRewardPoints() {
@@ -269,8 +271,8 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         let compact = scrollView.contentOffset.y > 150
         if compact != isAlreadyCompact {
             isHeaderExpanding = true
-            topHeaderView.adjustUI(compact: compact)
-            topHeaderView.view_container.backgroundColor = compact ? .white : .appRevampEnableStateColor
+            topHeaderView.adjustUI(compact: compact,isBackgroundColorClear: true)
+            topHeaderView.view_container.backgroundColor = .white
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
                 self.isHeaderExpanding = false
@@ -423,6 +425,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     self.topHeaderView.headerTitleImageView.isHidden = false
                     self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
                 }
+                let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+                self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
                 self.upgradeNowButton.isHidden = true
             }else{
                 topHeaderView.isHidden = true
