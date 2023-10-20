@@ -48,7 +48,12 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     
     var selectedLocation: String? = nil
     var isHeaderExpanding = false
-    
+    var hasTopNotch: Bool {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
+        }
+        return false
+    }
     
     
     //var categoryId = 0
@@ -208,7 +213,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: btnBack)
         self.navigationItem.leftBarButtonItem = barButton
         self.topHeaderView.isHidden = true
-        self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)))
+        if hasTopNotch {
+            self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)))
+        } else{
+            self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)-30.0))
+        }
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         

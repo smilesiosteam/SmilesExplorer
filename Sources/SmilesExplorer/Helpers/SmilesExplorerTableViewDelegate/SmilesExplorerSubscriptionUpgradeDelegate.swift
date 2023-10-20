@@ -164,6 +164,11 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                 return 0
             }
         }
+        if let offersIndex = getSectionIndex(for: .freetickets) {
+            if section == offersIndex {
+                return 0
+            }
+        }
         return CGFloat.leastNormalMagnitude
     }
     

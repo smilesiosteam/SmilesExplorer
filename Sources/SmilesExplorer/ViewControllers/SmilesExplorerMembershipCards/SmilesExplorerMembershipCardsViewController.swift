@@ -109,6 +109,8 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         
         tableView.delegate = self
         //        tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 40.0, right: 0.0)
+        
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerSubscriptionCellRegistration()
         smilesExplorerCellRegistrable.register(for: tableView)
         

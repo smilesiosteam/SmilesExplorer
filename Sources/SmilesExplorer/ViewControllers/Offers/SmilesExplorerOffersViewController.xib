@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMR-Mx-bli">
-                    <rect key="frame" x="0.0" y="59" width="393" height="1.6666666666666856"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="1.6666666666666643"/>
                     <color key="backgroundColor" red="0.88235294819999999" green="0.88235294819999999" blue="0.88235294819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1.5" id="iKZ-Nu-Bc1"/>
@@ -63,56 +63,56 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesBody3"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
-                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apo-rX-ZM4" customClass="UICustomButton" customModule="SmilesUtilities">
-                                    <rect key="frame" x="240" y="685" width="137" height="48"/>
-                                    <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="9nr-rR-qqr"/>
-                                        <constraint firstAttribute="width" constant="137" id="Nnr-PG-0vO"/>
-                                    </constraints>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="Confirm">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="24"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Confirm"/>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="confirmPressed:" destination="-1" eventType="touchUpInside" id="g91-Pq-3vZ"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wN3-U7-QKu" customClass="UICustomButton" customModule="SmilesUtilities">
-                                    <rect key="frame" x="16" y="685" width="163" height="48"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="163" id="0kD-BJ-6Df"/>
-                                        <constraint firstAttribute="height" constant="48" id="xNi-4S-mcs"/>
-                                    </constraints>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="Skip for now">
-                                        <color key="titleColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="24"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Skip for now"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                            <integer key="value" value="2"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                            <color key="value" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="skipPressed:" destination="-1" eventType="touchUpInside" id="mpA-bD-CcC"/>
-                                    </connections>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="fYu-Hq-wOX">
+                                    <rect key="frame" x="16" y="685" width="361" height="48"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wN3-U7-QKu" customClass="UICustomButton" customModule="SmilesUtilities">
+                                            <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="48"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="nrh-do-dfR"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Skip for now">
+                                                <color key="titleColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="24"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Skip for now"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                    <color key="value" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="skipPressed:" destination="-1" eventType="touchUpInside" id="mpA-bD-CcC"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apo-rX-ZM4" customClass="UICustomButton" customModule="SmilesUtilities">
+                                            <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="48"/>
+                                            <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Confirm">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="24"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Confirm"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="confirmPressed:" destination="-1" eventType="touchUpInside" id="g91-Pq-3vZ"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ofJ-g9-Q7c">
                                     <rect key="frame" x="0.0" y="126" width="393" height="551"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -126,19 +126,18 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="fYu-Hq-wOX" firstAttribute="top" secondItem="ofJ-g9-Q7c" secondAttribute="bottom" constant="8" id="5Xi-W7-qg3"/>
                                 <constraint firstAttribute="trailing" secondItem="vmG-PU-Gbh" secondAttribute="trailing" constant="16" id="8CJ-mw-5Kk"/>
-                                <constraint firstItem="Apo-rX-ZM4" firstAttribute="top" secondItem="ofJ-g9-Q7c" secondAttribute="bottom" constant="8" id="8U5-sC-9X5"/>
                                 <constraint firstAttribute="trailing" secondItem="ofJ-g9-Q7c" secondAttribute="trailing" id="AYV-7M-KDF"/>
                                 <constraint firstItem="vmG-PU-Gbh" firstAttribute="leading" secondItem="PbA-q6-LAr" secondAttribute="leading" constant="16" id="BkP-90-42l"/>
-                                <constraint firstItem="wN3-U7-QKu" firstAttribute="leading" secondItem="PbA-q6-LAr" secondAttribute="leading" constant="16" id="FVa-oh-kQD"/>
                                 <constraint firstItem="ofJ-g9-Q7c" firstAttribute="leading" secondItem="PbA-q6-LAr" secondAttribute="leading" id="KGz-gt-oFB"/>
-                                <constraint firstItem="wN3-U7-QKu" firstAttribute="centerY" secondItem="Apo-rX-ZM4" secondAttribute="centerY" id="LBR-qy-p5z"/>
+                                <constraint firstAttribute="bottom" secondItem="fYu-Hq-wOX" secondAttribute="bottom" constant="26" id="NbH-qc-OoM"/>
                                 <constraint firstItem="kWA-sq-5nz" firstAttribute="leading" secondItem="vmG-PU-Gbh" secondAttribute="leading" id="Oap-ok-vgE"/>
-                                <constraint firstAttribute="trailing" secondItem="Apo-rX-ZM4" secondAttribute="trailing" constant="16" id="bFz-Ms-qo5"/>
                                 <constraint firstItem="vmG-PU-Gbh" firstAttribute="top" secondItem="PbA-q6-LAr" secondAttribute="top" constant="24" id="bIH-IX-LeB"/>
+                                <constraint firstAttribute="trailing" secondItem="fYu-Hq-wOX" secondAttribute="trailing" constant="16" id="bcT-Qz-gbL"/>
                                 <constraint firstItem="kWA-sq-5nz" firstAttribute="trailing" secondItem="vmG-PU-Gbh" secondAttribute="trailing" id="c2C-Is-nvb"/>
-                                <constraint firstAttribute="bottom" secondItem="Apo-rX-ZM4" secondAttribute="bottom" constant="26" id="ddO-rV-xWv"/>
                                 <constraint firstItem="ofJ-g9-Q7c" firstAttribute="top" secondItem="kWA-sq-5nz" secondAttribute="bottom" constant="24" id="dea-28-Zup"/>
+                                <constraint firstItem="fYu-Hq-wOX" firstAttribute="leading" secondItem="PbA-q6-LAr" secondAttribute="leading" constant="16" id="mgh-qD-3gS"/>
                                 <constraint firstItem="kWA-sq-5nz" firstAttribute="top" secondItem="vmG-PU-Gbh" secondAttribute="bottom" constant="8" id="yIq-kJ-YRu"/>
                             </constraints>
                         </view>

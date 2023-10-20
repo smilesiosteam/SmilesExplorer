@@ -78,6 +78,8 @@ public class SmilesExplorerOffersViewController: UIViewController {
     
         titleLbl.text = response?.listTitle
         detailsLbl.text = response?.listSubtitle
+        titleLbl.fontTextStyle = .smilesHeadline3
+        detailsLbl.fontTextStyle = .smilesBody3
         skipBtn.layer.borderColor = #colorLiteral(red: 0.431372549, green: 0.2352941176, blue: 0.5098039216, alpha: 1)
         setupCollectionView()
         setConfirmBtnUI(enabled: false)
@@ -91,11 +93,12 @@ public class SmilesExplorerOffersViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
         let locationNavBarTitle = UILabel()
         locationNavBarTitle.text = SmilesLanguageManager.shared.getLocalizedString(for: "Pick a ticket")
-        locationNavBarTitle.textColor = .black
+        locationNavBarTitle.textColor = .appRevampPurpleMainColor
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         self.navigationItem.titleView = locationNavBarTitle
         let btnBack: UIButton = UIButton(type: .custom)
-        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow", in: .module, compatibleWith: nil), for: .normal)
+        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow", in: .module, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btnBack.tintColor = .appRevampPurpleMainColor
         btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
         btnBack.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         let barButton = UIBarButtonItem(customView: btnBack)
