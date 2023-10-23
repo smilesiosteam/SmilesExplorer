@@ -136,7 +136,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
     private func styleFontAndTextColor() {
        
         self.congratulationLabel.fontTextStyle = .smilesHeadline3
-        self.detailLabel.fontTextStyle = .smilesBody3
+        self.detailLabel.fontTextStyle = .smilesBody1
         self.dateORLinkButton.fontTextStyle = .smilesBody3
         self.continueButton.fontTextStyle = .smilesHeadline4
         self.exploreButton.fontTextStyle = .smilesHeadline4
