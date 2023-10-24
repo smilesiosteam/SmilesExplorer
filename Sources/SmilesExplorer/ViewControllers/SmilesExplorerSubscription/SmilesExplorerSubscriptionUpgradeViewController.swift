@@ -90,12 +90,14 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     private var rewardPoint: Int?
     private var rewardPointIcon: String?
     private var personalizationEventSource: String?
+    private var platinumLimiReached: Bool?
 
     
     var restaurants = [Restaurant]()
 
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?) {
+    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?,platinumLimiReached: Bool?) {
+        self.platinumLimiReached = platinumLimiReached
         self.personalizationEventSource =  personalizationEventSource
         self.categoryId = categoryId
         self.isGuestUser = isGuestUser
@@ -118,7 +120,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         bind(to: viewModel)
         
         if let isUserSubscribed {
-            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false)
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false,platinumLimiReached: platinumLimiReached)
         } else {
             self.input.send(.getRewardPoints)
         }
@@ -357,8 +359,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
-    private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage,freeTicketAvailed:Bool) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed))
+    private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage,freeTicketAvailed:Bool,platinumLimiReached: Bool? = nil) {
+        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed,platinumLimiReached: platinumLimiReached))
     }
     
     

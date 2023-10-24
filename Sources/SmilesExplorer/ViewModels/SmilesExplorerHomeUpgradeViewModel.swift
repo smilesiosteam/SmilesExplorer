@@ -59,9 +59,9 @@ extension SmilesExplorerHomeUpgradeViewModel {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {
-            case .getSections(categoryID: let categoryID, let type, let explorerPackageType, let freeTicketAvailed):
+            case .getSections(categoryID: let categoryID, let type, let explorerPackageType, let freeTicketAvailed,let platinumLimitReached):
                 self?.bind(to: self?.sectionsViewModel ?? SectionsViewModel())
-                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed))
+                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed,platinumLimitReached: platinumLimitReached))
                 
             case .getFiltersData(let filtersSavedList, let isFilterAllowed, let isSortAllowed):
                 self?.createFiltersData(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed)
