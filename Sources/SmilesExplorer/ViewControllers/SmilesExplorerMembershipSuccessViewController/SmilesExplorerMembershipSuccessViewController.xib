@@ -105,7 +105,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eb-4b-tbv" customClass="UICustomButton" customModule="SmilesUtilities">
-                    <rect key="frame" x="115" y="744" width="163" height="48"/>
+                    <rect key="frame" x="115" y="750" width="163" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="52l-fH-COP"/>
                         <constraint firstAttribute="width" constant="163" id="DpP-hH-t36"/>
@@ -142,7 +142,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="wiy-x1-Pag" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="20" id="4oi-xn-WeX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4eb-4b-tbv" secondAttribute="bottom" constant="26" id="5b0-9y-EdX"/>
+                <constraint firstAttribute="bottom" secondItem="4eb-4b-tbv" secondAttribute="bottom" constant="54" id="5b0-9y-EdX"/>
                 <constraint firstItem="ANz-Ah-hdQ" firstAttribute="top" secondItem="wiy-x1-Pag" secondAttribute="bottom" constant="16" id="9jY-u4-iQS"/>
                 <constraint firstItem="TrA-6i-RpV" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.233568" id="DdQ-Hk-ou3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wiy-x1-Pag" secondAttribute="trailing" constant="32" id="HsF-oO-L8y"/>
