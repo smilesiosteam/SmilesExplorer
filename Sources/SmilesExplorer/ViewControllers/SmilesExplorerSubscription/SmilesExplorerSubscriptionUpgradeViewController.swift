@@ -126,7 +126,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         }
         
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        if self.subscriptionType == .platinum {
+        if self.subscriptionType == .platinum || self.platinumLimiReached == false{
             self.upgradeNowButton.isHidden = true
         }else{
             self.upgradeNowButton.isHidden = false
@@ -432,7 +432,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 }
                 let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
                 self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
-            if self.subscriptionType == .platinum {self.upgradeNowButton.isHidden = true}else{
+            if self.subscriptionType == .platinum || self.platinumLimiReached == false{
+                self.upgradeNowButton.isHidden = true
+            }else{
                 self.upgradeNowButton.isHidden = false
             }
             self.configureDataSource()
