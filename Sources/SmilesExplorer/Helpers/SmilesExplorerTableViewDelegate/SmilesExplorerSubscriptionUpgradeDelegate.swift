@@ -225,9 +225,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.subscriptionType == .platinum {
             adjustTopHeader(scrollView)
-        }
     }
     
 }
