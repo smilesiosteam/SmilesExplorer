@@ -432,7 +432,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 }
                 let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
                 self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
-            if self.subscriptionType == .platinum || self.platinumLimiReached == false{
+            if self.subscriptionType == .platinum || self.platinumLimiReached == true{
                 self.upgradeNowButton.isHidden = true
             }else{
                 self.upgradeNowButton.isHidden = false
