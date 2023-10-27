@@ -126,7 +126,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         }
         
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        if self.subscriptionType == .platinum || self.platinumLimiReached == false{
+        if self.subscriptionType == .platinum || self.platinumLimiReached == true{
             self.upgradeNowButton.isHidden = true
         }else{
             self.upgradeNowButton.isHidden = false
