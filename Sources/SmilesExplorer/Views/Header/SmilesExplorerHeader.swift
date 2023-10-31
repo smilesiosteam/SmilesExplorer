@@ -50,10 +50,10 @@ class SmilesExplorerHeader: UIView {
         
         
         
-        subTitleLabel.isHidden = subTitle == nil
-        if isPostSub {
-            subTitleLabel.isHidden = true
-        }
+//        subTitleLabel.isHidden = subTitle == nil
+//        if isPostSub {
+//            subTitleLabel.isHidden = true
+//        }
         titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         subTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
     }
