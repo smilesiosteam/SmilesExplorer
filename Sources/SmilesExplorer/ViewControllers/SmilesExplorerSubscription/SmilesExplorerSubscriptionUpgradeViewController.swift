@@ -132,7 +132,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
             self.upgradeNowButton.isHidden = false
             self.upgradeNowButton.fontTextStyle = .smilesHeadline4
             self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
-            self.upgradeNowButton.setTitle("Buy Now".localizedString, for: .normal)
+            self.upgradeNowButton.setTitle("ExplorerBuyNow".localizedString, for: .normal)
         }
         self.setupHeaderView(headerTitle: "")
         let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
