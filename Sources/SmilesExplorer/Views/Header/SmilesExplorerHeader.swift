@@ -44,9 +44,9 @@ class SmilesExplorerHeader: UIView {
     
     func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?, isPostSub:Bool = false) {
         titleLabel.localizedString = title ?? ""
-        if !isPostSub {
+//        if !isPostSub {
             subTitleLabel.localizedString = subTitle ?? ""
-        }
+//        }
         
         
         
