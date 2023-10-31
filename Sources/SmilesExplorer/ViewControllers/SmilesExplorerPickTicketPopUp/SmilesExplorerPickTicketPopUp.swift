@@ -74,7 +74,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
     private func setupUI() {
         
         setupCollectionView()
-        self.upgradeButton.setTitle("Upgrade".localizedString, for: .normal)
+        self.upgradeButton.setTitle("Buy Now".localizedString, for: .normal)
         mainContainerView.clipsToBounds = true
         mainContainerView.layer.cornerRadius = 16
         mainContainerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]

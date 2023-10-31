@@ -151,7 +151,7 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         setButtonsAndDateORLinkUI()
         
         continueButton.setTitle( "ContinueTitle".localizedString.capitalized, for: .normal)
-        self.exploreButton.setTitle("Go to explorer".localizedString, for: .normal)
+        self.exploreButton.setTitle("ContinueTitle".localizedString.capitalized, for: .normal)
         congratulationLabel.text = self.response?.themeResources?.explorerPurchaseSuccessTitle
         if let urlStr = self.response?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
             imgView.isHidden = false
