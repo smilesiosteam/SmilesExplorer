@@ -44,14 +44,14 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
         self.choiceTicketLabel.fontTextStyle = .smilesTitle3
         self.exclusiveOfferLabel.fontTextStyle = .smilesTitle3
         self.buy1Get1Label.fontTextStyle = .smilesTitle3
-        self.choiceTicketLabel.fontTextStyle = .smilesHeadline4
+        self.priceLabel.fontTextStyle = .smilesHeadline4
         
         //TypoGraphy Color
         self.platinumExplorerLabel.textColor = UIColor(hexString: "#e6000000")
         self.choiceTicketLabel.textColor = UIColor(hexString: "#383838")
         self.exclusiveOfferLabel.textColor = UIColor(hexString: "#383838")
         self.buy1Get1Label.textColor = UIColor(hexString: "#383838")
-        self.choiceTicketLabel.textColor = UIColor(hexString: "#e6000000")
+        self.priceLabel.textColor = UIColor(hexString: "#e6000000")
         
     }
     
