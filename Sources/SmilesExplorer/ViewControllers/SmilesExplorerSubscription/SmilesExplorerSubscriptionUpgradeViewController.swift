@@ -126,20 +126,17 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         }
         
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        self.upgradeNowButton.fontTextStyle = .smilesHeadline4
-        self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
-        self.upgradeNowButton.setTitle("Upgrade Now".localizedString, for: .normal)
-        if self.subscriptionType == .platinum {
-            topHeaderView.isHidden = false
-            self.tableViewTopConstraint.constant = -16
-            self.setupHeaderView(headerTitle: "")
-            let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
-            self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
+        if self.subscriptionType == .platinum || self.platinumLimiReached == true{
+            self.upgradeNowButton.isHidden = true
         }else{
-            self.tableViewTopConstraint.constant = ((-212) + ((self.navigationController?.navigationBar.frame.height ?? 0.0)))
-            self.topHeaderView.isHidden = true
-            
+            self.upgradeNowButton.isHidden = false
+            self.upgradeNowButton.fontTextStyle = .smilesHeadline4
+            self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
+            self.upgradeNowButton.setTitle("ExplorerBuyNow".localizedString, for: .normal)
         }
+        self.setupHeaderView(headerTitle: "")
+        let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+        self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
     }
     
     
@@ -427,9 +424,6 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
             
-            if self.subscriptionType == .platinum {
-                self.topHeaderView.isHidden = false
-                self.upgradeNowButton.isHidden = true
                 setupHeaderView(headerTitle: topPlaceholderSection.title)
                 
                 if let iconURL = topPlaceholderSection.iconUrl {
@@ -438,10 +432,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 }
                 let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
                 self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
+            if self.subscriptionType == .platinum || self.platinumLimiReached == true{
                 self.upgradeNowButton.isHidden = true
             }else{
-                topHeaderView.isHidden = true
-                setUpNavigationBar()
+                self.upgradeNowButton.isHidden = false
             }
             self.configureDataSource()
             homeAPICalls()

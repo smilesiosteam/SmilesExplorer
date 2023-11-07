@@ -35,7 +35,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         subscriptionImageView.contentMode = .scaleAspectFit
-        getMemberShipButton.setTitle("Get membership".localizedString, for: .normal)
+        getMemberShipButton.setTitle("Subscribe".localizedString, for: .normal)
         topView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
         // Initialization code
     }

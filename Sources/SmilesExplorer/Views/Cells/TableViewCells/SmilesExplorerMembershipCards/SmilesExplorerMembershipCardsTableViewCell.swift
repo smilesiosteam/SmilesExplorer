@@ -39,6 +39,20 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
         self.cardView.layer.borderColor = UIColor.lightGray.cgColor
         self.cardView.layer.borderWidth = 1
         
+        //TypoGraphy Setup
+        self.platinumExplorerLabel.fontTextStyle = .smilesHeadline3
+        self.choiceTicketLabel.fontTextStyle = .smilesTitle3
+        self.exclusiveOfferLabel.fontTextStyle = .smilesTitle3
+        self.buy1Get1Label.fontTextStyle = .smilesTitle3
+        self.priceLabel.fontTextStyle = .smilesHeadline4
+        
+        //TypoGraphy Color
+        self.platinumExplorerLabel.textColor = UIColor(hexString: "#e6000000")
+        self.choiceTicketLabel.textColor = UIColor(hexString: "#383838")
+        self.exclusiveOfferLabel.textColor = UIColor(hexString: "#383838")
+        self.buy1Get1Label.textColor = UIColor(hexString: "#383838")
+        self.priceLabel.textColor = UIColor(hexString: "#e6000000")
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,7 +71,7 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
 
         for (index, label) in labels.enumerated() {
             if index < texts.count {
-                label?.text = "• " + texts[index]
+                label?.text = texts[index]
             } else {
                 label?.isHidden = true
             }

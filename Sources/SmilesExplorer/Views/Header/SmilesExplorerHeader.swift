@@ -44,16 +44,16 @@ class SmilesExplorerHeader: UIView {
     
     func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?, isPostSub:Bool = false) {
         titleLabel.localizedString = title ?? ""
-        if !isPostSub {
+//        if !isPostSub {
             subTitleLabel.localizedString = subTitle ?? ""
-        }
+//        }
         
         
         
-        subTitleLabel.isHidden = subTitle == nil
-        if isPostSub {
-            subTitleLabel.isHidden = true
-        }
+//        subTitleLabel.isHidden = subTitle == nil
+//        if isPostSub {
+//            subTitleLabel.isHidden = true
+//        }
         titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         subTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
     }

@@ -92,7 +92,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
         let locationNavBarTitle = UILabel()
-        locationNavBarTitle.text = SmilesLanguageManager.shared.getLocalizedString(for: "Pick a ticket")
+        locationNavBarTitle.text = SmilesLanguageManager.shared.getLocalizedString(for: "Choose a ticket")
         locationNavBarTitle.textColor = .appRevampPurpleMainColor
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         self.navigationItem.titleView = locationNavBarTitle
