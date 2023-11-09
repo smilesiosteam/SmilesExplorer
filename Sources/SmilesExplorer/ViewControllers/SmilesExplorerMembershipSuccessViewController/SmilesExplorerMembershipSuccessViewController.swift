@@ -155,8 +155,8 @@ public class SmilesExplorerMembershipSuccessViewController: UIViewController {
         congratulationLabel.text = self.response?.themeResources?.explorerPurchaseSuccessTitle
         if let urlStr = self.response?.themeResources?.explorerPurchaseSuccessImage, !urlStr.isEmpty {
             imgView.isHidden = false
-            if urlStr.hasSuffix(".json") {
-                LottieAnimationManager.showAnimationFromUrl(FromUrl: urlStr, animationBackgroundView: self.imgView, removeFromSuper: false, loopMode: .loop, shouldAnimate: true) { _ in }
+            if urlStr.hasSuffix(".json"), let url = URL(string:urlStr) {
+                LottieAnimationManager.showAnimationFromUrl(FromUrl: url, animationBackgroundView: self.imgView, removeFromSuper: false, loopMode: .loop, shouldAnimate: true) { _ in }
             }else{
                 self.imgView.setImageWithUrlString(urlStr)
             }
