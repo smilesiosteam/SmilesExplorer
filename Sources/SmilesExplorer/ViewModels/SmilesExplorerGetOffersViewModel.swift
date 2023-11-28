@@ -45,20 +45,20 @@ extension SmilesExplorerGetOffersViewModel {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {
-            case .getExclusiveOffersList(let categoryId,let tag,_):
-                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "")
+            case .getExclusiveOffersList(let categoryId,let tag,let page):
+                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "", page: page)
                 
             case .getTickets(categoryId: let categoryId, tag: let tag, _):
-                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "")
+                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "",page: 1)
             case .getBogo(categoryId: let categoryId, tag: let tag, page: _):
-                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "")
+                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "",page: 1)
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
     }
     
-    func getExclusiveOffersList(categoryId: Int, tag: String, page: Int = 1) {
-        let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag)
+    func getExclusiveOffersList(categoryId: Int, tag: String, page: Int) {
+        let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag, pageNo: page)
         
         let service = SmilesExplorerGetExclusiveOfferRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60), baseUrl: AppCommonMethods.serviceBaseUrl,

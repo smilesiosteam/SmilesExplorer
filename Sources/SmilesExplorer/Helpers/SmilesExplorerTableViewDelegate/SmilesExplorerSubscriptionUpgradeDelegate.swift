@@ -185,7 +185,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                 let lastItem = self.bogoOffers.endIndex - 1
                 if indexPath.row == lastItem {
                     if bogoOffers.count != (bogooffersListing?.offersCount ?? 0)  {
-                        offersPage += 1
+                        offersPage = offersPage + 1
+                        print("-----> offersPage \(offersPage)")
+                        
                         self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: offersPage))
                     }
                 }

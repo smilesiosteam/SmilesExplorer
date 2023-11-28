@@ -28,7 +28,7 @@ public class ExplorerGetExclusiveOfferRequest: SmilesBaseMainRequest {
         
     }
     
-    public init(categoryId: Int?, tag: String? = nil, pageNo: Int? = 1) {
+    public init(categoryId: Int?, tag: String? = nil, pageNo: Int?) {
         super.init()
         self.categoryId = categoryId
         self.tag = tag
