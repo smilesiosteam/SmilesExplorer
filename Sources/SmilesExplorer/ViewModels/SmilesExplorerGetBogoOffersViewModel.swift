@@ -19,7 +19,7 @@ public class SmilesExplorerGetBogoOffersViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
   public  enum Input {
-        case getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int = 1)
+        case getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int)
     }
     
     enum Output {
@@ -45,7 +45,7 @@ extension SmilesExplorerGetBogoOffersViewModel {
         return output.eraseToAnyPublisher()
     }
     
-    func getBogoOffers(categoryId: Int, tag: String, pageNo: Int = 1) {
+    func getBogoOffers(categoryId: Int, tag: String, pageNo: Int) {
         let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag, pageNo: pageNo)
         
         let service = SmilesExplorerGetExclusiveOfferRepository(

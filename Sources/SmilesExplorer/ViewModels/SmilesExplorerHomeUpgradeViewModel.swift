@@ -101,16 +101,16 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 self?.bind(to: self?.smilesExplorerGetOffersStoriesViewModel ?? SmilesExplorerGetOffersStoriesViewModel())
                 self?.exclusiveOffersStoriesUseCaseInput.send(.getExclusiveOffersList(categoryId: categoryId, tag: tag.rawValue, pageNo: pageNo ?? 1))
                 
-            case .getTickets(categoryId: let categoryId, tag: let tag, pageNo: _):
+            case .getTickets(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
                 
                 self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
-                self?.exclusiveOffersUseCaseInput.send(.getTickets(categoryId: categoryId, tag: tag))
+                self?.exclusiveOffersUseCaseInput.send(.getTickets(categoryId: categoryId, tag: tag, page: pageNo ?? 1))
             
-            case .getBogoOffers(categoryId: let categoryId, tag: let tag, pageNo: _):
+            case .getBogoOffers(categoryId: let categoryId, tag: let tag, pageNo: let page):
             
 //                self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
                 self?.bind(to: self?.smilesExplorerGetBogoOffersViewModel ?? SmilesExplorerGetBogoOffersViewModel())
-                self?.bogoOffersUseCaseInput.send(.getBogoOffers(categoryId: categoryId, tag: tag.rawValue))
+                self?.bogoOffersUseCaseInput.send(.getBogoOffers(categoryId: categoryId, tag: tag.rawValue,pageNo: page ?? 1))
                 
             
             case .getBogo(categoryId: _, tag: _, pageNo: _):
