@@ -135,7 +135,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
             self.upgradeNowButton.setTitle("Upgrade Now".localizedString, for: .normal)
         }
         self.setupHeaderView(headerTitle: "")
-        let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+        let imageName = "back_arrow"
         self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
     }
     
@@ -430,7 +430,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     self.topHeaderView.headerTitleImageView.isHidden = false
                     self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
                 }
-                let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+                let imageName = "back_arrow"
                 self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
             if self.subscriptionType == .platinum || self.platinumLimiReached == true{
                 self.upgradeNowButton.isHidden = true
