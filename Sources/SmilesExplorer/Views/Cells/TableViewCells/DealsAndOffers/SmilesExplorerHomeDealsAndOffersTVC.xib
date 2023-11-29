@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SmilesExplorerHomeDealsAndOffersTVC" rowHeight="108" id="8gQ-iW-412" customClass="SmilesExplorerHomeDealsAndOffersTVC" customModule="SmilesExplorer">
-            <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SmilesExplorerHomeDealsAndOffersTVC" rowHeight="130" id="8gQ-iW-412" customClass="SmilesExplorerHomeDealsAndOffersTVC" customModule="SmilesExplorer">
+            <rect key="frame" x="0.0" y="0.0" width="470" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8gQ-iW-412" id="dCp-NX-gaP">
-                <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+                <rect key="frame" x="0.0" y="0.0" width="470" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gK4-PD-F18">
-                        <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+                        <rect key="frame" x="0.0" y="0.0" width="470" height="130"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ye2-oI-5d8">
-                                <rect key="frame" x="0.0" y="0.0" width="396" height="108"/>
+                                <rect key="frame" x="0.0" y="0.0" width="470" height="130"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="108" id="0HJ-7x-NdF"/>
+                                    <constraint firstAttribute="height" constant="130" id="gHL-fP-yEP"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SKD-Rp-iN4">
                                     <size key="itemSize" width="128" height="128"/>
@@ -36,10 +36,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="leading" secondItem="gK4-PD-F18" secondAttribute="leading" id="R5o-kn-kTD"/>
-                            <constraint firstAttribute="trailing" secondItem="Ye2-oI-5d8" secondAttribute="trailing" id="Xoy-Lz-VX6"/>
-                            <constraint firstAttribute="bottom" secondItem="Ye2-oI-5d8" secondAttribute="bottom" id="iS9-U2-fgY"/>
-                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="top" secondItem="gK4-PD-F18" secondAttribute="top" id="vD2-zh-CXZ"/>
+                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="top" secondItem="gK4-PD-F18" secondAttribute="top" id="8bZ-O6-cOP"/>
+                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="height" secondItem="gK4-PD-F18" secondAttribute="height" id="GK2-jV-Onq"/>
+                            <constraint firstAttribute="bottom" secondItem="Ye2-oI-5d8" secondAttribute="bottom" id="dBa-Pe-wn9"/>
+                            <constraint firstItem="Ye2-oI-5d8" firstAttribute="leading" secondItem="gK4-PD-F18" secondAttribute="leading" id="dyg-Y8-sbg"/>
+                            <constraint firstAttribute="trailing" secondItem="Ye2-oI-5d8" secondAttribute="trailing" id="ynb-8C-c8j"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -57,7 +58,7 @@
                 <outlet property="collectionView" destination="Ye2-oI-5d8" id="5zA-Bq-LW1"/>
                 <outlet property="mainView" destination="gK4-PD-F18" id="2lV-am-A0n"/>
             </connections>
-            <point key="canvasLocation" x="109.9236641221374" y="27.464788732394368"/>
+            <point key="canvasLocation" x="166.41221374045801" y="31.690140845070424"/>
         </tableViewCell>
     </objects>
 </document>
