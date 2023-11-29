@@ -143,7 +143,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         }
         
         let locationNavBarTitle = UILabel()
-        locationNavBarTitle.text = response?.themeResources?.explorerTopPlaceholderTitle ?? "Smiles Explorer"
+        locationNavBarTitle.text = response?.themeResources?.explorerTopPlaceholderTitle ?? "Smiles Tourist".localizedString
         locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         let hStack = UIStackView(arrangedSubviews: [imageView, locationNavBarTitle])
@@ -160,6 +160,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
         btnBack.clipsToBounds = true
         let barButton = UIBarButtonItem(customView: btnBack)
         self.navigationItem.leftBarButtonItem = barButton
+        self.navigationController?.navigationBar.backgroundColor = .clear
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     }
