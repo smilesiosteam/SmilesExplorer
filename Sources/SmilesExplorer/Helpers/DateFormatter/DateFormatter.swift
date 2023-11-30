@@ -23,7 +23,7 @@ extension String {
         
         let dateFormatterPrint = DateFormatter.configuredFormatter(with: targetFormat, localeIdentifier: "en_US")
         if SmilesLanguageManager.shared.currentLanguage == .ar {
-            dateFormatterPrint.locale = Locale(identifier: "ar_SA")
+            dateFormatterPrint.locale = Locale(identifier: "ar_AE")
         }
         
         if let date = dateFormatterGet.date(from: self) {
