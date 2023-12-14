@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SmilesOffers
 
 class SmilesExplorerHomeDealsAndOffersTVC: UITableViewCell {
     
@@ -14,13 +15,13 @@ class SmilesExplorerHomeDealsAndOffersTVC: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - PROPERTIES -
-    var collectionsData: [ExplorerOffer]?{
+    var collectionsData: [OfferDO]?{
         didSet{
             self.collectionView?.reloadData()
         }
     }
     var index: Int?
-    var callBack: ((ExplorerOffer) -> ())?
+    var callBack: ((OfferDO) -> ())?
     
     // MARK: - ACTIONS -
     

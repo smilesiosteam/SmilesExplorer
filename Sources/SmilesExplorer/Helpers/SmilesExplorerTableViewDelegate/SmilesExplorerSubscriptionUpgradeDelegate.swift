@@ -210,7 +210,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             switch SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
             case .stories:
-                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OffersCategoryResponseModel>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
             case .offerListing:

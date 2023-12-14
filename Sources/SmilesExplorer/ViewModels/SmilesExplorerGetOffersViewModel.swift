@@ -25,13 +25,13 @@ public class SmilesExplorerGetOffersViewModel: NSObject {
     }
     
     enum Output {
-        case fetchExclusiveOffersDidSucceed(response: ExplorerOfferResponse)
+        case fetchExclusiveOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchExclusiveOffersDidFail(error: Error)
         
-        case fetchTicketsDidSucceed(response: ExplorerOfferResponse)
+        case fetchTicketsDidSucceed(response: OffersCategoryResponseModel)
         case fetchTicketDidFail(error: Error)
         
-        case fetchBogoDidSucceed(response: ExplorerOfferResponse)
+        case fetchBogoDidSucceed(response: OffersCategoryResponseModel)
         case fetchBogoDidFail(error: Error)
     }
     

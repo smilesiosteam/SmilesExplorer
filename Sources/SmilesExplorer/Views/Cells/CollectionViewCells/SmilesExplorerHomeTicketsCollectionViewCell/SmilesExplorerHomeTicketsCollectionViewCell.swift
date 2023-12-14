@@ -7,6 +7,7 @@
 
 import UIKit
 import SmilesUtilities
+import SmilesOffers
 
 class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
     
@@ -41,10 +42,10 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         self.amountLabel.attributedText = "".strikoutString(strikeOutColor: .appGreyColor_128)
     }
     
-    func configure(offer: ExplorerOffer) {
+    func configure(offer: OfferDO) {
         print(offer)
         
-        let attributeString = NSMutableAttributedString(string: "\(offer.dirhamValue ?? "") \("AED".localizedString)")
+        let attributeString = NSMutableAttributedString(string: "\(offer.originalDirhamValue ?? "") \("AED".localizedString)")
         attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
         amountLabel.attributedText = attributeString
         self.brandTitleLabel.localizedString = offer.offerTitle ?? ""

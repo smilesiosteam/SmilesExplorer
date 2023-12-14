@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import SmilesOffers
 
 public class SmilesExplorerStoriesTVC: UITableViewCell {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-     var collectionsData: [ExplorerOffer]?{
+     var collectionsData: [OfferDO]?{
         didSet{
             self.collectionView?.reloadData()
         }
     }
     
-    var callBack: ((ExplorerOffer) -> ())?
-    var StoriesCallBacK:((ExplorerOffer) -> ())?
+    var callBack: ((OfferDO) -> ())?
+    var StoriesCallBacK:((OfferDO) -> ())?
     
     public override func awakeFromNib() {
         super.awakeFromNib()
