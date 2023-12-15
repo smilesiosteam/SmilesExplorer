@@ -48,7 +48,7 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         let attributeString = NSMutableAttributedString(string: "\(offer.originalDirhamValue ?? "") \("AED".localizedString)")
         attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
         amountLabel.attributedText = attributeString
-        self.brandTitleLabel.localizedString = offer.offerTitle ?? ""
+        self.brandTitleLabel.text = offer.offerTitle ?? ""
       //  self.typeLabel.localizedString = offer.offerType ?? ""
         brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(),defaultImage: "", backgroundColor: .white) { image in
             if let image = image {
