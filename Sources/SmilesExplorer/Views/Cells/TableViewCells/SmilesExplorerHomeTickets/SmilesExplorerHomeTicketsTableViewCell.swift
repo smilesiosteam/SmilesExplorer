@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SmilesOffers
 
 class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
 
@@ -14,13 +15,13 @@ class SmilesExplorerHomeTicketsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - PROPERTIES -
-    var collectionsData: [ExplorerOffer]?{
+    var collectionsData: [OfferDO]?{
         didSet{
             self.collectionView?.reloadData()
         }
     }
      var index: Int?
-    var callBack: ((ExplorerOffer) -> ())?
+    var callBack: ((OfferDO) -> ())?
     
     // MARK: - ACTIONS -
     
@@ -100,6 +101,6 @@ extension SmilesExplorerHomeTicketsTableViewCell: UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 96.0, height: 128.0)
+        return CGSize(width: 96.0, height: 172.0)
     }
 }

@@ -19,7 +19,7 @@ public class SmilesExplorerGetOffersStoriesViewModel: NSObject {
     }
     
     enum Output {
-        case fetchExclusiveOffersDidSucceed(response: ExplorerOfferResponse)
+        case fetchExclusiveOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchExclusiveOffersDidFail(error: Error)
     }
     

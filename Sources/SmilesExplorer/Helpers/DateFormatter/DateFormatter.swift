@@ -22,9 +22,9 @@ extension String {
         let dateFormatterGet = DateFormatter.configuredFormatter(with: format, localeIdentifier: "en_US")
         
         let dateFormatterPrint = DateFormatter.configuredFormatter(with: targetFormat, localeIdentifier: "en_US")
-//        if SmilesLanguageManager.shared.currentLanguage == .ar {
-//            dateFormatterPrint.locale = Locale(identifier: "ar_SA")
-//        }
+        if SmilesLanguageManager.shared.currentLanguage == .ar {
+            dateFormatterPrint.locale = Locale(identifier: "ar")
+        }
         
         if let date = dateFormatterGet.date(from: self) {
             return dateFormatterPrint.string(from: date)

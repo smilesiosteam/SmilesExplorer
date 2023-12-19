@@ -76,6 +76,8 @@ public class SmilesExplorerOffersViewController: UIViewController {
     
     func setupUI() {
     
+        titleLbl.textAlignment = AppCommonMethods.languageIsArabic() ? .right : .left
+        detailsLbl.textAlignment = AppCommonMethods.languageIsArabic() ? .right : .left
         titleLbl.text = response?.listTitle
         detailsLbl.text = response?.listSubtitle
         titleLbl.fontTextStyle = .smilesHeadline3

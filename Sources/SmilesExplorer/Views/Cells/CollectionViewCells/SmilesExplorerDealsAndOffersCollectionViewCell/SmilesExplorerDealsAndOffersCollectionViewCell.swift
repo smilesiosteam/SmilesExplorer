@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SmilesOffers
 
 class SmilesExplorerDealsAndOffersCollectionViewCell: UICollectionViewCell {
     //MARK: - IBOutlets -
@@ -31,7 +32,7 @@ class SmilesExplorerDealsAndOffersCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configure(offer: ExplorerOffer) {
+    func configure(offer: OfferDO) {
         print(offer)
         self.brandTitleLabel.text = offer.offerTitle
         brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(), backgroundColor: .white) { image in

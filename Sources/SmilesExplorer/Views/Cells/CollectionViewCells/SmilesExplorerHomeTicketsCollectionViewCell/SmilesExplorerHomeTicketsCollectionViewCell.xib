@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,7 +46,7 @@
                                     <constraint firstItem="KFj-hq-hQ8" firstAttribute="top" secondItem="g2P-iu-Jfk" secondAttribute="top" id="gxr-37-dTR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2" customClass="UILocalizableLabel" customModule="SmilesUtilities">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burj Khalifa" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77D-37-DM2" customClass="UILocalizableLabel" customModule="SmilesUtilities">
                                 <rect key="frame" x="12" y="76" width="72" height="20"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -75,7 +75,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="tzb-Fw-jdT" secondAttribute="bottom" id="8uV-Rz-x1X"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tzb-Fw-jdT" secondAttribute="bottom" id="8uV-Rz-x1X"/>
                             <constraint firstItem="OqB-RH-Xo8" firstAttribute="leading" secondItem="77D-37-DM2" secondAttribute="leading" id="Ns2-U7-dXt"/>
                             <constraint firstItem="77D-37-DM2" firstAttribute="leading" secondItem="vaJ-hy-6H4" secondAttribute="leading" constant="12" id="SH1-qt-r6K"/>
                             <constraint firstItem="g2P-iu-Jfk" firstAttribute="centerX" secondItem="vaJ-hy-6H4" secondAttribute="centerX" id="ckw-q0-t2k"/>

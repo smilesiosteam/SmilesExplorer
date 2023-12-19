@@ -107,15 +107,15 @@ extension SmilesExplorerHomeViewController: UITableViewDelegate {
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             switch SmilesExplorerSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
             case .tickets:
-                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OffersCategoryResponseModel>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
             case .exclusiveDeals:
-                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OffersCategoryResponseModel>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
             case .bogoOffers:
-                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OffersCategoryResponseModel>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
                 

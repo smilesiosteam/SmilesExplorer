@@ -55,9 +55,9 @@ extension TableViewDataSource where Model == BOGODetailsResponseLifestyleOffer {
     }
 }
 
-extension TableViewDataSource where Model == ExplorerOfferResponse {
-    static func make(forOffers collectionsObject: ExplorerOfferResponse,
-                     reuseIdentifier: String = "SmilesExplorerHomeTicketsTableViewCell", data: String, isDummy: Bool = false, completion:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+extension TableViewDataSource where Model == OffersCategoryResponseModel {
+    static func make(forOffers collectionsObject: OffersCategoryResponseModel,
+                     reuseIdentifier: String = "SmilesExplorerHomeTicketsTableViewCell", data: String, isDummy: Bool = false, completion:((OfferDO) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
             reuseIdentifier: reuseIdentifier,
@@ -74,9 +74,9 @@ extension TableViewDataSource where Model == ExplorerOfferResponse {
     }
 }
 
-extension TableViewDataSource where Model == ExplorerOfferResponse {
-    static func make(forBogoHomeOffers collectionsObject: ExplorerOfferResponse,
-                     reuseIdentifier: String = "SmilesExplorerHomeDealsAndOffersTVC", data: String, isDummy: Bool = false, completion:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+extension TableViewDataSource where Model == OffersCategoryResponseModel {
+    static func make(forBogoHomeOffers collectionsObject: OffersCategoryResponseModel,
+                     reuseIdentifier: String = "SmilesExplorerHomeDealsAndOffersTVC", data: String, isDummy: Bool = false, completion:((OfferDO) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
             reuseIdentifier: reuseIdentifier,
@@ -93,9 +93,9 @@ extension TableViewDataSource where Model == ExplorerOfferResponse {
     }
 }
 
-extension TableViewDataSource where Model == ExplorerOfferResponse {
-    static func make(forStories collectionsObject: ExplorerOfferResponse,
-                     reuseIdentifier: String = "SmilesExplorerStoriesTVC", data : String, isDummy:Bool = false, onClick:((ExplorerOffer) -> ())?) -> TableViewDataSource {
+extension TableViewDataSource where Model == OffersCategoryResponseModel {
+    static func make(forStories collectionsObject: OffersCategoryResponseModel,
+                     reuseIdentifier: String = "SmilesExplorerStoriesTVC", data : String, isDummy:Bool = false, onClick:((OfferDO) -> ())?) -> TableViewDataSource {
         return TableViewDataSource(
             models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
             reuseIdentifier: reuseIdentifier,

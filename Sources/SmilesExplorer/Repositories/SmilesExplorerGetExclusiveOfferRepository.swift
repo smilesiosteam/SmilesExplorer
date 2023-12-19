@@ -13,7 +13,7 @@ import SmilesUtilities
 import SmilesOffers
 
 protocol SmilesExplorerGetExclusiveOfferServiceable {
-    func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<ExplorerOfferResponse, NetworkError>
+    func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     func getBogoOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     
 }
@@ -38,7 +38,7 @@ class SmilesExplorerGetExclusiveOfferRepository: SmilesExplorerGetExclusiveOffer
         
     }
     
-    func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<ExplorerOfferResponse, NetworkError> {
+    func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
         
         let endPoint = SmilesExplorerSubscriptionInfoRequestBuilder.getExclusiceOffer(request: request)
         let request = endPoint.createRequest(baseUrl: baseUrl, endpoint: self.endpoint)

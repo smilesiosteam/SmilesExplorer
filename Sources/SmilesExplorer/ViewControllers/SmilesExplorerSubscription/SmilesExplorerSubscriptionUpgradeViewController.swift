@@ -67,11 +67,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
    public var selectedSortTypeIndex: Int?
    public var didSelectFilterOrSort = false
     
-    var offersListing: ExplorerOfferResponse?
+    var offersListing: OffersCategoryResponseModel?
     var bogooffersListing: OffersCategoryResponseModel?
     var offersPage = 1 // For offers list pagination
     var dodOffersPage = 1 // For DOD offers list pagination
-    var offers = [ExplorerOffer]()
+    var offers = [OfferDO]()
     var bogoOffers = [OfferDO]()
     
     public var filtersSavedList: [RestaurantRequestWithNameFilter]?
@@ -132,10 +132,10 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
             self.upgradeNowButton.isHidden = false
             self.upgradeNowButton.fontTextStyle = .smilesHeadline4
             self.upgradeNowButton.backgroundColor = .appRevampPurpleMainColor
-            self.upgradeNowButton.setTitle("ExplorerBuyNow".localizedString, for: .normal)
+            self.upgradeNowButton.setTitle("Upgrade Now".localizedString, for: .normal)
         }
         self.setupHeaderView(headerTitle: "")
-        let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+        let imageName = "back_arrow"
         self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
     }
     
@@ -390,7 +390,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     break
                 case .stories:
                     
-                    if let response = ExplorerOfferResponse.fromModuleFile() {
+                    if let response = OffersCategoryResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forStories: response, data:"#FFFFFF", isDummy: true, onClick:nil)
                     }
                     
@@ -430,7 +430,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     self.topHeaderView.headerTitleImageView.isHidden = false
                     self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
                 }
-                let imageName = AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow"
+                let imageName = "back_arrow"
                 self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
             if self.subscriptionType == .platinum || self.platinumLimiReached == true{
                 self.upgradeNowButton.isHidden = true
@@ -511,7 +511,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     
                 case .fetchExclusiveOffersStoriesDidFail(let error):
                     debugPrint(error.localizedDescription)
-                    self?.configureHideSection(for: .stories, dataSource: ExplorerOfferResponse.self)
+                    self?.configureHideSection(for: .stories, dataSource: OffersCategoryResponseModel.self)
                 case .fetchBogoOffersDidSucceed(response: let bogoOffers):
                     SmilesLoader.dismiss(from: self?.view ?? UIView())
                     self?.configureBogoOffers(with: bogoOffers)
@@ -539,7 +539,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
     }
     
-    fileprivate func  configureExclusiveOffersStories(with exclusiveOffersResponse: ExplorerOfferResponse) {
+    fileprivate func  configureExclusiveOffersStories(with exclusiveOffersResponse: OffersCategoryResponseModel) {
         
         self.offersListing = exclusiveOffersResponse
         self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
@@ -552,7 +552,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
             }
         } else {
             if self.offers.isEmpty {
-                self.configureHideSection(for: .stories, dataSource: ExplorerOfferResponse.self)
+                self.configureHideSection(for: .stories, dataSource: OffersCategoryResponseModel.self)
             }
         }
         
@@ -578,12 +578,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     }
     
     
-    fileprivate func configureExclusiveOffers(with exclusiveOffersResponse: ExplorerOfferResponse) {
+    fileprivate func configureExclusiveOffers(with exclusiveOffersResponse: OffersCategoryResponseModel) {
         self.offersListing = exclusiveOffersResponse
         self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
         if !offers.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .stories) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing ?? ExplorerOfferResponse(), data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing!, data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
                     print(explorerOffer)
                     
                 })
@@ -591,7 +591,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
             }
         } else {
             if self.offers.isEmpty {
-                self.configureHideSection(for: .offerListing, dataSource: ExplorerOfferResponse.self)
+                self.configureHideSection(for: .offerListing, dataSource: OffersCategoryResponseModel.self)
             }
         }
     }

@@ -185,7 +185,9 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                 let lastItem = self.bogoOffers.endIndex - 1
                 if indexPath.row == lastItem {
                     if bogoOffers.count != (bogooffersListing?.offersCount ?? 0)  {
-                        offersPage += 1
+                        offersPage = offersPage + 1
+                        print("-----> offersPage \(offersPage)")
+                        
                         self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: offersPage))
                     }
                 }
@@ -208,7 +210,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             switch SmilesExplorerSubscriptionUpgradeSectionIdentifier(rawValue: sectionData.sectionIdentifier ?? "") {
             case .stories:
-                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<ExplorerOfferResponse>) {
+                if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OffersCategoryResponseModel>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
             case .offerListing:

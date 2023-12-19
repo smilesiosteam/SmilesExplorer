@@ -25,13 +25,13 @@ public class SmilesExplorerGetOffersViewModel: NSObject {
     }
     
     enum Output {
-        case fetchExclusiveOffersDidSucceed(response: ExplorerOfferResponse)
+        case fetchExclusiveOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchExclusiveOffersDidFail(error: Error)
         
-        case fetchTicketsDidSucceed(response: ExplorerOfferResponse)
+        case fetchTicketsDidSucceed(response: OffersCategoryResponseModel)
         case fetchTicketDidFail(error: Error)
         
-        case fetchBogoDidSucceed(response: ExplorerOfferResponse)
+        case fetchBogoDidSucceed(response: OffersCategoryResponseModel)
         case fetchBogoDidFail(error: Error)
     }
     
@@ -45,20 +45,20 @@ extension SmilesExplorerGetOffersViewModel {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {
-            case .getExclusiveOffersList(let categoryId,let tag,_):
-                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "")
+            case .getExclusiveOffersList(let categoryId,let tag,let page):
+                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "", page: page)
                 
             case .getTickets(categoryId: let categoryId, tag: let tag, _):
-                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "")
+                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "",page: 1)
             case .getBogo(categoryId: let categoryId, tag: let tag, page: _):
-                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "")
+                self?.getExclusiveOffersList(categoryId: categoryId ?? 0, tag: tag ?? "",page: 1)
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
     }
     
-    func getExclusiveOffersList(categoryId: Int, tag: String, page: Int = 1) {
-        let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag)
+    func getExclusiveOffersList(categoryId: Int, tag: String, page: Int) {
+        let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag, pageNo: page)
         
         let service = SmilesExplorerGetExclusiveOfferRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60), baseUrl: AppCommonMethods.serviceBaseUrl,
