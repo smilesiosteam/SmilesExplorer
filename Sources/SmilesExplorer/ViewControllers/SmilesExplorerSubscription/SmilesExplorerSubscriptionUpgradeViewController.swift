@@ -328,7 +328,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     }
     
     public func didTapOnLocation() {
-        self.delegate?.navigateToLocation()
+        self.delegate?.navigateToLocation(delegate: self)
         //self.categoryContainerCoordinator?.navigateToUpdateLocationVC(confirmLocationRedirection: .toCategoryContainer)
     }
     
@@ -662,3 +662,15 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     
 }
 
+// MARK: - UPDATE USER LOCATION DELEGATE -
+extension SmilesExplorerSubscriptionUpgradeViewController: UpdateUserLocationDelegate {
+    
+    public func userLocationUpdatedSuccessfully() {
+        if let isUserSubscribed {
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false,platinumLimiReached: platinumLimiReached)
+        } else {
+            self.input.send(.getRewardPoints)
+        }
+    }
+    
+}
