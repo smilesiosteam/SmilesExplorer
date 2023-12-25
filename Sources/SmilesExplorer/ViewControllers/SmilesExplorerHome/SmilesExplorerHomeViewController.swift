@@ -100,7 +100,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false)
         let imageName = "back_arrow"
         self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
     }
