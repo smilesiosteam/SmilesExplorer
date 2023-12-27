@@ -127,6 +127,15 @@
       }
     },
     {
+      "identity" : "smilesfilterandsort",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesFilterAndSort.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4ce4bd94a0dc93d50d0d678384b10d23c5557177"
+      }
+    },
+    {
       "identity" : "smilesfontsmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesFontsManager.git",
