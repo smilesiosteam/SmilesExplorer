@@ -11,7 +11,7 @@ import NetworkingLayer
 enum SmilesExplorerSubscriptionInfoRequestBuilder {
     
     case getSubscriptionInfo(request: SmilesExplorerSubscriptionInfoRequest)
-    case getExclusiceOffer(request: ExplorerGetExclusiveOfferRequest)
+    case getExclusiveOffer(request: ExplorerGetExclusiveOfferRequest)
     
     // gave a default timeout but can be different for each.
     var requestTimeOut: Int {
@@ -23,7 +23,7 @@ enum SmilesExplorerSubscriptionInfoRequestBuilder {
         switch self {
         case .getSubscriptionInfo:
             return .POST
-        case .getExclusiceOffer:
+        case .getExclusiveOffer:
             return .POST
         }
     }
@@ -45,7 +45,7 @@ enum SmilesExplorerSubscriptionInfoRequestBuilder {
         case .getSubscriptionInfo(let request):
             return request
         
-        case .getExclusiceOffer(request: let request):
+        case .getExclusiveOffer(request: let request):
             return request
         }
     }
@@ -55,7 +55,7 @@ enum SmilesExplorerSubscriptionInfoRequestBuilder {
         switch self {
         case .getSubscriptionInfo:
             return baseUrl + endPoints.serviceEndPoints
-        case .getExclusiceOffer:
+        case .getExclusiveOffer:
             return baseUrl + endPoints.serviceEndPoints
         }
         

@@ -17,8 +17,8 @@ import SmilesStoriesManager
 public class SmilesExplorerHomeUpgradeViewModel: NSObject {
     
     // MARK: - PROPERTIES -
-     var output: PassthroughSubject<Output, Never> = .init()
-     var cancellables = Set<AnyCancellable>()
+    var output: PassthroughSubject<Output, Never> = .init()
+    var cancellables = Set<AnyCancellable>()
     
     // MARK: - VIEWMODELS -
     public let sectionsViewModel = SectionsViewModel()
@@ -32,8 +32,8 @@ public class SmilesExplorerHomeUpgradeViewModel: NSObject {
     
     public var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
     public var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
-   public  var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
-   public  var exclusiveOffersStoriesUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersStoriesViewModel.Input, Never> = .init()
+    public  var exclusiveOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
+    public  var exclusiveOffersStoriesUseCaseInput: PassthroughSubject<SmilesExplorerGetOffersStoriesViewModel.Input, Never> = .init()
     public var bogoOffersUseCaseInput: PassthroughSubject<SmilesExplorerGetBogoOffersViewModel.Input, Never> = .init()
     
     public var filtersSavedList: [RestaurantRequestWithNameFilter]?
@@ -84,9 +84,9 @@ extension SmilesExplorerHomeUpgradeViewModel {
             case .setSelectedSort(let sortTitle):
                 self?.selectedSort = sortTitle
                 
-//            case .getTopOffers(bannerType: let bannerType, categoryId: let categoryId):
-//                self?.bind(to: self?.topOffersViewModel ?? TopOffersViewModel())
-//                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: nil, bannerType: bannerType, categoryId: categoryId, bannerSubType: nil, isGuestUser: false, baseUrl: AppCommonMethods.serviceBaseUrl))
+                //            case .getTopOffers(bannerType: let bannerType, categoryId: let categoryId):
+                //                self?.bind(to: self?.topOffersViewModel ?? TopOffersViewModel())
+                //                self?.topOffersUseCaseInput.send(.getTopOffers(menuItemType: nil, bannerType: bannerType, categoryId: categoryId, bannerSubType: nil, isGuestUser: false, baseUrl: AppCommonMethods.serviceBaseUrl))
             case .getRewardPoints:
                 
                 self?.bind(to: self?.rewardPointsViewModel ?? RewardPointsViewModel())
@@ -105,14 +105,13 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 
                 self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
                 self?.exclusiveOffersUseCaseInput.send(.getTickets(categoryId: categoryId, tag: tag, page: pageNo ?? 1))
-            
-            case .getBogoOffers(categoryId: let categoryId, tag: let tag, pageNo: let page):
-            
-//                self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
-                self?.bind(to: self?.smilesExplorerGetBogoOffersViewModel ?? SmilesExplorerGetBogoOffersViewModel())
-                self?.bogoOffersUseCaseInput.send(.getBogoOffers(categoryId: categoryId, tag: tag.rawValue,pageNo: page ?? 1))
                 
-            
+            case .getBogoOffers(categoryId: let categoryId, tag: let tag, pageNo: let page,sortingType: let sortingType,subCategoryTypeIdsList: let subCategoryTypeIdsList):
+                
+                self?.bind(to: self?.smilesExplorerGetBogoOffersViewModel ?? SmilesExplorerGetBogoOffersViewModel())
+                self?.bogoOffersUseCaseInput.send(.getBogoOffers(categoryId: categoryId, tag: tag.rawValue,pageNo: page ?? 1,sortingType: sortingType, subCategoryTypeIdsList:  subCategoryTypeIdsList ?? []))
+                
+                
             case .getBogo(categoryId: _, tag: _, pageNo: _):
                 break
             case .updateOfferWishlistStatus(let operation, let offerId):
@@ -120,11 +119,13 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
             case .getRestaurantList(pageNo: let pageNo, filtersList: let filtersList, selectedSortingTableViewCellModel: let selectedSortingTableViewCellModel):
                 self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
-//                self?.bind(to: self?.restaurantListModel ?? RestaurantListViewModel())
-//                let filters = self?.getSavedFilters()
-//                self?.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: pageNo, filtersList: (filtersList ?? []).isEmpty ? filters : filtersList))
+                //                self?.bind(to: self?.restaurantListModel ?? RestaurantListViewModel())
+                //                let filters = self?.getSavedFilters()
+                //                self?.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: pageNo, filtersList: (filtersList ?? []).isEmpty ? filters : filtersList))
                 break
                 
+            case .emptyOffersList:
+                break
             }
             
         }.store(in: &cancellables)
@@ -243,20 +244,44 @@ extension SmilesExplorerHomeUpgradeViewModel {
 }
 
 extension SmilesExplorerHomeUpgradeViewModel {
+    
+    
+    func mapSortObjects(sorts: [String]) -> [FilterDO] {
+        var filters: [FilterDO] = []
+        
+        for index in 0..<OfferSort.allCases.count {
+            let filter = FilterDO()
+            filter.name = sorts[index]
+            filter.filterKey = "\(index)"
+            filter.filterValue = "\(OfferSort.allCases[index].rawValue)"
+            filter.isSelected = false
+            filters.append(filter)
+        }
+        
+        if let index = filters.firstIndex(where: { $0.name == selectedSortingTableViewCellModel?.name }) {
+            filters[index].isSelected = true
+        } else {
+            let selectedFilters = filters.filter({ $0.isSelected ?? false })
+            (selectedFilters.isEmpty && !filters.isEmpty) ? filters[0].isSelected = true : ()
+        }
+        
+        return filters
+    }
+    
     // Create Filters Data
     func createFiltersData(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?) {
         var filters = [FiltersCollectionViewCellRevampModel]()
         
         // Filter List
-        var firstFilter = FiltersCollectionViewCellRevampModel(name: "Filters".localizedString, leftImage: "", rightImage: "filter-revamp", filterCount: filtersSavedList?.count ?? 0)
+        var firstFilter = FiltersCollectionViewCellRevampModel(name: "Filters".localizedString, leftImage: "", rightImage: "filter-icon-new", filterCount: filtersSavedList?.count ?? 0)
         
-        let firstFilterRowWidth = AppCommonMethods.getAutoWidthWith(firstFilter.name, font: .circularXXTTBookFont(size: 14), additionalWidth: 60)
+        let firstFilterRowWidth = AppCommonMethods.getAutoWidthWith(firstFilter.name, fontTextStyle: .smilesTitle1, additionalWidth: 60)
         firstFilter.rowWidth = firstFilterRowWidth
         
         let sortByTitle = !self.selectedSort.asStringOrEmpty().isEmpty ? "\("SortbyTitle".localizedString): \(self.selectedSort.asStringOrEmpty())" : "\("SortbyTitle".localizedString)"
-        var secondFilter = FiltersCollectionViewCellRevampModel(name: sortByTitle, leftImage: "", rightImage: "sortby-chevron-down", rightImageWidth: 0, rightImageHeight: 4, tag: RestaurantFiltersType.deliveryTime.rawValue)
+        var secondFilter = FiltersCollectionViewCellRevampModel(name: sortByTitle, leftImage: "", rightImage: "", rightImageWidth: 0, rightImageHeight: 4, tag: RestaurantFiltersType.deliveryTime.rawValue)
         
-        let secondFilterRowWidth = AppCommonMethods.getAutoWidthWith(secondFilter.name, font: .circularXXTTBookFont(size: 14), additionalWidth: 40)
+        let secondFilterRowWidth = AppCommonMethods.getAutoWidthWith(secondFilter.name, fontTextStyle: .smilesTitle1, additionalWidth: 40)
         secondFilter.rowWidth = secondFilterRowWidth
         
         if isFilterAllowed != 0 {
@@ -270,16 +295,15 @@ extension SmilesExplorerHomeUpgradeViewModel {
         if let appliedFilters = filtersSavedList, appliedFilters.count > 0 {
             for filter in appliedFilters {
                 
-                let width = AppCommonMethods.getAutoWidthWith(filter.filterName.asStringOrEmpty(), font: .circularXXTTMediumFont(size: 22), additionalWidth: 30)
+                let width = AppCommonMethods.getAutoWidthWith(filter.filterName.asStringOrEmpty(), fontTextStyle: .smilesTitle1, additionalWidth: 40)
                 
                 let model = FiltersCollectionViewCellRevampModel(name: filter.filterName.asStringOrEmpty(), leftImage: "", rightImage: "filters-cross", isFilterSelected: true, filterValue: filter.filterValue.asStringOrEmpty(), tag: 0, rowWidth: width)
-
+                
                 filters.append(model)
-
+                
             }
         }
-        
-        self.output.send(.fetchFiltersDataSuccess(filters: filters)) // Send filters back to VC
+        self.output.send(.fetchFiltersDataSuccess(filters: filters, selectedSortingTableViewCellModel: self.selectedSortingTableViewCellModel))// Send filters back to VC
     }
     
     // Get saved filters
@@ -288,9 +312,9 @@ extension SmilesExplorerHomeUpgradeViewModel {
             if savedFilters.count > 0 {
                 let uniqueUnordered = Array(Set(savedFilters))
                 filtersSavedList = uniqueUnordered
-
+                
                 filtersList = [RestaurantRequestFilter]()
-
+                
                 if let savedFilters = filtersSavedList {
                     for filter in savedFilters {
                         let restaurantRequestFilter = RestaurantRequestFilter()
@@ -299,13 +323,13 @@ extension SmilesExplorerHomeUpgradeViewModel {
                         filtersList?.append(restaurantRequestFilter)
                     }
                 }
-
+                
                 defer {
                     self.output.send(.fetchSavedFiltersAfterSuccess(filtersSavedList: filtersSavedList ?? []))
                 }
-
+                
                 return filtersList ?? []
-
+                
             }
         }
         return []
@@ -329,7 +353,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
         if let isFilteredNameIndex = isFilteredNameIndex {
             filtersList?.remove(at: isFilteredNameIndex)
         }
-                
+        
         self.output.send(.fetchAllSavedFiltersSuccess(filtersList: filtersList ?? [], filtersSavedList: filtersSavedList ?? []))
     }
     
@@ -368,7 +392,11 @@ extension SmilesExplorerHomeUpgradeViewModel {
     }
     
     func addSortingItems(items: inout [BaseRowModel], sorting: FilterDO, isSelected: Bool, isBottomLineHidden: Bool) {
-//        items.append(SortingTableViewCell.rowModel(model: SortingTableViewCellModel(title: sorting.name.asStringOrEmpty(), mode: .SingleSelection, isSelected: isSelected, multiChoiceUpTo: 1, isSelectionMandatory: true, sortingModel: sorting, bottomLineHidden: isBottomLineHidden)))
+        //        items.append(SortingTableViewCell.rowModel(model: SortingTableViewCellModel(title: sorting.name.asStringOrEmpty(), mode: .SingleSelection, isSelected: isSelected, multiChoiceUpTo: 1, isSelectionMandatory: true, sortingModel: sorting, bottomLineHidden: isBottomLineHidden)))
+        
+    }
+    func setSelectedSortingParam(sort: FilterDO) {
+        self.selectedSortingTableViewCellModel = sort
     }
 }
 

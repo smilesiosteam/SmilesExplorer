@@ -26,6 +26,7 @@ let package = Package(
         .package(url: "https://github.com/smilesiosteam/SmilesOffers.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesBanners.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesAppHeader.git", branch: "addressBook"),
+        .package(url: "https://github.com/smilesiosteam/SmilesFilterAndSort.git", branch: "main"),
         .package(url: "https://github.com/smilesiosteam/SmilesStoriesManager.git", branch: "main")
     ],
     targets: [
@@ -43,6 +44,7 @@ let package = Package(
                 .product(name: "SmilesOffers", package: "SmilesOffers"),
                 .product(name: "SmilesBanners", package: "SmilesBanners"),
                 .product(name: "AppHeader", package: "SmilesAppHeader"),
+                .product(name: "SmilesFilterAndSort", package: "SmilesFilterAndSort"),
                 .product(name: "SmilesStoriesManager", package: "SmilesStoriesManager")
             ],
             resources: [

@@ -40,14 +40,14 @@ class SmilesExplorerGetExclusiveOfferRepository: SmilesExplorerGetExclusiveOffer
     
     func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
         
-        let endPoint = SmilesExplorerSubscriptionInfoRequestBuilder.getExclusiceOffer(request: request)
+        let endPoint = SmilesExplorerSubscriptionInfoRequestBuilder.getExclusiveOffer(request: request)
         let request = endPoint.createRequest(baseUrl: baseUrl, endpoint: self.endpoint)
         return self.networkRequest.request(request)
         
     }
     
     func getBogoOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
-        let endPoint = SmilesExplorerSubscriptionInfoRequestBuilder.getExclusiceOffer(request: request)
+        let endPoint = SmilesExplorerSubscriptionInfoRequestBuilder.getExclusiveOffer(request: request)
         let request = endPoint.createRequest(baseUrl: baseUrl, endpoint: self.endpoint)
         return self.networkRequest.request(request)
     }

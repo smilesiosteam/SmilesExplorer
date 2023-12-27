@@ -9,6 +9,7 @@ import Foundation
 import SmilesOffers
 import SmilesStoriesManager
 import SmilesLocationHandler
+import SmilesFilterAndSort
 
 public enum SmilesExplorerHomeNavigationType {
     case payment, withTextPromo, withQRPromo, freeTicket
@@ -25,7 +26,7 @@ public protocol SmilesExplorerHomeDelegate {
     func proceedToOfferDetails(offer: OfferDO?)
     func navigateToStoriesWebView(objStory: OfferDO)
     func navigateToExplorerHome()
-    func navigateToFilter(selectedOfferCategoryIndex: Int, arraySelectedSubCategoryPAths: [IndexPath], sortingType: String?)
-    func navigateToSortingVC(selectedSortTypeIndex: Int?, selectedOfferCategoryIndex: Int, arraySort: [String], isChangeSortType: Bool)
+    func navigateToFilter(categoryId: Int, sortingType: String, previousFiltersResponse: Data?, selectedFilters: [FilterValue]?, filterDelegate: SelectedFiltersDelegate)
+    func navigateToSortingVC(sorts: [FilterDO], delegate: SelectedSortDelegate)
 
 }
