@@ -313,7 +313,9 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         }
         //showShimmer(identifier: .OFFERLISTING)
         //TODO: Need to send selected filters in below api
-        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,sortingType: self.sortingType,subCategoryTypeIdsList: self.arraySelectedSubCategoryTypes))
+        self.input.send(.emptyOffersList)
+        self.showShimmer(identifier: .offerListing)
+        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
         
         
     }
@@ -409,7 +411,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     if let response = OfferDO.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoOffers: [response], data:"#FFFFFF", isDummy: true, completion:nil)
                     }
-                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,sortingType: self.sortingType,subCategoryTypeIdsList: self.arraySelectedSubCategoryTypes))
+                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
                     break
                     
                 default: break
@@ -527,6 +529,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                 case .fetchBogoOffersDidFail(error: let error):
                     self?.configureHideSection(for: .offerListing, dataSource: OfferDO.self)
                     debugPrint(error.localizedDescription)
+                    
+                case .emptyOffersListDidSucceed:
+                    self?.offersPage = 1
+                    self?.bogoOffers.removeAll()
+                    self?.configureDataSource()
+                    
                 default: break
                 }
             }.store(in: &cancellables)
@@ -675,8 +683,11 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
 extension SmilesExplorerSubscriptionUpgradeViewController {
     
     func redirectToFilters() {
-        
-        self.delegate?.navigateToFilter(categoryId: self.categoryId, sortingType: self.sortingType ?? "", previousFiltersResponse: selectedFiltersResponse, selectedFilters: filterValues, filterDelegate: self)
+        let selectedFilters = getSelectedFilters()
+        if selectedFilters.isEmpty {
+            selectedFiltersResponse = nil
+        }
+        self.delegate?.navigateToFilter(categoryId: self.categoryId, sortingType: self.sortingType ?? "", previousFiltersResponse: selectedFiltersResponse, selectedFilters: selectedFilters, filterDelegate: self)
         
     }
     
@@ -708,12 +719,13 @@ extension SmilesExplorerSubscriptionUpgradeViewController: SelectedFiltersDelega
         filtersSavedList = filterObjects
         didSelectFilterOrSort = true
         input.send(.setFiltersSavedList(filtersSavedList: self.filtersSavedList, filtersList: []))
-        self.showShimmer(identifier: .offerListing)
         input.send(.emptyOffersList)
-        input.send(.getBogoOffers(categoryId: self.offersCategoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1, sortingType: sortingType, subCategoryTypeIdsList: arraySelectedSubCategoryTypes))
+        self.showShimmer(identifier: .offerListing)
+        input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
     }
     
     public func didSetFilterResponse(_ data: Data?) {
+        print("_________didSetFilterResponse is called __________")
         selectedFiltersResponse = data
     }
     
@@ -753,8 +765,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController: SelectedSortDelegate 
         self.didSelectFilterOrSort = true
         self.showShimmer(identifier: .offerListing)
         self.input.send(.setSelectedSort(sortTitle: selectedSort))
-        self.input.send(.emptyOffersList)
-        
-        self.input.send(.getBogoOffers(categoryId: self.offersCategoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1, sortingType: sortingType, subCategoryTypeIdsList: arraySelectedSubCategoryTypes))
+        input.send(.emptyOffersList)
+        self.showShimmer(identifier: .offerListing)
+        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
     }
 }
