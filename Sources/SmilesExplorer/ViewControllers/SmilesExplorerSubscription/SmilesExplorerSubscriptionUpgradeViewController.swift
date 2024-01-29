@@ -411,7 +411,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     if let response = OfferDO.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoOffers: [response], data:"#FFFFFF", isDummy: true, completion:nil)
                     }
-                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
+                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes.isEmpty  ? nil: self.arraySelectedSubCategoryTypes))
                     break
                     
                 default: break
