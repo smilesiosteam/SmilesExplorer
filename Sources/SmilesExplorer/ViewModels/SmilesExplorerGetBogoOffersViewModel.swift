@@ -19,7 +19,7 @@ public class SmilesExplorerGetBogoOffersViewModel: NSObject {
     
     // MARK: - INPUT. View event methods
   public  enum Input {
-        case getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int)
+        case getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int,categoryTypeIdsList: [String])
     }
     
     enum Output {
@@ -38,15 +38,15 @@ extension SmilesExplorerGetBogoOffersViewModel {
         output = PassthroughSubject<Output, Never>()
         input.sink { [weak self] event in
             switch event {
-            case .getBogoOffers(let categoryId, let tag, let pageNo):
-                self?.getBogoOffers(categoryId: categoryId ?? 0, tag: tag ?? "", pageNo: pageNo)
+            case .getBogoOffers(let categoryId, let tag, let pageNo, let sortingIdsList):
+                self?.getBogoOffers(categoryId: categoryId ?? 0, tag: tag ?? "", pageNo: pageNo , categoryTypeIdsList: sortingIdsList )
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
     }
     
-    func getBogoOffers(categoryId: Int, tag: String, pageNo: Int) {
-        let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag, pageNo: pageNo)
+    func getBogoOffers(categoryId: Int, tag: String, pageNo: Int, categoryTypeIdsList: [String]) {
+        let exclusiveOffersRequest = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
         
         let service = SmilesExplorerGetExclusiveOfferRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60), baseUrl: AppCommonMethods.serviceBaseUrl,

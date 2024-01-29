@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Habib Rehman on 05/09/2023.
 //
@@ -53,7 +53,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
             return UITableView.automaticDimension
             
         case SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue:
-             return UITableView.automaticDimension
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }
@@ -67,7 +67,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {return nil}
         if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
             if sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.freetickets.rawValue && sectionData.sectionIdentifier != SmilesExplorerSubscriptionUpgradeSectionIdentifier.upgradeBanner.rawValue{
-                if let sectionData = self.smilesExplorerSections?.sectionDetails?[safe: section] {
+                
                     
                     if (sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue) && (sectionData.isFilterAllowed != 0 || sectionData.isSortAllowed != 0) {
                         self.input.send(.getFiltersData(filtersSavedList: self.filtersSavedList, isFilterAllowed: sectionData.isFilterAllowed, isSortAllowed: sectionData.isSortAllowed)) // Get Filters Data
@@ -84,7 +84,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                                 self?.redirectToFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
-                                // self?.redirectToSortingVC()
+                                 self?.redirectToSortingVC()
                             } else {
                                 // Remove and saved filters
                                 self?.input.send(.removeAndSaveFilters(filter: filterData))
@@ -150,7 +150,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         
                         
                     }
-                }
+                
             }
         }
         
@@ -188,7 +188,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         offersPage = offersPage + 1
                         print("-----> offersPage \(offersPage)")
                         
-                        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: offersPage))
+                        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: offersPage, categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
                     }
                 }
             }
@@ -218,8 +218,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                 if let dataSource = (self.dataSource?.dataSources?[safe: section] as? TableViewDataSource<OfferDO>) {
                     showHide(isDummy: dataSource.isDummy)
                 }
-           
-            
+                
+                
             default:
                 break
             }
@@ -227,7 +227,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
         
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            adjustTopHeader(scrollView)
+        adjustTopHeader(scrollView)
     }
     
 }

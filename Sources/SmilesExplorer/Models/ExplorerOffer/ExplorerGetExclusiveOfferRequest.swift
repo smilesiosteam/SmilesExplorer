@@ -16,6 +16,8 @@ public class ExplorerGetExclusiveOfferRequest: SmilesBaseMainRequest {
     var categoryId: Int?
     var tag: String?
     var pageNo: Int?
+    var sortingType:String?
+    var categoryTypeIdsList:[String]?
     
     
     // MARK: - Model Keys
@@ -25,14 +27,18 @@ public class ExplorerGetExclusiveOfferRequest: SmilesBaseMainRequest {
         case categoryId
         case tag
         case pageNo
+        case sortingType
+        case categoryTypeIdsList
         
     }
     
-    public init(categoryId: Int?, tag: String? = nil, pageNo: Int?) {
+    public init(categoryId: Int?, tag: String? = nil, pageNo: Int?, sortingType:String? = nil, categoryTypeIdsList:[String]? = nil) {
         super.init()
         self.categoryId = categoryId
         self.tag = tag
         self.pageNo = pageNo
+        self.sortingType = sortingType
+        self.categoryTypeIdsList = categoryTypeIdsList
         
     }
     
@@ -46,5 +52,7 @@ public class ExplorerGetExclusiveOfferRequest: SmilesBaseMainRequest {
         try container.encodeIfPresent(self.categoryId, forKey: .categoryId)
         try container.encodeIfPresent(self.tag, forKey: .tag)
         try container.encodeIfPresent(self.pageNo, forKey: .pageNo)
+        try container.encodeIfPresent(self.sortingType, forKey: .sortingType)
+        try container.encodeIfPresent(self.categoryTypeIdsList, forKey: .categoryTypeIdsList)
     }
 }

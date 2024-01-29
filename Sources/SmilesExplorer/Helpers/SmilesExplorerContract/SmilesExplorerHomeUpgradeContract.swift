@@ -21,6 +21,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
         case getSortingList
         case generateActionContentForSortingItems(sortingModel: GetSortingListResponseModel?)
         case setFiltersSavedList(filtersSavedList: [RestaurantRequestWithNameFilter]?, filtersList: [RestaurantRequestFilter]?)
+        case emptyOffersList
         case setSelectedSort(sortTitle: String?)
 ///        The value of Tag is the Section Identifier.
         case exclusiveDeals(categoryId: Int?, tag: String?,pageNo:Int?)
@@ -29,7 +30,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
      
         case getBogo(categoryId: Int?, tag: String?,pageNo:Int?)
         
-        case getBogoOffers(categoryId: Int?, tag: SectionTypeTag,pageNo:Int?)
+        case getBogoOffers(categoryId: Int?, tag: SectionTypeTag,pageNo:Int?, categoryTypeIdsList: [String]?)
         case updateOfferWishlistStatus(operation: Int, offerId: String)
         
         case getRestaurantList(pageNo : Int = 0, filtersList: [RestaurantRequestFilter]?, selectedSortingTableViewCellModel: FilterDO?)
@@ -42,7 +43,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
         case fetchSectionsDidSucceed(response: GetSectionsResponseModel)
         case fetchSectionsDidFail(error: Error)
         
-        case fetchFiltersDataSuccess(filters: [FiltersCollectionViewCellRevampModel])
+        case fetchFiltersDataSuccess(filters: [FiltersCollectionViewCellRevampModel], selectedSortingTableViewCellModel: FilterDO?)
         case fetchAllSavedFiltersSuccess(filtersList: [RestaurantRequestFilter], filtersSavedList: [RestaurantRequestWithNameFilter])
         
         case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel, shouldLogout: Bool?)
@@ -76,6 +77,8 @@ extension SmilesExplorerHomeUpgradeViewModel {
         
         case fetchRestaurantListDidSucceed(response: GetRestaurantListingDOResponse)
         case fetchRestaurantListDidFail(error: Error)
+        
+        case emptyOffersListDidSucceed
         
         
     }
