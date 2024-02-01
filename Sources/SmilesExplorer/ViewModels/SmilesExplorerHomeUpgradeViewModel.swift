@@ -117,7 +117,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
             case .updateOfferWishlistStatus(let operation, let offerId):
                 self?.bind(to: self?.wishListViewModel ?? WishListViewModel())
                 self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
-            case .getRestaurantList(pageNo: let pageNo, filtersList: let filtersList, selectedSortingTableViewCellModel: let selectedSortingTableViewCellModel):
+            case .getRestaurantList(pageNo:  _, filtersList:  _, selectedSortingTableViewCellModel: let selectedSortingTableViewCellModel):
                 self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
                 break
                 

@@ -103,7 +103,7 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
             imageView.widthAnchor.constraint(equalToConstant: 24)
         ])
         imageView.tintColor = .black
-        var toptitle: String = "Filters"
+        let toptitle: String = "Filters"
         
         let locationNavBarTitle = UILabel()
         locationNavBarTitle.text = toptitle

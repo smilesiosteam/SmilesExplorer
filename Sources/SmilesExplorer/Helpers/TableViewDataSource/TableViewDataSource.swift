@@ -45,12 +45,6 @@ extension TableViewDataSource where Model == BOGODetailsResponseLifestyleOffer {
             guard let cell = cell as? SmilesExplorerMembershipCardsTableViewCell else { return }
             cell.configureCell(with: subscription)
             cell.selectionStyle = .none
-            cell.callBack = { () in
-                //                cell.toggleButton.isSelected = !cell.toggleButton.isSelected
-            }
-            
-            
-            
         }
     }
 }

@@ -581,7 +581,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         if let bannerSectionResponse = sectionsResponse, (bannerSectionResponse.backgroundImage != nil) {
             
             self.dataSource?.dataSources?[index] = TableViewDataSource.make(forUpgradeBanner: bannerSectionResponse, data: "", onClick: { sections in
-                print(sections)
+                debugPrint(sections)
             })
             self.configureDataSource()
             
@@ -599,8 +599,8 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
         if !offers.isEmpty {
             if let offersCategoryIndex = getSectionIndex(for: .stories) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing!, data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { [weak self] explorerOffer in
-                    print(explorerOffer)
+                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing!, data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
+                    debugPrint(explorerOffer)
                     
                 })
                 self.configureDataSource()
