@@ -181,7 +181,7 @@ extension SmilesExplorerQRCodeScannerViewController {
         output
             .sink { [weak self] event in
                 switch event {
-                case .validateGiftDidSucceed(response: let model):
+                case .validateGiftDidSucceed(response: _):
                     SmilesLoader.dismiss()
                     self?.dismiss{
                         //            let vc = StandAloneSpecialOfferRouter.setupModule()

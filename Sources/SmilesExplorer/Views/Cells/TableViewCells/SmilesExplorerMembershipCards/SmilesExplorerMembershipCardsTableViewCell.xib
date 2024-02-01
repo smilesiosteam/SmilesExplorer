@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -97,29 +97,13 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isUserInteractionDisabledWhenSkeletonIsActive" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJP-NQ-jMh">
-                        <rect key="frame" x="0.0" y="0.0" width="349" height="240"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <connections>
-                            <action selector="selectinoButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5Xn-4T-9SO"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="y7V-L2-KQ2" secondAttribute="trailing" constant="16" id="F9v-Zq-3zR"/>
-                    <constraint firstItem="KJP-NQ-jMh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="X2o-pC-Uyr"/>
-                    <constraint firstAttribute="bottom" secondItem="KJP-NQ-jMh" secondAttribute="bottom" id="hJF-UN-y7E"/>
                     <constraint firstItem="y7V-L2-KQ2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="hq1-tq-q3A"/>
-                    <constraint firstItem="KJP-NQ-jMh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nu3-SE-cTs"/>
-                    <constraint firstAttribute="trailing" secondItem="KJP-NQ-jMh" secondAttribute="trailing" id="pLG-rU-RNs"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="y7V-L2-KQ2" secondAttribute="bottom" constant="8" id="xu0-EW-CK3"/>
                     <constraint firstItem="y7V-L2-KQ2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zUL-eH-Wf8"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="subviews">
-                        <exclude reference="KJP-NQ-jMh"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
@@ -130,7 +114,6 @@
                 <outlet property="exclusiveOfferLabel" destination="eWR-rr-ssE" id="XZh-6J-FbH"/>
                 <outlet property="platinumExplorerLabel" destination="gj9-ow-Ke0" id="vU5-BJ-W1v"/>
                 <outlet property="priceLabel" destination="oDD-PK-aCu" id="aq2-xj-bXE"/>
-                <outlet property="selectionButton" destination="KJP-NQ-jMh" id="5ge-ms-AMf"/>
                 <outlet property="toggleButton" destination="jb4-zV-DFp" id="5P8-Sk-JyS"/>
             </connections>
             <point key="canvasLocation" x="165.64885496183206" y="82.394366197183103"/>

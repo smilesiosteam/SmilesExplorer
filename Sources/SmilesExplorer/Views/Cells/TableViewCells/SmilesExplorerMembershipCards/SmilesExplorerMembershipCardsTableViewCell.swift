@@ -19,7 +19,6 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var toggleButton: UIButton!
-    var callBack: (() -> Void)?
     
     @IBOutlet weak var selectionButton: UIButton!
     @IBOutlet weak var cardView: UIView!
@@ -58,10 +57,6 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.toggleButton.isSelected = selected ? true:false
-    }
-    
-    @IBAction func selectinoButtonPressed(_ sender: Any) {
-        callBack?()
     }
     
     func configureCell(with data: BOGODetailsResponseLifestyleOffer) {
