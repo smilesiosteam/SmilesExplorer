@@ -106,10 +106,10 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
                 self?.exclusiveOffersUseCaseInput.send(.getTickets(categoryId: categoryId, tag: tag, page: pageNo ?? 1))
                 
-            case .getBogoOffers(categoryId: let categoryId, tag: let tag, pageNo: let page,sortingType: let sortingType,subCategoryTypeIdsList: let subCategoryTypeIdsList):
+            case .getBogoOffers(categoryId: let categoryId, tag: let tag, pageNo: let page, categoryTypeIdsList:let categoryTypeIdsList):
                 
                 self?.bind(to: self?.smilesExplorerGetBogoOffersViewModel ?? SmilesExplorerGetBogoOffersViewModel())
-                self?.bogoOffersUseCaseInput.send(.getBogoOffers(categoryId: categoryId, tag: tag.rawValue,pageNo: page ?? 1,sortingType: sortingType, subCategoryTypeIdsList:  subCategoryTypeIdsList ?? []))
+                self?.bogoOffersUseCaseInput.send(.getBogoOffers(categoryId: categoryId, tag: tag.rawValue,pageNo: page ?? 1, categoryTypeIdsList:  categoryTypeIdsList ?? []))
                 
                 
             case .getBogo(categoryId: _, tag: _, pageNo: _):
@@ -119,12 +119,10 @@ extension SmilesExplorerHomeUpgradeViewModel {
                 self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
             case .getRestaurantList(pageNo: let pageNo, filtersList: let filtersList, selectedSortingTableViewCellModel: let selectedSortingTableViewCellModel):
                 self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
-                //                self?.bind(to: self?.restaurantListModel ?? RestaurantListViewModel())
-                //                let filters = self?.getSavedFilters()
-                //                self?.restaurantListUseCaseInput.send(.getRestaurantList(pageNo: pageNo, filtersList: (filtersList ?? []).isEmpty ? filters : filtersList))
                 break
                 
             case .emptyOffersList:
+                self?.output.send(.emptyOffersListDidSucceed)
                 break
             }
             

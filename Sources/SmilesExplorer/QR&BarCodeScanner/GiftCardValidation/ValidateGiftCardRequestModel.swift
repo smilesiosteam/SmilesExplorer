@@ -14,17 +14,20 @@ class ValidateGiftCardRequestModel: SmilesBaseMainRequest {
     // MARK: - Model Variables
     
     let giftCode: String
+    var subscriptionSegment: String?
     
     
     // MARK: - Model Keys
     
     enum CodingKeys: CodingKey {
         case giftCode
+        case subscriptionSegment
         
     }
     
-    public init(giftCode: String) {
+    public init(giftCode: String, subscriptionSegment: String? = nil) {
         self.giftCode = giftCode
+        self.subscriptionSegment = subscriptionSegment
         super.init()
     }
     
@@ -36,5 +39,6 @@ class ValidateGiftCardRequestModel: SmilesBaseMainRequest {
         try super.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.giftCode, forKey: .giftCode)
+        try container.encodeIfPresent(self.subscriptionSegment, forKey: .subscriptionSegment)
     }
 }

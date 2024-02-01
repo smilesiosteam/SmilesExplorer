@@ -30,7 +30,7 @@ extension SmilesExplorerHomeUpgradeViewModel {
      
         case getBogo(categoryId: Int?, tag: String?,pageNo:Int?)
         
-        case getBogoOffers(categoryId: Int?, tag: SectionTypeTag,pageNo:Int?, sortingType: String?, subCategoryTypeIdsList: [String]?)
+        case getBogoOffers(categoryId: Int?, tag: SectionTypeTag,pageNo:Int?, categoryTypeIdsList: [String]? = nil)
         case updateOfferWishlistStatus(operation: Int, offerId: String)
         
         case getRestaurantList(pageNo : Int = 0, filtersList: [RestaurantRequestFilter]?, selectedSortingTableViewCellModel: FilterDO?)
