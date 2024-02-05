@@ -17,7 +17,6 @@ import SmilesLoader
 public class SmilesExplorerHomeViewController: UIViewController {
     
     // MARK: - OUTLETS -
-    @IBOutlet weak var topHeaderView: AppHeaderView!
     @IBOutlet weak var contentTableView: UITableView!
     
     // MARK: - PROPERTIES -
@@ -44,9 +43,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var bogoOffer = [OfferDO]()
     var dodOffers = [OfferDO]()
     private var selectedIndexPath: IndexPath?
-    
     var categoryDetailsSections: GetSectionsResponseModel?
-    
     var mutatingSectionDetails = [SectionDetailDO]()
     
     // MARK: - ACTIONS -
@@ -56,6 +53,11 @@ public class SmilesExplorerHomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpNavigationBar()
     }
     
     public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil) {
@@ -73,9 +75,9 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     private func setupViews() {
         
+        
         setupTableView()
         bind(to: viewModel)
-        setupHeaderView(headerTitle: nil)
         //        if let isUserSubscribed {
         getSections(isSubscribed: false)
         //        } else {
@@ -98,13 +100,6 @@ public class SmilesExplorerHomeViewController: UIViewController {
         
     }
     
-    private func setupHeaderView(headerTitle: String?) {
-        topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: nil, titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
-        let imageName = "back_arrow"
-        self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
-    }
-    
     fileprivate func configureDataSource() {
         self.contentTableView.dataSource = self.dataSource
         DispatchQueue.main.async {
@@ -115,16 +110,9 @@ public class SmilesExplorerHomeViewController: UIViewController {
     private func configureSectionsData(with sectionsResponse: GetSectionsResponseModel) {
         
         smilesExplorerSections = sectionsResponse
+        setUpNavigationBar()
         if let sectionDetailsArray = sectionsResponse.sectionDetails, !sectionDetailsArray.isEmpty {
             self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: sectionDetailsArray.count))
-        }
-        if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue }) {
-            setupHeaderView(headerTitle: topPlaceholderSection.title)
-            if let iconURL = topPlaceholderSection.iconUrl {
-                self.topHeaderView.headerTitleImageView.isHidden = false
-                self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
-            }
-            
         }
         homeAPICalls()
         
@@ -143,6 +131,54 @@ public class SmilesExplorerHomeViewController: UIViewController {
             return obj.identifier == identifier
         })?.index
         
+    }
+    
+    private func setUpNavigationBar() {
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(hex: "ECEDF5")
+        self.navigationItem.standardAppearance = appearance
+        self.navigationItem.scrollEdgeAppearance = appearance
+        guard let headerData = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue }) else { return }
+        let imageView = UIImageView()
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 24),
+            imageView.widthAnchor.constraint(equalToConstant: 24)
+        ])
+        imageView.tintColor = .black
+        imageView.sd_setImage(with: URL(string: headerData.iconUrl ?? "")) { image, _, _, _ in
+            imageView.image = image?.withRenderingMode(.alwaysTemplate)
+        }
+
+        let locationNavBarTitle = UILabel()
+        locationNavBarTitle.text = headerData.title
+        locationNavBarTitle.textColor = .black
+        locationNavBarTitle.fontTextStyle = .smilesHeadline4
+        let hStack = UIStackView(arrangedSubviews: [imageView, locationNavBarTitle])
+        hStack.spacing = 4
+        hStack.alignment = .center
+        self.navigationItem.titleView = hStack
+        
+        let btnBack: UIButton = UIButton(type: .custom)
+        btnBack.backgroundColor = .white
+        let backImage = UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_icon", in: .module, compatibleWith: nil)
+        btnBack.setImage(backImage, for: .normal)
+        btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
+        btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        btnBack.layer.cornerRadius = btnBack.frame.height / 2
+        btnBack.clipsToBounds = true
+        btnBack.tintColor = .black
+        let barButton = UIBarButtonItem(customView: btnBack)
+        self.navigationItem.leftBarButtonItem = barButton
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+    }
+    
+    @objc func onClickBack() {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -276,7 +312,7 @@ extension SmilesExplorerHomeViewController {
     private func configureHeaderSection() {
         
         if let headerSectionIndex = getSectionIndex(for: .header) {
-            dataSource?.dataSources?[headerSectionIndex] = TableViewDataSource(models: [], reuseIdentifier: "", data: "#FFFFFF", cellConfigurator: { _, _, _, _ in })
+            dataSource?.dataSources?[headerSectionIndex] = TableViewDataSource.make(header: HomeHeaderResponse(headerImage: "", headerTitle: ""), reuseIdentifier: "HomeHeaderTableViewCell", data: self.smilesExplorerSections?.sectionDetails?[headerSectionIndex].backgroundColor ?? "#FFFFFF", isDummy: false)
             configureDataSource()
         }
         
