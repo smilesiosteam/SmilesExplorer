@@ -13,6 +13,22 @@ import SmilesOffers
 import SmilesBanners
 import SmilesStoriesManager
 
+extension TableViewDataSource where Model == HomeHeaderResponse {
+    static func make(header: HomeHeaderResponse,
+                     reuseIdentifier: String = "HomeHeaderTableViewCell", data: String, isDummy: Bool = false) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [header],
+            reuseIdentifier: reuseIdentifier,
+            data : data,
+            isDummy:isDummy
+        ) { (offer, cell, data, indexPath) in
+//            guard let cell = cell as? HomeHeaderTableViewCell else {return}
+//            cell.setBackGroundColor(color: UIColor(hexString: data))
+        }
+    }
+}
+
+
 extension TableViewDataSource where Model == OfferDO {
     static func make(forNearbyOffers nearbyOffersObjects: [OfferDO], offerCellType: RestaurantsRevampTableViewCell.OfferCellType = .manCity,
                      reuseIdentifier: String = "RestaurantsRevampTableViewCell", data: String, isDummy: Bool = false, completion: ((Bool, String, IndexPath?) -> ())?) -> TableViewDataSource {
