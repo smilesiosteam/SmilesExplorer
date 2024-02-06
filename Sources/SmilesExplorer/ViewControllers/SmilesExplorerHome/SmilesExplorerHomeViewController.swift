@@ -161,8 +161,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
         
         let btnBack: UIButton = UIButton(type: .custom)
         btnBack.backgroundColor = .white
-        let backImage = UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_icon", in: .module, compatibleWith: nil)
-        btnBack.setImage(backImage, for: .normal)
+        btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_icon_ar" : "back_icon", in: .module, with: nil), for: .normal)
         btnBack.addTarget(self, action: #selector(self.onClickBack), for: .touchUpInside)
         btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         btnBack.layer.cornerRadius = btnBack.frame.height / 2
