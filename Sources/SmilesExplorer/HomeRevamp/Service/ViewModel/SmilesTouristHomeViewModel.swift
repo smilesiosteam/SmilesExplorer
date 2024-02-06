@@ -63,10 +63,18 @@ final class SmilesTouristHomeViewModel {
     var output: PassthroughSubject<Output, Never> = .init()
     var cancellables = Set<AnyCancellable>()
     private let faqsViewModel = FAQsViewModel()
+    private let offerUseCase: OffersListUseCaseProtocol
+    private let subscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol
+
     private var faqsUseCaseInput: PassthroughSubject<FAQsViewModel.Input, Never> = .init()
+    var navigationDelegate: SmilesExplorerHomeDelegate?
+    // MARK: - Init
     
     // MARK: - Init
-    init() {
+    init(offerUseCase: OffersListUseCaseProtocol,
+         subscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol) {
+        self.offerUseCase = offerUseCase
+        self.subscriptionUseCase = subscriptionUseCase
     }
 }
 

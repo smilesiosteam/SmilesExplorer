@@ -11,11 +11,11 @@ import SmilesUtilities
 import SmilesSharedServices
 import SmilesOffers
 
-protocol ExclusiveOffersUseCaseProtocol {
-    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int,categoryTypeIdsList: [String]?) -> AnyPublisher<ExclusiveOffersUseCase.State, Never>
+protocol OffersListUseCaseProtocol {
+    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersListUseCase.State, Never>
 }
 
-public class ExclusiveOffersUseCase: ExclusiveOffersUseCaseProtocol {
+public class OffersListUseCase: OffersListUseCaseProtocol {
     
     // MARK: - Properties
     private let services: SmilesTouristServiceHandlerProtocol
@@ -27,12 +27,12 @@ public class ExclusiveOffersUseCase: ExclusiveOffersUseCaseProtocol {
     }
     
     // MARK: - getBogoOffers
-    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int, categoryTypeIdsList: [String]?) -> AnyPublisher<ExclusiveOffersUseCase.State, Never> {
+    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int, categoryTypeIdsList: [String]?) -> AnyPublisher<OffersListUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
             }
-            self.services.getExclusiveOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+            self.services.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         promise(.success(.failure(message: error.localizedDescription)))
@@ -51,7 +51,7 @@ public class ExclusiveOffersUseCase: ExclusiveOffersUseCaseProtocol {
 }
 
 
-extension ExclusiveOffersUseCase {
+extension OffersListUseCase {
     enum State {
         case success(response: OffersCategoryResponseModel)
         case failure(message: String)

@@ -32,7 +32,7 @@ public class BogoOffersUseCase: BogoOffersUseCaseProtocol {
             guard let self else {
                 return
             }
-            self.services.getBogoOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+            self.services.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         promise(.success(.failure(message: error.localizedDescription)))

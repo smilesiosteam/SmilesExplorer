@@ -10,7 +10,6 @@ import Foundation
 enum SmilesTouristEndpoints {
     
     case subscriptionInfo
-    case getExclusiveOffer
     case fetchOffersList
     case validateGift
     
@@ -18,8 +17,6 @@ enum SmilesTouristEndpoints {
         switch self {
         case .subscriptionInfo:
             return "explorer/subscription"
-        case .getExclusiveOffer:
-            return "explorer/offers"
         case .fetchOffersList:
             return "explorer/offers"
         case .validateGift:

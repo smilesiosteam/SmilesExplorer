@@ -13,11 +13,10 @@ import SmilesBaseMainRequestManager
 
 enum SmilesTouristRequestBuilder {
     // MARK: -  organise all the end points here for clarity
-    case getExclusiveOffer(request: ExplorerGetExclusiveOfferRequest)
+    case getOffers(request: ExplorerGetExclusiveOfferRequest)
     case getSubscriptionInfo(request: SmilesExplorerSubscriptionInfoRequest)
     case validateSmilesExplorerGift(request: ValidateGiftCardRequestModel)
-    case getSmilesExplorerOffers(request: SmilesBaseMainRequest)
-    
+   
     // MARK: -  gave a default timeout but can be different for each.
     var requestTimeOut: Int {
         return 20
@@ -26,13 +25,11 @@ enum SmilesTouristRequestBuilder {
     // MARK: - specify the type of HTTP request
     var httpMethod: SmilesHTTPMethod {
         switch self {
-        case .getExclusiveOffer:
+        case .getOffers:
             return .POST
         case .getSubscriptionInfo:
             return .POST
         case .validateSmilesExplorerGift:
-            return .POST
-        case .getSmilesExplorerOffers(request: let request):
             return .POST
         }
     }
@@ -51,13 +48,11 @@ enum SmilesTouristRequestBuilder {
     // MARK: - encodable request body for POST
     var requestBody: Encodable? {
         switch self {
-        case .getExclusiveOffer(let request):
+        case .getOffers(let request):
             return request
         case .getSubscriptionInfo(request: let request):
             return request
         case .validateSmilesExplorerGift(request: let request):
-            return request
-        case .getSmilesExplorerOffers(request: let request):
             return request
         }
     }
@@ -66,13 +61,11 @@ enum SmilesTouristRequestBuilder {
     func getURL(from baseUrl: String, for endPoint: SmilesTouristEndpoints) -> String {
         let endPoint = endPoint.url
         switch self {
-        case .getExclusiveOffer:
+        case .getOffers:
             return "\(baseUrl)\(endPoint)"
         case .getSubscriptionInfo:
             return "\(baseUrl)\(endPoint)"
         case .validateSmilesExplorerGift:
-            return "\(baseUrl)\(endPoint)"
-        case .getSmilesExplorerOffers:
             return "\(baseUrl)\(endPoint)"
         }
     }

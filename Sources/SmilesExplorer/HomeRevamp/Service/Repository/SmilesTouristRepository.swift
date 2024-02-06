@@ -14,11 +14,7 @@ import SmilesBaseMainRequestManager
 
 protocol SmilesTouristServiceable {
     
-    func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
-    
-    func getBogoOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
-    
-    func smilesExplorerOffersService(request: SmilesBaseMainRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
+    func getOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     
     func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkError>
     
@@ -37,24 +33,12 @@ final class SmilesTouristRepository: SmilesTouristServiceable {
   
     // MARK: - Services
     
-    func getExclusiveOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
-        let endPoint = SmilesTouristRequestBuilder.getExclusiveOffer(request: request)
-        let request = endPoint.createRequest(endPoint: .getExclusiveOffer)
-        return self.networkRequest.request(request)
-    }
-    
-    // MARK: - BogoOffers Service
-    func getBogoOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
-        let endPoint = SmilesTouristRequestBuilder.getExclusiveOffer(request: request)
-        let request = endPoint.createRequest(endPoint: .getExclusiveOffer)
-        return self.networkRequest.request(request)
-    }
-    // MARK: - Explorer Offers Service
-    func smilesExplorerOffersService(request: SmilesBaseMainRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
-        let endPoint = SmilesTouristRequestBuilder.getSmilesExplorerOffers(request: request)
+    func getOffers(request: ExplorerGetExclusiveOfferRequest) -> AnyPublisher<OffersCategoryResponseModel, NetworkError> {
+        let endPoint = SmilesTouristRequestBuilder.getOffers(request: request)
         let request = endPoint.createRequest(endPoint: .fetchOffersList)
         return self.networkRequest.request(request)
     }
+    
     // MARK: - ValidateGift Service
     func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkingLayer.NetworkError> {
         let endPoint = SmilesTouristRequestBuilder.validateSmilesExplorerGift(request: request)

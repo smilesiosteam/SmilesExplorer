@@ -38,6 +38,8 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         return SmilesExplorerHomeUpgradeViewModel()
     }()
     
+     var viewModl: SmilesTouristHomeViewModel!
+    
     var dataSource: SectionedTableViewDataSource?
     var sections = [SmilesExplorerSubscriptionUpgradeSectionData]()
     var smilesExplorerSections: GetSectionsResponseModel?
