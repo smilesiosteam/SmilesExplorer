@@ -8,7 +8,6 @@
 import Foundation
 
 enum SmilesTouristEndpoints {
-    
     case subscriptionInfo
     case fetchOffersList
     case validateGift

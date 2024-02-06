@@ -18,7 +18,7 @@ final class SmilesTouristHomeViewModel {
     // MARK: - Input
     public enum Input {
         case emptyOffersList
-        case getSections(categoryID: Int, type: String, explorerPackageType:ExplorerPackage,freeTicketAvailed:Bool,platinumLimiReached: Bool? = nil)
+        case getSections(categoryID: Int, type: String, explorerPackageType:ExplorerPackage,freeTicketAvailed:Bool,platinumLimitReached: Bool? = nil)
         case exclusiveDeals(categoryId: Int?, tag: String?,pageNo:Int?)
         case getExclusiveDealsStories(categoryId: Int?, tag: SectionTypeTag, pageNo: Int?)
         case getTickets(categoryId: Int?, tag: String?,pageNo:Int?)
@@ -65,6 +65,7 @@ final class SmilesTouristHomeViewModel {
     private let faqsViewModel = FAQsViewModel()
     private let offerUseCase: OffersListUseCaseProtocol
     private let subscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol
+    public var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
 
     private var faqsUseCaseInput: PassthroughSubject<FAQsViewModel.Input, Never> = .init()
     var navigationDelegate: SmilesExplorerHomeDelegate?
@@ -89,10 +90,10 @@ extension SmilesTouristHomeViewModel {
                 break
             case .exclusiveDeals(categoryId: let categoryID, tag: let tag, pageNo: let pageNo):
                 break
-            case .getSections(categoryID: let categoryID, type: let type, explorerPackageType: let explorerPackageType, freeTicketAvailed: let freeTicketAvailed, platinumLimiReached: let platinumLimiReached):
-                break
+            case .getSections(categoryID: let categoryID, type: let type, explorerPackageType: let explorerPackageType, freeTicketAvailed: let freeTicketAvailed, platinumLimitReached: let platinumLimitReached):
+                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed,platinumLimitReached: platinumLimitReached))
             case .getExclusiveDealsStories(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
-                break
+                self?.offerUseCase.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
             case .getTickets(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
                 break
             case .getBogo(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
