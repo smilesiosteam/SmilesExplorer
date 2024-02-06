@@ -21,14 +21,9 @@ protocol SmilesExplorerGetExclusiveOfferServiceable {
 // GetCuisinesRepository
 class SmilesExplorerGetExclusiveOfferRepository: SmilesExplorerGetExclusiveOfferServiceable {
     
-    
-    
-    
-    
     private var networkRequest: Requestable
     private var baseUrl: String
     private var endpoint: SmilesExplorerEndpoints
-    
 
   // inject this for testability
     init(networkRequest: Requestable, baseUrl: String, endpoint: SmilesExplorerEndpoints) {

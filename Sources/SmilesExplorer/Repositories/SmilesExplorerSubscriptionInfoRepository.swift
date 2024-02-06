@@ -17,17 +17,16 @@ protocol SmilesExplorerSubscriptionInfoServiceable {
 
 // GetCuisinesRepository
 class SmilesExplorerSubscriptionInfoRepository: SmilesExplorerSubscriptionInfoServiceable {
+    
     private var networkRequest: Requestable
     private var baseUrl: String
     private var endpoint: SmilesExplorerEndpoints
-    
 
   // inject this for testability
     init(networkRequest: Requestable, baseUrl: String,endpoint:SmilesExplorerEndpoints) {
         self.networkRequest = networkRequest
         self.baseUrl = baseUrl
         self.endpoint = endpoint
-        
     }
     
     func getSubscriptionInfoService(request: SmilesExplorerSubscriptionInfoRequest) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError> {
