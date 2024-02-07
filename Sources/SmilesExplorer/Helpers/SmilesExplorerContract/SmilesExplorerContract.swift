@@ -26,6 +26,7 @@ extension SmilesExplorerHomeViewModel {
         case exclusiveDeals(categoryId: Int?, tag: String?,pageNo:Int?)
         case getTickets(categoryId: Int?, tag: String?,pageNo:Int?)
         case getBogo(categoryId: Int?, tag: String?,pageNo:Int?)
+        case getSubscriptionBannerDetails
     }
     
     enum Output {
@@ -55,6 +56,9 @@ extension SmilesExplorerHomeViewModel {
         
         case fetchBogoDidSucceed(response: OffersCategoryResponseModel)
         case fetchBogoDidFail(error: Error)
+        
+        case fetchSubscriptionBannerDetailsDidSucceed(response: ExplorerSubscriptionBannerResponse)
+        case fetchSubscriptionBannerDetailsDidFail(error: Error)
     }
     
 }

@@ -9,26 +9,9 @@ import Foundation
 import SmilesUtilities
 import NetworkingLayer
 
-final class HomeHeaderResponse: BaseMainResponse {
+struct HomeHeaderResponse {
     
-    var headerImage: String?
-    var headerTitle: String?
-    
-    init(headerImage: String, headerTitle: String) {
-        super.init()
-        self.headerImage = headerImage
-        self.headerTitle = headerTitle
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case headerImage, headerTitle
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        headerImage = try values.decodeIfPresent(String.self, forKey: .headerImage)
-        headerTitle = try values.decodeIfPresent(String.self, forKey: .headerTitle)
-        try super.init(from: decoder)
-    }
+    let headerImage: String?
+    let headerTitle: String?
     
 }

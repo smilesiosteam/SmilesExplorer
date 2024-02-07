@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIX-wA-QdG">
                         <rect key="frame" x="0.0" y="0.0" width="545" height="234.33333333333334"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="pk8-WI-7Mb">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pk8-WI-7Mb">
                                 <rect key="frame" x="16" y="16" width="513" height="218.33333333333334"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pk8-WI-7Mb" secondAttribute="height" multiplier="343:146" id="F6P-lR-Nse"/>
@@ -35,7 +35,7 @@
                             <constraint firstAttribute="bottom" secondItem="pk8-WI-7Mb" secondAttribute="bottom" id="fy8-Pm-p0h"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock exclusive offers at Smiles Tourist today" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vce-lB-Jxt">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vce-lB-Jxt">
                         <rect key="frame" x="16" y="266.33333333333331" width="513" height="190.66666666666669"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,7 +65,4 @@
             <point key="canvasLocation" x="202.29007633587784" y="155.28169014084509"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="header" width="343" height="146.33332824707031"/>
-    </resources>
 </document>

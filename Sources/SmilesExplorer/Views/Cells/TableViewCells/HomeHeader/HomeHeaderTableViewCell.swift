@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SmilesUtilities
 
 class HomeHeaderTableViewCell: UITableViewCell {
 
@@ -13,8 +14,6 @@ class HomeHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var headerTitle: UILabel!
     @IBOutlet weak var bgView: UIView!
-    
-    
     
     // MARK: - PROPERTIES -
     
@@ -30,6 +29,7 @@ class HomeHeaderTableViewCell: UITableViewCell {
     
     func setupData(header: HomeHeaderResponse) {
         headerTitle.text = header.headerTitle
+        headerImageView.setImageWithUrlString(header.headerImage ?? "")
     }
     
     func setBackGroundColor(color: UIColor) {

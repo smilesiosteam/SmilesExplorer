@@ -21,9 +21,10 @@ extension TableViewDataSource where Model == HomeHeaderResponse {
             reuseIdentifier: reuseIdentifier,
             data : data,
             isDummy:isDummy
-        ) { (offer, cell, data, indexPath) in
-//            guard let cell = cell as? HomeHeaderTableViewCell else {return}
-//            cell.setBackGroundColor(color: UIColor(hexString: data))
+        ) { (header, cell, data, indexPath) in
+            guard let cell = cell as? HomeHeaderTableViewCell else {return}
+            cell.setupData(header: header)
+            cell.setBackGroundColor(color: UIColor(hexString: data))
         }
     }
 }
@@ -160,6 +161,24 @@ extension TableViewDataSource where Model == OfferDO {
             }
             
             
+        }
+    }
+}
+
+extension TableViewDataSource where Model == HomeFooter {
+    static func make(footer: HomeFooter,
+                     reuseIdentifier: String = "SmilesExplorerFooterTableViewCell", title: String?, data: String, isDummy: Bool = false, completion: (() -> Void)?) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [footer],
+            reuseIdentifier: reuseIdentifier,
+            data : data,
+            isDummy:isDummy
+        ) { (footer, cell, data, indexPath) in
+            guard let cell = cell as? SmilesExplorerFooterTableViewCell else {return}
+            cell.setupData(title: title, footer: footer)
+            if !isDummy {
+                cell.getMembership = completion
+            }
         }
     }
 }

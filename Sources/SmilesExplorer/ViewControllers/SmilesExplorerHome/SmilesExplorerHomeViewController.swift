@@ -241,6 +241,11 @@ extension SmilesExplorerHomeViewController {
                 case .fetchTopOffersDidSucceed(response: _):
                     break
                     
+                case .fetchSubscriptionBannerDetailsDidSucceed(let response):
+                    self?.configureFooterSection(with: response)
+                    
+                case .fetchSubscriptionBannerDetailsDidFail(_):
+                    self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
                 default: break
                 }
             }.store(in: &cancellables)
@@ -270,7 +275,11 @@ extension SmilesExplorerHomeViewController {
                 case .header:
                     configureHeaderSection()
                 case .footer:
-                    configureFooterSection()
+                    if let response = ExplorerSubscriptionBannerResponse.fromModuleFile(), let footer = response.footer {
+                        let title = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })?.title
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(footer: footer, title: title, data: element.backgroundColor ?? "FFFFFF", isDummy: true, completion: nil)
+                    }
+                    self.input.send(.getSubscriptionBannerDetails)
                 case .tickets:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
@@ -305,32 +314,22 @@ extension SmilesExplorerHomeViewController {
     
     private func configureHeaderSection() {
         
-        if let headerSectionIndex = getSectionIndex(for: .header) {
-            dataSource?.dataSources?[headerSectionIndex] = TableViewDataSource.make(header: HomeHeaderResponse(headerImage: "", headerTitle: ""), reuseIdentifier: "HomeHeaderTableViewCell", data: self.smilesExplorerSections?.sectionDetails?[headerSectionIndex].backgroundColor ?? "#FFFFFF", isDummy: false)
+        if let headerSectionIndex = getSectionIndex(for: .header), let sectionData = smilesExplorerSections?.sectionDetails?[headerSectionIndex] {
+            dataSource?.dataSources?[headerSectionIndex] = TableViewDataSource.make(header: HomeHeaderResponse(headerImage: sectionData.backgroundImage, headerTitle: sectionData.title), data: self.smilesExplorerSections?.sectionDetails?[headerSectionIndex].backgroundColor ?? "#FFFFFF", isDummy: false)
             configureDataSource()
         }
         
     }
     
-    private func configureFooterSection() {
+    private func configureFooterSection(with response: ExplorerSubscriptionBannerResponse) {
         
-        if let footerSectionIndex = getSectionIndex(for: .footer) {
-            if let footer = smilesExplorerSections?.sectionDetails?.first(where: { section in
-                return section.sectionIdentifier == SmilesExplorerSectionIdentifier.footer.rawValue
-            }), let backgroundImage = footer.backgroundImage {
-                dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource(models: [backgroundImage], reuseIdentifier: "SmilesExplorerFooterTableViewCell", data: "#FFFFFF", cellConfigurator: { (url, cell, data, indexPath) in
-                    guard let cell = cell as? SmilesExplorerFooterTableViewCell else { return }
-                    cell.footerconfiguration = self.smilesExplorerSections?.sectionDetails?[footerSectionIndex]
-                    cell.setupValues(url: url)
-                    cell.getMembership = { [weak self] in
-                        // Setup navigation for membership
-                        SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self?.navigationController, delegate: self?.delegate)
-                    }
-                })
-                configureDataSource()
-            }
-        }else{
-                self.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
+        if let footer = response.footer, let footerSectionIndex = getSectionIndex(for: .footer), let sectionDetails = self.smilesExplorerSections?.sectionDetails?[footerSectionIndex] {
+            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: sectionDetails.title, data: sectionDetails.backgroundColor ?? "FFFFFF", 
+                                                                                         completion: { [weak self] in
+                SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self?.navigationController, delegate: self?.delegate)
+            })
+        } else {
+            self.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
         }
         
     }
