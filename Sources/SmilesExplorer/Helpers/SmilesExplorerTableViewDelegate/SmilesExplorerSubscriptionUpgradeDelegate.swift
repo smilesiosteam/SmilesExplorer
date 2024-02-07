@@ -188,7 +188,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         offersPage = offersPage + 1
                         print("-----> offersPage \(offersPage)")
                         
-                        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: offersPage, categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
+                        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .bogoOffers, pageNo: offersPage, categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
                     }
                 }
             }

@@ -317,7 +317,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         //TODO: Need to send selected filters in below api
         self.input.send(.emptyOffersList)
         self.showShimmer(identifier: .offerListing)
-        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
+        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .bogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
         
         
     }
@@ -405,7 +405,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forStories: response, data:"#FFFFFF", isDummy: true, onClick:nil)
                     }
                     
-                    self.input.send(.getExclusiveDealsStories(categoryId: self.categoryId, tag: .exclusiveDealsStories, pageNo: 1))
+                    self.input.send(.getExclusiveDealsStories(categoryId: self.categoryId, tag: .exclusiveDeals, pageNo: 1))
                     
                     break
                 case .offerListing:
@@ -413,7 +413,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     if let response = OfferDO.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoOffers: [response], data:"#FFFFFF", isDummy: true, completion:nil)
                     }
-                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes.isEmpty  ? nil: self.arraySelectedSubCategoryTypes))
+                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .bogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes.isEmpty  ? nil: self.arraySelectedSubCategoryTypes))
                     break
                     
                 default: break
@@ -723,7 +723,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: SelectedFiltersDelega
         input.send(.setFiltersSavedList(filtersSavedList: self.filtersSavedList, filtersList: []))
         input.send(.emptyOffersList)
         self.showShimmer(identifier: .offerListing)
-        input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
+        input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDeals, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
     }
     
     public func didSetFilterResponse(_ data: Data?) {
@@ -769,6 +769,6 @@ extension SmilesExplorerSubscriptionUpgradeViewController: SelectedSortDelegate 
         self.input.send(.setSelectedSort(sortTitle: selectedSort))
         input.send(.emptyOffersList)
         self.showShimmer(identifier: .offerListing)
-        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDealsBogoOffers, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
+        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDeals, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
     }
 }

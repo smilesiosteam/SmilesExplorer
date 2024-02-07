@@ -10,6 +10,7 @@ import Combine
 import SmilesUtilities
 import SmilesSharedServices
 import SmilesOffers
+import NetworkingLayer
 
 protocol OffersListUseCaseProtocol {
     func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersListUseCase.State, Never>
@@ -29,7 +30,7 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
     }
     
     // MARK: - getBogoOffers
-    func getOffers(categoryId: Int?, tag: SectionTypeTag? = .exclusiveDealsBogoOffers, pageNo: Int? = 1) -> AnyPublisher<OffersListUseCase.State, Never> {
+    func getOffers(categoryId: Int?, tag: SectionTypeTag? = .bogoOffers, pageNo: Int? = 1) -> AnyPublisher<OffersListUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
@@ -37,12 +38,21 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
             self.services.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
                 .sink { completion in
                     if case .failure(let error) = completion {
-                        promise(.success(.failure(message: error.localizedDescription)))
+                        promise(.success(.offersDidFail(error: error.localizedDescription)))
                     }
                 
             } receiveValue: { response in
                 debugPrint(response)
-                promise(.success(.success(response: response)))
+                switch tag {
+                case .exclusiveDeals:
+                    promise(.success(.exclusiveDeals(response: response)))
+                case .bogoOffers:
+                    promise(.success(.bogoOffers(response: response)))
+                case .tickets:
+                    promise(.success(.tickets(response: response)))
+                default:
+                    break
+                }
             }
             .store(in: &cancellables)
 
@@ -51,7 +61,7 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
     }
     
     
-    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag? = .exclusiveDealsBogoOffers, pageNo: Int? = 1, categoryTypeIdsList: [String]?) -> AnyPublisher<State, Never> {
+    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag? = .bogoOffers, pageNo: Int? = 1, categoryTypeIdsList: [String]?) -> AnyPublisher<State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
@@ -59,12 +69,20 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
             self.services.getOffersWithFilters(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
                 .sink { completion in
                     if case .failure(let error) = completion {
-                        promise(.success(.failure(message: error.localizedDescription)))
+                        promise(.success(.offersDidFail(error: error.localizedDescription)))
                     }
-                
             } receiveValue: { response in
                 debugPrint(response)
-                promise(.success(.success(response: response)))
+                switch tag {
+                case .exclusiveDeals:
+                    promise(.success(.exclusiveDeals(response: response)))
+                case .bogoOffers:
+                    promise(.success(.bogoOffers(response: response)))
+                case .tickets:
+                    promise(.success(.tickets(response: response)))
+                default:
+                    break
+                }
             }
             .store(in: &cancellables)
 
@@ -77,7 +95,10 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
 
 extension OffersListUseCase {
     enum State {
-        case success(response: OffersCategoryResponseModel)
-        case failure(message: String)
+        case stories(response: OffersCategoryResponseModel)
+        case tickets(response: OffersCategoryResponseModel)
+        case bogoOffers(response: OffersCategoryResponseModel)
+        case exclusiveDeals(response: OffersCategoryResponseModel)
+        case offersDidFail(error: String)
     }
 }

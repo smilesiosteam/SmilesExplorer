@@ -49,7 +49,8 @@ public enum SmilesTouristConfigrator {
     public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerSubscriptionUpgradeViewController {
         let offersUseCase = OffersListUseCase(services: service)
         let subscriptionUseCase = SmilesExplorerSubscriptionUseCase(services: service)
-        let viewModel = SmilesTouristHomeViewModel(offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase)
+        let filtersUseCaseProtocol = FiltersUseCase()
+        let viewModel = SmilesTouristHomeViewModel(offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase, filtersUseCaseProtocol:filtersUseCaseProtocol)
         let viewController = SmilesExplorerSubscriptionUpgradeViewController(categoryId: dependance.categoryId, isGuestUser: dependance.isGuestUser, delegate: navigationDelegate, rewardPoint: dependance.rewardPoint ?? 0, rewardPointIcon: dependance.rewardPointIcon ?? "", personalizationEventSource: dependance.personalizationEventSource, platinumLimiReached: dependance.platinumLimiReached)
         viewController.viewModl = viewModel
         viewController.delegate = navigationDelegate
