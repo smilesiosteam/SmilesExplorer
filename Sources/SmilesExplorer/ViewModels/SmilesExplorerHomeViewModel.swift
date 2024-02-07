@@ -12,6 +12,7 @@ import SmilesUtilities
 import SmilesOffers
 import SmilesBanners
 import SmilesLocationHandler
+import NetworkingLayer
 
 class SmilesExplorerHomeViewModel: NSObject {
     
@@ -75,6 +76,8 @@ extension SmilesExplorerHomeViewModel {
                 self?.bind(to: self?.smilesExplorerGetOffersViewModel ?? SmilesExplorerGetOffersViewModel())
                 self?.exclusiveOffersUseCaseInput.send(.getBogo(categoryId: categoryId, tag: tag))
                 
+            case .getSubscriptionBannerDetails:
+                self?.getSubscriptionBannerDetails()
             default:
                 break
             }
@@ -142,6 +145,30 @@ extension SmilesExplorerHomeViewModel {
                     self?.output.send(.fetchBogoDidFail(error: error))
                 }
             }.store(in: &cancellables)
+    }
+    
+    private func getSubscriptionBannerDetails() {
+        
+        let request = ExplorerSubscriptionBannerRequest()
+        
+        let service = ExplorerHomeRepository(
+            networkRequest: NetworkingLayerRequestable(requestTimeOut: 60), baseUrl: AppCommonMethods.serviceBaseUrl,
+            endPoint: .getSubscriptionBannerDetails
+        )
+        
+        service.getSubscriptionBannerDetails(request: request)
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.output.send(.fetchSubscriptionBannerDetailsDidFail(error: error))
+                case .finished:
+                    debugPrint("nothing much to do here")
+                }
+            } receiveValue: { [weak self] response in
+                self?.output.send(.fetchSubscriptionBannerDetailsDidSucceed(response: response))
+            }
+        .store(in: &cancellables)
+        
     }
     
 }

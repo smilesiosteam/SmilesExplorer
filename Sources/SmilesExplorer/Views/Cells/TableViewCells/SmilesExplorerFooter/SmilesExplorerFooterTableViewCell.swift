@@ -8,20 +8,20 @@
 import UIKit
 import SmilesUtilities
 import SmilesSharedServices
+import SmilesFontsManager
 
 class SmilesExplorerFooterTableViewCell: UITableViewCell {
 
     // MARK: - OUTLETS -
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subscriptionImageView: UIImageView!
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var footerBgView: UIView!
-    @IBOutlet weak var explorerMembershipLabel: UILocalizableLabel!
-    @IBOutlet weak var priceLabel: UILocalizableLabel!
-    @IBOutlet weak var validityLabel: UILocalizableLabel!
-    @IBOutlet weak var benefitsLable: UILocalizableLabel!
-    @IBOutlet weak var getMemberShipButton: UIButton!
-    @IBOutlet weak var fromLabel: UILocalizableLabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILocalizableLabel!
+    @IBOutlet weak var faqButton: UIButton!
+    @IBOutlet weak var mainView: UICustomView!
+    
     // MARK: - PROPERTIES -
+    private var gradientLayer: CAGradientLayer? = nil
     var getMembership: (() -> Void)?
     
     // MARK: - ACTIONS -
@@ -29,43 +29,46 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         getMembership?()
     }
     
+    @IBAction func faqPressed(_ sender: Any) {
+    }
     
     // MARK: - METHODS -
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        subscriptionImageView.contentMode = .scaleAspectFit
-        getMemberShipButton.setTitle("Subscribe".localizedString, for: .normal)
-        topView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
-        // Initialization code
+        setupViews()
     }
     
-    func setupValues(url: String) {
-        subscriptionImageView.setImageWithUrlString(url)
-    }
-    
-    // MARK: - CONFIGURATION METHODS -
-    var footerconfiguration: SectionDetailDO? {
-        didSet {
-            guard let footerConfig = footerconfiguration else { return }
-            self.setupFooterUI(model: footerConfig)
-        }
-    }
-
-    private func setupFooterUI(model: SectionDetailDO) {
-       
-        self.explorerMembershipLabel.text = model.title?.components(separatedBy: "\n").first ?? ""
-        self.fromLabel.localizedString = (model.title?.components(separatedBy: "\n").last ?? "").components(separatedBy: " ").first ?? "from"
-        self.priceLabel.localizedString = (model.title?.components(separatedBy: "\n").last ?? "").components(separatedBy: "from").last ?? ""
-        self.validityLabel.localizedString = model.subTitle?.components(separatedBy: "\n").first ?? ""
-        self.benefitsLable.localizedString = model.subTitle?.components(separatedBy: "\n\n")[1] ?? ""
-//        self.footerBgView.backgroundColor = UIColor(hexString: model.backgroundColor ?? "")
+    private func setupViews() {
         
-        explorerMembershipLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
-        priceLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
-        validityLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
-        benefitsLable.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
-        fromLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+        let attributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributedTitle = NSAttributedString(string: "Read FAQs".localizedString, attributes: attributes)
+        faqButton.attributedText(attributedTitle, style: .smilesHeadline5, textColor: .white)
+        subscriptionImageView.layer.cornerRadius = 16
+        
+    }
+    
+    func setupData(title: String?, footer: HomeFooter) {
+        
+        titleLabel.text = title
+        subscriptionImageView.setImageWithUrlString(footer.explorerSubBannerBgImage ?? "")
+        priceLabel.text = "AED".localizedString + " \(footer.explorerSubBannerPrice ?? "")"
+        descriptionLabel.text = footer.explorerSubBannerDescription
+        setupGradient(colors: footer.explorerSubBannerBgColor ?? "#9ECFFF|#DBEAF8", direction: footer.explorerSubBannerColorDirection)
+        
+    }
+    
+    private func setupGradient(colors: String, direction: String?) {
+        
+        let backgroundGradientColors = colors.components(separatedBy: "|")
+        let gradientColors = backgroundGradientColors.map({UIColor().colorWithHexString(hexString: $0).cgColor})
+        gradientLayer?.removeFromSuperlayer()
+        gradientLayer = GradientUtility.shared.getGradientLayer(forView: mainView,
+                                                                    colors: gradientColors,
+                                                                    direction: direction ?? "left")
+        mainView.layer.insertSublayer(gradientLayer!, at: 0)
+        
     }
 
     

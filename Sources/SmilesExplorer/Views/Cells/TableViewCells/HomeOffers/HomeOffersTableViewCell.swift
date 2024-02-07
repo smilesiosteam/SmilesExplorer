@@ -1,0 +1,103 @@
+//
+//  HomeOffersTableViewCell.swift
+//  
+//
+//  Created by Abdul Rehman Amjad on 18/08/2023.
+//
+
+import UIKit
+import SmilesOffers
+import SmilesUtilities
+
+class HomeOffersTableViewCell: UITableViewCell {
+
+    // MARK: - OUTLETS -
+    @IBOutlet weak var mainView: UICustomView!
+    @IBOutlet weak var offerImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var viewAllButton: UIButton!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    // MARK: - PROPERTIES -
+    private var collectionsData: [OfferDO]?{
+        didSet{
+            self.collectionView?.reloadData()
+        }
+    }
+    private var isForTickets = true
+    var index: Int?
+    var callBack: ((OfferDO) -> ())?
+    
+    // MARK: - ACTIONS -
+    @IBAction func viewAllPressed(_ sender: Any) {
+    }
+    
+    // MARK: - METHODS -
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupViews()
+    }
+    
+    private func setupViews() {
+        
+        viewAllButton.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceLeftToRight : .forceRightToLeft
+        mainView.backgroundColor = .clear
+        setupCollectionView()
+        
+    }
+    
+    private func setupCollectionView() {
+        
+        collectionView.register(UINib(nibName: String(describing: HomeOffersCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: HomeOffersCollectionViewCell.self))
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+    }
+    
+    func setBackGroundColor(color: UIColor) {
+        mainView.backgroundColor = color
+    }
+    
+    func setupData(offers: [OfferDO]?, title: String?, subtitle: String?, offersImage: String?, isForTickets: Bool) {
+        
+        offerImageView.setImageWithUrlString(offersImage ?? "")
+        titleLabel.text = title
+        subtitleLabel.text = subtitle
+        self.isForTickets = isForTickets
+        collectionsData = offers
+        
+    }
+    
+}
+
+// MARK: - COLLECTIONVIEW DELEGATE & DATASOURCE -
+extension HomeOffersTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionsData?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if let data = collectionsData?[safe: indexPath.row] {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeOffersCollectionViewCell", for: indexPath) as? HomeOffersCollectionViewCell else {return UICollectionViewCell()}
+            cell.setupData(offer: data, isForTickets: isForTickets)
+            return cell
+        }
+        return UICollectionViewCell()
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let data = collectionsData?[indexPath.row] {
+            callBack?(data)
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 135, height: 200)
+    }
+}
