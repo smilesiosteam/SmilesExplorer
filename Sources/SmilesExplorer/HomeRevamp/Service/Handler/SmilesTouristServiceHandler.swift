@@ -11,11 +11,10 @@ import NetworkingLayer
 import SmilesBaseMainRequestManager
 import SmilesOffers
 
-
 protocol SmilesTouristServiceHandlerProtocol {
     
-    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
-    func getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
+    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     func getSubscriptionInfo(_ packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError>
 }
 
@@ -30,14 +29,14 @@ final class SmilesTouristServiceHandler: SmilesTouristServiceHandlerProtocol {
     }
     
     // MARK: - Functions
-    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
         let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, pageNo: pageNo)
-        return repository.getExclusiveOffers(request: request)
+        return repository.getOffers(request: request)
     }
     
-    func getBogoOffers(categoryId: Int?, tag: String?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
-        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, pageNo: pageNo)
-        return repository.getExclusiveOffers(request: request)
+    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
+        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, pageNo: pageNo,categoryTypeIdsList: categoryTypeIdsList)
+        return repository.getOffers(request: request)
     }
     
     func getSubscriptionInfo(_ packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError> {

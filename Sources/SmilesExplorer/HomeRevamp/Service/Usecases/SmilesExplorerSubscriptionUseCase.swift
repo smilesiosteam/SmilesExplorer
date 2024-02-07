@@ -12,7 +12,7 @@ import SmilesSharedServices
 import SmilesOffers
 
 protocol SmilesExplorerSubscriptionUseCaseProtocol {
-    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int,categoryTypeIdsList: [String]?) -> AnyPublisher<SmilesExplorerSubscriptionUseCase.State, Never>
+     func getSubscriptionInfo(packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionUseCase.State, Never>
 }
 
 public class SmilesExplorerSubscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol {
@@ -27,12 +27,12 @@ public class SmilesExplorerSubscriptionUseCase: SmilesExplorerSubscriptionUseCas
     }
     
     // MARK: - getBogoOffers
-    func getExclusiveOffers(categoryId: Int?, tag: String?, pageNo: Int, categoryTypeIdsList: [String]?) -> AnyPublisher<SmilesExplorerSubscriptionUseCase.State, Never> {
+    func getSubscriptionInfo(packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
             }
-            self.services.getExclusiveOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+            self.services.getSubscriptionInfo(packageType)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         promise(.success(.failure(message: error.localizedDescription)))
@@ -53,7 +53,7 @@ public class SmilesExplorerSubscriptionUseCase: SmilesExplorerSubscriptionUseCas
 
 extension SmilesExplorerSubscriptionUseCase {
     enum State {
-        case success(response: OffersCategoryResponseModel)
+        case success(response: SmilesExplorerSubscriptionInfoResponse)
         case failure(message: String)
     }
 }
