@@ -595,25 +595,6 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
     }
     
-    
-    fileprivate func configureExclusiveOffers(with exclusiveOffersResponse: OffersCategoryResponseModel) {
-        self.offersListing = exclusiveOffersResponse
-        self.offers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
-        if !offers.isEmpty {
-            if let offersCategoryIndex = getSectionIndex(for: .stories) {
-                self.dataSource?.dataSources?[offersCategoryIndex] = TableViewDataSource.make(forOffers: self.offersListing!, data: self.smilesExplorerSections?.sectionDetails?[offersCategoryIndex].backgroundColor ?? "#FFFFFF", completion: { explorerOffer in
-                    debugPrint(explorerOffer)
-                    
-                })
-                self.configureDataSource()
-            }
-        } else {
-            if self.offers.isEmpty {
-                self.configureHideSection(for: .offerListing, dataSource: OffersCategoryResponseModel.self)
-            }
-        }
-    }
-    
     fileprivate func configureBogoOffers(with exclusiveOffersResponse: OffersCategoryResponseModel) {
         self.bogooffersListing = exclusiveOffersResponse
         self.bogoOffers.append(contentsOf: exclusiveOffersResponse.offers ?? [])

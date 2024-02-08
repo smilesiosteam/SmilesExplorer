@@ -25,12 +25,12 @@ class HomeOffersTableViewCell: UITableViewCell {
             self.collectionView?.reloadData()
         }
     }
-    private var isForTickets = true
-    var index: Int?
-    var callBack: ((OfferDO) -> ())?
+    var section: SmilesExplorerSectionIdentifier = .tickets
+    weak var delegate: HomeOffersDelegate?
     
     // MARK: - ACTIONS -
     @IBAction func viewAllPressed(_ sender: Any) {
+        delegate?.showOffersList(section: section)
     }
     
     // MARK: - METHODS -
@@ -64,12 +64,12 @@ class HomeOffersTableViewCell: UITableViewCell {
         mainView.backgroundColor = color
     }
     
-    func setupData(offers: [OfferDO]?, title: String?, subtitle: String?, offersImage: String?, isForTickets: Bool) {
+    func setupData(offers: [OfferDO]?, title: String?, subtitle: String?, offersImage: String?, section: SmilesExplorerSectionIdentifier) {
         
         offerImageView.setImageWithUrlString(offersImage ?? "")
         titleLabel.text = title
         subtitleLabel.text = subtitle
-        self.isForTickets = isForTickets
+        self.section = section
         collectionsData = offers
         
     }
@@ -87,7 +87,7 @@ extension HomeOffersTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         
         if let data = collectionsData?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeOffersCollectionViewCell", for: indexPath) as? HomeOffersCollectionViewCell else {return UICollectionViewCell()}
-            cell.setupData(offer: data, isForTickets: isForTickets)
+            cell.setupData(offer: data, isForTickets: section == .tickets)
             return cell
         }
         return UICollectionViewCell()
@@ -97,7 +97,7 @@ extension HomeOffersTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if let data = collectionsData?[indexPath.row] {
-            callBack?(data)
+            delegate?.showOfferDetails(offer: data)
         }
         
     }

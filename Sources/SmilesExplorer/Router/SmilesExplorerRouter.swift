@@ -9,6 +9,7 @@
 import SmilesSharedServices
 import SmilesUtilities
 import UIKit
+import SmilesOffers
 
 @objcMembers
 public final class SmilesExplorerRouter: NSObject {
@@ -79,6 +80,13 @@ public final class SmilesExplorerRouter: NSObject {
                 break
             }
         }
+    }
+    
+    func pushOffersListingVC(navVC: UINavigationController?, offersResponse: OffersCategoryResponseModel, title: String) {
+        
+        let vc = ExplorerOffersListingViewController(offersResponse: offersResponse, title: title)
+        navVC?.pushViewController(vc, animated: true)
+        
     }
     
     

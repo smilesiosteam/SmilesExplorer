@@ -66,19 +66,19 @@ extension TableViewDataSource where Model == BOGODetailsResponseLifestyleOffer {
     }
 }
 
-extension TableViewDataSource where Model == OffersCategoryResponseModel {
-    static func make(forOffers collectionsObject: OffersCategoryResponseModel,
-                     reuseIdentifier: String = "HomeOffersTableViewCell", data: String, isDummy: Bool = false, title: String? = nil, subtitle: String? = nil, isForTickets: Bool = false, completion:((OfferDO) -> ())?) -> TableViewDataSource {
+extension TableViewDataSource where Model == [OfferDO] {
+    static func make(forOffers collectionsObject: [OfferDO],
+                     reuseIdentifier: String = "HomeOffersTableViewCell", data: String, isDummy: Bool = false, title: String? = nil, subtitle: String? = nil, offersIcon: String? = nil, section: SmilesExplorerSectionIdentifier, delegate: HomeOffersDelegate? = nil) -> TableViewDataSource {
         return TableViewDataSource(
-            models: [collectionsObject].filter({$0.offers?.count ?? 0 > 0}),
+            models: [collectionsObject],
             reuseIdentifier: reuseIdentifier,
             data : data,
             isDummy:isDummy
         ) { (offer, cell, data, indexPath) in
             guard let cell = cell as? HomeOffersTableViewCell else {return}
-            cell.setupData(offers: offer.offers, title: title, subtitle: subtitle, offersImage: offer.iconImageUrl, isForTickets: isForTickets)
+            cell.setupData(offers: offer, title: title, subtitle: subtitle, offersImage: offersIcon, section: section)
             cell.setBackGroundColor(color: UIColor(hexString: data))
-            cell.callBack = completion
+            cell.delegate = delegate
         }
     }
 }
@@ -179,6 +179,21 @@ extension TableViewDataSource where Model == HomeFooter {
             if !isDummy {
                 cell.getMembership = completion
             }
+        }
+    }
+}
+
+extension TableViewDataSource where Model == OfferDO {
+    static func makeForOffersListing(offers: [OfferDO],
+                     reuseIdentifier: String = "OffersListingTableViewCell", isDummy: Bool = false) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: offers,
+            reuseIdentifier: reuseIdentifier,
+            data: "FFFFFF",
+            isDummy: isDummy
+        ) { (offer, cell, data, indexPath) in
+            guard let cell = cell as? OffersListingTableViewCell else { return }
+            cell.setupData(offer: offer)
         }
     }
 }
