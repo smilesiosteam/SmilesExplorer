@@ -50,9 +50,9 @@ class SmilesExplorerHomeTicketsCollectionViewCell: UICollectionViewCell {
         amountLabel.attributedText = attributeString
         self.brandTitleLabel.text = offer.offerTitle ?? ""
       //  self.typeLabel.localizedString = offer.offerType ?? ""
-        brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(),defaultImage: "", backgroundColor: .white) { image in
+        brandLogoImageView.setImageWithUrlString(offer.partnerImage.asStringOrEmpty(),defaultImage: "", backgroundColor: .white) { [weak self] image in
             if let image = image {
-                self.brandLogoImageView.image = image
+                self?.brandLogoImageView.image = image
             }
         }
         
