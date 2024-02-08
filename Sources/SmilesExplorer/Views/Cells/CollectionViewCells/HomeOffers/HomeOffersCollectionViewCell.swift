@@ -16,7 +16,7 @@ class HomeOffersCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var descriptionStackView: UIStackView!
+    @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var contentBottomSpace: NSLayoutConstraint!
     @IBOutlet weak var contentBottomSpaceEqual: NSLayoutConstraint!
     
@@ -40,7 +40,7 @@ class HomeOffersCollectionViewCell: UICollectionViewCell {
         
         titleLabel.text = offer.offerTitle
         titleLabel.numberOfLines = isForTickets ? 2 : 3
-        descriptionStackView.isHidden = !isForTickets
+        descriptionView.isHidden = !isForTickets
         offerImageView.setImageWithUrlString(offer.imageURL ?? "")
         partnerImageView.setImageWithUrlString(offer.partnerImage ?? "")
         contentBottomSpace.priority = isForTickets ? .defaultLow : .defaultHigh

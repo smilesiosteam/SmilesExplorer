@@ -88,9 +88,10 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     private func setupTableView() {
         
-        contentTableView.sectionFooterHeight = .leastNormalMagnitude
         contentTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: contentTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         contentTableView.sectionHeaderHeight = 0.0
+        contentTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: contentTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
+        contentTableView.sectionFooterHeight = 0.0
         contentTableView.delegate = self
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerHomeCellRegistration()
         smilesExplorerCellRegistrable.register(for: contentTableView)
@@ -323,9 +324,9 @@ extension SmilesExplorerHomeViewController {
     
     private func configureFooterSection(with response: ExplorerSubscriptionBannerResponse) {
         
-        if let footer = response.footer, let footerSectionIndex = getSectionIndex(for: .footer), let sectionDetails = self.smilesExplorerSections?.sectionDetails?[footerSectionIndex] {
-            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: sectionDetails.title, data: sectionDetails.backgroundColor ?? "FFFFFF", 
-                                                                                         completion: { [weak self] in
+        if let footer = response.footer, let footerSectionIndex = getSectionIndex(for: .footer) {
+            let topPlaceholder = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })
+            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: topPlaceholder?.title, data: "FFFFFF", completion: { [weak self] in
                 SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self?.navigationController, delegate: self?.delegate)
             })
         } else {
@@ -348,8 +349,9 @@ extension SmilesExplorerHomeViewController {
         }
         offers.append(contentsOf: response.offers ?? [])
         if !offers.isEmpty, let offerslisting = self.offersListing {
-            if let offersIndex = getSectionIndex(for: section), let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] {
-                self.dataSource?.dataSources?[offersIndex] = TableViewDataSource.make(forOffers: offerslisting, data: sectionDetails.backgroundColor ?? "#FFFFFF", title: sectionDetails.title, subtitle: sectionDetails.subTitle, offersImage: sectionDetails.iconUrl, isForTickets: section == .tickets, completion: { explorerOffer in
+            if let offersIndex = getSectionIndex(for: section),
+               let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] {
+                self.dataSource?.dataSources?[offersIndex] = TableViewDataSource.make(forOffers: offerslisting, data: sectionDetails.backgroundColor ?? "#FFFFFF", title: sectionDetails.title, subtitle: sectionDetails.subTitle, isForTickets: section == .tickets, completion: { explorerOffer in
                     
                 })
                 self.configureDataSource()

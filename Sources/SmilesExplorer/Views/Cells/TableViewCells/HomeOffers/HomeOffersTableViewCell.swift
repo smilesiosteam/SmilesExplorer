@@ -41,7 +41,12 @@ class HomeOffersTableViewCell: UITableViewCell {
     
     private func setupViews() {
         
-        viewAllButton.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceLeftToRight : .forceRightToLeft
+        let isLanguageArabic = AppCommonMethods.languageIsArabic()
+        viewAllButton.semanticContentAttribute = isLanguageArabic ? .forceLeftToRight : .forceRightToLeft
+        viewAllButton.setImage(UIImage(named: isLanguageArabic ? "back_icon" : "back_icon_ar", in: .module, with: nil), for: .normal)
+        viewAllButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: isLanguageArabic ? 0 : -2,
+                                                     bottom: 0, right: isLanguageArabic ? -2 : 0)
+        viewAllButton.contentHorizontalAlignment = isLanguageArabic ? .left : .right
         mainView.backgroundColor = .clear
         setupCollectionView()
         
