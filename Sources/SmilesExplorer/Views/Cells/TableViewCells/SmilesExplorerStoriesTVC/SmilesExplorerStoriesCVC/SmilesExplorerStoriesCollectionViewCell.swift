@@ -55,15 +55,15 @@ public class SmilesExplorerStoriesCollectionViewCell: UICollectionViewCell {
     }
     
      func configure(storyOffer: OfferDO) {
-         image.setImageWithUrlString(storyOffer.imageURL.asStringOrEmpty()) { image in
+         image.setImageWithUrlString(storyOffer.imageURL.asStringOrEmpty()) { [weak self] image in
             if let image = image {
-                self.image.image = image
+                self?.image.image = image
             }
         }
         
-        icon.setImageWithUrlString(storyOffer.partnerImage.asStringOrEmpty()) { image in
+        icon.setImageWithUrlString(storyOffer.partnerImage.asStringOrEmpty()) { [weak self] image in
             if let image = image {
-                self.icon.image = image
+                self?.icon.image = image
             }
         }
         
