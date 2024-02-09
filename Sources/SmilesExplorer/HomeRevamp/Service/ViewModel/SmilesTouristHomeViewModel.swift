@@ -104,6 +104,7 @@ extension SmilesTouristHomeViewModel {
             switch event {
             case .emptyOffersList:
                 self?.output.send(.emptyOffersListDidSucceed)
+                
             case .updateOfferWishlistStatus(operation: let operation, offerId: let offerId):
                 self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
                 
@@ -112,6 +113,9 @@ extension SmilesTouristHomeViewModel {
            
             case .getOffers(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
                 self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+                
+            case .getOffersWithFilters(categoryId: let categoryId, tag: let tag, pageNo: let pageNo, categoryTypeIdsList: let categoryTypeIdsList):
+                self?.getOffersWithFilters(categoryId: categoryId ?? 973, tag: tag, pageNo: pageNo ?? 0,categoryTypeIdsList: categoryTypeIdsList ?? [])
             
             case .getFiltersData(filtersSavedList: let filtersSavedList, isFilterAllowed: let isFilterAllowed, isSortAllowed: let isSortAllowed):
                 self?.filtersUseCaseProtocol.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
@@ -122,16 +126,13 @@ extension SmilesTouristHomeViewModel {
                 self?.filtersUseCaseProtocol.removeAndSaveFilters(filtersList: filtersList, filtersSavedList: filtersSavedList, filter: filter, completion: { filtersList, filtersSavedList in
                     self?.output.send(.fetchAllSavedFiltersSuccess(filtersList: filtersList, filtersSavedList: filtersSavedList))
                 })
-            
-            case .getOffersWithFilters(categoryId: let categoryId, tag: let tag, pageNo: let pageNo, categoryTypeIdsList: let categoryTypeIdsList):
-                self?.getOffersWithFilters(categoryId: categoryId ?? 973, tag: tag, pageNo: pageNo ?? 0,categoryTypeIdsList: categoryTypeIdsList ?? [])
-                
-            case .getRewardPoints:
-                self?.rewardPointsUseCaseInput.send(.getRewardPoints(baseUrl: AppCommonMethods.serviceBaseUrl))
                 
             case .setFiltersSavedList(filtersSavedList: let filtersSavedList, filtersList: let filtersList):
                 self?.filtersSavedList = filtersSavedList
                 self?.filtersList = filtersList
+                
+            case .getRewardPoints:
+                self?.rewardPointsUseCaseInput.send(.getRewardPoints(baseUrl: AppCommonMethods.serviceBaseUrl))
                 
             }
             
