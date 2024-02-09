@@ -31,10 +31,10 @@
                             <constraint firstAttribute="height" constant="40" id="nDf-cN-ztf"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AUf-7H-eqo">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AUf-7H-eqo">
                         <rect key="frame" x="0.0" y="140" width="135" height="56"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-3y-ILV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-3y-ILV">
                                 <rect key="frame" x="0.0" y="0.0" width="135" height="20.333333333333332"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,11 +43,11 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-Sp-IKV">
-                                <rect key="frame" x="0.0" y="28.333333333333343" width="135" height="27.666666666666671"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v93-QD-R6r">
+                                <rect key="frame" x="0.0" y="20.333333333333339" width="135" height="35.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7l-EK-eza">
-                                        <rect key="frame" x="0.0" y="7.3333333333333126" width="63.666666666666664" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="15.333333333333313" width="85.666666666666671" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -55,8 +55,8 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle2"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13a-Cu-wkr">
-                                        <rect key="frame" x="71.666666666666671" y="7.3333333333333126" width="63.333333333333329" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13a-Cu-wkr">
+                                        <rect key="frame" x="93.666666666666671" y="15.333333333333313" width="41.333333333333329" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -65,7 +65,17 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="13a-Cu-wkr" firstAttribute="leading" secondItem="x7l-EK-eza" secondAttribute="trailing" constant="8" id="Bmp-hj-rFF"/>
+                                    <constraint firstItem="13a-Cu-wkr" firstAttribute="bottom" secondItem="x7l-EK-eza" secondAttribute="bottom" id="Bwq-wM-GM0"/>
+                                    <constraint firstItem="x7l-EK-eza" firstAttribute="leading" secondItem="v93-QD-R6r" secondAttribute="leading" id="H1k-h3-hWM"/>
+                                    <constraint firstAttribute="bottom" secondItem="x7l-EK-eza" secondAttribute="bottom" id="Y1k-iU-BPI"/>
+                                    <constraint firstAttribute="trailing" secondItem="13a-Cu-wkr" secondAttribute="trailing" id="b9s-eP-00q"/>
+                                    <constraint firstItem="x7l-EK-eza" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v93-QD-R6r" secondAttribute="top" id="gHQ-Lz-wdt"/>
+                                    <constraint firstItem="13a-Cu-wkr" firstAttribute="top" secondItem="x7l-EK-eza" secondAttribute="top" id="uyx-yX-rh7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -88,7 +98,7 @@
                 <outlet property="amountLabel" destination="13a-Cu-wkr" id="ERO-Ox-Uxb"/>
                 <outlet property="contentBottomSpace" destination="5sJ-f6-85f" id="jDg-gj-hmT"/>
                 <outlet property="contentBottomSpaceEqual" destination="PTO-3d-0xf" id="8uh-MG-XHP"/>
-                <outlet property="descriptionStackView" destination="xhy-Sp-IKV" id="t1a-Uq-t3l"/>
+                <outlet property="descriptionView" destination="v93-QD-R6r" id="H27-ig-QSp"/>
                 <outlet property="offerImageView" destination="7jk-R9-xmO" id="83j-Lv-FyM"/>
                 <outlet property="partnerImageView" destination="C20-dR-SVH" id="Gtm-Jx-JcK"/>
                 <outlet property="titleLabel" destination="IRG-3y-ILV" id="EaH-Pa-TsT"/>

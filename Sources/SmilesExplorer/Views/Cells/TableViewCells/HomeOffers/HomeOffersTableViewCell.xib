@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="One Free Ticket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbU-sJ-hEn">
-                                <rect key="frame" x="16" y="112" width="259" height="20.333333333333343"/>
+                                <rect key="frame" x="16" y="112" width="323" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Get one attraction ticket for Free worth up to AED 350" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3M-uz-J8W">
-                                <rect key="frame" x="16" y="140.33333333333334" width="259" height="40.666666666666657"/>
+                                <rect key="frame" x="16" y="140.33333333333334" width="323" height="40.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -50,19 +50,17 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesBody3"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8L-yS-oOi">
-                                <rect key="frame" x="279" y="112" width="82" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="82" id="t9r-iZ-HaK"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8L-yS-oOi" customClass="UICustomButton" customModule="SmilesUtilities">
+                                <rect key="frame" x="343" y="112" width="24" height="24"/>
                                 <fontDescription key="fontDescription" name="CircularXXTT-Medium" family="CircularXX TT" pointSize="16"/>
                                 <color key="tintColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="View all" image="back_icon_ar">
+                                <state key="normal" image="back_icon_ar">
                                     <color key="titleColor" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="ViewAllText"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="viewAllPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XDc-vt-JrP"/>
@@ -92,7 +90,7 @@
                             <constraint firstItem="RDO-JV-0dC" firstAttribute="top" secondItem="hpz-lj-LMz" secondAttribute="top" constant="24" id="Pbt-gV-Uoh"/>
                             <constraint firstAttribute="bottom" secondItem="hkf-IG-6aa" secondAttribute="bottom" constant="24" id="Rnk-Ve-DEz"/>
                             <constraint firstItem="nbU-sJ-hEn" firstAttribute="top" secondItem="RDO-JV-0dC" secondAttribute="bottom" constant="24" id="TFR-wN-lI2"/>
-                            <constraint firstAttribute="trailing" secondItem="R8L-yS-oOi" secondAttribute="trailing" constant="16" id="Ut8-vG-Bil"/>
+                            <constraint firstAttribute="trailing" secondItem="R8L-yS-oOi" secondAttribute="trailing" constant="10" id="Ut8-vG-Bil"/>
                             <constraint firstItem="RDO-JV-0dC" firstAttribute="leading" secondItem="hpz-lj-LMz" secondAttribute="leading" constant="16" id="ZOq-dM-9dq"/>
                             <constraint firstItem="R8L-yS-oOi" firstAttribute="top" secondItem="nbU-sJ-hEn" secondAttribute="top" id="cGg-54-SdQ"/>
                             <constraint firstItem="hkf-IG-6aa" firstAttribute="top" secondItem="b3M-uz-J8W" secondAttribute="bottom" constant="16" id="d3t-M0-Fz4"/>
@@ -112,7 +110,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="hpz-lj-LMz" secondAttribute="trailing" constant="16" id="J9n-gW-OuQ"/>
                     <constraint firstItem="hpz-lj-LMz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="VfV-f8-bOo"/>
@@ -121,7 +119,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="hkf-IG-6aa" id="eLe-Y5-Zmh"/>
                 <outlet property="mainView" destination="hpz-lj-LMz" id="9XQ-3a-afB"/>

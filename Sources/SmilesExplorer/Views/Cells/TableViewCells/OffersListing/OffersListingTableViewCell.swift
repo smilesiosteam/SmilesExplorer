@@ -1,24 +1,29 @@
 //
-//  HomeOffersCollectionViewCell.swift
+//  OffersListingTableViewCell.swift
 //  
 //
-//  Created by Abdul Rehman Amjad on 06/02/2024.
+//  Created by Abdul Rehman Amjad on 08/02/2024.
 //
 
 import UIKit
 import SmilesOffers
 
-class HomeOffersCollectionViewCell: UICollectionViewCell {
+class OffersListingTableViewCell: UITableViewCell {
 
     // MARK: - OUTLETS -
     @IBOutlet weak var offerImageView: UIImageView!
     @IBOutlet weak var partnerImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var descriptionView: UIView!
-    @IBOutlet weak var contentBottomSpace: NSLayoutConstraint!
-    @IBOutlet weak var contentBottomSpaceEqual: NSLayoutConstraint!
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    
+    // MARK: - PROPERTIES -
+    
+    
+    // MARK: - ACTIONS -
+    
     
     // MARK: - METHODS -
     override func awakeFromNib() {
@@ -36,22 +41,24 @@ class HomeOffersCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setupData(offer: OfferDO, isForTickets: Bool = true) {
+    func setupData(offer: OfferDO) {
         
         titleLabel.text = offer.offerTitle
-        titleLabel.numberOfLines = isForTickets ? 2 : 3
-        descriptionView.isHidden = !isForTickets
+        subTitleLabel.text = offer.offerDescription
         offerImageView.setImageWithUrlString(offer.imageURL ?? "")
         partnerImageView.setImageWithUrlString(offer.partnerImage ?? "")
-        contentBottomSpace.priority = isForTickets ? .defaultLow : .defaultHigh
-        contentBottomSpaceEqual.priority = isForTickets ? .defaultHigh : .defaultLow
-        if isForTickets {
+        
+        if let price = offer.dirhamValue, (price != "0" && price != "0.00") {
+            typeLabel.isHidden = true
+            priceLabel.text = ("AED".localizedString) + " " + price
+        } else {
+            typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
+            typeLabel.isHidden = false
             let attributeString = NSMutableAttributedString(string: "\("AED".localizedString) 0.00")
             attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
-            amountLabel.attributedText = attributeString
-            typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
+            priceLabel.attributedText = attributeString
         }
         
     }
-
+    
 }

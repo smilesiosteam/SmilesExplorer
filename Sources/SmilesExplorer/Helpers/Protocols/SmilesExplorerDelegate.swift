@@ -29,3 +29,10 @@ public protocol SmilesExplorerHomeDelegate {
     func navigateToSortingVC(sorts: [FilterDO], delegate: SelectedSortDelegate)
 
 }
+
+protocol HomeOffersDelegate: AnyObject {
+    
+    func showOfferDetails(offer: OfferDO)
+    func showOffersList(section: SmilesExplorerSectionIdentifier)
+    
+}

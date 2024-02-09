@@ -35,13 +35,14 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var sections = [SmilesExplorerSectionData]()
     
     public var delegate:SmilesExplorerHomeDelegate? = nil
-    var offersListing: OffersCategoryResponseModel?
+    var ticketsResponse: OffersCategoryResponseModel?
+    var exclusiveDealsResponse: OffersCategoryResponseModel?
+    var bogoOffersResponse: OffersCategoryResponseModel?
     var offersPage = 1 // For offers list pagination
     var dodOffersPage = 1 // For DOD offers list pagination
     var offers = [OfferDO]()
     var tickets = [OfferDO]()
     var bogoOffer = [OfferDO]()
-    var dodOffers = [OfferDO]()
     private var selectedIndexPath: IndexPath?
     var categoryDetailsSections: GetSectionsResponseModel?
     var mutatingSectionDetails = [SectionDetailDO]()
@@ -88,9 +89,10 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     private func setupTableView() {
         
-        contentTableView.sectionFooterHeight = .leastNormalMagnitude
         contentTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: contentTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         contentTableView.sectionHeaderHeight = 0.0
+        contentTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: contentTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
+        contentTableView.sectionFooterHeight = 0.0
         contentTableView.delegate = self
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerHomeCellRegistration()
         smilesExplorerCellRegistrable.register(for: contentTableView)
@@ -282,19 +284,19 @@ extension SmilesExplorerHomeViewController {
                     self.input.send(.getSubscriptionBannerDetails)
                 case .tickets:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .tickets)
                     }
                     self.input.send(.getTickets(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .exclusiveDeals:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .exclusiveDeals)
                     }
                     self.input.send(.exclusiveDeals(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
                 case .bogoOffers:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response, data: "#FFFFFF", isDummy: true, completion: nil)
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .bogoOffers)
                     }
                     self.input.send(.getBogo(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
                     break
@@ -323,9 +325,9 @@ extension SmilesExplorerHomeViewController {
     
     private func configureFooterSection(with response: ExplorerSubscriptionBannerResponse) {
         
-        if let footer = response.footer, let footerSectionIndex = getSectionIndex(for: .footer), let sectionDetails = self.smilesExplorerSections?.sectionDetails?[footerSectionIndex] {
-            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: sectionDetails.title, data: sectionDetails.backgroundColor ?? "FFFFFF", 
-                                                                                         completion: { [weak self] in
+        if let footer = response.footer, let footerSectionIndex = getSectionIndex(for: .footer) {
+            let topPlaceholder = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })
+            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: topPlaceholder?.title, data: "FFFFFF", completion: { [weak self] in
                 SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self?.navigationController, delegate: self?.delegate)
             })
         } else {
@@ -335,23 +337,24 @@ extension SmilesExplorerHomeViewController {
     }
     
     fileprivate func configureOffers(with response: OffersCategoryResponseModel, section: SmilesExplorerSectionIdentifier) {
-        self.offersListing = response
         var offers = [OfferDO]()
         switch section {
         case .tickets:
             offers = tickets
+            ticketsResponse = response
         case .exclusiveDeals:
             offers = self.offers
+            exclusiveDealsResponse = response
         case .bogoOffers:
             offers = bogoOffer
+            bogoOffersResponse = response
         default: break
         }
         offers.append(contentsOf: response.offers ?? [])
-        if !offers.isEmpty, let offerslisting = self.offersListing {
-            if let offersIndex = getSectionIndex(for: section), let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] {
-                self.dataSource?.dataSources?[offersIndex] = TableViewDataSource.make(forOffers: offerslisting, data: sectionDetails.backgroundColor ?? "#FFFFFF", title: sectionDetails.title, subtitle: sectionDetails.subTitle, offersImage: sectionDetails.iconUrl, isForTickets: section == .tickets, completion: { explorerOffer in
-                    
-                })
+        if !offers.isEmpty {
+            if let offersIndex = getSectionIndex(for: section),
+               let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] {
+                self.dataSource?.dataSources?[offersIndex] = TableViewDataSource.make(forOffers: offers, data: sectionDetails.backgroundColor ?? "#FFFFFF", title: sectionDetails.title, subtitle: sectionDetails.subTitle, offersIcon: response.iconImageUrl, section: section, delegate: self)
                 self.configureDataSource()
             }
         } else {
@@ -414,3 +417,27 @@ extension SmilesExplorerHomeViewController: AppHeaderDelegate {
     }
 }
 
+// MARK: - HOME OFFERS DELEGATE -
+extension SmilesExplorerHomeViewController: HomeOffersDelegate {
+    
+    func showOfferDetails(offer: OfferDO) {
+        
+    }
+    
+    func showOffersList(section: SmilesExplorerSectionIdentifier) {
+        var response: OffersCategoryResponseModel?
+        switch section {
+        case .tickets:
+            response = ticketsResponse
+        case .exclusiveDeals:
+            response = exclusiveDealsResponse
+        case .bogoOffers:
+            response = bogoOffersResponse
+        default: break
+        }
+        guard let response, let offersIndex = getSectionIndex(for: section),
+                                let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] else { return }
+        SmilesExplorerRouter.shared.pushOffersListingVC(navVC: navigationController, offersResponse: response, title: sectionDetails.title ?? "")
+    }
+    
+}

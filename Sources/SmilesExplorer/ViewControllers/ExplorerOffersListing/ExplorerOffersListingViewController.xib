@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExplorerOffersListingViewController" customModuleProvider="target">
+            <connections>
+                <outlet property="offersTableView" destination="5w8-Lb-WrD" id="G87-Iq-PKh"/>
+                <outlet property="titleLabel" destination="q6V-bl-iyc" id="Wfa-YH-gjn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6V-bl-iyc">
+                    <rect key="frame" x="16" y="83" width="361" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline2"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5w8-Lb-WrD">
+                    <rect key="frame" x="16" y="128" width="361" height="588"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohb-6G-5cc" customClass="UICustomButton" customModule="SmilesUtilities">
+                    <rect key="frame" x="16" y="754" width="361" height="48"/>
+                    <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="btA-DM-OVG"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Subscribe now"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="subscribePressed:" destination="-1" eventType="touchUpInside" id="uSx-iD-ZGe"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Ohb-6G-5cc" firstAttribute="trailing" secondItem="5w8-Lb-WrD" secondAttribute="trailing" id="6oy-XV-5ag"/>
+                <constraint firstItem="q6V-bl-iyc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="7ch-Wp-79c"/>
+                <constraint firstItem="5w8-Lb-WrD" firstAttribute="top" secondItem="q6V-bl-iyc" secondAttribute="bottom" constant="24" id="NvB-s6-qyQ"/>
+                <constraint firstItem="5w8-Lb-WrD" firstAttribute="trailing" secondItem="q6V-bl-iyc" secondAttribute="trailing" id="TCT-zK-mzW"/>
+                <constraint firstItem="Ohb-6G-5cc" firstAttribute="leading" secondItem="5w8-Lb-WrD" secondAttribute="leading" id="Z0m-TR-sv9"/>
+                <constraint firstItem="Ohb-6G-5cc" firstAttribute="top" secondItem="5w8-Lb-WrD" secondAttribute="bottom" constant="38" id="gkp-v3-QZC"/>
+                <constraint firstItem="q6V-bl-iyc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="iu1-m0-qB1"/>
+                <constraint firstItem="5w8-Lb-WrD" firstAttribute="leading" secondItem="q6V-bl-iyc" secondAttribute="leading" id="uj4-hi-4WK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ohb-6G-5cc" secondAttribute="bottom" constant="16" id="vBF-JS-YyT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q6V-bl-iyc" secondAttribute="trailing" constant="16" id="vW1-51-U1q"/>
+            </constraints>
+            <point key="canvasLocation" x="140" y="0.0"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="Ohb-6G-5cc">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

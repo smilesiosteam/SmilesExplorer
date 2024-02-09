@@ -53,9 +53,9 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         
         titleLabel.text = title
         subscriptionImageView.setImageWithUrlString(footer.explorerSubBannerBgImage ?? "")
-        priceLabel.text = "AED".localizedString + " \(footer.explorerSubBannerPrice ?? "")"
+        priceLabel.text = footer.explorerSubBannerPrice
         descriptionLabel.text = footer.explorerSubBannerDescription
-        setupGradient(colors: footer.explorerSubBannerBgColor ?? "#9ECFFF|#DBEAF8", direction: footer.explorerSubBannerColorDirection)
+        setupGradient(colors: footer.explorerSubBannerBgColor ?? "#75428e|#424c99", direction: footer.explorerSubBannerColorDirection)
         
     }
     
