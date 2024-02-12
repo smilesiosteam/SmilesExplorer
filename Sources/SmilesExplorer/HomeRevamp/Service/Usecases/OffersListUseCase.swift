@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import SmilesOffers
- 
+
 protocol OffersListUseCaseProtocol {
     func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?, categoryTypeIdsList: [String]?) -> AnyPublisher<OffersListUseCase.State, Never>
 }
@@ -36,7 +36,7 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
                         promise(.success(.offersDidFail(error: error.localizedDescription)))
                     }
                 } receiveValue: { response in
-                    promise(.success(.fetchOffersDidSucceed(response: response, tag: tag ?? .bogoOffers)))
+                    promise(.success(.fetchOffersDidSucceed(response: response)))
                 }
                 .store(in: &cancellables)
         }
@@ -49,7 +49,7 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
  
 extension OffersListUseCase {
     enum State {
-        case fetchOffersDidSucceed(response: OffersCategoryResponseModel, tag: SectionTypeTag)
+        case fetchOffersDidSucceed(response: OffersCategoryResponseModel)
         case offersDidFail(error: String)
     }
 }

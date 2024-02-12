@@ -43,7 +43,6 @@ public struct SmilesTouristDependance {
 }
 
 
-
 public enum SmilesTouristConfigrator {
    
     public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerHomeViewController {
@@ -67,6 +66,14 @@ public enum SmilesTouristConfigrator {
         return smilesExplorerHomeViewController
     }
     
+    static func getExplorerListingVC(dependence: ExplorerOffersListingDependance) -> ExplorerOffersListingViewController {
+        
+        let offersUseCase = OffersListUseCase(services: service)
+        let viewModel = ExplorerOffersListingViewModel(offerUseCase: offersUseCase)
+        let viewController = ExplorerOffersListingViewController(viewModel: viewModel, dependencies: dependence)
+        return viewController
+        
+    }
     
     static var service: SmilesTouristServiceHandler {
         return .init(repository: repository)

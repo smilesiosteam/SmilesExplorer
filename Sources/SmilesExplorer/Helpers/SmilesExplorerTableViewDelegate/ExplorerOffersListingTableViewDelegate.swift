@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SmilesUtilities
 
 extension ExplorerOffersListingViewController: UITableViewDelegate {
     
@@ -15,6 +16,19 @@ extension ExplorerOffersListingViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastItem = offers.endIndex - 1
+        if indexPath.row == lastItem {
+            if (dependencies.offersResponse.offersCount ?? 0) != offers.count {
+                offersPage += 1
+                tableView.tableFooterView = PaginationLoaderView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 44))
+                viewModel.getOffers(categoryId: dependencies.categoryId, tag: dependencies.offersTag, pageNo: offersPage)
+            }
+        }
+        
     }
     
 }

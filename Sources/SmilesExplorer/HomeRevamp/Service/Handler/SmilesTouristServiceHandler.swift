@@ -30,9 +30,10 @@ final class SmilesTouristServiceHandler: SmilesTouristServiceHandlerProtocol {
     }
     
     // MARK: - Functions
-    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]? = nil) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
-        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId,tag: tag?.rawValue, pageNo: pageNo)
-        return repository.getOffers(request: request)
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?, categoryTypeIdsList: [String]?) -> AnyPublisher<
+        OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
+            let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag?.rawValue, pageNo: pageNo)
+            return repository.getOffers(request: request)
     }
     
     func getSubscriptionInfo(_ packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError> {

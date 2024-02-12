@@ -135,7 +135,7 @@ extension SmilesTouristHomeViewModel {
                 self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed,platinumLimitReached: platinumLimitReached))
            
             case .getOffers(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
-                self?.getOffers(tag: tag, pageNo: pageNo)
+                self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
                 
             case .getFiltersData(filtersSavedList: let filtersSavedList, isFilterAllowed: let isFilterAllowed, isSortAllowed: let isSortAllowed):
                 self?.filtersUseCase.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
@@ -161,22 +161,19 @@ extension SmilesTouristHomeViewModel {
     }
     
     // MARK: - Get Offers
-    func getOffers(tag: SectionTypeTag, pageNo: Int? = 1,categoryTypeIdsList: [String]? = nil){
-        
-        self.offerUseCase.getOffers(categoryId: self.categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
+    func getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int, categoryTypeIdsList: [String]? = nil){
+        self.offerUseCase.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
             .sink { [weak self] state in
                 guard let self = self else {return}
                 switch state {
-                case .fetchOffersDidSucceed(response: let response, tag: let tag):
+                case .fetchOffersDidSucceed(response: let response):
                     switch tag {
-                    case .bogoOffers:
-                        self.output.send(.fetchBogoDidSucceed(response: response))
-//                    case .offerListing:
-//                        self.output.send(.fetchExclusiveOffersStoriesDidSucceed(response: response))
                     case .tickets:
                         self.output.send(.fetchTicketsDidSucceed(response: response))
                     case .exclusiveDeals:
                         self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                    case .bogoOffers:
+                        self.output.send(.fetchBogoDidSucceed(response: response))
                     }
                 case .offersDidFail(error: let error):
                     debugPrint(error.localizedString)

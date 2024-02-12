@@ -82,9 +82,9 @@ public final class SmilesExplorerRouter: NSObject {
         }
     }
     
-    func pushOffersListingVC(navVC: UINavigationController?, offersResponse: OffersCategoryResponseModel, title: String) {
+    func pushOffersListingVC(navVC: UINavigationController?, dependence: ExplorerOffersListingDependance) {
         
-        let vc = ExplorerOffersListingViewController(offersResponse: offersResponse, title: title)
+        let vc = SmilesTouristConfigrator.getExplorerListingVC(dependence: dependence)
         navVC?.pushViewController(vc, animated: true)
         
     }
