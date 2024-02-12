@@ -48,6 +48,8 @@ class HomeOffersTableViewCell: UITableViewCell {
                                                      bottom: 0, right: isLanguageArabic ? -2 : 0)
         viewAllButton.contentHorizontalAlignment = isLanguageArabic ? .left : .right
         mainView.backgroundColor = .clear
+        offerImageView.layer.cornerRadius = offerImageView.frame.height / 2
+        offerImageView.clipsToBounds = true
         setupCollectionView()
         
     }

@@ -31,7 +31,7 @@
                             <constraint firstAttribute="height" constant="40" id="nDf-cN-ztf"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AUf-7H-eqo">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AUf-7H-eqo">
                         <rect key="frame" x="0.0" y="140" width="135" height="56"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRG-3y-ILV">
@@ -43,11 +43,11 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle1"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v93-QD-R6r">
-                                <rect key="frame" x="0.0" y="20.333333333333339" width="135" height="35.666666666666657"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eyT-Tg-MnI">
+                                <rect key="frame" x="0.0" y="28.333333333333343" width="135" height="27.666666666666671"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7l-EK-eza">
-                                        <rect key="frame" x="0.0" y="15.333333333333313" width="85.666666666666671" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7l-EK-eza">
+                                        <rect key="frame" x="0.0" y="7.3333333333333126" width="41.333333333333336" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -55,8 +55,8 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesTitle2"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13a-Cu-wkr">
-                                        <rect key="frame" x="93.666666666666671" y="15.333333333333313" width="41.333333333333329" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13a-Cu-wkr">
+                                        <rect key="frame" x="57.333333333333336" y="7.3333333333333126" width="77.666666666666657" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -65,17 +65,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="13a-Cu-wkr" firstAttribute="leading" secondItem="x7l-EK-eza" secondAttribute="trailing" constant="8" id="Bmp-hj-rFF"/>
-                                    <constraint firstItem="13a-Cu-wkr" firstAttribute="bottom" secondItem="x7l-EK-eza" secondAttribute="bottom" id="Bwq-wM-GM0"/>
-                                    <constraint firstItem="x7l-EK-eza" firstAttribute="leading" secondItem="v93-QD-R6r" secondAttribute="leading" id="H1k-h3-hWM"/>
-                                    <constraint firstAttribute="bottom" secondItem="x7l-EK-eza" secondAttribute="bottom" id="Y1k-iU-BPI"/>
-                                    <constraint firstAttribute="trailing" secondItem="13a-Cu-wkr" secondAttribute="trailing" id="b9s-eP-00q"/>
-                                    <constraint firstItem="x7l-EK-eza" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v93-QD-R6r" secondAttribute="top" id="gHQ-Lz-wdt"/>
-                                    <constraint firstItem="13a-Cu-wkr" firstAttribute="top" secondItem="x7l-EK-eza" secondAttribute="top" id="uyx-yX-rh7"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -84,7 +74,7 @@
             <constraints>
                 <constraint firstItem="C20-dR-SVH" firstAttribute="bottom" secondItem="7jk-R9-xmO" secondAttribute="bottom" constant="-12" id="1zv-pB-WxO"/>
                 <constraint firstItem="7jk-R9-xmO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3oh-M9-AYw"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AUf-7H-eqo" secondAttribute="bottom" priority="750" id="5sJ-f6-85f"/>
+                <constraint firstAttribute="bottom" secondItem="AUf-7H-eqo" secondAttribute="bottom" priority="750" id="5sJ-f6-85f"/>
                 <constraint firstItem="AUf-7H-eqo" firstAttribute="top" secondItem="7jk-R9-xmO" secondAttribute="bottom" constant="8" id="Gc8-eg-ka3"/>
                 <constraint firstItem="7jk-R9-xmO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LJn-Uv-IFF"/>
                 <constraint firstAttribute="trailing" secondItem="7jk-R9-xmO" secondAttribute="trailing" id="O5x-xK-QaC"/>
@@ -98,9 +88,9 @@
                 <outlet property="amountLabel" destination="13a-Cu-wkr" id="ERO-Ox-Uxb"/>
                 <outlet property="contentBottomSpace" destination="5sJ-f6-85f" id="jDg-gj-hmT"/>
                 <outlet property="contentBottomSpaceEqual" destination="PTO-3d-0xf" id="8uh-MG-XHP"/>
-                <outlet property="descriptionView" destination="v93-QD-R6r" id="H27-ig-QSp"/>
                 <outlet property="offerImageView" destination="7jk-R9-xmO" id="83j-Lv-FyM"/>
                 <outlet property="partnerImageView" destination="C20-dR-SVH" id="Gtm-Jx-JcK"/>
+                <outlet property="priceStackView" destination="eyT-Tg-MnI" id="dZj-42-sFl"/>
                 <outlet property="titleLabel" destination="IRG-3y-ILV" id="EaH-Pa-TsT"/>
                 <outlet property="typeLabel" destination="x7l-EK-eza" id="dTi-91-oih"/>
             </connections>
