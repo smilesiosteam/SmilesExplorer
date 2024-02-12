@@ -14,7 +14,7 @@ import SmilesUtilities
 import SmilesSharedServices
 
 public struct SmilesTouristDependance {
-    public var categoryId: Int
+    public var categoryId: Int?
     public var selectedSort: String?
     public var rewardPoint: Int?
     public var rewardPointIcon: String?
@@ -27,7 +27,7 @@ public struct SmilesTouristDependance {
     public var delegate:SmilesExplorerHomeDelegate? = nil
     
 
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?,platinumLimiReached: Bool?) {
+    public init(categoryId: Int?, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?,platinumLimiReached: Bool?) {
         self.platinumLimiReached = platinumLimiReached
         self.personalizationEventSource =  personalizationEventSource
         self.categoryId = categoryId
@@ -46,15 +46,25 @@ public struct SmilesTouristDependance {
 
 public enum SmilesTouristConfigrator {
    
-    public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerSubscriptionUpgradeViewController {
+    public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerHomeViewController {
+        
         let offersUseCase = OffersListUseCase(services: service)
-        let subscriptionUseCase = SmilesExplorerSubscriptionUseCase(services: service)
-        let filtersUseCaseProtocol = FiltersUseCase()
-        let viewModel = SmilesTouristHomeViewModel(offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase, filtersUseCaseProtocol:filtersUseCaseProtocol)
-        let viewController = SmilesExplorerSubscriptionUpgradeViewController(categoryId: dependance.categoryId, isGuestUser: dependance.isGuestUser, delegate: navigationDelegate, rewardPoint: dependance.rewardPoint ?? 0, rewardPointIcon: dependance.rewardPointIcon ?? "", personalizationEventSource: dependance.personalizationEventSource, platinumLimiReached: dependance.platinumLimiReached)
-        viewController.viewModl = viewModel
-        viewController.delegate = navigationDelegate
-        return viewController
+        let subscriptionUseCase = ExplorerSubscriptionUseCase(services: service)
+        let filtersUseCase = FiltersUseCase()
+        let wishListUseCase = WishListUseCase()
+        let rewardPointUseCase = RewardPointUseCase()
+        let sectionsUseCase = SectionsUseCase()
+        let subscriptionBannerUseCase = SubscriptionBannerUseCase(services: service)
+        
+        let viewModel = SmilesTouristHomeViewModel(offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase, filtersUseCase: filtersUseCase, sectionsUseCase: sectionsUseCase,rewardPointUseCase: rewardPointUseCase,wishListUseCase: wishListUseCase,subscriptionBannerUseCase:subscriptionBannerUseCase)
+        
+        let smilesExplorerHomeViewController = SmilesExplorerHomeViewController.init()
+        smilesExplorerHomeViewController.hidesBottomBarWhenPushed = true
+        
+        smilesExplorerHomeViewController.viewModel = viewModel
+        smilesExplorerHomeViewController.delegate = navigationDelegate
+        
+        return smilesExplorerHomeViewController
     }
     
     

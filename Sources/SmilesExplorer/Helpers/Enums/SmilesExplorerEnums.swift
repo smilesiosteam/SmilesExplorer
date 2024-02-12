@@ -11,5 +11,4 @@ public enum SectionTypeTag: String {
     case tickets = "TICKETS"
     case exclusiveDeals = "EXCLUSIVE_DEALS"
     case bogoOffers = "BOGO_OFFERS"
-    case offerListing = "OFFER_LISTING"
 }

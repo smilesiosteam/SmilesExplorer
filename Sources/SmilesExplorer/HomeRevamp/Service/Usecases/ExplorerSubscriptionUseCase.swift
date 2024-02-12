@@ -11,11 +11,11 @@ import SmilesUtilities
 import SmilesSharedServices
 import SmilesOffers
 
-protocol SmilesExplorerSubscriptionUseCaseProtocol {
-     func getSubscriptionInfo(packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionUseCase.State, Never>
+protocol ExplorerSubscriptionUseCaseProtocol {
+     func getSubscriptionInfo(packageType: String?) -> AnyPublisher<ExplorerSubscriptionUseCase.State, Never>
 }
 
-public class SmilesExplorerSubscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol {
+public class ExplorerSubscriptionUseCase: ExplorerSubscriptionUseCaseProtocol {
     
     // MARK: - Properties
     private let services: SmilesTouristServiceHandlerProtocol
@@ -27,7 +27,7 @@ public class SmilesExplorerSubscriptionUseCase: SmilesExplorerSubscriptionUseCas
     }
     
     // MARK: - getBogoOffers
-    func getSubscriptionInfo(packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionUseCase.State, Never> {
+    func getSubscriptionInfo(packageType: String?) -> AnyPublisher<ExplorerSubscriptionUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
@@ -51,7 +51,7 @@ public class SmilesExplorerSubscriptionUseCase: SmilesExplorerSubscriptionUseCas
 }
 
 
-extension SmilesExplorerSubscriptionUseCase {
+extension ExplorerSubscriptionUseCase {
     enum State {
         case success(response: SmilesExplorerSubscriptionInfoResponse)
         case failure(message: String)

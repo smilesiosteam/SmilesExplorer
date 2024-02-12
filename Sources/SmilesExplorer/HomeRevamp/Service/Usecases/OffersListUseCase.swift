@@ -7,18 +7,13 @@
 
 import Foundation
 import Combine
-import SmilesUtilities
-import SmilesSharedServices
 import SmilesOffers
-import NetworkingLayer
-
+ 
 protocol OffersListUseCaseProtocol {
-    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersListUseCase.State, Never>
-    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersListUseCase.State, Never>
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?, categoryTypeIdsList: [String]?) -> AnyPublisher<OffersListUseCase.State, Never>
 }
-
+ 
 public class OffersListUseCase: OffersListUseCaseProtocol {
-    
     
     // MARK: - Properties
     private let services: SmilesTouristServiceHandlerProtocol
@@ -30,75 +25,31 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
     }
     
     // MARK: - getBogoOffers
-    func getOffers(categoryId: Int?, tag: SectionTypeTag? = .bogoOffers, pageNo: Int? = 1) -> AnyPublisher<OffersListUseCase.State, Never> {
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?, categoryTypeIdsList: [String]? = nil) -> AnyPublisher<OffersListUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
             }
-            self.services.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+            self.services.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         promise(.success(.offersDidFail(error: error.localizedDescription)))
                     }
-                
-            } receiveValue: { response in
-                debugPrint(response)
-                switch tag {
-                case .exclusiveDeals:
-                    promise(.success(.exclusiveDeals(response: response)))
-                case .bogoOffers:
-                    promise(.success(.bogoOffers(response: response)))
-                case .tickets:
-                    promise(.success(.tickets(response: response)))
-                default:
-                    break
+                } receiveValue: { response in
+                    promise(.success(.fetchOffersDidSucceed(response: response, tag: tag ?? .bogoOffers)))
                 }
-            }
-            .store(in: &cancellables)
-
+                .store(in: &cancellables)
         }
         .eraseToAnyPublisher()
-    }
-    
-    
-    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag? = .bogoOffers, pageNo: Int? = 1, categoryTypeIdsList: [String]?) -> AnyPublisher<State, Never> {
-        return Future<State, Never> { [weak self] promise in
-            guard let self else {
-                return
-            }
-            self.services.getOffersWithFilters(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
-                .sink { completion in
-                    if case .failure(let error) = completion {
-                        promise(.success(.offersDidFail(error: error.localizedDescription)))
-                    }
-            } receiveValue: { response in
-                debugPrint(response)
-                switch tag {
-                case .exclusiveDeals:
-                    promise(.success(.exclusiveDeals(response: response)))
-                case .bogoOffers:
-                    promise(.success(.bogoOffers(response: response)))
-                case .tickets:
-                    promise(.success(.tickets(response: response)))
-                default:
-                    break
-                }
-            }
-            .store(in: &cancellables)
-
-        }
-        .eraseToAnyPublisher()
+        
     }
   
 }
-
-
+ 
+ 
 extension OffersListUseCase {
     enum State {
-        case stories(response: OffersCategoryResponseModel)
-        case tickets(response: OffersCategoryResponseModel)
-        case bogoOffers(response: OffersCategoryResponseModel)
-        case exclusiveDeals(response: OffersCategoryResponseModel)
+        case fetchOffersDidSucceed(response: OffersCategoryResponseModel, tag: SectionTypeTag)
         case offersDidFail(error: String)
     }
 }

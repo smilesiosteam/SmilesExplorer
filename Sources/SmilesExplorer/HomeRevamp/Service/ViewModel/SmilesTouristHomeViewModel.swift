@@ -21,7 +21,6 @@ final class SmilesTouristHomeViewModel {
         case getRewardPoints
         case getSections(categoryID: Int, type: String, explorerPackageType:ExplorerPackage,freeTicketAvailed:Bool,platinumLimitReached: Bool? = nil)
         case getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int)
-        case getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag,pageNo:Int?, categoryTypeIdsList: [String]? = nil)
         
         //MARK: - Filtered Offers
         case getFiltersData(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?)
@@ -39,6 +38,9 @@ final class SmilesTouristHomeViewModel {
         
         case fetchTopOffersDidSucceed(response: GetTopOffersResponseModel)
         case fetchTopOffersDidFail(error: Error)
+        
+        case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel, shouldLogout: Bool?)
+        case fetchRewardPointsDidFail(error: Error)
         
         case fetchExclusiveOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchExclusiveOffersDidFail(error: Error)
@@ -63,6 +65,9 @@ final class SmilesTouristHomeViewModel {
         case fetchFiltersDataSuccess(filters: [FiltersCollectionViewCellRevampModel], selectedSortingTableViewCellModel: FilterDO?)
         case fetchAllSavedFiltersSuccess(filtersList: [RestaurantRequestFilter], filtersSavedList: [RestaurantRequestWithNameFilter])
         
+        case fetchSubscriptionBannerDetailsDidSucceed(response: ExplorerSubscriptionBannerResponse)
+        case fetchSubscriptionBannerDetailsDidFail(error: Error)
+        
     }
     
     // MARK: - Properties
@@ -74,24 +79,42 @@ final class SmilesTouristHomeViewModel {
     public var selectedSortingTableViewCellModel: FilterDO?
     
     // MARK: - UseCases
-    private let faqsViewModel = FAQsViewModel()
     private let offerUseCase: OffersListUseCaseProtocol
-    private let subscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol
-    private let filtersUseCaseProtocol: FiltersUseCaseProtocol
+    private let subscriptionUseCase: ExplorerSubscriptionUseCaseProtocol
+    private let filtersUseCase: FiltersUseCaseProtocol
+    private let sectionsUseCase: SectionsUseCaseProtocol
+    public let rewardPointUseCase: RewardPointUseCaseProtocol
+    public let wishListUseCase: WishListUseCaseProtocol
+    public let subscriptionBannerUseCase: SubscriptionBannerUseCaseProtocol
+
     public var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
-    private var faqsUseCaseInput: PassthroughSubject<FAQsViewModel.Input, Never> = .init()
     public var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
     public var wishListUseCaseInput: PassthroughSubject<WishListViewModel.Input, Never> = .init()
     // MARK: - Delegate
     var navigationDelegate: SmilesExplorerHomeDelegate?
-    
+    private let sectionsViewModel = SectionsViewModel()
+
+    var personalizationEventSource:String?
+    var categoryId:Int?
+    var isGuestUser:Bool?
+    var isUserSubscribed:Bool?
+    var subscriptionType:ExplorerPackage?
+    var voucherCode:String?
+    var delegate :SmilesExplorerHomeDelegate?
+    var rewardPointIcon:String?
+    var rewardPoint:Int?
+    var platinumLimiReached:Bool?
     // MARK: - Init
     init(offerUseCase: OffersListUseCaseProtocol,
-         subscriptionUseCase: SmilesExplorerSubscriptionUseCaseProtocol,
-         filtersUseCaseProtocol:FiltersUseCaseProtocol) {
+         subscriptionUseCase: ExplorerSubscriptionUseCaseProtocol,
+         filtersUseCase:FiltersUseCaseProtocol,sectionsUseCase:SectionsUseCaseProtocol,rewardPointUseCase:RewardPointUseCaseProtocol,wishListUseCase:WishListUseCaseProtocol,subscriptionBannerUseCase:SubscriptionBannerUseCaseProtocol) {
         self.offerUseCase = offerUseCase
         self.subscriptionUseCase = subscriptionUseCase
-        self.filtersUseCaseProtocol = filtersUseCaseProtocol
+        self.filtersUseCase = filtersUseCase
+        self.sectionsUseCase = sectionsUseCase
+        self.rewardPointUseCase = rewardPointUseCase
+        self.wishListUseCase = wishListUseCase
+        self.subscriptionBannerUseCase = subscriptionBannerUseCase
     }
 }
 
@@ -112,18 +135,15 @@ extension SmilesTouristHomeViewModel {
                 self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed,platinumLimitReached: platinumLimitReached))
            
             case .getOffers(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
-                self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+                self?.getOffers(tag: tag, pageNo: pageNo)
                 
-            case .getOffersWithFilters(categoryId: let categoryId, tag: let tag, pageNo: let pageNo, categoryTypeIdsList: let categoryTypeIdsList):
-                self?.getOffersWithFilters(categoryId: categoryId ?? 973, tag: tag, pageNo: pageNo ?? 0,categoryTypeIdsList: categoryTypeIdsList ?? [])
-            
             case .getFiltersData(filtersSavedList: let filtersSavedList, isFilterAllowed: let isFilterAllowed, isSortAllowed: let isSortAllowed):
-                self?.filtersUseCaseProtocol.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
+                self?.filtersUseCase.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
                     self?.output.send(.fetchFiltersDataSuccess(filters: filters, selectedSortingTableViewCellModel: self?.selectedSortingTableViewCellModel))
                 }
             
             case .removeAndSaveFilters(filtersList: let filtersList, filtersSavedList: let filtersSavedList, filter: let filter):
-                self?.filtersUseCaseProtocol.removeAndSaveFilters(filtersList: filtersList, filtersSavedList: filtersSavedList, filter: filter, completion: { filtersList, filtersSavedList in
+                self?.filtersUseCase.removeAndSaveFilters(filtersList: filtersList, filtersSavedList: filtersSavedList, filter: filter, completion: { filtersList, filtersSavedList in
                     self?.output.send(.fetchAllSavedFiltersSuccess(filtersList: filtersList, filtersSavedList: filtersSavedList))
                 })
                 
@@ -141,19 +161,23 @@ extension SmilesTouristHomeViewModel {
     }
     
     // MARK: - Get Offers
-    func getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int){
-        self.offerUseCase.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+    func getOffers(tag: SectionTypeTag, pageNo: Int? = 1,categoryTypeIdsList: [String]? = nil){
+        
+        self.offerUseCase.getOffers(categoryId: self.categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
             .sink { [weak self] state in
                 guard let self = self else {return}
                 switch state {
-                case .bogoOffers(response: let response):
-                    self.output.send(.fetchBogoDidSucceed(response: response))
-                case .stories(response: let response):
-                    self.output.send(.fetchExclusiveOffersStoriesDidSucceed(response: response))
-                case .tickets(response: let response):
-                    self.output.send(.fetchTicketsDidSucceed(response: response))
-                case .exclusiveDeals(response: let response):
-                    self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                case .fetchOffersDidSucceed(response: let response, tag: let tag):
+                    switch tag {
+                    case .bogoOffers:
+                        self.output.send(.fetchBogoDidSucceed(response: response))
+//                    case .offerListing:
+//                        self.output.send(.fetchExclusiveOffersStoriesDidSucceed(response: response))
+                    case .tickets:
+                        self.output.send(.fetchTicketsDidSucceed(response: response))
+                    case .exclusiveDeals:
+                        self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                    }
                 case .offersDidFail(error: let error):
                     debugPrint(error.localizedString)
                 }
@@ -162,24 +186,44 @@ extension SmilesTouristHomeViewModel {
     }
     
     // MARK: - Get Offers With Filters
-    func getOffersWithFilters(categoryId: Int, tag: SectionTypeTag, pageNo: Int,categoryTypeIdsList:[String]){
-        self.offerUseCase.getOffersWithFilters(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
+    
+    func getSections(){
+        self.sectionsUseCase.getSections(categoryID: 973, baseUrl: nil, isGuestUser: nil, type: "UNSUBSCRIBED", explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
             .sink { [weak self] state in
-                guard let self = self else {return}
+                guard self != nil else {
+                    return
+                }
                 switch state {
-                case .bogoOffers(response: let response):
-                    self.output.send(.fetchBogoDidSucceed(response: response))
-                case .stories(response: let response):
-                    self.output.send(.fetchExclusiveOffersStoriesDidSucceed(response: response))
-                case .tickets(response: let response):
-                    self.output.send(.fetchTicketsDidSucceed(response: response))
-                case .exclusiveDeals(response: let response):
-                    self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
-                case .offersDidFail(error: let error):
-                    debugPrint(error.localizedString)
+                case .sectionsDidSucceed(response: let response):
+                    print(response)
+                    self?.output.send(.fetchSectionsDidSucceed(response: response))
+                case .sectionsDidFail(error: let error):
+                    self?.output.send(.fetchTicketDidFail(error: error))
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellables)
+            
+    }
+    
+    func getSubscriptionBannerDetails(){
+        self.subscriptionBannerUseCase.getSubscriptionBannerDetails()
+            .sink { [weak self] state in
+                guard self != nil else {
+                    return
+                }
+                switch state {
+                case .fetchSubscriptionBannerDetailDidSucceed(response: let response):
+                    print(response)
+                    self?.output.send(.fetchSubscriptionBannerDetailsDidSucceed(response: response))
+                case .fetchSubscriptionBannerDetailDidFail(error: let error):
+                    self?.output.send(.fetchSubscriptionBannerDetailsDidFail(error: error))
+                    debugPrint(error.localizedDescription)
                 }
             }
             .store(in: &cancellables)
     }
+    
+    
 }
 

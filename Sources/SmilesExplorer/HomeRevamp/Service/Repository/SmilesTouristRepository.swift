@@ -19,6 +19,8 @@ protocol SmilesTouristServiceable {
     func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkError>
     
     func getSubscriptionInfoService(request: SmilesExplorerSubscriptionInfoRequest) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError>
+    
+    func getSubscriptionBannerDetails(request: ExplorerSubscriptionBannerRequest) -> AnyPublisher<ExplorerSubscriptionBannerResponse, NetworkError>
 }
 
 final class SmilesTouristRepository: SmilesTouristServiceable {
@@ -51,5 +53,13 @@ final class SmilesTouristRepository: SmilesTouristServiceable {
         let request = endPoint.createRequest(endPoint: .subscriptionInfo)
         return self.networkRequest.request(request)
     }
+    
+    // MARK: - SubscriptionBanner Details Service
+    func getSubscriptionBannerDetails(request: ExplorerSubscriptionBannerRequest) -> AnyPublisher<ExplorerSubscriptionBannerResponse, NetworkError> {
+        let endPoint = SmilesTouristRequestBuilder.getSubscriptionBannerDetails(request: request)
+        let request = endPoint.createRequest(endPoint: .getSubscriptionBannerDetails)
+        return self.networkRequest.request(request)
+    }
+    
 }
 

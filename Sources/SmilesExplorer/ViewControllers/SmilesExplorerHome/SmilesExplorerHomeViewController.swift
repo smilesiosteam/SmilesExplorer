@@ -21,16 +21,19 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     // MARK: - PROPERTIES -
     var dataSource: SectionedTableViewDataSource?
-    private var  input: PassthroughSubject<SmilesExplorerHomeViewModel.Input, Never> = .init()
+    private var  input: PassthroughSubject<SmilesTouristHomeViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-    private lazy var viewModel: SmilesExplorerHomeViewModel = {
-        return SmilesExplorerHomeViewModel()
-    }()
-    private let categoryId: Int
-    private let isGuestUser: Bool
-    private var isUserSubscribed: Bool?
-    private var subscriptionType: ExplorerPackage?
-    private var voucherCode: String?
+//    private lazy var viewModel: SmilesExplorerHomeViewModel = {
+//        return SmilesExplorerHomeViewModel()
+//    }()
+    
+    var viewModel: SmilesTouristHomeViewModel!
+    private let categoryId: Int? = nil
+    private let isGuestUser: Bool? = false
+    private var isUserSubscribed: Bool? = false
+    private var subscriptionType: ExplorerPackage? = .gold
+    private var voucherCode: String? = ""
+    
     var smilesExplorerSections: GetSectionsResponseModel?
     var sections = [SmilesExplorerSectionData]()
     
@@ -54,6 +57,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        viewModel.getSections()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -61,13 +65,8 @@ public class SmilesExplorerHomeViewController: UIViewController {
         setUpNavigationBar()
     }
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil) {
-        self.categoryId = categoryId
-        self.isGuestUser = isGuestUser
-        self.isUserSubscribed = isUserSubscribed
-        self.subscriptionType = subscriptionType
-        self.voucherCode = voucherCode
-        super.init(nibName: "SmilesExplorerHomeViewController", bundle: Bundle.module)
+    public init() {
+        super.init(nibName: "SmilesExplorerHomeViewController", bundle: .module)
     }
     
     required init?(coder: NSCoder) {
@@ -80,7 +79,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
         setupTableView()
         bind(to: viewModel)
         //        if let isUserSubscribed {
-        getSections(isSubscribed: false)
+//        getSections(isSubscribed: false)
         //        } else {
         //            self.input.send(.getRewardPoints)
         //        }
@@ -184,9 +183,10 @@ public class SmilesExplorerHomeViewController: UIViewController {
 // MARK: - VIEWMODEL BINDING -
 extension SmilesExplorerHomeViewController {
     
-    func bind(to viewModel: SmilesExplorerHomeViewModel) {
-        input = PassthroughSubject<SmilesExplorerHomeViewModel.Input, Never>()
-        let output = viewModel.transform(input: input.eraseToAnyPublisher())
+    func bind(to viewModel: SmilesTouristHomeViewModel) {
+        input = PassthroughSubject<SmilesTouristHomeViewModel.Input, Never>()
+//        let output = viewModel.transform(input: input.eraseToAnyPublisher())
+        let output = viewModel.output
         output
             .sink { [weak self] event in
                 switch event {
@@ -196,10 +196,10 @@ extension SmilesExplorerHomeViewController {
                 case .fetchSectionsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
                     self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
-//                    self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
+                    self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.isUserSubscribed = response.explorerSubscriptionStatus
-                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false)
+//                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false)
                     self?.subscriptionType = response.explorerPackageType
                     self?.voucherCode = response.explorerVoucherCode
                     
@@ -223,9 +223,9 @@ extension SmilesExplorerHomeViewController {
                 case .fetchTicketDidFail(_):
                     self?.configureHideSection(for: .tickets, dataSource: OffersCategoryResponseModel.self)
                     break
-                case .fetchSavedFiltersAfterSuccess(_):
+//                case .fetchSavedFiltersAfterSuccess(_):
 //                    self?.filtersSavedList = filtersSavedList
-                    break
+//                    break
                 case .fetchExclusiveOffersDidSucceed(let offers):
                     self?.configureOffers(with: offers, section: .exclusiveDeals)
                     
@@ -237,9 +237,9 @@ extension SmilesExplorerHomeViewController {
                     self?.configureOffers(with: offers, section: .bogoOffers)
                 case .fetchBogoDidFail(_):
                     self?.configureHideSection(for: .bogoOffers, dataSource: OffersCategoryResponseModel.self)
-                case .fetchContentForSortingItems(_):
+//                case .fetchContentForSortingItems(_):
                     //                    self?.sortingListRowModels = baseRowModels
-                    break
+//                    break
                 case .fetchTopOffersDidSucceed(response: _):
                     break
                     
@@ -258,9 +258,7 @@ extension SmilesExplorerHomeViewController {
 // MARK: - SERVER CALLS -
 extension SmilesExplorerHomeViewController {
     
-    private func getSections(isSubscribed: Bool) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED"))
-    }
+    
     
     private func homeAPICalls() {
         
@@ -281,24 +279,25 @@ extension SmilesExplorerHomeViewController {
                         let title = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })?.title
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(footer: footer, title: title, data: element.backgroundColor ?? "FFFFFF", isDummy: true, completion: nil)
                     }
-                    self.input.send(.getSubscriptionBannerDetails)
+//                    self.input.send(.getSubscriptionBannerDetails)
+                    viewModel.getSubscriptionBannerDetails()
                 case .tickets:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .tickets)
                     }
-                    self.input.send(.getTickets(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
+                    self.viewModel.getOffers(tag: .tickets)
                     break
                 case .exclusiveDeals:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .exclusiveDeals)
                     }
-                    self.input.send(.exclusiveDeals(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
+                    self.viewModel.getOffers(tag: .exclusiveDeals)
                     break
                 case .bogoOffers:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .bogoOffers)
                     }
-                    self.input.send(.getBogo(categoryId: self.categoryId, tag: sectionIdentifier, pageNo: 0))
+                    self.viewModel.getOffers(tag: .bogoOffers)
                     break
                 case .topPlaceholder:
                     break
@@ -441,3 +440,4 @@ extension SmilesExplorerHomeViewController: HomeOffersDelegate {
     }
     
 }
+

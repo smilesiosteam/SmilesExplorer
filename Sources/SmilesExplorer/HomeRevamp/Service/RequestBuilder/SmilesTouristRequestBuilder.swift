@@ -16,6 +16,7 @@ enum SmilesTouristRequestBuilder {
     case getOffers(request: ExplorerGetExclusiveOfferRequest)
     case getSubscriptionInfo(request: SmilesExplorerSubscriptionInfoRequest)
     case validateSmilesExplorerGift(request: ValidateGiftCardRequestModel)
+    case getSubscriptionBannerDetails(request: ExplorerSubscriptionBannerRequest)
    
     // MARK: -  gave a default timeout but can be different for each.
     var requestTimeOut: Int {
@@ -30,6 +31,8 @@ enum SmilesTouristRequestBuilder {
         case .getSubscriptionInfo:
             return .POST
         case .validateSmilesExplorerGift:
+            return .POST
+        case .getSubscriptionBannerDetails:
             return .POST
         }
     }
@@ -54,6 +57,8 @@ enum SmilesTouristRequestBuilder {
             return request
         case .validateSmilesExplorerGift(request: let request):
             return request
+        case .getSubscriptionBannerDetails(request: let request):
+            return request
         }
     }
     
@@ -66,6 +71,8 @@ enum SmilesTouristRequestBuilder {
         case .getSubscriptionInfo:
             return "\(baseUrl)\(endPoint)"
         case .validateSmilesExplorerGift:
+            return "\(baseUrl)\(endPoint)"
+        case .getSubscriptionBannerDetails:
             return "\(baseUrl)\(endPoint)"
         }
     }

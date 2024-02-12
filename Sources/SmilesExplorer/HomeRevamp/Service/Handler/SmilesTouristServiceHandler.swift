@@ -13,9 +13,10 @@ import SmilesOffers
 
 protocol SmilesTouristServiceHandlerProtocol {
     
-    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
-    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     func getSubscriptionInfo(_ packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError>
+    func getSubscriptionBannerDetails() -> AnyPublisher<ExplorerSubscriptionBannerResponse, NetworkError>
+    
 }
 
 final class SmilesTouristServiceHandler: SmilesTouristServiceHandlerProtocol {
@@ -29,19 +30,19 @@ final class SmilesTouristServiceHandler: SmilesTouristServiceHandlerProtocol {
     }
     
     // MARK: - Functions
-    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
-        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, pageNo: pageNo)
-        return repository.getOffers(request: request)
-    }
-    
-    func getOffersWithFilters(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
-        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, pageNo: pageNo,categoryTypeIdsList: categoryTypeIdsList)
+    func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]? = nil) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
+        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId,tag: tag?.rawValue, pageNo: pageNo)
         return repository.getOffers(request: request)
     }
     
     func getSubscriptionInfo(_ packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError> {
         let request = SmilesExplorerSubscriptionInfoRequest()
         return repository.getSubscriptionInfoService(request: request)
+    }
+    
+    func getSubscriptionBannerDetails() -> AnyPublisher<ExplorerSubscriptionBannerResponse,NetworkError> {
+        let request = ExplorerSubscriptionBannerRequest()
+        return repository.getSubscriptionBannerDetails(request: request)
     }
     
 }
