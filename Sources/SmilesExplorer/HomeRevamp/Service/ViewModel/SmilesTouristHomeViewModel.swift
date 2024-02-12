@@ -135,7 +135,8 @@ extension SmilesTouristHomeViewModel {
                 self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed,platinumLimitReached: platinumLimitReached))
            
             case .getOffers(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
-                self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+//                self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+                break
                 
             case .getFiltersData(filtersSavedList: let filtersSavedList, isFilterAllowed: let isFilterAllowed, isSortAllowed: let isSortAllowed):
                 self?.filtersUseCase.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
@@ -161,8 +162,8 @@ extension SmilesTouristHomeViewModel {
     }
     
     // MARK: - Get Offers
-    func getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int, categoryTypeIdsList: [String]? = nil){
-        self.offerUseCase.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
+    func getOffers(tag: SectionTypeTag, pageNo: Int = 1, categoryTypeIdsList: [String]? = nil){
+        self.offerUseCase.getOffers(categoryId: self.categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
             .sink { [weak self] state in
                 guard let self = self else {return}
                 switch state {
