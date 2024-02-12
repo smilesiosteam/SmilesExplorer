@@ -30,7 +30,7 @@ final class SmilesTouristServiceHandler: SmilesTouristServiceHandlerProtocol {
     
     // MARK: - Functions
     func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?) -> AnyPublisher<OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
-        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, pageNo: pageNo)
+        let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag?.rawValue, pageNo: pageNo)
         return repository.getOffers(request: request)
     }
     

@@ -17,24 +17,21 @@ class ExplorerOffersListingViewController: UIViewController {
     @IBOutlet weak var offersTableView: UITableView!
     
     // MARK: - PROPERTIES -
-    private lazy var viewModel: SmilesExplorerGetOffersViewModel = {
-        return SmilesExplorerGetOffersViewModel()
-    }()
-    private var input: PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never> = .init()
-    private var cancellables = Set<AnyCancellable>()
-    private var offers = [OfferDO]()
-    private var offersTitle: String
+    let viewModel: ExplorerOffersListingViewModel
     var dataSource: SectionedTableViewDataSource?
-    private var offersResponse: OffersCategoryResponseModel
+    var dependencies: ExplorerOffersListingDependance
+    var offers = [OfferDO]()
+    var offersPage = 1
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - ACTIONS -
     @IBAction func subscribePressed(_ sender: Any) {
     }
     
     // MARK: - INITIALIZERS -
-    init(offersResponse: OffersCategoryResponseModel, title: String) {
-        self.offersResponse = offersResponse
-        self.offersTitle = title
+    init(viewModel: ExplorerOffersListingViewModel, dependencies: ExplorerOffersListingDependance) {
+        self.viewModel = viewModel
+        self.dependencies = dependencies
         super.init(nibName: "ExplorerOffersListingViewController", bundle: Bundle.module)
     }
     
@@ -49,11 +46,12 @@ class ExplorerOffersListingViewController: UIViewController {
     }
     
     private func setupViews() {
-        titleLabel.text = offersTitle
+        bindStatus()
+        titleLabel.text = dependencies.title
         setUpNavigationBar()
         setupTableView()
         self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
-        configureOffers(with: offersResponse)
+        configureOffers(with: dependencies.offersResponse)
     }
     
     private func setupTableView() {
@@ -102,28 +100,17 @@ class ExplorerOffersListingViewController: UIViewController {
 // MARK: - VIEWMODEL BINDING -
 extension ExplorerOffersListingViewController {
     
-//    func bind(to viewModel: SmilesExplorerGetOffersViewModel) {
-//        input = PassthroughSubject<SmilesExplorerGetOffersViewModel.Input, Never>()
-//        let output = viewModel.transform(input: input.eraseToAnyPublisher())
-//        output
-//            .sink { [weak self] event in
-//                switch event {
-//                case .fetchExclusiveOffersDidSucceed(let response):
-//                    debugPrint(response)
-//                    self?.output.send(.fetchExclusiveOffersDidSucceed(response: response))
-//                case .fetchExclusiveOffersDidFail(error: let error):
-//                    self?.output.send(.fetchExclusiveOffersDidFail(error: error))
-//                case .fetchTicketsDidSucceed(response: let response):
-//                    self?.output.send(.fetchTicketsDidSucceed(response: response))
-//                case .fetchTicketDidFail(error: let error):
-//                    self?.output.send(.fetchTicketDidFail(error: error))
-//                case .fetchBogoDidSucceed(response: let response):
-//                    self?.output.send(.fetchBogoDidSucceed(response: response))
-//                case .fetchBogoDidFail(error: let error):
-//                    self?.output.send(.fetchBogoDidFail(error: error))
-//                }
-//            }.store(in: &cancellables)
-//    }
+    private func bindStatus() {
+        viewModel.orderStatusPublisher.sink { [weak self] state in
+            switch state {
+            case .fetchOffersDidSucceed(response: let response):
+                self?.configureOffers(with: response)
+            case .offersDidFail(error: let error):
+                debugPrint(error)
+            }
+        }
+        .store(in: &cancellables)
+    }
     
 }
 
@@ -131,7 +118,8 @@ extension ExplorerOffersListingViewController {
 extension ExplorerOffersListingViewController {
     
     private func configureOffers(with response: OffersCategoryResponseModel) {
-        offersResponse = response
+        offersTableView.tableFooterView = nil
+        dependencies.offersResponse = response
         offers.append(contentsOf: response.offers ?? [])
         if !offers.isEmpty {
             self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersListing(offers: offers)

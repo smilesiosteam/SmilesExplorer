@@ -115,7 +115,7 @@ extension SmilesTouristHomeViewModel {
                 self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
                 
             case .getOffersWithFilters(categoryId: let categoryId, tag: let tag, pageNo: let pageNo, categoryTypeIdsList: let categoryTypeIdsList):
-                self?.getOffersWithFilters(categoryId: categoryId ?? 973, tag: tag, pageNo: pageNo ?? 0,categoryTypeIdsList: categoryTypeIdsList ?? [])
+                self?.getOffers(categoryId: categoryId ?? 973, tag: tag, pageNo: pageNo ?? 0,categoryTypeIdsList: categoryTypeIdsList ?? [])
             
             case .getFiltersData(filtersSavedList: let filtersSavedList, isFilterAllowed: let isFilterAllowed, isSortAllowed: let isSortAllowed):
                 self?.filtersUseCaseProtocol.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
@@ -141,19 +141,21 @@ extension SmilesTouristHomeViewModel {
     }
     
     // MARK: - Get Offers
-    func getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int){
-        self.offerUseCase.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
+    func getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int, categoryTypeIdsList: [String]? = nil){
+        self.offerUseCase.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
             .sink { [weak self] state in
                 guard let self = self else {return}
                 switch state {
-                case .bogoOffers(response: let response):
-                    self.output.send(.fetchBogoDidSucceed(response: response))
-                case .stories(response: let response):
-                    self.output.send(.fetchExclusiveOffersStoriesDidSucceed(response: response))
-                case .tickets(response: let response):
-                    self.output.send(.fetchTicketsDidSucceed(response: response))
-                case .exclusiveDeals(response: let response):
-                    self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                case .fetchOffersDidSucceed(response: let response):
+                    switch tag {
+                    case .tickets:
+                        self.output.send(.fetchTicketsDidSucceed(response: response))
+                    case .exclusiveDeals:
+                        self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
+                    case .bogoOffers:
+                        self.output.send(.fetchBogoDidSucceed(response: response))
+                    default: break
+                    }
                 case .offersDidFail(error: let error):
                     debugPrint(error.localizedString)
                 }
@@ -161,25 +163,5 @@ extension SmilesTouristHomeViewModel {
             .store(in: &cancellables)
     }
     
-    // MARK: - Get Offers With Filters
-    func getOffersWithFilters(categoryId: Int, tag: SectionTypeTag, pageNo: Int,categoryTypeIdsList:[String]){
-        self.offerUseCase.getOffersWithFilters(categoryId: categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
-            .sink { [weak self] state in
-                guard let self = self else {return}
-                switch state {
-                case .bogoOffers(response: let response):
-                    self.output.send(.fetchBogoDidSucceed(response: response))
-                case .stories(response: let response):
-                    self.output.send(.fetchExclusiveOffersStoriesDidSucceed(response: response))
-                case .tickets(response: let response):
-                    self.output.send(.fetchTicketsDidSucceed(response: response))
-                case .exclusiveDeals(response: let response):
-                    self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
-                case .offersDidFail(error: let error):
-                    debugPrint(error.localizedString)
-                }
-            }
-            .store(in: &cancellables)
-    }
 }
 
