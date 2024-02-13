@@ -14,7 +14,7 @@ final class ExplorerOffersListingViewModel {
     // MARK: - PROPERTIES -
     private let offerUseCase: OffersListUseCaseProtocol
     private var statusSubject = PassthroughSubject<State, Never>()
-    var orderStatusPublisher: AnyPublisher<State, Never> {
+    var offersListingPublisher: AnyPublisher<State, Never> {
         statusSubject.eraseToAnyPublisher()
     }
     private var cancellables = Set<AnyCancellable>()

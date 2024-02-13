@@ -15,7 +15,7 @@ import SmilesSharedServices
 
 public enum SmilesTouristConfigrator {
    
-    public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerHomeViewController {
+    public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance) -> SmilesExplorerHomeViewController {
         
         let offersUseCase = OffersListUseCase(services: service)
         let subscriptionUseCase = ExplorerSubscriptionUseCase(services: service)
@@ -25,13 +25,13 @@ public enum SmilesTouristConfigrator {
         let sectionsUseCase = SectionsUseCase()
         let subscriptionBannerUseCase = SubscriptionBannerUseCase(services: service)
         
-        let viewModel = SmilesTouristHomeViewModel(offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase, filtersUseCase: filtersUseCase, sectionsUseCase: sectionsUseCase,rewardPointUseCase: rewardPointUseCase,wishListUseCase: wishListUseCase,subscriptionBannerUseCase:subscriptionBannerUseCase)
+        let viewModel = SmilesTouristHomeViewModel(categoryId: dependance.categoryId, offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase, filtersUseCase: filtersUseCase, sectionsUseCase: sectionsUseCase,rewardPointUseCase: rewardPointUseCase,wishListUseCase: wishListUseCase,subscriptionBannerUseCase:subscriptionBannerUseCase)
         
         let smilesExplorerHomeViewController = SmilesExplorerHomeViewController.init()
         smilesExplorerHomeViewController.hidesBottomBarWhenPushed = true
         
         smilesExplorerHomeViewController.viewModel = viewModel
-        smilesExplorerHomeViewController.delegate = navigationDelegate
+        smilesExplorerHomeViewController.delegate = dependance.delegate
         
         return smilesExplorerHomeViewController
     }
@@ -41,6 +41,15 @@ public enum SmilesTouristConfigrator {
         let offersUseCase = OffersListUseCase(services: service)
         let viewModel = ExplorerOffersListingViewModel(offerUseCase: offersUseCase)
         let viewController = ExplorerOffersListingViewController(viewModel: viewModel, dependencies: dependence)
+        return viewController
+        
+    }
+    
+    static func getFAQsVC() -> FAQsViewController {
+        
+        let faqsUseCase = FAQsUseCase()
+        let viewModel = ExplorerFAQsViewModel(faqsUseCase: faqsUseCase)
+        let viewController = FAQsViewController(viewModel: viewModel)
         return viewController
         
     }

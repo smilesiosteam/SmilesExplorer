@@ -1,0 +1,15 @@
+ {
+  "faqsDetails" : [
+    {
+      "id" : 40,
+      "faq_title" : "Dummy Text",
+      "faq_content" : "Dummy Text"
+    },
+    {
+      "id" : 41,
+      "faq_title" : "Dummy Text",
+      "faq_content" : "Dummy Text"
+    }
+  ],
+  "extTransactionId" : "7156682987953"
+}

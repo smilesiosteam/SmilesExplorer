@@ -95,7 +95,7 @@ final class SmilesTouristHomeViewModel {
     private let sectionsViewModel = SectionsViewModel()
 
     var personalizationEventSource:String?
-    var categoryId:Int?
+    let categoryId:Int?
     var isGuestUser:Bool?
     var isUserSubscribed:Bool?
     var subscriptionType:ExplorerPackage?
@@ -105,9 +105,10 @@ final class SmilesTouristHomeViewModel {
     var rewardPoint:Int?
     var platinumLimiReached:Bool?
     // MARK: - Init
-    init(offerUseCase: OffersListUseCaseProtocol,
+    init(categoryId: Int, offerUseCase: OffersListUseCaseProtocol,
          subscriptionUseCase: ExplorerSubscriptionUseCaseProtocol,
          filtersUseCase:FiltersUseCaseProtocol,sectionsUseCase:SectionsUseCaseProtocol,rewardPointUseCase:RewardPointUseCaseProtocol,wishListUseCase:WishListUseCaseProtocol,subscriptionBannerUseCase:SubscriptionBannerUseCaseProtocol) {
+        self.categoryId = categoryId
         self.offerUseCase = offerUseCase
         self.subscriptionUseCase = subscriptionUseCase
         self.filtersUseCase = filtersUseCase
@@ -186,7 +187,7 @@ extension SmilesTouristHomeViewModel {
     // MARK: - Get Offers With Filters
     
     func getSections(){
-        self.sectionsUseCase.getSections(categoryID: 973, baseUrl: nil, isGuestUser: nil, type: "UNSUBSCRIBED", explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
+        self.sectionsUseCase.getSections(categoryID: categoryId, baseUrl: nil, isGuestUser: nil, type: "UNSUBSCRIBED", explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
             .sink { [weak self] state in
                 guard self != nil else {
                     return

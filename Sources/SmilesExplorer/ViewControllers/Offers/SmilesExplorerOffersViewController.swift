@@ -1,6 +1,6 @@
 //
 //  SmilesExplorerOffersViewController.swift
-//  
+//
 //
 //  Created by Shmeel Ahmad on 17/08/2023.
 //
@@ -15,7 +15,7 @@ import SmilesLoader
 import SmilesOffers
 
 public class SmilesExplorerOffersViewController: UIViewController {
-
+    
     // MARK: - OUTLETS -
     var selectedOffer:OfferDO?
     @IBOutlet weak var titleLbl: UILabel!
@@ -23,7 +23,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
     @IBOutlet weak var confirmBtn: UICustomButton!
     @IBOutlet weak var skipBtn: UICustomButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    var categoryId = 973 //TODO: init it -1
+    var categoryId: Int
     
     public var delegate: SmilesExplorerHomeDelegate?
     // MARK: - PROPERTIES -
@@ -33,17 +33,17 @@ public class SmilesExplorerOffersViewController: UIViewController {
         return SmilesExplorerOffersViewModel()
     }()
     private var response:OffersCategoryResponseModel?
-
+    
     var currentPage = 1
     var isLoading = false
     var hasMoreData = true
     // MARK: - ACTIONS -
-
+    
     
     @IBAction func confirmPressed(_ sender: UIButton) {
         guard let selectedOffer else {return}
         let objSmilesExplorerPaymentParams = SmilesExplorerPaymentParams(freeOffer: selectedOffer, isComingFromSpecialOffer: false, isComingFromTreasureChest: false)
-
+        
         delegate?.proceedToPayment(params: objSmilesExplorerPaymentParams, navigationType: .freeTicket)
     }
     
@@ -57,11 +57,12 @@ public class SmilesExplorerOffersViewController: UIViewController {
         setupUI()
         self.bind(to: viewModel)
         loadMoreItems()
-//        SmilesLoader.show(on: self.view)
+        //        SmilesLoader.show(on: self.view)
         // Do any additional setup after loading the view.
     }
     
-  public  init() {
+    public init() {
+        categoryId = ExplorerConstants.explorerCategoryID
         super.init(nibName: "SmilesExplorerOffersViewController", bundle: .module)
     }
     
@@ -75,7 +76,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
     }
     
     func setupUI() {
-    
+        
         titleLbl.textAlignment = AppCommonMethods.languageIsArabic() ? .right : .left
         detailsLbl.textAlignment = AppCommonMethods.languageIsArabic() ? .right : .left
         titleLbl.text = response?.listTitle

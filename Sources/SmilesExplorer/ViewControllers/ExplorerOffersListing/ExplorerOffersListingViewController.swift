@@ -101,7 +101,7 @@ class ExplorerOffersListingViewController: UIViewController {
 extension ExplorerOffersListingViewController {
     
     private func bindStatus() {
-        viewModel.orderStatusPublisher.sink { [weak self] state in
+        viewModel.offersListingPublisher.sink { [weak self] state in
             switch state {
             case .fetchOffersDidSucceed(response: let response):
                 self?.configureOffers(with: response)

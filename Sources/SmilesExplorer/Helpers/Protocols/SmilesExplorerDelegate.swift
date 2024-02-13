@@ -36,3 +36,10 @@ protocol HomeOffersDelegate: AnyObject {
     func showOffersList(section: SmilesExplorerSectionIdentifier)
     
 }
+
+protocol ExplorerHomeFooterDelegate: AnyObject {
+    
+    func getMembershipPressed()
+    func faqsPressed()
+    
+}

@@ -89,6 +89,12 @@ public final class SmilesExplorerRouter: NSObject {
         
     }
     
+    func pushFAQsVC(navVC: UINavigationController?) {
+        
+        let vc = SmilesTouristConfigrator.getFAQsVC()
+        navVC?.pushViewController(vc, animated: true)
+        
+    }
     
 //    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate, sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
 //        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "", delegate: delegate)

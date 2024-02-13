@@ -46,7 +46,7 @@ extension SmilesExplorerOffersViewModel {
     }
     
     func fetchSmilesExplorerOffersData(page:Int) {
-        let offersCategoryRequest = OffersCategoryRequestModel(pageNo:page, categoryId: "973", tag: "TICKETS")
+        let offersCategoryRequest = OffersCategoryRequestModel(pageNo:page, categoryId: "\(ExplorerConstants.explorerCategoryID)", tag: "TICKETS")
         let service = SmilesExplorerOffersRepository(
             networkRequest: NetworkingLayerRequestable(requestTimeOut: 60),
             baseUrl: AppCommonMethods.serviceBaseUrl,
