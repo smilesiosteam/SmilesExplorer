@@ -279,6 +279,10 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.viewModel.getOffers(tag: .bogoOffers, pageNo: 1, categoryTypeIdsList: self.arraySelectedSubCategoryTypes)
     }
     
+    public func setSavedFilterForCordinator(filtersSavedList: [RestaurantRequestWithNameFilter]?, filtersList: [RestaurantRequestFilter]?){
+        self.viewModel.setFiltersSavedList(filtersSavedList: filtersSavedList, filtersList: filtersList)
+    }
+    
 }
 
 
