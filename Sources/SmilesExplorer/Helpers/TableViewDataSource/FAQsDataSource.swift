@@ -13,7 +13,7 @@ import SmilesReusableComponents
 //MARK: - Make For FAQs
 extension TableViewDataSource where Model == FaqsDetail {
     static func make(forFAQs  faqsDetails: [FaqsDetail],
-                     reuseIdentifier: String = "FAQTableViewCell", data : String, isDummy:Bool = false, completion:(() -> ())?) -> TableViewDataSource {
+                     reuseIdentifier: String = "FAQTableViewCell", data : String, isDummy:Bool = false) -> TableViewDataSource {
         return TableViewDataSource(
             models: faqsDetails,
             reuseIdentifier: reuseIdentifier,

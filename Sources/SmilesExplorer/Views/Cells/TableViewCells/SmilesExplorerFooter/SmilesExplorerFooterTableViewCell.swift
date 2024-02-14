@@ -22,14 +22,15 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
     
     // MARK: - PROPERTIES -
     private var gradientLayer: CAGradientLayer? = nil
-    var getMembership: (() -> Void)?
+    weak var delegate: ExplorerHomeFooterDelegate?
     
     // MARK: - ACTIONS -
     @IBAction func getMembershipPressed(_ sender: Any) {
-        getMembership?()
+        delegate?.getMembershipPressed()
     }
     
     @IBAction func faqPressed(_ sender: Any) {
+        delegate?.faqsPressed()
     }
     
     // MARK: - METHODS -

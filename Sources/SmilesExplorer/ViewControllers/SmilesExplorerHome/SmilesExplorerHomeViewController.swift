@@ -231,7 +231,7 @@ extension SmilesExplorerHomeViewController {
                 case .footer:
                     if let response = ExplorerSubscriptionBannerResponse.fromModuleFile(), let footer = response.footer {
                         let title = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })?.title
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(footer: footer, title: title, data: element.backgroundColor ?? "FFFFFF", isDummy: true, completion: nil)
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(footer: footer, title: title, data: element.backgroundColor ?? "FFFFFF", isDummy: true)
                     }
                     viewModel.getSubscriptionBannerDetails()
                 case .tickets:
@@ -279,9 +279,7 @@ extension SmilesExplorerHomeViewController {
         
         if let footer = response.footer, let footerSectionIndex = getSectionIndex(for: .footer) {
             let topPlaceholder = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })
-            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: topPlaceholder?.title, data: "FFFFFF", completion: { [weak self] in
-                SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self?.navigationController, delegate: self?.delegate)
-            })
+            self.dataSource?.dataSources?[footerSectionIndex] = TableViewDataSource.make(footer: footer, title: topPlaceholder?.title, data: "FFFFFF", delegate: self)
         } else {
             self.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
         }
@@ -389,9 +387,21 @@ extension SmilesExplorerHomeViewController: HomeOffersDelegate {
         }
         guard let response, let offersIndex = getSectionIndex(for: section),
                                 let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] else { return }
-        let dependence = ExplorerOffersListingDependance(categoryId: viewModel.categoryId ?? 973, title: sectionDetails.title ?? "", offersResponse: response, offersTag: SectionTypeTag(rawValue: section.rawValue) ?? .tickets)
+        let dependence = ExplorerOffersListingDependance(categoryId: viewModel.categoryId ?? ExplorerConstants.explorerCategoryID, title: sectionDetails.title ?? "", offersResponse: response, offersTag: SectionTypeTag(rawValue: section.rawValue) ?? .tickets)
         SmilesExplorerRouter.shared.pushOffersListingVC(navVC: navigationController, dependence: dependence)
     }
     
 }
 
+// MARK: - HOME FOOTER DELEGATE -
+extension SmilesExplorerHomeViewController: ExplorerHomeFooterDelegate {
+    
+    func getMembershipPressed() {
+        SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: navigationController, delegate: delegate)
+    }
+    
+    func faqsPressed() {
+        SmilesExplorerRouter.shared.pushFAQsVC(navVC: navigationController)
+    }
+    
+}

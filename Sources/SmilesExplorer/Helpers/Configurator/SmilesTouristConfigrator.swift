@@ -17,7 +17,7 @@ public enum SmilesTouristConfigrator {
     
     //MARK: -  Smiles Tourist UnSubscribed HomeVC
     public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerHomeViewController {
-        
+
         let offersUseCase = OffersListUseCase(services: service)
         let subscriptionUseCase = ExplorerSubscriptionUseCase(services: service)
         let filtersUseCase = FiltersUseCase()
@@ -25,6 +25,7 @@ public enum SmilesTouristConfigrator {
         let rewardPointUseCase = RewardPointUseCase()
         let sectionsUseCase = SectionsUseCase()
         let subscriptionBannerUseCase = SubscriptionBannerUseCase(services: service)
+
         let viewModel = SmilesTouristHomeViewModel(offerUseCase: offersUseCase, subscriptionUseCase: subscriptionUseCase, filtersUseCase: filtersUseCase, sectionsUseCase: sectionsUseCase,rewardPointUseCase: rewardPointUseCase,wishListUseCase: wishListUseCase,subscriptionBannerUseCase:subscriptionBannerUseCase)
         let smilesExplorerHomeViewController = SmilesExplorerHomeViewController.init(viewModel: viewModel, delegate: navigationDelegate)
         viewModel.categoryId = dependance.categoryId
@@ -35,6 +36,7 @@ public enum SmilesTouristConfigrator {
         viewModel.rewardPoint = dependance.rewardPoint
         viewModel.rewardPointIcon = dependance.rewardPointIcon
         smilesExplorerHomeViewController.hidesBottomBarWhenPushed = true
+        
         return smilesExplorerHomeViewController
     }
     
@@ -71,6 +73,15 @@ public enum SmilesTouristConfigrator {
     }
     
     //MARK: -  Smiles Tourist Service Handler
+    static func getFAQsVC() -> FAQsViewController {
+        
+        let faqsUseCase = FAQsUseCase()
+        let viewModel = ExplorerFAQsViewModel(faqsUseCase: faqsUseCase)
+        let viewController = FAQsViewController(viewModel: viewModel)
+        return viewController
+        
+    }
+    
     static var service: SmilesTouristServiceHandler {
         return .init(repository: repository)
     }
