@@ -26,56 +26,22 @@ enum OfferSort: String, CaseIterable {
 
 public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var topHeaderView: AppHeaderView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var upgradeNowButton: UIButton!
-    
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
-    public  var input: PassthroughSubject<SmilesExplorerHomeUpgradeViewModel.Input, Never> = .init()
-    private var cancellables = Set<AnyCancellable>()
-    public lazy var viewModel: SmilesExplorerHomeUpgradeViewModel = {
-        return SmilesExplorerHomeUpgradeViewModel()
-    }()
-    
-     var viewModl: SmilesTouristHomeViewModel!
-    
+    // MARK: - Properties
+    var selectedLocation: String? = nil
+    var isHeaderExpanding = false
+    var viewModel: SmilesTouristHomeViewModel!
     var dataSource: SectionedTableViewDataSource?
     var sections = [SmilesExplorerSubscriptionUpgradeSectionData]()
     var smilesExplorerSections: GetSectionsResponseModel?
-    let categoryId: Int
-    private let isGuestUser: Bool
-    private var isUserSubscribed: Bool?
-    var subscriptionType: ExplorerPackage?
-    private var voucherCode: String?
-    public var delegate:SmilesExplorerHomeDelegate? = nil
-    private var selectedIndexPath: IndexPath?
     var mutatingSectionDetails = [SectionDetailDO]()
-    private var offerFavoriteOperation = 0
-    
-    var selectedLocation: String? = nil
-    var isHeaderExpanding = false
-    var hasTopNotch: Bool {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
-        }
-        return false
-    }
-    
-    
-    //var categoryId = 0
-    public   var offersCategoryId = 0
-    public  var sortOfferBy: String?
-    public  var sortingType: String?
-    public  var lastSortCriteria: String?
-    public  var arraySelectedSubCategoryPaths: [IndexPath] = []
-    public  var arraySelectedSubCategoryTypes: [String] = []
-    public  var filterValues: [FilterValue] = []
     var selectedFiltersResponse: Data?
-    
-    public var selectedSortTypeIndex: Int?
-    public var didSelectFilterOrSort = false
-    
+    var restaurants = [Restaurant]()
     var offersListing: OffersCategoryResponseModel?
     var bogooffersListing: OffersCategoryResponseModel?
     var offersPage = 1 // For offers list pagination
@@ -83,39 +49,46 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     var offers = [OfferDO]()
     var bogoOffers = [OfferDO]()
     
-    public var filtersSavedList: [RestaurantRequestWithNameFilter]?
-    public var filtersData: [FiltersCollectionViewCellRevampModel]?
-    public var savedFilters: [RestaurantRequestFilter]?
-    public var restaurantSortingResponseModel: GetSortingListResponseModel?
-    public var selectedSortingTableViewCellModel: FilterDO?
-    
-    
-    private var onFilterClick:(() -> Void)?
-    
-    
-    public var filtersList: [RestaurantRequestFilter]?
-    
-    public var selectedSort: String?
+    private var offerFavoriteOperation = 0
+    private var cancellables = Set<AnyCancellable>()
+    public var delegate:SmilesExplorerHomeDelegate? = nil
+    private var selectedIndexPath: IndexPath?
     private var rewardPoint: Int?
     private var rewardPointIcon: String?
     private var personalizationEventSource: String?
     private var platinumLimiReached: Bool?
     
+    public   var offersCategoryId = 0
+    public  var sortOfferBy: String?
+    public  var sortingType: String?
+    public  var lastSortCriteria: String?
+    public  var arraySelectedSubCategoryPaths: [IndexPath] = []
+    public  var arraySelectedSubCategoryTypes: [String] = []
+    public  var filterValues: [FilterValue] = []
+    public var selectedSortTypeIndex: Int?
+    public var didSelectFilterOrSort = false
+    public var filtersSavedList: [RestaurantRequestWithNameFilter]?
+    public var filtersData: [FiltersCollectionViewCellRevampModel]?
+    public var savedFilters: [RestaurantRequestFilter]?
+    public var restaurantSortingResponseModel: GetSortingListResponseModel?
+    public var selectedSortingTableViewCellModel: FilterDO?
+    private var onFilterClick:(() -> Void)?
+    public var filtersList: [RestaurantRequestFilter]?
+    public var selectedSort: String?
     
-    var restaurants = [Restaurant]()
     
+    // MARK: - For TopSpace in X series
+    var hasTopNotch: Bool {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
+        }
+        return false
+    }
     
-    public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?,platinumLimiReached: Bool?) {
-        self.platinumLimiReached = platinumLimiReached
-        self.personalizationEventSource =  personalizationEventSource
-        self.categoryId = categoryId
-        self.isGuestUser = isGuestUser
-        self.isUserSubscribed = isUserSubscribed
-        self.subscriptionType = subscriptionType
-        self.voucherCode = voucherCode
+    // MARK: - initializer
+    init(viewModel: SmilesTouristHomeViewModel, delegate:SmilesExplorerHomeDelegate) {
+        self.viewModel = viewModel
         self.delegate = delegate
-        self.rewardPointIcon = rewardPointIcon
-        self.rewardPoint = rewardPoint
         super.init(nibName: "SmilesExplorerSubscriptionUpgradeViewController", bundle: Bundle.module)
     }
     
@@ -123,19 +96,17 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View LifeCycle
     public override func viewDidLoad() {
-        
         setupTableView()
         bind(to: viewModel)
-        
-        if let isUserSubscribed {
-            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false,platinumLimiReached: platinumLimiReached)
+        if viewModel.isUserSubscribed != nil {
+            self.getSections(isSubscribed: viewModel.isUserSubscribed ?? false, explorerPackageType: viewModel.subscriptionType ?? .gold, freeTicketAvailed: viewModel.voucherCode != nil ? true:false,platinumLimiReached: viewModel.platinumLimiReached)
         } else {
-            self.input.send(.getRewardPoints)
+            viewModel.getRewardPoint()
         }
-        
         selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
-        if self.subscriptionType == .platinum || self.platinumLimiReached == true{
+        if self.viewModel.subscriptionType == .platinum || self.viewModel.platinumLimiReached == true{
             self.upgradeNowButton.isHidden = true
         }else{
             self.upgradeNowButton.isHidden = false
@@ -146,20 +117,17 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.setupHeaderView(headerTitle: "")
         let imageName = "back_arrow"
         self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
+        
     }
-    
     
     public override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        
         if let currentLocationId = LocationStateSaver.getLocationInfo()?.locationId, let locationId = self.selectedLocation, currentLocationId != locationId {
-            //            self.input.send(.emptyRestaurantList)
-            //            self.callFoodOrderServices()
             selectedLocation = LocationStateSaver.getLocationInfo()?.locationId
         }
         
     }
-    // MARK: - Helping Functions
+    // MARK: - setupTableView
     func setupTableView() {
         self.tableView.sectionFooterHeight = .leastNormalMagnitude
         if #available(iOS 15.0, *) {
@@ -178,16 +146,13 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         // ----- Tableview section header hide in case of tableview mode Plain ---
     }
     
-    //MARK: Navigation Bar Setup
+    //MARK: - Navigation Bar Setup
     func setUpNavigationBar() {
-        
-        
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.configureWithTransparentBackground()
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
-        
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 24),
@@ -201,7 +166,6 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
                 toptitle = topPlaceholderSection.title ?? toptitle
             }
         }
-        
         let locationNavBarTitle = UILabel()
         locationNavBarTitle.text = toptitle
         locationNavBarTitle.textColor = .black
@@ -210,7 +174,6 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         hStack.spacing = 4
         hStack.alignment = .center
         self.navigationItem.titleView = hStack
-        
         let btnBack: UIButton = UIButton(type: .custom)
         btnBack.backgroundColor = UIColor.clear
         btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow", in: .module, compatibleWith: nil), for: .normal)
@@ -230,50 +193,50 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     }
-    
+    //MARK: - onClickBack
     @objc func onClickBack() {
-        
         self.navigationController?.popViewController(animated: true)
     }
+    //MARK: - onUpgradeBannerButtonClick()
     @IBAction func onUpgradeBannerButtonClick() {
         SmilesExplorerRouter.shared.showPickTicketPop(viewcontroller: self ,delegate: delegate)
     }
+    //MARK: - configureDataSource()
     fileprivate func configureDataSource() {
         self.tableView.dataSource = self.dataSource
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-    
+    //MARK: - getSectionIndex()
     func getSectionIndex(for identifier: SmilesExplorerSubscriptionUpgradeSectionIdentifier) -> Int? {
         return sections.first(where: { obj in
             return obj.identifier == identifier
         })?.index
     }
-    
+    //MARK: - setupUI()
     private func setupUI() {
         
         self.tableView.addMaskedCorner(withMaskedCorner: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20.0)
         self.tableView.backgroundColor = .white
         self.sections.removeAll()
-        
-        //        self.homeAPICalls()
     }
     // MARK: - Top Header
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: isGuestUser, showHeaderContent: isUserSubscribed ?? false, toolTipInfo: nil)
+        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: self.viewModel.isGuestUser ?? false, showHeaderContent: self.viewModel.isUserSubscribed ?? false, toolTipInfo: nil)
         displayRewardPoints()
     }
+    
     func displayRewardPoints() {
         if let rewardPoints = rewardPoint {
             self.topHeaderView.setPointsOfUser(with: rewardPoints.numberWithCommas())
         }
-        
         if let rewardPointsIcon = self.rewardPointIcon {
             self.topHeaderView.setPointsIcon(with: rewardPointsIcon, shouldShowAnimation: false)
         }
     }
+    
     func adjustTopHeader(_ scrollView: UIScrollView) {
         guard isHeaderExpanding == false else {return}
         if let tableView = scrollView as? UITableView {
@@ -296,14 +259,12 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
             }
         }
     }
+    
     private func updateView(index: Int) {
-        
-        
         //self?.adjustTopHeader(scrollView)
-        
     }
+    
     public func configureFiltersData() {
-        
         if let filtersSavedList = self.filtersSavedList {
             arraySelectedSubCategoryTypes = []
             arraySelectedSubCategoryPaths = []
@@ -313,14 +274,11 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
                 arraySelectedSubCategoryPaths.append(filter.indexPath ?? IndexPath())
             }
         }
-        //showShimmer(identifier: .OFFERLISTING)
-        //TODO: Need to send selected filters in below api
-        self.input.send(.emptyOffersList)
+        self.viewModel.emptyOffers()
         self.showShimmer(identifier: .offerListing)
-        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .bogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
-        
-        
+        self.viewModel.getOffers(tag: .bogoOffers, pageNo: 1, categoryTypeIdsList: self.arraySelectedSubCategoryTypes)
     }
+    
 }
 
 
@@ -328,19 +286,15 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
 extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     
     public func didTapOnBackButton() {
-        
         navigationController?.popViewController()
-        
     }
     
     public func didTapOnSearch() {
         self.delegate?.navigateToGlobalSearch()
-        // self.categoryContainerCoordinator?.navigateToGlobalSearchVC()
     }
     
     public func didTapOnLocation() {
         self.delegate?.navigateToLocation()
-        //self.categoryContainerCoordinator?.navigateToUpdateLocationVC(confirmLocationRedirection: .toCategoryContainer)
     }
     
     func setLocationToolTipPositionView(view: UIImageView) {
@@ -361,19 +315,16 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     
     public func rewardPointsBtnTapped() {
         self.delegate?.navigateToRewardPoint(personalizationEventSource: self.personalizationEventSource)
-        // self.categoryContainerCoordinator?.navigateToTransactionsListViewController(personalizationEventSource: self.personalizationEventSource)
     }
 }
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
     private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage,freeTicketAvailed:Bool,platinumLimiReached: Bool? = nil) {
-        self.input.send(.getSections(categoryID: categoryId, type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed,platinumLimiReached: platinumLimiReached))
+        self.viewModel.getSections(type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed, platinumLimiReached: platinumLimiReached)
     }
     
-    
     // MARK: - HomeApi Calls
-    
     private func homeAPICalls() {
         
         if let sectionDetails = self.smilesExplorerSections?.sectionDetails, !sectionDetails.isEmpty {
@@ -400,20 +351,16 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     }
                     break
                 case .stories:
-                    
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forStories: response, data:"#FFFFFF", isDummy: true, onClick:nil)
                     }
-                    
-                    self.input.send(.getExclusiveDealsStories(categoryId: self.categoryId, tag: .exclusiveDeals, pageNo: 1))
-                    
+                    self.viewModel.getOffers(tag: .exclusiveDeals)
                     break
                 case .offerListing:
-                    
                     if let response = OfferDO.fromModuleFile() {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(forBogoOffers: [response], data:"#FFFFFF", isDummy: true, completion:nil)
                     }
-                    self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .bogoOffers, pageNo: 1,categoryTypeIdsList: self.arraySelectedSubCategoryTypes.isEmpty  ? nil: self.arraySelectedSubCategoryTypes))
+                    self.viewModel.getOffers(tag: .bogoOffers,categoryTypeIdsList: self.arraySelectedSubCategoryTypes.isEmpty  ? nil: self.arraySelectedSubCategoryTypes)
                     break
                     
                 default: break
@@ -425,25 +372,20 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     
     // MARK: - Section Data
     private func configureSectionsData(with sectionsResponse: GetSectionsResponseModel) {
-        
         smilesExplorerSections = sectionsResponse
         if let sectionDetailsArray = sectionsResponse.sectionDetails, !sectionDetailsArray.isEmpty {
             self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: sectionDetailsArray.count))
         }
         
-        
-        
         if let topPlaceholderSection = sectionsResponse.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.topPlaceholder.rawValue }) {
-            
             setupHeaderView(headerTitle: topPlaceholderSection.title)
-            
             if let iconURL = topPlaceholderSection.iconUrl {
                 self.topHeaderView.headerTitleImageView.isHidden = false
                 self.topHeaderView.setHeaderTitleIcon(iconURL: iconURL)
             }
             let imageName = "back_arrow"
             self.topHeaderView.setCustomImageForBackButton(imageName: imageName)
-            if self.subscriptionType == .platinum || self.platinumLimiReached == true{
+            if self.viewModel.subscriptionType == .platinum || self.viewModel.platinumLimiReached == true{
                 self.upgradeNowButton.isHidden = true
             }else{
                 self.upgradeNowButton.isHidden = false
@@ -457,19 +399,16 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     
     func updateOfferWishlistStatus(isFavorite: Bool, offerId: String) {
         offerFavoriteOperation = isFavorite ? 1 : 2
-        input.send(.updateOfferWishlistStatus(operation: offerFavoriteOperation, offerId: offerId))
+        self.viewModel.updateOfferWishlistStatus(operation: offerFavoriteOperation, offerId: offerId)
     }
 }
 
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     
-    
     // MARK: - Section Data
-    
-    func bind(to viewModel: SmilesExplorerHomeUpgradeViewModel) {
-        input = PassthroughSubject<SmilesExplorerHomeUpgradeViewModel.Input, Never>()
-        let output = viewModel.transform(input: input.eraseToAnyPublisher())
+    func bind(to viewModel: SmilesTouristHomeViewModel) {
+        let output = viewModel.output
         output
             .sink { [weak self] event in
                 switch event {
@@ -480,10 +419,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     debugPrint(error.localizedDescription)
                     
                 case .fetchRewardPointsDidSucceed(response: let response, _):
-                    self?.isUserSubscribed = response.explorerSubscriptionStatus
-                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold, freeTicketAvailed: response.explorerVoucherCode != nil ? true:false)
-                    self?.subscriptionType = response.explorerPackageType
-                    self?.voucherCode = response.explorerVoucherCode
+                    self?.viewModel.isUserSubscribed = response.explorerSubscriptionStatus
+                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false, explorerPackageType: response.explorerPackageType ?? .gold, freeTicketAvailed: response.explorerVoucherCode != nil ? true:false,platinumLimiReached: response.platinumLimitReached)
+                    self?.viewModel.subscriptionType = response.explorerPackageType
+                    self?.viewModel.voucherCode = response.explorerVoucherCode
                     if response.explorerPackageType ?? .gold == .platinum {
                         self?.upgradeNowButton.isHidden = true
                     }
@@ -496,32 +435,24 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
                     self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
                     break
                 case .fetchAllSavedFiltersSuccess(let filtersList, let savedFilters):
+                    self?.savedFilters?.removeAll()
+                    self?.offers.removeAll()
+                    self?.filtersSavedList?.removeAll()
                     self?.savedFilters = filtersList
                     self?.filtersSavedList = savedFilters
-                    self?.offers.removeAll()
+                    
                     self?.configureDataSource()
                     self?.configureFiltersData()
-                    break
-                    
-                case .fetchSavedFiltersAfterSuccess(let filtersSavedList):
-                    self?.filtersSavedList = filtersSavedList
-                    break
-                    
-                    
-                case .fetchContentForSortingItems(_):
-                    //                    self?.sortingListRowModels = baseRowModels
-                    break
                 case .updateWishlistStatusDidSucceed(let updateWishlistResponse):
                     self?.configureWishListData(with: updateWishlistResponse)
                     
-                    //                case .updateWishlistStatusDidFail(let error):
-                    //                    print(error.localizedDescription)
+                case .updateWishlistStatusDidFail(let error):
+                    print(error.localizedDescription)
                     
-                    
-                case .fetchExclusiveOffersStoriesDidSucceed(let exclusiveOffersStories):
+                case .fetchExclusiveOffersDidSucceed(let exclusiveOffersStories):
                     self?.configureExclusiveOffersStories(with: exclusiveOffersStories)
                     
-                case .fetchExclusiveOffersStoriesDidFail(let error):
+                case .fetchExclusiveOffersDidFail(let error):
                     debugPrint(error.localizedDescription)
                     self?.configureHideSection(for: .stories, dataSource: OffersCategoryResponseModel.self)
                 case .fetchBogoOffersDidSucceed(response: let bogoOffers):
@@ -544,17 +475,13 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     
 }
 extension SmilesExplorerSubscriptionUpgradeViewController {
+    
     // MARK: - SECTIONS CONFIGURATIONS -
-    
-    
     private func configureHeaderSection() {
-        
         if let headerSectionIndex = getSectionIndex(for: .stories) {
             dataSource?.dataSources?[headerSectionIndex] = TableViewDataSource(models: [], reuseIdentifier: "", data: "#FFFFFF", cellConfigurator: { _, _, _, _ in })
             configureDataSource()
         }
-        
-        
     }
     
     fileprivate func  configureExclusiveOffersStories(with exclusiveOffersResponse: OffersCategoryResponseModel) {
@@ -576,25 +503,19 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         
         
     }
-    
-    
+    //MARK: - configure Banner Data
     fileprivate func  configureUpgardeBanner(with sectionsResponse: SectionDetailDO?,index: Int) {
-        
         if let bannerSectionResponse = sectionsResponse, (bannerSectionResponse.backgroundImage != nil) {
-            
             self.dataSource?.dataSources?[index] = TableViewDataSource.make(forUpgradeBanner: bannerSectionResponse, data: "", onClick: { sections in
                 debugPrint(sections)
             })
             self.configureDataSource()
-            
         } else {
             self.configureHideSection(for: .upgradeBanner, dataSource: SectionDetailDO.self)
         }
         
-        
-        
     }
-    
+    //MARK: - configure Bogo Offer
     fileprivate func configureBogoOffers(with exclusiveOffersResponse: OffersCategoryResponseModel) {
         self.bogooffersListing = exclusiveOffersResponse
         self.bogoOffers.append(contentsOf: exclusiveOffersResponse.offers ?? [])
@@ -613,26 +534,25 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
         }
     }
     
+    //MARK: - configure WishList
     fileprivate func configureWishListData(with updateWishlistResponse: WishListResponseModel) {
         var isFavoriteOffer = false
-        
         if let favoriteIndexPath = self.selectedIndexPath {
             if let updateWishlistStatus = updateWishlistResponse.updateWishlistStatus, updateWishlistStatus {
                 isFavoriteOffer = self.offerFavoriteOperation == 1 ? true : false
             } else {
                 isFavoriteOffer = false
             }
-            
             (self.dataSource?.dataSources?[favoriteIndexPath.section] as? TableViewDataSource<OfferDO>)?.models?[favoriteIndexPath.row].isWishlisted = isFavoriteOffer
             
             if let cell = tableView.cellForRow(at: favoriteIndexPath) as? RestaurantsRevampTableViewCell {
                 cell.offerData?.isWishlisted = isFavoriteOffer
                 cell.showFavouriteAnimation(isRestaurant: false)
             }
-            
         }
     }
     
+    //MARK: - configure Hide Section
     fileprivate func configureHideSection<T>(for section: SmilesExplorerSubscriptionUpgradeSectionIdentifier, dataSource: T.Type) {
         if let index = getSectionIndex(for: section) {
             (self.dataSource?.dataSources?[index] as? TableViewDataSource<T>)?.models = []
@@ -642,7 +562,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
             self.configureDataSource()
         }
     }
-    
+    //MARK: - configure ShowShimer
     func showShimmer(identifier:SmilesExplorerSubscriptionUpgradeSectionIdentifier){
         if let sectionDetails = self.smilesExplorerSections?.sectionDetails, !sectionDetails.isEmpty {
             for (index, element) in sectionDetails.enumerated() {
@@ -665,31 +585,24 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
 
 extension SmilesExplorerSubscriptionUpgradeViewController {
     
+    //MARK: - Naviagation To Filters
     func redirectToFilters() {
         let selectedFilters = getSelectedFilters()
         if selectedFilters.isEmpty {
             selectedFiltersResponse = nil
         }
-        self.delegate?.navigateToFilter(categoryId: self.categoryId, sortingType: self.sortingType ?? "", previousFiltersResponse: selectedFiltersResponse, selectedFilters: selectedFilters, filterDelegate: self)
+        self.delegate?.navigateToFilter(categoryId: viewModel.categoryId ?? 973, sortingType: self.sortingType ?? "", previousFiltersResponse: selectedFiltersResponse, selectedFilters: selectedFilters, filterDelegate: self)
         
     }
     
-    func redirectToSortingVC(){
-        guard let sortData = AppCommonMethods.getLocalizedArray(forKey: "ViewAllSortCriteria") as? [String] else { return }
-        let sorts = viewModel.mapSortObjects(sorts: sortData)
-        self.delegate?.navigateToSortingVC(sorts: sorts, delegate: self)
-    }
-    
-    
 }
 
+//MARK: - Filters Delegate
 extension SmilesExplorerSubscriptionUpgradeViewController: SelectedFiltersDelegate {
     public func didSetFilters(_ filters: [FilterValue]) {
         arraySelectedSubCategoryTypes.removeAll()
         filtersSavedList = []
-        
         var filterObjects: [RestaurantRequestWithNameFilter] = []
-        
         filters.forEach {
             arraySelectedSubCategoryTypes.append($0.filterKey ?? "")
             let filter = RestaurantRequestWithNameFilter()
@@ -698,13 +611,12 @@ extension SmilesExplorerSubscriptionUpgradeViewController: SelectedFiltersDelega
             filter.indexPath = $0.indexPath
             filterObjects.append(filter)
         }
-        
         filtersSavedList = filterObjects
         didSelectFilterOrSort = true
-        input.send(.setFiltersSavedList(filtersSavedList: self.filtersSavedList, filtersList: []))
-        input.send(.emptyOffersList)
+        self.viewModel.setFiltersSavedList(filtersSavedList: self.filtersSavedList, filtersList: [])
+        self.viewModel.emptyOffers()
         self.showShimmer(identifier: .offerListing)
-        input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDeals, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
+        self.viewModel.getOffers(tag: .bogoOffers,categoryTypeIdsList: arraySelectedSubCategoryTypes)
     }
     
     public func didSetFilterResponse(_ data: Data?) {
@@ -719,37 +631,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: SelectedFiltersDelega
             filter.indexPath = item.indexPath
             selectedFilters.append(filter)
         }
-        
         return selectedFilters
     }
 }
 
-
-
-extension SmilesExplorerSubscriptionUpgradeViewController: SelectedSortDelegate {
-    
-    public func didSetSort(sortBy: FilterDO) {
-        viewModel.setSelectedSortingParam(sort: sortBy)
-        
-        let sortName = sortBy.filterValue
-        let sortIndex = Int(sortBy.filterKey ?? "0") ?? 0
-        
-        lastSortCriteria = sortName
-        sortingType = sortName
-        
-        selectedSortTypeIndex = sortIndex
-        updateTheOffersListingWithSelectedSort(sortIndex)
-    }
-    
-    func updateTheOffersListingWithSelectedSort(_ index: Int) {
-        let sortData = AppCommonMethods.getLocalizedArray(forKey: "ViewAllSortCriteria") as? [String]
-        let selectedSort = sortData?[index]
-        
-        self.didSelectFilterOrSort = true
-        self.showShimmer(identifier: .offerListing)
-        self.input.send(.setSelectedSort(sortTitle: selectedSort))
-        input.send(.emptyOffersList)
-        self.showShimmer(identifier: .offerListing)
-        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .exclusiveDeals, pageNo: 1, categoryTypeIdsList: arraySelectedSubCategoryTypes))
-    }
-}

@@ -70,7 +70,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                 
                     
                     if (sectionData.sectionIdentifier == SmilesExplorerSubscriptionUpgradeSectionIdentifier.offerListing.rawValue) && (sectionData.isFilterAllowed != 0 || sectionData.isSortAllowed != 0) {
-                        self.input.send(.getFiltersData(filtersSavedList: self.filtersSavedList, isFilterAllowed: sectionData.isFilterAllowed, isSortAllowed: sectionData.isSortAllowed)) // Get Filters Data
+                        self.viewModel.getFiltersData(filtersSavedList: self.filtersSavedList, isFilterAllowed: sectionData.isFilterAllowed, isSortAllowed: sectionData.isSortAllowed)
                         let filtersCell = tableView.dequeueReusableCell(withIdentifier: "FiltersTableViewCell") as! FiltersTableViewCell
                         filtersCell.title.text = sectionData.title
                         filtersCell.title.setTextSpacingBy(value: -0.2)
@@ -84,10 +84,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                                 self?.redirectToFilters()
                             } else if filterData.tag == RestaurantFiltersType.deliveryTime.rawValue {
                                 // Delivery time
-                                 self?.redirectToSortingVC()
+//                                 self?.redirectToSortingVC()
                             } else {
                                 // Remove and saved filters
-                                self?.input.send(.removeAndSaveFilters(filter: filterData))
+                                self?.viewModel.removeAndSaveFilters(filter: filterData)
                             }
                         }
                         
@@ -188,7 +188,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
                         offersPage = offersPage + 1
                         print("-----> offersPage \(offersPage)")
                         
-                        self.input.send(.getBogoOffers(categoryId: self.categoryId, tag: .bogoOffers, pageNo: offersPage, categoryTypeIdsList: self.arraySelectedSubCategoryTypes))
+                        viewModel.getOffers(tag: .bogoOffers,pageNo: offersPage,categoryTypeIdsList: self.arraySelectedSubCategoryTypes)
                     }
                 }
             }

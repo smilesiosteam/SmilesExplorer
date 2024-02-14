@@ -13,7 +13,7 @@ import SmilesUtilities
 import SmilesSharedServices
 
 protocol WishListUseCaseProtocol {
-    func updateOfferWishlistStatus(operation: Int, offerId: String, baseUrl: String) -> Future<WishListUseCase.State, Never>
+    func updateOfferWishlistStatus(operation: Int, offerId: String) -> Future<WishListUseCase.State, Never>
 }
 
 class WishListUseCase: WishListUseCaseProtocol {
@@ -23,14 +23,14 @@ class WishListUseCase: WishListUseCaseProtocol {
     private let wishListViewModel = WishListViewModel()
     private var cancellables = Set<AnyCancellable>()
     
-    func updateOfferWishlistStatus(operation: Int, offerId: String, baseUrl: String) -> Future<WishListUseCase.State, Never> {
+    func updateOfferWishlistStatus(operation: Int, offerId: String) -> Future<WishListUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
             }
             wishListUseCaseInput = PassthroughSubject<WishListViewModel.Input, Never>()
             let output = wishListViewModel.transform(input: wishListUseCaseInput.eraseToAnyPublisher())
-            self.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: baseUrl))
+            self.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
             output.sink { event in
                 switch event {
                 case .updateWishlistStatusDidSucceed(response: let response):

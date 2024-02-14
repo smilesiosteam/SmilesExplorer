@@ -15,22 +15,6 @@ import SmilesBanners
 
 final class SmilesTouristHomeViewModel {
     
-    // MARK: - Input
-    public enum Input {
-        case emptyOffersList
-        case getRewardPoints
-        case getSections(categoryID: Int, type: String, explorerPackageType:ExplorerPackage,freeTicketAvailed:Bool,platinumLimitReached: Bool? = nil)
-        case getOffers(categoryId: Int, tag: SectionTypeTag, pageNo: Int)
-        
-        //MARK: - Filtered Offers
-        case getFiltersData(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?)
-        case removeAndSaveFilters(filtersList: [RestaurantRequestFilter]?, filtersSavedList: [RestaurantRequestWithNameFilter]?,filter: FiltersCollectionViewCellRevampModel)
-        case setFiltersSavedList(filtersSavedList: [RestaurantRequestWithNameFilter]?, filtersList: [RestaurantRequestFilter]?)
-        //MARK: - Favourite
-        case updateOfferWishlistStatus(operation: Int, offerId: String)
-        
-    }
-    
     // MARK: - Output
     public enum Output {
         case fetchSectionsDidSucceed(response: GetSectionsResponseModel)
@@ -45,20 +29,16 @@ final class SmilesTouristHomeViewModel {
         case fetchExclusiveOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchExclusiveOffersDidFail(error: Error)
         
-        case fetchExclusiveOffersStoriesDidSucceed(response: OffersCategoryResponseModel)
-        case fetchExclusiveOffersStoriesDidFail(error: Error)
-        
         case fetchTicketsDidSucceed(response: OffersCategoryResponseModel)
         case fetchTicketDidFail(error: Error)
-        
-        case fetchBogoDidSucceed(response: OffersCategoryResponseModel)
-        case fetchBogoDidFail(error: Error)
         
         case fetchBogoOffersDidSucceed(response: OffersCategoryResponseModel)
         case fetchBogoOffersDidFail(error: Error)
         
         case updateHeaderView
+        
         case updateWishlistStatusDidSucceed(response: WishListResponseModel)
+        case updateWishlistStatusDidFail(error: Error)
         
         case emptyOffersListDidSucceed
         
@@ -86,14 +66,14 @@ final class SmilesTouristHomeViewModel {
     public let rewardPointUseCase: RewardPointUseCaseProtocol
     public let wishListUseCase: WishListUseCaseProtocol
     public let subscriptionBannerUseCase: SubscriptionBannerUseCaseProtocol
-
+    
     public var sectionsUseCaseInput: PassthroughSubject<SectionsViewModel.Input, Never> = .init()
     public var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
     public var wishListUseCaseInput: PassthroughSubject<WishListViewModel.Input, Never> = .init()
     // MARK: - Delegate
     var navigationDelegate: SmilesExplorerHomeDelegate?
     private let sectionsViewModel = SectionsViewModel()
-
+    
     var personalizationEventSource:String?
     var categoryId:Int?
     var isGuestUser:Bool?
@@ -118,51 +98,12 @@ final class SmilesTouristHomeViewModel {
     }
 }
 
-//MARK: - EasyInsuranceViewModel Transformation
+//MARK: - UseCases Api Calling
 extension SmilesTouristHomeViewModel {
     
-    func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
-        output = PassthroughSubject<Output, Never>()
-        input.sink { [weak self] event in
-            switch event {
-            case .emptyOffersList:
-                self?.output.send(.emptyOffersListDidSucceed)
-                
-            case .updateOfferWishlistStatus(operation: let operation, offerId: let offerId):
-                self?.wishListUseCaseInput.send(.updateOfferWishlistStatus(operation: operation, offerId: offerId, baseUrl: AppCommonMethods.serviceBaseUrl))
-                
-            case .getSections(categoryID: let categoryID, type: let type, explorerPackageType: let explorerPackageType, freeTicketAvailed: let freeTicketAvailed, platinumLimitReached: let platinumLimitReached):
-                self?.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type, explorerPackageType:explorerPackageType,freeTicketAvailed:freeTicketAvailed,platinumLimitReached: platinumLimitReached))
-           
-            case .getOffers(categoryId: let categoryId, tag: let tag, pageNo: let pageNo):
-//                self?.getOffers(categoryId: categoryId, tag: tag, pageNo: pageNo)
-                break
-                
-            case .getFiltersData(filtersSavedList: let filtersSavedList, isFilterAllowed: let isFilterAllowed, isSortAllowed: let isSortAllowed):
-                self?.filtersUseCase.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed) { filters in
-                    self?.output.send(.fetchFiltersDataSuccess(filters: filters, selectedSortingTableViewCellModel: self?.selectedSortingTableViewCellModel))
-                }
-            
-            case .removeAndSaveFilters(filtersList: let filtersList, filtersSavedList: let filtersSavedList, filter: let filter):
-                self?.filtersUseCase.removeAndSaveFilters(filtersList: filtersList, filtersSavedList: filtersSavedList, filter: filter, completion: { filtersList, filtersSavedList in
-                    self?.output.send(.fetchAllSavedFiltersSuccess(filtersList: filtersList, filtersSavedList: filtersSavedList))
-                })
-                
-            case .setFiltersSavedList(filtersSavedList: let filtersSavedList, filtersList: let filtersList):
-                self?.filtersSavedList = filtersSavedList
-                self?.filtersList = filtersList
-                
-            case .getRewardPoints:
-                self?.rewardPointsUseCaseInput.send(.getRewardPoints(baseUrl: AppCommonMethods.serviceBaseUrl))
-                
-            }
-            
-        }.store(in: &cancellables)
-        return output.eraseToAnyPublisher()
-    }
-    
-    // MARK: - Get Offers
+    // MARK: - Get Offers API
     func getOffers(tag: SectionTypeTag, pageNo: Int = 1, categoryTypeIdsList: [String]? = nil){
+        
         self.offerUseCase.getOffers(categoryId: self.categoryId, tag: tag, pageNo: pageNo, categoryTypeIdsList: categoryTypeIdsList)
             .sink { [weak self] state in
                 guard let self = self else {return}
@@ -174,7 +115,7 @@ extension SmilesTouristHomeViewModel {
                     case .exclusiveDeals:
                         self.output.send(.fetchExclusiveOffersDidSucceed(response: response))
                     case .bogoOffers:
-                        self.output.send(.fetchBogoDidSucceed(response: response))
+                        self.output.send(.fetchBogoOffersDidSucceed(response: response))
                     }
                 case .offersDidFail(error: let error):
                     debugPrint(error.localizedString)
@@ -183,10 +124,9 @@ extension SmilesTouristHomeViewModel {
             .store(in: &cancellables)
     }
     
-    // MARK: - Get Offers With Filters
-    
+    // MARK: - Get Sections(UNSUBSCRIBED) API
     func getSections(){
-        self.sectionsUseCase.getSections(categoryID: 973, baseUrl: nil, isGuestUser: nil, type: "UNSUBSCRIBED", explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
+        self.sectionsUseCase.getSections(categoryID: self.categoryId, type: "UNSUBSCRIBED", explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
             .sink { [weak self] state in
                 guard self != nil else {
                     return
@@ -201,9 +141,29 @@ extension SmilesTouristHomeViewModel {
                 }
             }
             .store(in: &cancellables)
-            
+        
+    }
+    // MARK: - Get Sections(SUBSCRIBED) API
+    func getSections(type: String? = nil, explorerPackageType: ExplorerPackage? = nil, freeTicketAvailed:Bool? = nil, platinumLimiReached: Bool? = nil){
+        self.sectionsUseCase.getSections(categoryID: self.categoryId, type: type, explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed, platinumLimitReached: platinumLimiReached)
+            .sink { [weak self] state in
+                guard self != nil else {
+                    return
+                }
+                switch state {
+                case .sectionsDidSucceed(response: let response):
+                    print(response)
+                    self?.output.send(.fetchSectionsDidSucceed(response: response))
+                case .sectionsDidFail(error: let error):
+                    self?.output.send(.fetchTicketDidFail(error: error))
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellables)
     }
     
+    
+    // MARK: - Get SubscriptionBanner Details API
     func getSubscriptionBannerDetails(){
         self.subscriptionBannerUseCase.getSubscriptionBannerDetails()
             .sink { [weak self] state in
@@ -220,6 +180,109 @@ extension SmilesTouristHomeViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    // MARK: - UpdateWishlist API
+    func updateOfferWishlistStatus(operation: Int, offerId: String){
+        self.wishListUseCase.updateOfferWishlistStatus(operation: operation, offerId: offerId)
+            .sink { [weak self] state in
+                guard self != nil else {
+                    return
+                }
+                switch state {
+                case .updateWishlistStatusDidSucceed(response: let response):
+                    print(response)
+                    self?.output.send(.updateWishlistStatusDidSucceed(response: response))
+                case .updateWishlistDidFail(error: let error):
+                    self?.output.send(.updateWishlistStatusDidFail(error: error))
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    // MARK: - RewardPoint API
+    func getRewardPoint(){
+        self.rewardPointUseCase.getRewardPoints()
+            .sink { [weak self] state in
+                guard self != nil else {
+                    return
+                }
+                switch state {
+                case .fetchRewardPointsDidSucceed(response: let response, shouldLogout: let logout):
+                    print(response)
+                    self?.output.send(.fetchRewardPointsDidSucceed(response: response, shouldLogout: logout))
+                case .fetchRewardPointsDidFail(error: let error):
+                    self?.output.send(.fetchRewardPointsDidFail(error: error))
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    // MARK: - Get Filters Data
+    func getFiltersData(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?){
+        self.filtersUseCase.createFilters(filtersSavedList: filtersSavedList, isFilterAllowed: isFilterAllowed, isSortAllowed: isSortAllowed)
+            .sink { [weak self] state in
+                guard self != nil else {
+                    return
+                }
+                switch state {
+                case .filtersDidSucceed(response: let filters):
+                    print(filters)
+                    self?.output.send(.fetchFiltersDataSuccess(filters: filters, selectedSortingTableViewCellModel: self?.selectedSortingTableViewCellModel))
+                }
+            }
+            .store(in: &cancellables)
+    }
+    // MARK: - Empty Offers
+    func emptyOffers(){
+        self.filtersUseCase.emptyOffersList()
+            .sink { [weak self] state in
+                guard self != nil else {
+                    return
+                }
+                switch state {
+                case .emptyOffersListDidSucceed:
+                    self?.output.send(.emptyOffersListDidSucceed)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    // MARK: - Remove And Save Filters
+    func removeAndSaveFilters(filter: FiltersCollectionViewCellRevampModel) {
+        
+        if let filtersSavedList = filtersSavedList {
+            self.filtersSavedList = filtersSavedList
+        }
+        if let filtersList = filtersList {
+            self.filtersList = filtersList
+        }
+        // Remove all saved Filters
+        let isFilteredIndex = filtersSavedList?.firstIndex(where: { (restaurantRequestWithNameFilter) -> Bool in
+            filter.name.lowercased() == restaurantRequestWithNameFilter.filterName?.lowercased()
+        })
+        
+        if let isFilteredIndex = isFilteredIndex {
+            self.filtersSavedList?.remove(at: isFilteredIndex)
+        }
+        
+        // Remove Names for filters
+        let isFilteredNameIndex = filtersList?.firstIndex(where: { (restaurantRequestWithNameFilter) -> Bool in
+            filter.filterValue.lowercased() == restaurantRequestWithNameFilter.filterValue?.lowercased()
+        })
+        
+        if let isFilteredNameIndex = isFilteredNameIndex {
+            self.filtersList?.remove(at: isFilteredNameIndex)
+        }
+        
+        self.output.send(.fetchAllSavedFiltersSuccess(filtersList: self.filtersList ?? [], filtersSavedList: self.filtersSavedList ?? []))
+    }
+    // MARK: - Set Filters to be Removed
+    func setFiltersSavedList(filtersSavedList: [RestaurantRequestWithNameFilter]?, filtersList: [RestaurantRequestFilter]?) {
+        self.filtersSavedList = filtersSavedList
+        self.filtersList = filtersList
     }
     
     

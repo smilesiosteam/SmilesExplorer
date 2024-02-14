@@ -12,7 +12,7 @@ import SmilesUtilities
 import SmilesSharedServices
 
 protocol RewardPointUseCaseProtocol {
-    func getRewardPoints(baseUrl: String) -> Future<RewardPointUseCase.State, Never>
+    func getRewardPoints() -> Future<RewardPointUseCase.State, Never>
 }
 
 class RewardPointUseCase: RewardPointUseCaseProtocol {
@@ -21,7 +21,7 @@ class RewardPointUseCase: RewardPointUseCaseProtocol {
     private let rewardPointsViewModel = RewardPointsViewModel()
     private var cancellables = Set<AnyCancellable>()
     
-    func getRewardPoints(baseUrl: String) -> Future<RewardPointUseCase.State, Never> {
+    func getRewardPoints() -> Future<RewardPointUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
@@ -33,7 +33,7 @@ class RewardPointUseCase: RewardPointUseCaseProtocol {
                     switch event {
                     case .fetchRewardPointsDidSucceed(response: let response, shouldLogout: let logout):
                         debugPrint(response)
-                        promise(.success(.fetchRewardPointsDidSucceed(response: response)))
+                        promise(.success(.fetchRewardPointsDidSucceed(response: response, shouldLogout: logout ?? false)))
                     case .fetchRewardPointsDidFail(error: let error):
                         print(error.localizedDescription)
                         promise(.success(.fetchRewardPointsDidFail(error: error)))
@@ -46,7 +46,7 @@ class RewardPointUseCase: RewardPointUseCaseProtocol {
 }
 extension RewardPointUseCase {
     enum State {
-        case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel)
+        case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel,shouldLogout:Bool)
         case fetchRewardPointsDidFail(error: Error)
     }
 }

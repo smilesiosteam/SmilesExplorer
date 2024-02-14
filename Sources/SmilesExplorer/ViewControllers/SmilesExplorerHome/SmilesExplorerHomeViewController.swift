@@ -21,22 +21,11 @@ public class SmilesExplorerHomeViewController: UIViewController {
     
     // MARK: - PROPERTIES -
     var dataSource: SectionedTableViewDataSource?
-    private var  input: PassthroughSubject<SmilesTouristHomeViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-//    private lazy var viewModel: SmilesExplorerHomeViewModel = {
-//        return SmilesExplorerHomeViewModel()
-//    }()
-    
-    var viewModel: SmilesTouristHomeViewModel!
-    private let categoryId: Int? = nil
-    private let isGuestUser: Bool? = false
-    private var isUserSubscribed: Bool? = false
-    private var subscriptionType: ExplorerPackage? = .gold
-    private var voucherCode: String? = ""
-    
     var smilesExplorerSections: GetSectionsResponseModel?
     var sections = [SmilesExplorerSectionData]()
     
+    private var viewModel: SmilesTouristHomeViewModel!
     public var delegate:SmilesExplorerHomeDelegate? = nil
     var ticketsResponse: OffersCategoryResponseModel?
     var exclusiveDealsResponse: OffersCategoryResponseModel?
@@ -50,9 +39,6 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var categoryDetailsSections: GetSectionsResponseModel?
     var mutatingSectionDetails = [SectionDetailDO]()
     
-    // MARK: - ACTIONS -
-    
-    
     // MARK: - METHODS -
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +51,9 @@ public class SmilesExplorerHomeViewController: UIViewController {
         setUpNavigationBar()
     }
     
-    public init() {
+     init(viewModel:SmilesTouristHomeViewModel,delegate:SmilesExplorerHomeDelegate) {
+        self.viewModel = viewModel
+        self.delegate = delegate
         super.init(nibName: "SmilesExplorerHomeViewController", bundle: .module)
     }
     
@@ -74,16 +62,8 @@ public class SmilesExplorerHomeViewController: UIViewController {
     }
     
     private func setupViews() {
-        
-        
         setupTableView()
         bind(to: viewModel)
-        //        if let isUserSubscribed {
-//        getSections(isSubscribed: false)
-        //        } else {
-        //            self.input.send(.getRewardPoints)
-        //        }
-        
     }
     
     private func setupTableView() {
@@ -184,70 +164,46 @@ public class SmilesExplorerHomeViewController: UIViewController {
 extension SmilesExplorerHomeViewController {
     
     func bind(to viewModel: SmilesTouristHomeViewModel) {
-        input = PassthroughSubject<SmilesTouristHomeViewModel.Input, Never>()
-//        let output = viewModel.transform(input: input.eraseToAnyPublisher())
         let output = viewModel.output
         output
             .sink { [weak self] event in
                 switch event {
+                    
                 case .fetchSectionsDidSucceed(let sectionsResponse):
                     self?.configureSectionsData(with: sectionsResponse)
-                    
                 case .fetchSectionsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
                     self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
                     self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
-                case .fetchRewardPointsDidSucceed(response: let response, _):
-                    self?.isUserSubscribed = response.explorerSubscriptionStatus
-//                    self?.getSections(isSubscribed: response.explorerSubscriptionStatus ?? false)
-                    self?.subscriptionType = response.explorerPackageType
-                    self?.voucherCode = response.explorerVoucherCode
                     
+                case .fetchRewardPointsDidSucceed(response: let response, _):
+                    self?.viewModel.isUserSubscribed = response.explorerSubscriptionStatus
+                    self?.viewModel.subscriptionType = response.explorerPackageType
+                    self?.viewModel.voucherCode = response.explorerVoucherCode
                 case .fetchRewardPointsDidFail(error: let error):
                     debugPrint(error.localizedDescription)
                     SmilesLoader.dismiss(from: self?.view ?? UIView())
-                    
-                case .fetchFiltersDataSuccess(_, _):
-//                    self?.filtersData = filters
-//                    self?.selectedSortingTableViewCellModel = selectedSortingTableViewCellModel
-                    break
-                case .fetchAllSavedFiltersSuccess(_, _):
-//                    self?.savedFilters = filtersList
-//                    self?.filtersSavedList = savedFilters
-//                    self?.offers.removeAll()
-//                    self?.configureDataSource()
-//                    self?.configureFiltersData()
-                    break
+                 
                 case .fetchTicketsDidSucceed(let offers):
                     self?.configureOffers(with: offers, section: .tickets)
                 case .fetchTicketDidFail(_):
                     self?.configureHideSection(for: .tickets, dataSource: OffersCategoryResponseModel.self)
-                    break
-//                case .fetchSavedFiltersAfterSuccess(_):
-//                    self?.filtersSavedList = filtersSavedList
-//                    break
+                    
                 case .fetchExclusiveOffersDidSucceed(let offers):
                     self?.configureOffers(with: offers, section: .exclusiveDeals)
-                    
                 case .fetchExclusiveOffersDidFail( _):
                     self?.configureHideSection(for: .exclusiveDeals, dataSource: OffersCategoryResponseModel.self)
-                    break
                     
-                case .fetchBogoDidSucceed(let offers):
+                case .fetchBogoOffersDidSucceed(let offers):
                     self?.configureOffers(with: offers, section: .bogoOffers)
-                case .fetchBogoDidFail(_):
+                case .fetchBogoOffersDidFail(_):
                     self?.configureHideSection(for: .bogoOffers, dataSource: OffersCategoryResponseModel.self)
-//                case .fetchContentForSortingItems(_):
-                    //                    self?.sortingListRowModels = baseRowModels
-//                    break
-                case .fetchTopOffersDidSucceed(response: _):
-                    break
-                    
+
                 case .fetchSubscriptionBannerDetailsDidSucceed(let response):
                     self?.configureFooterSection(with: response)
-                    
                 case .fetchSubscriptionBannerDetailsDidFail(_):
                     self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
+                    
                 default: break
                 }
             }.store(in: &cancellables)
@@ -257,8 +213,6 @@ extension SmilesExplorerHomeViewController {
 
 // MARK: - SERVER CALLS -
 extension SmilesExplorerHomeViewController {
-    
-    
     
     private func homeAPICalls() {
         
@@ -279,7 +233,6 @@ extension SmilesExplorerHomeViewController {
                         let title = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })?.title
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(footer: footer, title: title, data: element.backgroundColor ?? "FFFFFF", isDummy: true, completion: nil)
                     }
-//                    self.input.send(.getSubscriptionBannerDetails)
                     viewModel.getSubscriptionBannerDetails()
                 case .tickets:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {

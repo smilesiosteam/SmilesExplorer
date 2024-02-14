@@ -12,7 +12,7 @@ import SmilesUtilities
 import SmilesSharedServices
 
 protocol SectionsUseCaseProtocol {
-    func getSections(categoryID: Int?, baseUrl: String?, isGuestUser: Bool?, type: String?, explorerPackageType: ExplorerPackage?, freeTicketAvailed: Bool?, platinumLimitReached: Bool?) -> Future<SectionsUseCase.State, Never>
+    func getSections(categoryID: Int?, type: String?, explorerPackageType: ExplorerPackage?, freeTicketAvailed: Bool?, platinumLimitReached: Bool?) -> Future<SectionsUseCase.State, Never>
 }
 
 class SectionsUseCase: SectionsUseCaseProtocol {
@@ -21,14 +21,14 @@ class SectionsUseCase: SectionsUseCaseProtocol {
     private let sectionsViewModel = SectionsViewModel()
     private var cancellables = Set<AnyCancellable>()
     
-    func getSections(categoryID: Int?, baseUrl: String? = nil, isGuestUser: Bool? = nil, type: String? = nil, explorerPackageType: ExplorerPackage? = nil, freeTicketAvailed: Bool? = nil, platinumLimitReached: Bool? = nil) -> Future<SectionsUseCase.State, Never> {
+    func getSections(categoryID: Int?, type: String? = nil, explorerPackageType: ExplorerPackage? = nil, freeTicketAvailed: Bool? = nil, platinumLimitReached: Bool? = nil) -> Future<SectionsUseCase.State, Never> {
         return Future<State, Never> { [weak self] promise in
             guard let self else {
                 return
             }
         sectionsUseCaseInput = PassthroughSubject<SectionsViewModel.Input, Never>()
         let output = sectionsViewModel.transform(input: sectionsUseCaseInput.eraseToAnyPublisher())
-        self.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type))
+        self.sectionsUseCaseInput.send(.getSections(categoryID: categoryID, baseUrl: AppCommonMethods.serviceBaseUrl, isGuestUser: AppCommonMethods.isGuestUser, type: type,explorerPackageType: explorerPackageType,freeTicketAvailed: freeTicketAvailed,platinumLimitReached: platinumLimitReached))
             output.sink { event in
                     switch event {
                     case .fetchSectionsDidSucceed(let sectionsResponse):
