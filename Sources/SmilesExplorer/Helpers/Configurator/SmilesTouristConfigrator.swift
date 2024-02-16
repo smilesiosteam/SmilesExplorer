@@ -12,6 +12,7 @@ import Combine
 import NetworkingLayer
 import SmilesUtilities
 import SmilesSharedServices
+import SmilesOffers
 
 public enum SmilesTouristConfigrator {
     
@@ -65,10 +66,11 @@ public enum SmilesTouristConfigrator {
     }
     
     //MARK: -  Smiles Tourist Offer Listing Controller
-    static func getExplorerListingVC(dependence: ExplorerOffersListingDependance) -> ExplorerOffersListingViewController {
+    static func getExplorerListingVC(dependence: ExplorerOffersListingDependance,delegate:SmilesExplorerHomeDelegate?) -> ExplorerOffersListingViewController {
         let offersUseCase = OffersListUseCase(services: service)
         let viewModel = ExplorerOffersListingViewModel(offerUseCase: offersUseCase)
         let viewController = ExplorerOffersListingViewController(viewModel: viewModel, dependencies: dependence)
+        viewController.delegate = delegate
         return viewController
     }
     

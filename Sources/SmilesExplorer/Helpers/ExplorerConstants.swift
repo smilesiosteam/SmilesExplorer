@@ -11,3 +11,8 @@ struct ExplorerConstants {
     static let explorerCategoryID = 973
     static let explorerFAQsID = 11
 }
+
+struct ExplorerSubscriptionTypeConstant {
+    static let subscribed = "SUBSCRIBED"
+    static let unsubscribed = "UNSUBSCRIBED"
+}

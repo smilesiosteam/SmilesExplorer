@@ -388,7 +388,7 @@ extension SmilesExplorerHomeViewController: HomeOffersDelegate {
         guard let response, let offersIndex = getSectionIndex(for: section),
                                 let sectionDetails = self.smilesExplorerSections?.sectionDetails?[offersIndex] else { return }
         let dependence = ExplorerOffersListingDependance(categoryId: viewModel.categoryId ?? ExplorerConstants.explorerCategoryID, title: sectionDetails.title ?? "", offersResponse: response, offersTag: SectionTypeTag(rawValue: section.rawValue) ?? .tickets)
-        SmilesExplorerRouter.shared.pushOffersListingVC(navVC: navigationController, dependence: dependence)
+        SmilesExplorerRouter.shared.pushOffersListingVC(navVC: navigationController, dependence: dependence,delegate: delegate)
     }
     
 }

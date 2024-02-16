@@ -42,13 +42,13 @@ final class SmilesTouristRepository: SmilesTouristServiceable {
     }
     
     // MARK: - ValidateGift Service
-    func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkingLayer.NetworkError> {
+    func smilesExplorerValidateGiftService(request: ValidateGiftCardRequestModel) -> AnyPublisher<ValidateGiftCardResponseModel, NetworkError> {
         let endPoint = SmilesTouristRequestBuilder.validateSmilesExplorerGift(request: request)
         let request = endPoint.createRequest(endPoint: .validateGift)
         return self.networkRequest.request(request)
     }
     // MARK: - Subscription Info Service
-    func getSubscriptionInfoService(request: SmilesExplorerSubscriptionInfoRequest) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkingLayer.NetworkError> {
+    func getSubscriptionInfoService(request: SmilesExplorerSubscriptionInfoRequest) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError> {
         let endPoint = SmilesTouristRequestBuilder.getSubscriptionInfo(request: request)
         let request = endPoint.createRequest(endPoint: .subscriptionInfo)
         return self.networkRequest.request(request)

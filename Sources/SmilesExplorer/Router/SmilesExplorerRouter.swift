@@ -43,12 +43,6 @@ public final class SmilesExplorerRouter: NSObject {
     }
     
     
-    func pushSmilesExplorerSortingVC(navVC: UINavigationController) {
-        let subVC = UIStoryboard(name: "SmilesExplorerSortingVC", bundle: .module).instantiateViewController(withIdentifier: "SmilesExplorerSortingVC")
-        navVC.present(subVC)
-    }
-    
-    
     func pushSmilesExplorerOffersFiltersVC(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate?) {
         let subVC = SmilesExplorerOffersFiltersVC()
         subVC.homeDelegate = delegate
@@ -82,9 +76,8 @@ public final class SmilesExplorerRouter: NSObject {
         }
     }
     
-    func pushOffersListingVC(navVC: UINavigationController?, dependence: ExplorerOffersListingDependance) {
-        
-        let vc = SmilesTouristConfigrator.getExplorerListingVC(dependence: dependence)
+    func pushOffersListingVC(navVC: UINavigationController?, dependence: ExplorerOffersListingDependance,delegate:SmilesExplorerHomeDelegate?) {
+        let vc = SmilesTouristConfigrator.getExplorerListingVC(dependence: dependence, delegate: delegate)
         navVC?.pushViewController(vc, animated: true)
         
     }
@@ -96,10 +89,6 @@ public final class SmilesExplorerRouter: NSObject {
         
     }
     
-//    public func pushSmilesExplorerSubscriptionUpgradeViewController(navVC: UINavigationController?, delegate:SmilesExplorerHomeDelegate, sourceScreen: SourceScreen = .success,transactionId: String?,onContinue:((String?) -> Void)?) {
-//        let smilesExplorerMembershipSuccess = SmilesExplorerSubscriptionUpgradeViewController(categoryId: 973, isGuestUser: false, isUserSubscribed: true, subscriptionType: .gold, voucherCode: "", delegate: delegate)
-//        navVC?.pushViewController(smilesExplorerMembershipSuccess, animated: true)
-//    }
 
 }
 

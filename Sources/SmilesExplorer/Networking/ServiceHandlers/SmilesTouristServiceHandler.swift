@@ -15,6 +15,7 @@ protocol SmilesTouristServiceHandlerProtocol {
     
     func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?,categoryTypeIdsList: [String]?) -> AnyPublisher<OffersCategoryResponseModel, NetworkError>
     func getSubscriptionInfo(_ packageType: String?) -> AnyPublisher<SmilesExplorerSubscriptionInfoResponse, NetworkError>
+    
     func getSubscriptionBannerDetails() -> AnyPublisher<ExplorerSubscriptionBannerResponse, NetworkError>
     
 }
@@ -31,7 +32,7 @@ final class SmilesTouristServiceHandler: SmilesTouristServiceHandlerProtocol {
     
     // MARK: - Functions
     func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?, categoryTypeIdsList: [String]?) -> AnyPublisher<
-        OffersCategoryResponseModel, NetworkingLayer.NetworkError> {
+        OffersCategoryResponseModel, NetworkError> {
             let request = ExplorerGetExclusiveOfferRequest(categoryId: categoryId, tag: tag?.rawValue, pageNo: pageNo,categoryTypeIdsList: categoryTypeIdsList)
             return repository.getOffers(request: request)
     }

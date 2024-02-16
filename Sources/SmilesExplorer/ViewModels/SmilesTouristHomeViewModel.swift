@@ -126,7 +126,7 @@ extension SmilesTouristHomeViewModel {
     
     // MARK: - Get Sections(UNSUBSCRIBED) API
     func getSections(){
-        self.sectionsUseCase.getSections(categoryID: self.categoryId, type: "UNSUBSCRIBED", explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
+        self.sectionsUseCase.getSections(categoryID: self.categoryId, type: ExplorerSubscriptionTypeConstant.unsubscribed, explorerPackageType: nil, freeTicketAvailed: nil, platinumLimitReached: nil)
             .sink { [weak self] state in
                 guard self != nil else {
                     return

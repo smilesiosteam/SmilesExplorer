@@ -197,3 +197,18 @@ extension TableViewDataSource where Model == OfferDO {
         }
     }
 }
+
+extension TableViewDataSource where Model == OfferDO {
+    static func makeForOffersDetail(offers: [OfferDO],
+                     reuseIdentifier: String = "OffersPopupTVC", isDummy: Bool = false) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: offers,
+            reuseIdentifier: reuseIdentifier,
+            data: "FFFFFF",
+            isDummy: isDummy
+        ) { (offer, cell, data, indexPath) in
+            guard let cell = cell as? OffersPopupTVC else { return }
+//            cell.setupData(offer: offer)
+        }
+    }
+}

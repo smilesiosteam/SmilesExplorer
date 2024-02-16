@@ -325,7 +325,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
 extension SmilesExplorerSubscriptionUpgradeViewController {
     // MARK: - Get Sections Api Calls
     private func getSections(isSubscribed: Bool, explorerPackageType: ExplorerPackage,freeTicketAvailed:Bool,platinumLimiReached: Bool? = nil) {
-        self.viewModel.getSections(type: isSubscribed ? "SUBSCRIBED" : "UNSUBSCRIBED", explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed, platinumLimiReached: platinumLimiReached)
+        self.viewModel.getSections(type: isSubscribed ? ExplorerSubscriptionTypeConstant.subscribed : ExplorerSubscriptionTypeConstant.unsubscribed, explorerPackageType: explorerPackageType, freeTicketAvailed: freeTicketAvailed, platinumLimiReached: platinumLimiReached)
     }
     
     // MARK: - HomeApi Calls

@@ -7,11 +7,30 @@
 
 import UIKit
 import SmilesUtilities
+import SmilesOffers
+import NetworkingLayer
+import SmilesLocationHandler
 
 extension ExplorerOffersListingViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let viewModel = OffersDetailViewModel(offerUseCase: OffersDetailUsecase(services: OffersDetailRespository(networkRequest: NetworkingLayerRequestable(requestTimeOut: 60), baseUrl: AppCommonMethods.serviceBaseUrl)))
+        if let offerId = dependencies.offersResponse.offers?[safe: indexPath.row]?.offerId {
+            viewModel.offerId = offerId
+        }
+        if let userInfo = LocationStateSaver.getLocationInfo() {
+            viewModel.longitude = userInfo.longitude
+            viewModel.latitude = userInfo.latitude
+        }
+        
+        let viewController = OfferDetailsPopupVC(viewModel: viewModel, delegate: delegate)
+        viewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+
+        present(viewController, animated: true)
+        
+        
+    
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
