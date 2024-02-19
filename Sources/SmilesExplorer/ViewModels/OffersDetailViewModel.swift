@@ -10,13 +10,10 @@ import SmilesOffers
 import Combine
 import NetworkingLayer
 
-final class OffersDetailViewModel {
+final public class OffersDetailViewModel {
     
     // MARK: - PROPERTIES -
     var offerId: String?
-    var longitude: String?
-    var latitude: String?
-    
     private let offerUseCase: OffersDetailUseCaseProtocol
     private var statusSubject = PassthroughSubject<State, Never>()
     var offersDetailPublisher: AnyPublisher<State, Never> {
@@ -35,7 +32,7 @@ final class OffersDetailViewModel {
 extension OffersDetailViewModel {
     
     func getOffers() {
-        self.offerUseCase.getOffersDetail(offerId: self.offerId, longitude: self.longitude, latitude: self.latitude)
+        self.offerUseCase.getOffersDetail(offerId: self.offerId)
             .sink { [weak self] state in
                 switch state {
                 case .fetchOffersDetailDidSucceed(let response):

@@ -16,7 +16,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OfferDetailsPopupVC" customModule="SmilesExplorer">
             <connections>
+                <outlet property="imgOfferDetail" destination="6T5-Xy-h93" id="7kp-KM-Q8q"/>
+                <outlet property="mainView" destination="yyo-b5-wiR" id="aKP-FR-f0b"/>
                 <outlet property="tableView" destination="7xC-M5-aeq" id="HNA-1G-hFx"/>
+                <outlet property="tableViewHeightConst" destination="zuW-G7-MCK" id="ftq-AF-bXO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -71,6 +74,9 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7xC-M5-aeq">
                             <rect key="frame" x="16" y="244" width="361" height="128"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="128" id="zuW-G7-MCK"/>
+                            </constraints>
                         </tableView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sheet_Bgimage" translatesAutoresizingMaskIntoConstraints="NO" id="6T5-Xy-h93">
                             <rect key="frame" x="16" y="55" width="361" height="165"/>
@@ -88,7 +94,6 @@
                     <constraints>
                         <constraint firstItem="7xC-M5-aeq" firstAttribute="top" secondItem="6T5-Xy-h93" secondAttribute="bottom" constant="24" id="3JN-86-UKf"/>
                         <constraint firstAttribute="trailing" secondItem="6T5-Xy-h93" secondAttribute="trailing" constant="16" id="6ao-98-IfE"/>
-                        <constraint firstAttribute="height" constant="480" id="A2m-IH-4B6"/>
                         <constraint firstAttribute="trailing" secondItem="7xC-M5-aeq" secondAttribute="trailing" constant="16" id="B1V-LT-Rq4"/>
                         <constraint firstItem="6T5-Xy-h93" firstAttribute="leading" secondItem="yyo-b5-wiR" secondAttribute="leading" constant="16" id="K2G-6w-rvi"/>
                         <constraint firstAttribute="trailing" secondItem="GXk-pG-to6" secondAttribute="trailing" constant="10" id="OuO-uz-ZBp"/>
@@ -100,6 +105,7 @@
                         <constraint firstItem="dmM-Nx-eWD" firstAttribute="top" secondItem="7xC-M5-aeq" secondAttribute="bottom" constant="22" id="eu8-Dx-Jf4"/>
                         <constraint firstItem="6T5-Xy-h93" firstAttribute="top" secondItem="GXk-pG-to6" secondAttribute="bottom" constant="8" id="hde-ib-sXP"/>
                         <constraint firstItem="trd-OI-o42" firstAttribute="top" secondItem="yyo-b5-wiR" secondAttribute="top" constant="8" id="jMd-mI-TCO"/>
+                        <constraint firstAttribute="height" secondItem="7xC-M5-aeq" secondAttribute="height" multiplier="3.75" id="vMY-W6-38O"/>
                         <constraint firstAttribute="bottom" secondItem="dmM-Nx-eWD" secondAttribute="bottom" constant="38" id="vdw-pE-rsV"/>
                         <constraint firstItem="dmM-Nx-eWD" firstAttribute="leading" secondItem="yyo-b5-wiR" secondAttribute="leading" constant="16" id="w1o-m2-NV4"/>
                     </constraints>
@@ -108,6 +114,11 @@
                             <real key="value" value="16"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="VoA-Uj-dwS"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

@@ -15,7 +15,7 @@ extension OfferDetailsPopupVC: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 30
     }
     
     //MARK: - HeaderView Setup -

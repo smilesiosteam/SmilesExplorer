@@ -14,12 +14,15 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - OUTLETS -
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var imgOfferDetail: UIImageView!
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var tableViewHeightConst: NSLayoutConstraint!
     // MARK: - PROPERTIES -
     private let viewModel:OffersDetailViewModel
     public var delegate:SmilesExplorerHomeDelegate? = nil
     var dataSource: SectionedTableViewDataSource?
     private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - VIEWLIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,19 +43,21 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - SETUPUI -
     private func setupUI(){
+        bindStatus()
         setupTableView()
     }
     
     // MARK: - SETUP TABLEVIEW -
     private func setupTableView() {
-        self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)
+        self.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        self.mainView.layer.cornerRadius = 16.0
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         tableView.sectionHeaderHeight = 0.0
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         tableView.sectionFooterHeight = 0.0
         tableView.separatorStyle = .none
         tableView.delegate = self
-        tableView.dataSource = self
+        self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
         tableView.registerCellFromNib(OffersPopupTVC.self, bundle: .module)
         
         
@@ -96,27 +101,13 @@ extension OfferDetailsPopupVC {
 extension OfferDetailsPopupVC {
     
     private func configureOffers(with response: OfferDetailsResponse) {
-        
-//        offers.append(contentsOf: response.offers ?? [])
-//        if !offers.isEmpty {
-//            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: offers)
-//            self.configureDataSource()
-//        }
+        print(response.whatYouGetList ?? [])
+        let tableHeight = CGFloat(response.whatYouGetList?.count ?? 0) * self.tableView.rowHeight
+        self.tableViewHeightConst.constant = tableHeight
+        self.imgOfferDetail.setImageWithUrlString(response.offerImageUrl ?? "")
+            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response)
+            self.configureDataSource()
     }
     
 }
 
-extension OfferDetailsPopupVC: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OffersPopupTVC", for: indexPath) as! OffersPopupTVC
-        return cell
-    }
-}

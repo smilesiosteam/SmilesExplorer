@@ -57,6 +57,13 @@ public final class SmilesExplorerRouter: NSObject {
         picTicketPopUp.paymentDelegate = delegate
         viewcontroller.present(picTicketPopUp)
     }
+    
+    public func showOfferDetailPopup(viewcontroller: UIViewController,viewModel: OffersDetailViewModel, delegate:SmilesExplorerHomeDelegate?)  {
+        let vc = OfferDetailsPopupVC(viewModel: viewModel, delegate: delegate)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.delegate = delegate
+        viewcontroller.present(vc)
+    }
 
     public func popToSmilesExplorerHomeViewController(navVC: UINavigationController) {
         for controller in navVC.viewControllers as Array {
