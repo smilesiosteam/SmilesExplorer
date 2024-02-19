@@ -1,6 +1,6 @@
 //
 //  FAQsViewController.swift
-//  
+//
 //
 //  Created by Habib Rehman on 12/02/2024.
 //
@@ -31,7 +31,7 @@ final class FAQsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: "FAQsViewController", bundle: .module)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,7 +92,7 @@ final class FAQsViewController: UIViewController {
         }
         viewModel.getFaqs()
     }
-
+    
 }
 
 // MARK: - DATA BINDING EXTENSION
@@ -114,8 +114,8 @@ extension FAQsViewController {
 extension FAQsViewController {
     // MARK: - configure FAQsDetails
     private func configureFAQsDetails(with response: FAQsDetailsResponse) {
-            dataSource?.dataSources?[0] = TableViewDataSource.make(forFAQs: response.faqsDetails ?? [], data: "#FFFFFF", isDummy: false)
-            self.configureDataSource()
+        dataSource?.dataSources?[0] = TableViewDataSource.make(forFAQs: response.faqsDetails ?? [], data: "#FFFFFF", isDummy: false)
+        self.configureDataSource()
     }
     
 }
