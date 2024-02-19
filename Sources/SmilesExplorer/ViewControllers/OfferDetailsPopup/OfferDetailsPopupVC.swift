@@ -25,19 +25,20 @@ class OfferDetailsPopupVC: UIViewController {
     public var delegate:SmilesExplorerHomeDelegate? = nil
     public var imageURL: String?
     var dataSource: SectionedTableViewDataSource?
-    var response: OfferDetailsResponse?
+    lazy var response: OfferDetailsResponse? = nil
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - VIEWLIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
+        response = nil
         setupUI()
         self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
         if let response = OfferDetailsResponse.fromModuleFile() {
-            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response,isDummy: true)
+            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: true)
+            self.response = response
             self.configureDataSource()
         }
-        configureDataSource()
         showHide(isDummy: true, view: self.imgOfferDetail)
         self.viewModel.getOffers()
         
@@ -133,7 +134,7 @@ extension OfferDetailsPopupVC {
             self.tableViewHeightConst.constant = UIScreen.main.bounds.height-tableHeight+60
         }
         self.imgOfferDetail.setImageWithUrlString(self.imageURL ?? "")
-        self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response)
+        self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response,isDummy: false)
         self.showHide(isDummy: false, view: imgOfferDetail)
         if self.imgOfferDetail.image == nil {
             self.imgHeightConst.constant = 0

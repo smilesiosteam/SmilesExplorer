@@ -155,7 +155,6 @@ extension TableViewDataSource where Model == OfferDO {
             cell.configureCell(with: offer)
             cell.offerCellType = offerCellType
             cell.selectionStyle = .none
-            //            cell.setBackGroundColor(color: UIColor(hexString: data))
             cell.favoriteCallback = { isFavorite, offerId in
                 completion?(isFavorite, offerId, indexPath)
             }

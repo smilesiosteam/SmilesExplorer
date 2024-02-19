@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Habib Rehman on 15/02/2024.
-//
+//sectionIdentifier
 
 import Foundation
 import UIKit
@@ -12,9 +12,10 @@ import SmilesFontsManager
 class OffersPopupHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Title Label
-    let titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.fontTextStyle = .smilesHeadline2
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

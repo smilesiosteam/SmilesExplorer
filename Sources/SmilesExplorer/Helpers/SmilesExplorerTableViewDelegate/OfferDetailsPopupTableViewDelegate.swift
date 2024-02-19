@@ -18,14 +18,14 @@ extension OfferDetailsPopupVC: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.dataSource?.tableView(tableView, numberOfRowsInSection: indexPath.section) == 0 {
-            return 0
-        }
         return 30
     }
     
     //MARK: - HeaderView Setup -
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            return nil
+        }
         if let dataSource = self.response {
             let headerView = OffersPopupHeaderView(reuseIdentifier: "OffersPopupHeaderView")
             headerView.setTitle(dataSource.offerTitle ?? "")
@@ -36,6 +36,9 @@ extension OfferDetailsPopupVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            return 0
+        }
         return 50
     }
     
