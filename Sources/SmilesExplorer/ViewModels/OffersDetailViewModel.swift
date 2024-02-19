@@ -14,6 +14,7 @@ final public class OffersDetailViewModel {
     
     // MARK: - PROPERTIES -
     var offerId: String?
+    var imageURL: String?
     private let offerUseCase: OffersDetailUseCaseProtocol
     private var statusSubject = PassthroughSubject<State, Never>()
     var offersDetailPublisher: AnyPublisher<State, Never> {

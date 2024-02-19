@@ -19,6 +19,10 @@ extension ExplorerOffersListingViewController: UITableViewDelegate {
         if let offerId = dependencies.offersResponse.offers?[safe: indexPath.row]?.offerId {
             viewModel.offerId = offerId
         }
+        if let imageURL = dependencies.offersResponse.offers?[safe: indexPath.row]?.imageURL {
+            viewModel.imageURL = imageURL
+        }
+        
         SmilesExplorerRouter.shared.showOfferDetailPopup(viewcontroller: self, viewModel: viewModel, delegate:delegate)
     
     }

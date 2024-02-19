@@ -7,6 +7,9 @@
 
 import UIKit
 import Foundation
+import SmilesUtilities
+import SmilesOffers
+
 
 extension OfferDetailsPopupVC: UITableViewDelegate {
     
@@ -15,26 +18,46 @@ extension OfferDetailsPopupVC: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.dataSource?.tableView(tableView, numberOfRowsInSection: indexPath.section) == 0 {
+            return 0
+        }
         return 30
     }
     
     //MARK: - HeaderView Setup -
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = OffersPopupHeaderView(reuseIdentifier: "OffersPopupHeaderView")
-            headerView.setTitle("At the Top")
+        if let dataSource = self.response {
+            let headerView = OffersPopupHeaderView(reuseIdentifier: "OffersPopupHeaderView")
+            headerView.setTitle(dataSource.offerTitle ?? "")
+            configureHeaderForShimmer(section: section, headerView: headerView)
             return headerView
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
+        return 50
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
             return UITableView.automaticDimension
-        }else{
-            return 0
-        }
     }
     
+    
+}
+
+
+extension OfferDetailsPopupVC {
+    func configureHeaderForShimmer(section: Int, headerView: UIView) {
+        guard let dataSource = self.dataSource?.dataSources?[0] as? TableViewDataSource<String> else {
+            return
+        }
+        if dataSource.isDummy {
+            headerView.enableSkeleton()
+            headerView.showAnimatedGradientSkeleton()
+        } else {
+            headerView.hideSkeleton()
+        }
+    }
+
 }

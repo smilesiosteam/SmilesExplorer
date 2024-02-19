@@ -62,6 +62,7 @@ public final class SmilesExplorerRouter: NSObject {
         let vc = OfferDetailsPopupVC(viewModel: viewModel, delegate: delegate)
         vc.modalPresentationStyle = .overFullScreen
         vc.delegate = delegate
+        vc.imageURL = viewModel.imageURL
         viewcontroller.present(vc)
     }
 

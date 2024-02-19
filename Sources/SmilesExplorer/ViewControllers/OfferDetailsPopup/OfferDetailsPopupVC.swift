@@ -12,22 +12,44 @@ import SmilesOffers
 
 class OfferDetailsPopupVC: UIViewController {
     
+    
     // MARK: - OUTLETS -
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgOfferDetail: UIImageView!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tableViewHeightConst: NSLayoutConstraint!
+    @IBOutlet weak var imgHeightConst: NSLayoutConstraint!
+    
     // MARK: - PROPERTIES -
     private let viewModel:OffersDetailViewModel
     public var delegate:SmilesExplorerHomeDelegate? = nil
+    public var imageURL: String?
     var dataSource: SectionedTableViewDataSource?
+    var response: OfferDetailsResponse?
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - VIEWLIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.getOffers()
         setupUI()
+        self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
+        if let response = OfferDetailsResponse.fromModuleFile() {
+            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response,isDummy: true)
+            self.configureDataSource()
+        }
+        configureDataSource()
+        showHide(isDummy: true, view: self.imgOfferDetail)
+        self.viewModel.getOffers()
+        
+    }
+    // MARK: - Confgiure Shimmer For HeaderView
+    func showHide(isDummy: Bool,view: UIView) {
+        if isDummy {
+            view.enableSkeleton()
+            view.showAnimatedGradientSkeleton()
+        } else {
+            view.hideSkeleton()
+        }
     }
     
     // MARK: - INITIALIZER -
@@ -51,13 +73,14 @@ class OfferDetailsPopupVC: UIViewController {
     private func setupTableView() {
         self.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         self.mainView.layer.cornerRadius = 16.0
+        self.imgOfferDetail.layer.cornerRadius = 16.0
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         tableView.sectionHeaderHeight = 0.0
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         tableView.sectionFooterHeight = 0.0
         tableView.separatorStyle = .none
         tableView.delegate = self
-        self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
+        tableView.isScrollEnabled = false
         tableView.registerCellFromNib(OffersPopupTVC.self, bundle: .module)
         
         
@@ -89,6 +112,7 @@ extension OfferDetailsPopupVC {
             switch state {
             case .fetchOffersDetailDidSucceed(response: let response):
                 self?.configureOffers(with: response)
+                self?.response = response
             case .fetchOffersDetailDidFail(error: let error):
                 debugPrint(error)
             }
@@ -102,11 +126,19 @@ extension OfferDetailsPopupVC {
     
     private func configureOffers(with response: OfferDetailsResponse) {
         print(response.whatYouGetList ?? [])
-        let tableHeight = CGFloat(response.whatYouGetList?.count ?? 0) * self.tableView.rowHeight
-        self.tableViewHeightConst.constant = tableHeight
-        self.imgOfferDetail.setImageWithUrlString(response.offerImageUrl ?? "")
-            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response)
-            self.configureDataSource()
+        let tableHeight = CGFloat(response.whatYouGetList?.count ?? 0) * 30.0
+        if tableHeight < UIScreen.main.bounds.height-tableHeight+60 {
+            self.tableViewHeightConst.constant = tableHeight+60
+        }else{
+            self.tableViewHeightConst.constant = UIScreen.main.bounds.height-tableHeight+60
+        }
+        self.imgOfferDetail.setImageWithUrlString(self.imageURL ?? "")
+        self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response)
+        self.showHide(isDummy: false, view: imgOfferDetail)
+        if self.imgOfferDetail.image == nil {
+            self.imgHeightConst.constant = 0
+        }
+        self.configureDataSource()
     }
     
 }

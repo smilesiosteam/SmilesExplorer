@@ -8,7 +8,7 @@
 import Foundation
 import SmilesOffers
 
-struct ExplorerOffersListingDependance {
+public struct ExplorerOffersListingDependance {
     let categoryId: Int
     let title: String
     var offersResponse: OffersCategoryResponseModel

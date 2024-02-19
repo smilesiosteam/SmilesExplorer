@@ -23,6 +23,15 @@ class OffersPopupTVC: UITableViewCell {
         
     }
     
+    func showHide(isDummy: Bool) {
+        if isDummy {
+            self.contentView.enableSkeleton()
+            self.contentView.showAnimatedGradientSkeleton()
+        } else {
+            self.contentView.hideSkeleton()
+        }
+    }
+    
     // MARK: - Configuration
     func configure(title: String) {
         titleLabel.text = title

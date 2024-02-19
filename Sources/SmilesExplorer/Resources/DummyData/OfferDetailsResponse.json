@@ -1,0 +1,143 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Habib Rehman on 19/02/2024.
+  
+*/
+
+{
+ "dynamicDenomination" : false,
+ "estimatedSavings" : 0.10000000000000001,
+ "categoryId" : 973,
+ "whatYouGet" : "What you get",
+ "pointsValue" : 3750,
+ "eligibleFlag" : "Y",
+ "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/COUPONS\/BBST.jpg?1708343917688",
+ "minVoucherDenomination" : {
+   "denominationAED" : 0
+ },
+ "dirhamValue" : 35,
+ "originalDirhamValue" : 0,
+ "voucherSharingFlag" : true,
+ "voucherPromoText" : "Offer Details Mobile English",
+ "offerPromotionText" : "Additional T&C",
+ "description" : "brand description",
+ "extTransactionId" : "3257750785087",
+ "offerTitle" : "IMG World of Attractions",
+ "isBirthdayOffer" : false,
+ "cinemaOfferFlag" : false,
+ "lifestyleSubscriberFlag" : false,
+ "paymentMethods" : [
+   {
+     "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullPoints.png",
+     "paymentMethodId" : "1",
+     "title" : "Smiles points",
+     "titleAr" : "نقاط الابتسامات",
+     "paymentType" : "ONLINE",
+     "paymentTypeText" : "Online Payment",
+     "description" : "fullPoints"
+   },
+   {
+     "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullCreditCard.png",
+     "paymentMethodId" : "2",
+     "title" : "Credit\/Debit Card",
+     "titleAr" : "بطاقة الائتمان \/ الخصم",
+     "paymentType" : "ONLINE",
+     "paymentTypeText" : "Online Payment",
+     "description" : "fullCreditCard"
+   },
+   {
+     "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/applePay.png",
+     "paymentMethodId" : "8",
+     "title" : "Apple Pay",
+     "titleAr" : "Apple Pay",
+     "paymentType" : "OTHERS",
+     "paymentTypeText" : "Other Options",
+     "description" : "applePay"
+   }
+ ],
+ "maximumQuantity" : 2,
+ "termsAndConditions" : "T & C",
+ "relatedOffers" : [
+   {
+     "categoryId" : "10",
+     "offerDescription" : "uat_test1",
+     "dirhamValue" : "0",
+     "categoryOrder" : 2,
+     "offerTypeAr" : "خصم",
+     "recommendationModel" : "offer",
+     "offerTitle" : "uat_test1",
+     "partnerName" : "1847 Grooming for Men",
+     "voucherPromoText" : "t",
+     "imageURL" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_uat_test1_3655.jpg?1708343917722",
+     "offerId" : "OF_uat_test1_3655",
+     "offerType" : "Discount",
+     "isWishlisted" : false,
+     "recommendationModelEvent" : "RELATED_OFFERS",
+     "pointsValue" : "0"
+   },
+   {
+     "categoryId" : "973",
+     "offerDescription" : "test",
+     "dirhamValue" : "0",
+     "categoryOrder" : 2,
+     "offerTypeAr" : "خصم",
+     "recommendationModel" : "offer",
+     "offerTitle" : "test",
+     "partnerName" : "Noon.com",
+     "imageURL" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_0F_TEST_EXP_3905.jpg?1708343917722",
+     "offerId" : "OF_0F_TEST_EXP_3905",
+     "offerType" : "Discount",
+     "isWishlisted" : false,
+     "recommendationModelEvent" : "RELATED_OFFERS",
+     "pointsValue" : "0"
+   },
+   {
+     "categoryId" : "973",
+     "offerDescription" : "Free Ticket",
+     "dirhamValue" : "2",
+     "categoryOrder" : 2,
+     "offerTypeAr" : "خصم",
+     "recommendationModel" : "offer",
+     "offerTitle" : "Free Ticket Discover Ticket",
+     "partnerName" : "Dhow Cruise Marina",
+     "voucherPromoText" : "Free Ticket",
+     "imageURL" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_D_DCRM_FT_1_3906.jpg?1708343917722",
+     "offerId" : "OF_D_DCRM_FT_1_3906",
+     "offerType" : "Discount",
+     "isWishlisted" : false,
+     "recommendationModelEvent" : "RELATED_OFFERS",
+     "pointsValue" : "250"
+   }
+ ],
+ "isAccountDailyLimit" : true,
+ "offerType" : "Discount",
+ "partnerName" : "Big Bus Tours (Abu Dhabi)",
+ "sharingBonus" : 0,
+ "isRedeemedOffer" : false,
+ "merchantLocation" : [
+   {
+     "locationName" : "Rayna Store",
+     "locationAddress" : "Rayna store location",
+     "locationLatitude" : 23.23,
+     "locationLongitude" : 56.560000000000002,
+     "locationPhoneNumber" : "+9711237676767"
+   }
+ ],
+ "isAccountTotalLimit" : true,
+ "originalPointsValue" : 0,
+ "isWishlisted" : false,
+ "partnerPointRate" : 0,
+ "offerId" : "OF_ExpFreeAttraction_3846",
+ "offerDescription" : "Offer Description",
+ "vatFactor" : 0,
+ "whatYouGetList" : [
+   "What you get"
+ ],
+ "showLocationFlag" : true,
+ "offerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_ExpFreeAttraction_3846.jpg?1708343917688",
+ "maxVoucherDenomination" : {
+   "denominationAED" : 0
+ }
+}
