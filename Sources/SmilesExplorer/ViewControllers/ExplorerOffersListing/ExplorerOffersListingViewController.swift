@@ -24,9 +24,7 @@ class ExplorerOffersListingViewController: UIViewController {
     var offersPage = 1
     private var cancellables = Set<AnyCancellable>()
     public var delegate: SmilesExplorerHomeDelegate? = nil
-    // MARK: - ACTIONS -
-    @IBAction func subscribePressed(_ sender: Any) {
-    }
+    
     
     // MARK: - INITIALIZERS -
     init(viewModel: ExplorerOffersListingViewModel, dependencies: ExplorerOffersListingDependance) {
@@ -84,9 +82,18 @@ class ExplorerOffersListingViewController: UIViewController {
         
     }
     
+    // MARK: - ACTIONS -
+
+    @IBAction func onClickSubscription(_ sender: Any) {
+        
+        SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self.navigationController, delegate: self.delegate)
+    }
+    
     @objc func onClickBack() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
 
     fileprivate func configureDataSource() {
         self.offersTableView.dataSource = self.dataSource

@@ -52,7 +52,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Subscribe now"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="subscribePressed:" destination="-1" eventType="touchUpInside" id="uSx-iD-ZGe"/>
+                        <action selector="onClickSubscription:" destination="-1" eventType="touchUpInside" id="JBD-Kn-osn"/>
                     </connections>
                 </button>
             </subviews>

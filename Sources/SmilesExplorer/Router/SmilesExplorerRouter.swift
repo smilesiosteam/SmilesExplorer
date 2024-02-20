@@ -86,6 +86,7 @@ public final class SmilesExplorerRouter: NSObject {
     public func showOfferDetailPopup(viewcontroller: UIViewController, dependence: OfferDO, delegate:SmilesExplorerHomeDelegate?)  {
         let vc = SmilesTouristConfigrator.showOffersDetailVC(dependence: dependence, delegate: delegate)
         vc.modalPresentationStyle = .overFullScreen
+        vc.navC = viewcontroller.navigationController
         viewcontroller.present(vc)
     }
     

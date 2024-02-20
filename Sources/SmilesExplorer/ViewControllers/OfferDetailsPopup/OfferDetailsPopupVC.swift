@@ -19,12 +19,14 @@ class OfferDetailsPopupVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tableViewHeightConst: NSLayoutConstraint!
     
+    @IBOutlet weak var panView: UIView!
     // MARK: - PROPERTIES -
     private let viewModel: OffersDetailViewModel
     private var delegate: SmilesExplorerHomeDelegate? = nil
     var dataSource: SectionedTableViewDataSource?
     lazy var response: OfferDetailsResponse? = nil
     private var cancellables = Set<AnyCancellable>()
+    var navC: UINavigationController?
     
     // MARK: - VIEWLIFECYCLE -
     override func viewDidLoad() {
@@ -64,6 +66,8 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - SETUPUI -
     private func setupUI(){
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        self.panView.addGestureRecognizer(panGesture)
         bindStatus()
         setupTableView()
     }
@@ -88,6 +92,9 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - ACTIONS -
     @IBAction func onClickActionSubscribeNow(_ sender: Any) {
+        self.dismiss {
+            SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self.navC, delegate: self.delegate)
+        }
         
     }
     
@@ -140,3 +147,30 @@ extension OfferDetailsPopupVC {
     
 }
 
+
+extension OfferDetailsPopupVC {
+    @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+          let translation = recognizer.translation(in: view)
+          let velocity = recognizer.velocity(in: view)
+          
+          switch recognizer.state {
+          case .changed:
+              if translation.y > 0 {
+                  // Move the view with the user's gesture
+                  view.frame.origin.y = translation.y
+              }
+          case .ended:
+              if translation.y > 100 || velocity.y > 500 {
+                  // Dismiss the view controller if the gesture is fast or the translation is significant
+                  dismiss(animated: true, completion: nil)
+              } else {
+                  // Return the view to its original position if the gesture is not enough to dismiss
+                  UIView.animate(withDuration: 0.3) {
+                      self.view.frame.origin.y = 0
+                  }
+              }
+          default:
+              break
+          }
+      }
+}
