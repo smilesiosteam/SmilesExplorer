@@ -52,7 +52,7 @@ extension OfferDetailsPopupVC: UITableViewDelegate {
 
 extension OfferDetailsPopupVC {
     func configureHeaderForShimmer(section: Int, headerView: UIView) {
-        guard let dataSource = self.dataSource?.dataSources?[0] as? TableViewDataSource<String> else {
+        guard let dataSource = self.dataSource?.dataSources?[section] as? TableViewDataSource<String> else {
             return
         }
         if dataSource.isDummy {

@@ -100,6 +100,7 @@ extension HomeOffersTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         
         if let data = collectionsData?[indexPath.row] {
             delegate?.showOfferDetails(offer: data)
+            
         }
         
     }

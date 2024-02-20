@@ -1,6 +1,6 @@
 //
 //  OfferDetailsPopupVC.swift
-//  
+//
 //
 //  Created by Habib Rehman on 15/02/2024.
 //
@@ -18,12 +18,10 @@ class OfferDetailsPopupVC: UIViewController {
     @IBOutlet weak var imgOfferDetail: UIImageView!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tableViewHeightConst: NSLayoutConstraint!
-    @IBOutlet weak var imgHeightConst: NSLayoutConstraint!
     
     // MARK: - PROPERTIES -
-    private let viewModel:OffersDetailViewModel
-    var delegate:SmilesExplorerHomeDelegate? = nil
-    public var imageURL: String?
+    private let viewModel: OffersDetailViewModel
+    private var delegate: SmilesExplorerHomeDelegate? = nil
     var dataSource: SectionedTableViewDataSource?
     lazy var response: OfferDetailsResponse? = nil
     private var cancellables = Set<AnyCancellable>()
@@ -35,8 +33,8 @@ class OfferDetailsPopupVC: UIViewController {
         setupUI()
         self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
         if let response = OfferDetailsResponse.fromModuleFile() {
-            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: true)
             self.response = response
+            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: true)
             self.configureDataSource()
         }
         showHide(isDummy: true, view: self.imgOfferDetail)
@@ -82,6 +80,7 @@ class OfferDetailsPopupVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.isScrollEnabled = false
+        tableView.allowsSelection = false
         tableView.registerCellFromNib(OffersPopupTVC.self, bundle: .module)
         
         
@@ -113,7 +112,6 @@ extension OfferDetailsPopupVC {
             switch state {
             case .fetchOffersDetailDidSucceed(response: let response):
                 self?.configureOffers(with: response)
-                self?.response = response
             case .fetchOffersDetailDidFail(error: let error):
                 debugPrint(error)
             }
@@ -124,21 +122,19 @@ extension OfferDetailsPopupVC {
 }
 // MARK: - OFFERS CONFIGURATIONS -
 extension OfferDetailsPopupVC {
+    //MARK: - Setting Dynamic Height For TableView
+    fileprivate func setDynamicHeightForTableView(response:OfferDetailsResponse) {
+        let minHeight = min(view.bounds.height - view.safeAreaInsets.top - 360, (CGFloat(response.whatYouGetList?.count ?? 0) * 30.0)+60)
+        tableViewHeightConst.constant = minHeight
+        tableView.isScrollEnabled = minHeight > (view.bounds.height - 360)
+    }
     
     private func configureOffers(with response: OfferDetailsResponse) {
-        print(response.whatYouGetList ?? [])
-        let tableHeight = CGFloat(response.whatYouGetList?.count ?? 0) * 30.0
-        if tableHeight < UIScreen.main.bounds.height-tableHeight+60 {
-            self.tableViewHeightConst.constant = tableHeight+60
-        }else{
-            self.tableViewHeightConst.constant = UIScreen.main.bounds.height-tableHeight+60
-        }
-        self.imgOfferDetail.setImageWithUrlString(self.imageURL ?? "")
+        self.response = response
+        setDynamicHeightForTableView(response:response)
+        self.imgOfferDetail.setImageWithUrlString(viewModel.imageURL ?? "")
         self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response,isDummy: false)
         self.showHide(isDummy: false, view: imgOfferDetail)
-        if self.imgOfferDetail.image == nil {
-            self.imgHeightConst.constant = 0
-        }
         self.configureDataSource()
     }
     

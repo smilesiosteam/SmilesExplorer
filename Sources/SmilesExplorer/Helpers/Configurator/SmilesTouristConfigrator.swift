@@ -74,6 +74,13 @@ public enum SmilesTouristConfigrator {
         return viewController
     }
     
+    static func showOffersDetailVC(dependence: OfferDO, delegate:SmilesExplorerHomeDelegate?) -> OfferDetailsPopupVC {
+        let offersUseCase = OffersDetailUsecase()
+        let viewModel = OffersDetailViewModel(offerUseCase: offersUseCase,offerId: dependence.offerId ?? "", imageURL: dependence.imageURL ?? "")
+        let viewController = OfferDetailsPopupVC(viewModel: viewModel, delegate: delegate)
+        return viewController
+    }
+    
     //MARK: -  Smiles Tourist Service Handler
     static func getFAQsVC() -> FAQsViewController {
         

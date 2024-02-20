@@ -13,8 +13,9 @@ import NetworkingLayer
 final public class OffersDetailViewModel {
     
     // MARK: - PROPERTIES -
-    var offerId: String?
-    var imageURL: String?
+    let offerId: String?
+    let imageURL: String?
+    
     private let offerUseCase: OffersDetailUseCaseProtocol
     private var statusSubject = PassthroughSubject<State, Never>()
     var offersDetailPublisher: AnyPublisher<State, Never> {
@@ -23,8 +24,10 @@ final public class OffersDetailViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - METHODS -
-    init(offerUseCase: OffersDetailUseCaseProtocol) {
+    init(offerUseCase: OffersDetailUseCaseProtocol,offerId:String,imageURL:String) {
         self.offerUseCase = offerUseCase
+        self.offerId = offerId
+        self.imageURL = imageURL
     }
     
 }

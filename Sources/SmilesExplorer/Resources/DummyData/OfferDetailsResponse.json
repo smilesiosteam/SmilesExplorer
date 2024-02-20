@@ -74,9 +74,7 @@
  "offerDescription" : "Offer Description",
  "vatFactor" : 0,
  "whatYouGetList" : [
-   "What you get",
-   "What you get",
-   "What you get"
+   "--------","-------","-------"
  ],
  "showLocationFlag" : true,
  "offerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_ExpFreeAttraction_3846.jpg?1708343917688",

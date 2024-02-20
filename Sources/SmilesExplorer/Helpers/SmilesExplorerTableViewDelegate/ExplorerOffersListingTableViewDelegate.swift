@@ -14,17 +14,10 @@ import SmilesLocationHandler
 extension ExplorerOffersListingViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let offerUseCase = OffersDetailUsecase()
-        let viewModel = OffersDetailViewModel(offerUseCase: offerUseCase)
-        if let offerId = dependencies.offersResponse.offers?[safe: indexPath.row]?.offerId {
-            viewModel.offerId = offerId
-        }
-        if let imageURL = dependencies.offersResponse.offers?[safe: indexPath.row]?.imageURL {
-            viewModel.imageURL = imageURL
-        }
         
-        SmilesExplorerRouter.shared.showOfferDetailPopup(viewcontroller: self, viewModel: viewModel, delegate:delegate)
-    
+        if let offer = dependencies.offersResponse.offers?[safe: indexPath.row] {
+            SmilesExplorerRouter.shared.showOfferDetailPopup(viewcontroller: self, dependence: offer, delegate: delegate)
+        }
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

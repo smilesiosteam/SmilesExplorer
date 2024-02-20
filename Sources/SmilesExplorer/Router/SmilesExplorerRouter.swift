@@ -58,13 +58,6 @@ public final class SmilesExplorerRouter: NSObject {
         viewcontroller.present(picTicketPopUp)
     }
     
-    public func showOfferDetailPopup(viewcontroller: UIViewController,viewModel: OffersDetailViewModel, delegate:SmilesExplorerHomeDelegate?)  {
-        let vc = OfferDetailsPopupVC(viewModel: viewModel, delegate: delegate)
-        vc.modalPresentationStyle = .overFullScreen
-        vc.delegate = delegate
-        vc.imageURL = viewModel.imageURL
-        viewcontroller.present(vc)
-    }
 
     public func popToSmilesExplorerHomeViewController(navVC: UINavigationController) {
         for controller in navVC.viewControllers as Array {
@@ -84,10 +77,16 @@ public final class SmilesExplorerRouter: NSObject {
         }
     }
     
-    func pushOffersListingVC(navVC: UINavigationController?, dependence: ExplorerOffersListingDependance,delegate:SmilesExplorerHomeDelegate?) {
+    func pushOffersListingVC(navVC: UINavigationController?, dependence: ExplorerOffersListingDependance, delegate:SmilesExplorerHomeDelegate?) {
         let vc = SmilesTouristConfigrator.getExplorerListingVC(dependence: dependence, delegate: delegate)
         navVC?.pushViewController(vc, animated: true)
         
+    }
+    //MARK: - Show OffersDetail
+    public func showOfferDetailPopup(viewcontroller: UIViewController, dependence: OfferDO, delegate:SmilesExplorerHomeDelegate?)  {
+        let vc = SmilesTouristConfigrator.showOffersDetailVC(dependence: dependence, delegate: delegate)
+        vc.modalPresentationStyle = .overFullScreen
+        viewcontroller.present(vc)
     }
     
     func pushFAQsVC(navVC: UINavigationController?) {

@@ -26,7 +26,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var sections = [SmilesExplorerSectionData]()
     
     private var viewModel: SmilesTouristHomeViewModel!
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    public var delegate: SmilesExplorerHomeDelegate? = nil
     var ticketsResponse: OffersCategoryResponseModel?
     var exclusiveDealsResponse: OffersCategoryResponseModel?
     var bogoOffersResponse: OffersCategoryResponseModel?
@@ -371,7 +371,7 @@ extension SmilesExplorerHomeViewController: AppHeaderDelegate {
 extension SmilesExplorerHomeViewController: HomeOffersDelegate {
     
     func showOfferDetails(offer: OfferDO) {
-        
+        SmilesExplorerRouter.shared.showOfferDetailPopup(viewcontroller: self, dependence: offer, delegate: delegate)
     }
     
     func showOffersList(section: SmilesExplorerSectionIdentifier) {
