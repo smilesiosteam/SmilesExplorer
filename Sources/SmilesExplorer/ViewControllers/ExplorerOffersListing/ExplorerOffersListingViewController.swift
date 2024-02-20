@@ -23,7 +23,7 @@ class ExplorerOffersListingViewController: UIViewController {
     var offers = [OfferDO]()
     var offersPage = 1
     private var cancellables = Set<AnyCancellable>()
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    public var delegate: SmilesExplorerHomeDelegate? = nil
     // MARK: - ACTIONS -
     @IBAction func subscribePressed(_ sender: Any) {
     }

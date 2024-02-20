@@ -22,7 +22,7 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - PROPERTIES -
     private let viewModel:OffersDetailViewModel
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    var delegate:SmilesExplorerHomeDelegate? = nil
     public var imageURL: String?
     var dataSource: SectionedTableViewDataSource?
     lazy var response: OfferDetailsResponse? = nil

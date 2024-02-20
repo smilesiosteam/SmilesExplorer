@@ -12,7 +12,7 @@ import SmilesFontsManager
 class OffersPopupHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Title Label
-    lazy var titleLabel: UILabel = {
+    lazy private var titleLabel: UILabel = {
         let label = UILabel()
         label.fontTextStyle = .smilesHeadline2
         label.numberOfLines = 0
