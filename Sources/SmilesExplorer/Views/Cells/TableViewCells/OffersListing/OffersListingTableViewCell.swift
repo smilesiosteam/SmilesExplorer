@@ -1,6 +1,6 @@
 //
 //  OffersListingTableViewCell.swift
-//  
+//
 //
 //  Created by Abdul Rehman Amjad on 08/02/2024.
 //
@@ -9,7 +9,7 @@ import UIKit
 import SmilesOffers
 
 class OffersListingTableViewCell: UITableViewCell {
-
+    
     // MARK: - OUTLETS -
     @IBOutlet weak var offerImageView: UIImageView!
     @IBOutlet weak var partnerImageView: UIImageView!
@@ -18,19 +18,13 @@ class OffersListingTableViewCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    
-    // MARK: - PROPERTIES -
-    
-    
-    // MARK: - ACTIONS -
-    
-    
     // MARK: - METHODS -
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViews()
     }
     
+    //MARK: - Setup UI
     private func setupViews() {
         
         offerImageView.layer.cornerRadius = 12
@@ -41,12 +35,13 @@ class OffersListingTableViewCell: UITableViewCell {
         
     }
     
+    //MARK: - Data Configuration
     func setupData(offer: OfferDO) {
         
-        titleLabel.text = offer.offerTitle
-        subTitleLabel.text = offer.offerDescription
-        offerImageView.setImageWithUrlString(offer.imageURL ?? "")
-        partnerImageView.setImageWithUrlString(offer.partnerImage ?? "")
+        self.titleLabel.text = offer.offerTitle
+        self.subTitleLabel.text = offer.offerDescription
+        self.offerImageView.setImageWithUrlString(offer.imageURL ?? "")
+        self.partnerImageView.setImageWithUrlString(offer.partnerImage ?? "")
         
         if let price = offer.dirhamValue, (price != "0" && price != "0.00") {
             typeLabel.isHidden = true

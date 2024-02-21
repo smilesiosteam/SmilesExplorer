@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Habib Rehman on 14/09/2023.
 //
@@ -11,7 +11,6 @@ import Foundation
 extension SmilesExplorerOffersFiltersVC: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
     }
     
@@ -25,23 +24,17 @@ extension SmilesExplorerOffersFiltersVC: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-
         return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
     }
     
-    
-    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
         let footerView = UIView()
         return footerView
-        
     }
-
-        @objc func buttonTapped() {
-            // Handle button tap action here
-        }
+    
+    @objc func buttonTapped() {
+        // Handle button tap action here
+    }
     
     
     public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {

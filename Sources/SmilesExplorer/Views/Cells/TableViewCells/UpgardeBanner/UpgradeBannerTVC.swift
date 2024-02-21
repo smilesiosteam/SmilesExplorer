@@ -1,6 +1,6 @@
 //
 //  UpgardeBannerTVC.swift
-//  
+//
 //
 //  Created by Habib Rehman on 06/09/2023.
 //
@@ -11,9 +11,8 @@ import SmilesSharedServices
 
 
 class UpgradeBannerTVC: UITableViewCell {
-
-    @IBOutlet weak var imgBanner: UIImageView!
     
+    @IBOutlet weak var imgBanner: UIImageView!
     
     var onClickUpgrade: (() -> ())?
     
@@ -29,16 +28,13 @@ class UpgradeBannerTVC: UITableViewCell {
         self.imgBanner.backgroundColor = .appRevampPurpleMainColor
         self.imgBanner.contentMode = .scaleAspectFill
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
-    
-    
     func configureBanner(objSection:SectionDetailDO){
-        
         self.imgBanner.sd_setImage(with: URL(string: objSection.backgroundImage.asStringOrEmpty())) { image, _, _, _ in
             self.imgBanner.image = image
         }

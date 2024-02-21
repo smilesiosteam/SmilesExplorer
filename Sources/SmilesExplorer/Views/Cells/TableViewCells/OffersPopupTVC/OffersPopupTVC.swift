@@ -20,7 +20,6 @@ class OffersPopupTVC: UITableViewCell {
     // MARK: - Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     // MARK: - Configuration

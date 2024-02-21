@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Habib Rehman on 12/02/2024.
 //
@@ -16,7 +16,7 @@ protocol RewardPointUseCaseProtocol {
 }
 
 class RewardPointUseCase: RewardPointUseCaseProtocol {
-
+    
     public var rewardPointsUseCaseInput: PassthroughSubject<RewardPointsViewModel.Input, Never> = .init()
     private let rewardPointsViewModel = RewardPointsViewModel()
     private var cancellables = Set<AnyCancellable>()
@@ -27,20 +27,20 @@ class RewardPointUseCase: RewardPointUseCaseProtocol {
                 return
             }
             rewardPointsUseCaseInput = PassthroughSubject<RewardPointsViewModel.Input, Never>()
-        let output = rewardPointsViewModel.transform(input: rewardPointsUseCaseInput.eraseToAnyPublisher())
+            let output = rewardPointsViewModel.transform(input: rewardPointsUseCaseInput.eraseToAnyPublisher())
             self.rewardPointsUseCaseInput.send(.getRewardPoints(baseUrl: AppCommonMethods.serviceBaseUrl))
             output.sink { event in
-                    switch event {
-                    case .fetchRewardPointsDidSucceed(response: let response, shouldLogout: let logout):
-                        debugPrint(response)
-                        promise(.success(.fetchRewardPointsDidSucceed(response: response, shouldLogout: logout ?? false)))
-                    case .fetchRewardPointsDidFail(error: let error):
-                        print(error.localizedDescription)
-                        promise(.success(.fetchRewardPointsDidFail(error: error)))
-                    }
-                }.store(in: &cancellables)
+                switch event {
+                case .fetchRewardPointsDidSucceed(response: let response, shouldLogout: let logout):
+                    debugPrint(response)
+                    promise(.success(.fetchRewardPointsDidSucceed(response: response, shouldLogout: logout ?? false)))
+                case .fetchRewardPointsDidFail(error: let error):
+                    print(error.localizedDescription)
+                    promise(.success(.fetchRewardPointsDidFail(error: error)))
+                }
+            }.store(in: &cancellables)
         }
-       
+        
     }
     
 }

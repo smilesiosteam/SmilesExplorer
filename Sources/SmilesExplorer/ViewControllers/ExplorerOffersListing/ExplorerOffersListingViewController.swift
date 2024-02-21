@@ -83,7 +83,6 @@ class ExplorerOffersListingViewController: UIViewController {
     }
     
     // MARK: - ACTIONS -
-
     @IBAction func onClickSubscription(_ sender: Any) {
         
         SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self.navigationController, delegate: self.delegate)
@@ -93,8 +92,6 @@ class ExplorerOffersListingViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-
     fileprivate func configureDataSource() {
         self.offersTableView.dataSource = self.dataSource
         DispatchQueue.main.async {

@@ -36,7 +36,6 @@ class SmilesExplorerHeader: UIView {
         mainView.bindFrameToSuperviewBounds()
         titleLabel.fontTextStyle = .smilesHeadline2
         subTitleLabel.fontTextStyle = .smilesBody3
-        
         titleLabel.textColor = .black
         subTitleLabel.textColor = .black.withAlphaComponent(0.8)
         
@@ -44,16 +43,7 @@ class SmilesExplorerHeader: UIView {
     
     func setupData(title: String?, subTitle: String?, color: UIColor?,section:Int?, isPostSub:Bool = false) {
         titleLabel.localizedString = title ?? ""
-//        if !isPostSub {
-            subTitleLabel.localizedString = subTitle ?? ""
-//        }
-        
-        
-        
-//        subTitleLabel.isHidden = subTitle == nil
-//        if isPostSub {
-//            subTitleLabel.isHidden = true
-//        }
+        subTitleLabel.localizedString = subTitle ?? ""
         titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         subTitleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
     }

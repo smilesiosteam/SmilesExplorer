@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Habib Rehman on 05/02/2024.
 //
@@ -12,7 +12,7 @@ import SmilesOffers
 protocol OffersListUseCaseProtocol {
     func getOffers(categoryId: Int?, tag: SectionTypeTag?, pageNo: Int?, categoryTypeIdsList: [String]?) -> AnyPublisher<OffersListUseCase.State, Never>
 }
- 
+
 public class OffersListUseCase: OffersListUseCaseProtocol {
     
     // MARK: - Properties
@@ -43,10 +43,10 @@ public class OffersListUseCase: OffersListUseCaseProtocol {
         .eraseToAnyPublisher()
         
     }
-  
+    
 }
- 
- 
+
+
 extension OffersListUseCase {
     enum State {
         case fetchOffersDidSucceed(response: OffersCategoryResponseModel)

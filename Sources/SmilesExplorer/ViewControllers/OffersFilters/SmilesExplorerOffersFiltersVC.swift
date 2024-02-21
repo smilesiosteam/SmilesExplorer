@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Habib Rehman on 14/09/2023.
 //
@@ -47,12 +47,9 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var applyFilterButton: UIButton!
     
     // MARK: Properties
-    
-    
     weak var delegate: SmilesExplorerOffersFiltersDelegate?
     var filterType: FilterType = .All
     var defaultQuickLinkFilter: RestaurantRequestWithNameFilter?
-//    var menuType: RestaurantMenuType?
     
     public var homeDelegate: SmilesExplorerHomeDelegate?
     
@@ -63,7 +60,7 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -76,21 +73,15 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
         styleViewUI()
     }
     
-     func styleViewUI() {
-//        clearAllButton.setTitle("Clearall".localizedString, for: .normal)
+    func styleViewUI() {
         applyFilterButton.setTitle("ApplyTitle".localizedString, for: .normal)
-//        clearAllButton.titleLabel?.font = .montserratBoldFont(size: 14.0)
         applyFilterButton.titleLabel?.font = .montserratBoldFont(size: 14.0)
-         bottomView.layer.shadowRadius = 2.0
-         bottomView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-         bottomView.layer.shadowColor = UIColor.applightGrey.cgColor
-         
-         
+        bottomView.layer.shadowRadius = 2.0
+        bottomView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        bottomView.layer.shadowColor = UIColor.applightGrey.cgColor
     }
     
     func setUpNavigationBar() {
-        
-        
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.configureWithTransparentBackground()
@@ -121,7 +112,6 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
         btnBack.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         btnBack.layer.cornerRadius = btnBack.frame.height / 2
         btnBack.clipsToBounds = true
-        
         
         let btnClear: UIButton = UIButton(type: .custom)
         btnClear.backgroundColor = .clear
@@ -172,31 +162,18 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
     
     //MARK: - ClickBack
     @objc func onClickBack() {
-//        let filterRequest = presenter?.applyFilters()
-//        if let filters = filterRequest, !filters.isEmpty {
-//            if let delegate = self.delegate {
-//                delegate.didReturnRestaurantFilters(filters)
-//            }
-//        }
-         
-         SmilesExplorerRouter.shared.popToSmilesExplorerSubscriptionUpgradeViewController(navVC: self.navigationController!)
+        SmilesExplorerRouter.shared.popToSmilesExplorerSubscriptionUpgradeViewController(navVC: self.navigationController!)
     }
     
     //MARK: -  Clear all filters
     @objc func onClickClear() {
-//        presenter?.clearAllFilters()
     }
     
     //MARK: - Apply filters
     @IBAction func applyFilterAction(_ sender: Any) {
-//        let filterRequest = presenter?.applyFilters()
-//        if let filters = filterRequest {
-//            if let delegate = self.delegate {
-//                delegate.didReturnRestaurantFilters(filters)
-//            }
-//        }
+       
     }
-
+    
 }
 
 
@@ -204,11 +181,11 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
 
 extension SmilesExplorerOffersFiltersVC {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 6
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "SmilesExplorerFilterSelectionTVC", for: indexPath) as! SmilesExplorerFilterSelectionTVC
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SmilesExplorerFilterSelectionTVC", for: indexPath) as! SmilesExplorerFilterSelectionTVC
         
         let searchBarcell = tableView.dequeueReusableCell(withIdentifier: "SmilesExplorerFilterTVC", for: indexPath) as! SmilesExplorerFilterTVC
         

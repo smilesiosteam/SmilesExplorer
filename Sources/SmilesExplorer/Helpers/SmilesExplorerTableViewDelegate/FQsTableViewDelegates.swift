@@ -13,6 +13,7 @@ import SmilesUtilities
 extension FAQsViewController: UITableViewDelegate{
     //MARK: - DidSelect Method
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let faqDetail = ((self.dataSource?.dataSources?[safe: indexPath.section] as? TableViewDataSource<FaqsDetail>)?.models?[safe: indexPath.row] as? FaqsDetail)
         faqDetail?.isHidden = !(faqDetail?.isHidden ?? true)
         tableView.reloadRows(at: [indexPath], with: .automatic)

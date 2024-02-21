@@ -14,7 +14,7 @@ protocol SubscriptionBannerUseCaseProtocol {
 }
 
 public class SubscriptionBannerUseCase: SubscriptionBannerUseCaseProtocol {
- 
+    
     // MARK: - Properties
     private let services: SmilesTouristServiceHandlerProtocol
     private var cancellables = Set<AnyCancellable>()

@@ -1,6 +1,6 @@
 //
 //  SmilesExplorerMembershipCardsTableViewCell.swift
-//  
+//
 //
 //  Created by Habib Rehman on 17/08/2023.
 //
@@ -11,28 +11,24 @@ import SmilesUtilities
 
 class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
     
+    //MARK: - Properties
     @IBOutlet weak var platinumExplorerLabel: UILocalizableLabel!
     @IBOutlet weak var choiceTicketLabel: UILocalizableLabel!
     @IBOutlet weak var exclusiveOfferLabel: UILocalizableLabel!
     @IBOutlet weak var buy1Get1Label: UILocalizableLabel!
     @IBOutlet weak var priceLabel: UILocalizableLabel!
-    
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var toggleButton: UIButton!
-    
     @IBOutlet weak var selectionButton: UIButton!
     @IBOutlet weak var cardView: UIView!
     
-    
-//    typealias FavHandler = (Bool) -> Void
-//    var favHandler: FavHandler?
-    
+    //MARK: - Initializer
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCellUI()
     }
     
-    
+    //MARK: - SetupUI
     private func setupCellUI(){
         self.cardView.layer.cornerRadius = 12.0
         self.cardView.layer.borderColor = UIColor.lightGray.cgColor
@@ -54,16 +50,18 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
         
     }
     
+    //MARK: - Selection
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.toggleButton.isSelected = selected ? true:false
     }
     
+    //MARK: - Cell Configuration
     func configureCell(with data: BOGODetailsResponseLifestyleOffer) {
         platinumExplorerLabel.text = data.offerTitle ?? ""
         let labels = [choiceTicketLabel, exclusiveOfferLabel, buy1Get1Label]
         let texts = data.whatYouGetTextList ?? []
-
+        
         for (index, label) in labels.enumerated() {
             if index < texts.count {
                 label?.text = texts[index]
@@ -71,9 +69,8 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
                 label?.isHidden = true
             }
         }
-
+        
         let pricePkg: String? = Int(exactly: data.price ?? 0.0).map { String($0) }
-
         
         priceLabel.text = "\(pricePkg ?? "") \("AED".localizedString)"
         cellImageView.setImageWithUrlString(data.subscribeImage ?? "")
@@ -83,10 +80,6 @@ class SmilesExplorerMembershipCardsTableViewCell: UITableViewCell {
         exclusiveOfferLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         buy1Get1Label.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         priceLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
-        
-        
     }
-    
-    
     
 }

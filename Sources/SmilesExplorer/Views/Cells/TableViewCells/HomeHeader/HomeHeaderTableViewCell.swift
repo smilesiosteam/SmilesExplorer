@@ -14,13 +14,7 @@ class HomeHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var headerTitle: UILabel!
     @IBOutlet weak var bgView: UIView!
-    
-    // MARK: - PROPERTIES -
-    
-    
-    // MARK: - ACTIONS -
-    
-    
+
     // MARK: - METHODS -
     override func awakeFromNib() {
         super.awakeFromNib()

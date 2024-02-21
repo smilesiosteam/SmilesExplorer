@@ -1,6 +1,6 @@
 //
 //  SmilesExplorerHomeDealsAndOffersTVC.swift
-//  
+//
 //
 //  Created by Habib Rehman on 15/09/2023.
 //
@@ -15,16 +15,13 @@ class SmilesExplorerHomeDealsAndOffersTVC: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - PROPERTIES -
+    var index: Int?
+    var callBack: ((OfferDO) -> ())?
     var collectionsData: [OfferDO]?{
         didSet{
             self.collectionView?.reloadData()
         }
     }
-    var index: Int?
-    var callBack: ((OfferDO) -> ())?
-    
-    // MARK: - ACTIONS -
-    
     
     // MARK: - METHODS -
     override func awakeFromNib() {
@@ -32,28 +29,26 @@ class SmilesExplorerHomeDealsAndOffersTVC: UITableViewCell {
         setupViews()
     }
     
+    // MARK: - SETUPUI
     private func setupViews() {
         mainView.backgroundColor = .clear
         collectionView.backgroundColor = UIColor(red: 244.0/255.0, green: 244.0/255.0, blue: 244.0/255.0, alpha: 1)
         setupCollectionView()
     }
     
+    // MARK: - SETUP COLLECTIONVIEW
     private func setupCollectionView() {
         
         collectionView.register(UINib(nibName: String(describing: SmilesExplorerDealsAndOffersCollectionViewCell.self), bundle: .module), forCellWithReuseIdentifier: String(describing: SmilesExplorerDealsAndOffersCollectionViewCell.self))
         collectionView.dataSource = self
         collectionView.delegate = self
-        //        collectionView.collectionViewLayout = setupCollectionViewLayout()
-        
     }
     
     private func setupCollectionViewLayout() ->  UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
             let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(108)))
             item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 8)
-            
             let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .absolute(96), heightDimension: .absolute(124)), subitems: [item])
-            
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             section.contentInsets.leading = 16
@@ -77,7 +72,7 @@ extension SmilesExplorerHomeDealsAndOffersTVC: UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         if let data = collectionsData?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerDealsAndOffersCollectionViewCell", for: indexPath) as? SmilesExplorerDealsAndOffersCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(offer: data)
@@ -88,7 +83,6 @@ extension SmilesExplorerHomeDealsAndOffersTVC: UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if let data = collectionsData?[indexPath.row] {
             callBack?(data)
         }

@@ -18,7 +18,6 @@ protocol WishListUseCaseProtocol {
 
 class WishListUseCase: WishListUseCaseProtocol {
     
-    
     public var wishListUseCaseInput: PassthroughSubject<WishListViewModel.Input, Never> = .init()
     private let wishListViewModel = WishListViewModel()
     private var cancellables = Set<AnyCancellable>()

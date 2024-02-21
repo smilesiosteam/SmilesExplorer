@@ -1,6 +1,6 @@
 //
 //  SmilesExplorerFooterTableViewCell.swift
-//  
+//
 //
 //  Created by Abdul Rehman Amjad on 17/08/2023.
 //
@@ -11,7 +11,7 @@ import SmilesSharedServices
 import SmilesFontsManager
 
 class SmilesExplorerFooterTableViewCell: UITableViewCell {
-
+    
     // MARK: - OUTLETS -
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subscriptionImageView: UIImageView!
@@ -39,6 +39,7 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         setupViews()
     }
     
+    //MARK: - Setup UI
     private func setupViews() {
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -66,11 +67,11 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         let gradientColors = backgroundGradientColors.map({UIColor().colorWithHexString(hexString: $0).cgColor})
         gradientLayer?.removeFromSuperlayer()
         gradientLayer = GradientUtility.shared.getGradientLayer(forView: mainView,
-                                                                    colors: gradientColors,
-                                                                    direction: direction ?? "left")
+                                                                colors: gradientColors,
+                                                                direction: direction ?? "left")
         mainView.layer.insertSublayer(gradientLayer!, at: 0)
         
     }
-
+    
     
 }

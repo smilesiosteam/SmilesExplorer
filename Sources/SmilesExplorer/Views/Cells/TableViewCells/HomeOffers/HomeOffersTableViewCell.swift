@@ -1,6 +1,6 @@
 //
 //  HomeOffersTableViewCell.swift
-//  
+//
 //
 //  Created by Abdul Rehman Amjad on 18/08/2023.
 //
@@ -10,7 +10,7 @@ import SmilesOffers
 import SmilesUtilities
 
 class HomeOffersTableViewCell: UITableViewCell {
-
+    
     // MARK: - OUTLETS -
     @IBOutlet weak var mainView: UICustomView!
     @IBOutlet weak var offerImageView: UIImageView!
@@ -101,8 +101,7 @@ extension HomeOffersTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         if let data = collectionsData?[indexPath.row] {
             delegate?.showOfferDetails(offer: data)
             
-        }
-        
+        }   
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

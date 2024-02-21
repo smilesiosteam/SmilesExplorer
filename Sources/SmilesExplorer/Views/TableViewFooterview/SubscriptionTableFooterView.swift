@@ -13,8 +13,10 @@ import SmilesUtilities
 
 
 class SubscriptionTableFooterView: UITableViewHeaderFooterView {
-    var onClick={}
-    var onClickQR={}
+    
+    var onClick = {}
+    var onClickQR = {}
+    
     let promoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,12 +59,15 @@ class SubscriptionTableFooterView: UITableViewHeaderFooterView {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
     @objc func tapped(){
         onClick()
     }
+    
     @objc func QRCodeTapped(){
         onClickQR()
     }
+    
     private func commonInit() {
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
         contentView.addSubview(promoImageView)
@@ -80,11 +85,8 @@ class SubscriptionTableFooterView: UITableViewHeaderFooterView {
             scanGiftButton.heightAnchor.constraint(equalToConstant: 32),
             scanGiftButton.centerXAnchor.constraint(equalTo: promoCodeLabel.centerXAnchor),
             scanGiftButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            
             promoCodeLabel.leadingAnchor.constraint(equalTo: promoImageView.leadingAnchor, constant: 20),
             promoCodeLabel.centerYAnchor.constraint(equalTo: promoImageView.centerYAnchor),
-            
             applyPromoCodeButton.topAnchor.constraint(equalTo: contentView.topAnchor),
             applyPromoCodeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             applyPromoCodeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
