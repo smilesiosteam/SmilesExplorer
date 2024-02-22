@@ -229,10 +229,10 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     }
     
     func displayRewardPoints() {
-        if let rewardPoints = rewardPoint {
+        if let rewardPoints = viewModel.rewardPoint {
             self.topHeaderView.setPointsOfUser(with: rewardPoints.numberWithCommas())
         }
-        if let rewardPointsIcon = self.rewardPointIcon {
+        if let rewardPointsIcon = viewModel.rewardPointIcon {
             self.topHeaderView.setPointsIcon(with: rewardPointsIcon, shouldShowAnimation: false)
         }
     }
