@@ -298,7 +298,7 @@ extension SmilesExplorerSubscriptionUpgradeViewController: AppHeaderDelegate {
     }
     
     public func didTapOnLocation() {
-        self.delegate?.navigateToLocation()
+        self.delegate?.navigateToLocation(delegate: self)
     }
     
     func setLocationToolTipPositionView(view: UIImageView) {
@@ -605,10 +605,10 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
 extension SmilesExplorerSubscriptionUpgradeViewController: UpdateUserLocationDelegate {
     
     public func userLocationUpdatedSuccessfully() {
-        if let isUserSubscribed {
-            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false,platinumLimiReached: platinumLimiReached)
+        if let isUserSubscribed = viewModel.isUserSubscribed {
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: viewModel.subscriptionType ?? .gold, freeTicketAvailed: viewModel.voucherCode != nil ? true:false, platinumLimiReached: viewModel.platinumLimiReached)
         } else {
-            self.input.send(.getRewardPoints)
+            viewModel.getRewardPoint()
         }
     }
 }
