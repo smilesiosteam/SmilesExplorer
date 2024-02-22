@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "googlemaps-sp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/YAtechnologies/GoogleMaps-SP.git",
+      "state" : {
+        "revision" : "684ea6db362feaefdfcff89356e446bec8bcde3d",
+        "version" : "7.2.0"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
@@ -87,7 +96,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesAppHeader.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c570cd2ab40ba6b951049f8b65005d21f7774167"
+        "revision" : "3554f5a9e3f7ede9f3baacc1d270e59eb52a8846"
       }
     },
     {
@@ -96,7 +105,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesBanners.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ab94fce6f788ecb621a3e8fb5078b3a8f13832a3"
+        "revision" : "f66ac01c2cb03e891e30625b975039b9508557bd"
       }
     },
     {
@@ -123,7 +132,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesFilterAndSort.git",
       "state" : {
         "branch" : "main",
-        "revision" : "32d18a7b2c48e03816dc5fa46708ecad2bc36ac6"
+        "revision" : "e2ab06cfa2da68cb3cef7d7fba379e0384935833"
       }
     },
     {
@@ -159,7 +168,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesLocationHandler.git",
       "state" : {
         "branch" : "main",
-        "revision" : "74d1cc01a66d96cfd9c4f82e7203b493f5f59dd1"
+        "revision" : "ff864e53cda91db6878aa0aa8af745ea98f7eb91"
       }
     },
     {
@@ -168,7 +177,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesOffers.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0719ad2248852f1cd683973d4595411546d12180"
+        "revision" : "ca9b62121ac9c15081c196fb9af4835a7b39cfd2"
       }
     },
     {
@@ -204,7 +213,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesStoriesManager.git",
       "state" : {
         "branch" : "main",
-        "revision" : "717c9ebb7e5450d6c5a88bb8d79e3c66e8985b19"
+        "revision" : "235d8ede59440247c0bb416d927b4fddeae0b2b8"
       }
     },
     {

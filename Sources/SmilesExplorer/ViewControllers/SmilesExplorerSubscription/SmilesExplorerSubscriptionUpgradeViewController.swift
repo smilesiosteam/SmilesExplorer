@@ -224,7 +224,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     // MARK: - Top Header
     private func setupHeaderView(headerTitle: String?) {
         topHeaderView.delegate = self
-        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: self.viewModel.isGuestUser ?? false, showHeaderContent: self.viewModel.isUserSubscribed ?? false, toolTipInfo: nil)
+        topHeaderView.setupHeaderView(backgroundColor: .white, searchBarColor: .white, pointsViewColor: .black.withAlphaComponent(0.1), titleColor: .black, headerTitle: headerTitle.asStringOrEmpty(), showHeaderNavigaton: true, haveSearchBorder: true, shouldShowBag: false, isGuestUser: self.viewModel.isGuestUser ?? false, showHeaderContent: self.viewModel.isUserSubscribed ?? false)
         displayRewardPoints()
     }
     
@@ -601,7 +601,18 @@ extension SmilesExplorerSubscriptionUpgradeViewController {
     
 }
 
-//MARK: - Filters Delegate
+// MARK: - UPDATE USER LOCATION DELEGATE -
+extension SmilesExplorerSubscriptionUpgradeViewController: UpdateUserLocationDelegate {
+    
+    public func userLocationUpdatedSuccessfully() {
+        if let isUserSubscribed {
+            getSections(isSubscribed: isUserSubscribed, explorerPackageType: subscriptionType ?? .gold, freeTicketAvailed: self.voucherCode != nil ? true:false,platinumLimiReached: platinumLimiReached)
+        } else {
+            self.input.send(.getRewardPoints)
+        }
+    }
+}
+
 extension SmilesExplorerSubscriptionUpgradeViewController: SelectedFiltersDelegate {
     public func didSetFilters(_ filters: [FilterValue]) {
         arraySelectedSubCategoryTypes.removeAll()

@@ -8,6 +8,7 @@
 import Foundation
 import SmilesOffers
 import SmilesStoriesManager
+import SmilesLocationHandler
 import SmilesFilterAndSort
 
 public enum SmilesExplorerHomeNavigationType {
@@ -20,7 +21,7 @@ public protocol SmilesExplorerHomeDelegate {
     func handleDeepLinkRedirection(redirectionUrl: String)
     
     func navigateToGlobalSearch()
-    func navigateToLocation()
+    func navigateToLocation(delegate: UpdateUserLocationDelegate)
     func navigateToRewardPoint(personalizationEventSource: String?)
     func proceedToOfferDetails(offer: OfferDO?)
     func navigateToStoriesWebView(objStory: OfferDO)
