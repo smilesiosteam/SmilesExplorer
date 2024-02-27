@@ -65,7 +65,7 @@ extension SmilesExplorerStoriesTVC: UICollectionViewDelegate, UICollectionViewDa
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if let storyOffer = collectionsData?[indexPath.row] {
+        if let storyOffer = collectionsData?[safe: indexPath.row] {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SmilesExplorerStoriesCollectionViewCell", for: indexPath) as? SmilesExplorerStoriesCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(storyOffer: storyOffer)
             return cell
@@ -74,7 +74,7 @@ extension SmilesExplorerStoriesTVC: UICollectionViewDelegate, UICollectionViewDa
         return UICollectionViewCell()
     }
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let data = collectionsData?[indexPath.row] {
+        if let data = collectionsData?[safe: indexPath.row] {
             callBack?(data)
             StoriesCallBacK?(data)
         }

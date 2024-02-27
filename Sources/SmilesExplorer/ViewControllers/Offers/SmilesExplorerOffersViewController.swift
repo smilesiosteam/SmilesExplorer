@@ -157,7 +157,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
 }
 extension SmilesExplorerOffersViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedOffer = self.response?.offers?[indexPath.row]
+        self.selectedOffer = self.response?.offers?[safe: indexPath.row]
         setConfirmBtnUI(enabled: true)
         self.collectionView.reloadData()
     }
@@ -172,7 +172,7 @@ extension SmilesExplorerOffersViewController: UICollectionViewDelegate, UICollec
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TicketOffersCollectionCell", for: indexPath) as! TicketOffersCollectionCell
-        cell.offer = self.response?.offers?[indexPath.row]
+        cell.offer = self.response?.offers?[safe: indexPath.row]
         let selected = cell.offer.offerId == self.selectedOffer?.offerId
         cell.radioBtnImageView.image = UIImage(named: selected ? "radio_button_selected" : "radio_button_unselected", in: .module, with: nil)
         return cell

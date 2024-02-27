@@ -98,7 +98,7 @@ extension HomeOffersTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let data = collectionsData?[indexPath.row] {
+        if let data = collectionsData?[safe: indexPath.row] {
             delegate?.showOfferDetails(offer: data)
             
         }   

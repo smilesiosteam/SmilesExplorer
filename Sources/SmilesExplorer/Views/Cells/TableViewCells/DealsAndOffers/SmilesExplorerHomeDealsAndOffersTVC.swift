@@ -83,7 +83,7 @@ extension SmilesExplorerHomeDealsAndOffersTVC: UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let data = collectionsData?[indexPath.row] {
+        if let data = collectionsData?[safe: indexPath.row] {
             callBack?(data)
         }
         
