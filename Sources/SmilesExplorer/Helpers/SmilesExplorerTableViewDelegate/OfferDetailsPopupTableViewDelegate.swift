@@ -17,4 +17,7 @@ extension OfferDetailsPopupVC: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.viewWillLayoutSubviews()
+    }
 }

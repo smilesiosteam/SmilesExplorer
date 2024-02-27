@@ -75,7 +75,7 @@ class OfferDetailsPopupVC: UIViewController {
         self.mainView.layer.cornerRadius = 16.0
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         tableView.sectionHeaderHeight = 0.0
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 22.0))
         tableView.sectionFooterHeight = 0.0
         self.tableView.separatorStyle = .none
         self.tableView.delegate = self
@@ -121,10 +121,10 @@ extension OfferDetailsPopupVC {
     //MARK: - Setting Dynamic Height For TableView
     fileprivate func setDynamicHeightForTableView() {
         let totalHeight = tableView.contentSize.height
-        let minHeight = min(totalHeight,self.view.frame.size.height*0.4)
+        let minHeight = min(totalHeight,self.view.frame.size.height*0.7)
         self.tableViewHeightConst.constant = minHeight
-//        tableView.isScrollEnabled = totalHeight > minHeight
-        self.view.layoutIfNeeded()
+        tableView.isScrollEnabled = totalHeight > minHeight
+        view.layoutIfNeeded()
     }
     
     fileprivate func configureDataSource() {
