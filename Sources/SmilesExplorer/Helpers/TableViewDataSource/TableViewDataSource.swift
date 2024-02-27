@@ -211,3 +211,19 @@ extension TableViewDataSource where Model == String {
         }
     }
 }
+
+extension TableViewDataSource where Model == OfferDetailsResponse {
+    static func makeForOffersDetailHeader(offers: OfferDetailsResponse,
+                     reuseIdentifier: String = "OfferDetailPopupHeaderTVC", isDummy: Bool = false) -> TableViewDataSource {
+        return TableViewDataSource(
+            models: [offers],
+            reuseIdentifier: reuseIdentifier,
+            data: "FFFFFF",
+            isDummy: isDummy
+        ) { (headerResp, cell, data, indexPath) in
+            guard let cell = cell as? OfferDetailPopupHeaderTVC else { return }
+            cell.setupData(offer: headerResp)
+            
+        }
+    }
+}

@@ -16,7 +16,7 @@
  "offerPromotionText" : "Additional T&C",
  "description" : "brand description",
  "extTransactionId" : "3257750785087",
- "offerTitle" : "",
+ "offerTitle" : "Offer Details Mobile English",
  "isBirthdayOffer" : false,
  "cinemaOfferFlag" : false,
  "lifestyleSubscriberFlag" : false,
@@ -74,7 +74,9 @@
  "offerDescription" : "Offer Description",
  "vatFactor" : 0,
  "whatYouGetList" : [
-   "--------","-------","-------"
+     "Offer Details Mobile English",
+   "Offer Details Mobile English",
+   "Offer Details Mobile English"
  ],
  "showLocationFlag" : true,
  "offerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_ExpFreeAttraction_3846.jpg?1708343917688",

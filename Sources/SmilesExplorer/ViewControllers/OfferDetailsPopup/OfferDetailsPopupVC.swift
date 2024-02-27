@@ -14,10 +14,8 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - OUTLETS -
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var imgOfferDetail: UIImageView!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var tableViewHeightConst: NSLayoutConstraint!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var panView: UIView!
     
     // MARK: - PROPERTIES -
@@ -32,31 +30,24 @@ class OfferDetailsPopupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
+        self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 2))
         if let response = OfferDetailsResponse.fromModuleFile() {
             self.response = response
-            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: true)
-            self.titleLabel.numberOfLines = 1
-            self.titleLabel.text = response.offerTitle ?? ""
-            showHide(isDummy: true, view: self.titleLabel)
-            self.tableViewHeightConst.constant = 90.0
+            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetailHeader(offers: response, isDummy: true)
+            self.dataSource?.dataSources?[1] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: true)
             self.configureDataSource()
+            setDynamicHeightForTableView()
         }
-        showHide(isDummy: true, view: self.imgOfferDetail)
         self.viewModel.getOffers()
         
     }
     
-    // MARK: - Confgiure Shimmer For HeaderView
-    func showHide(isDummy: Bool,view: UIView) {
-        if isDummy {
-            view.enableSkeleton()
-            view.showAnimatedGradientSkeleton()
-        } else {
-            view.hideSkeleton()
-        }
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        self.setDynamicHeightForTableView()
     }
     
+  
     // MARK: - INITIALIZER -
     init(viewModel: OffersDetailViewModel,delegate:SmilesExplorerHomeDelegate?) {
         self.viewModel = viewModel
@@ -74,9 +65,6 @@ class OfferDetailsPopupVC: UIViewController {
         let tapToDismissGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.panView.addGestureRecognizer(dragToDismissGesture)
         self.panView.addGestureRecognizer(tapToDismissGesture)
-        self.titleLabel.fontTextStyle = .smilesHeadline2
-        self.titleLabel.textColor = .black
-        self.titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
         bindStatus()
         setupTableView()
     }
@@ -85,17 +73,16 @@ class OfferDetailsPopupVC: UIViewController {
     private func setupTableView() {
         self.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         self.mainView.layer.cornerRadius = 16.0
-        self.imgOfferDetail.layer.cornerRadius = 16.0
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
-        self.tableView.sectionHeaderHeight = 0.0
-        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
-        self.tableView.sectionFooterHeight = 0.0
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
+        tableView.sectionHeaderHeight = 0.0
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
+        tableView.sectionFooterHeight = 0.0
         self.tableView.separatorStyle = .none
         self.tableView.delegate = self
         self.tableView.isScrollEnabled = false
         self.tableView.allowsSelection = false
         self.tableView.registerCellFromNib(OffersPopupTVC.self, bundle: .module)
-        
+        self.tableView.registerCellFromNib(OfferDetailPopupHeaderTVC.self, bundle: .module)
         
     }
     
@@ -132,11 +119,12 @@ extension OfferDetailsPopupVC {
 // MARK: - OFFERS CONFIGURATIONS -
 extension OfferDetailsPopupVC {
     //MARK: - Setting Dynamic Height For TableView
-    fileprivate func setDynamicHeightForTableView(response:OfferDetailsResponse, height:CGFloat) {
-        let minHeight = min(view.bounds.height - view.safeAreaInsets.top - 320, (CGFloat(response.whatYouGetList?.count ?? 0) * height))
-        tableViewHeightConst.constant = minHeight-20
-        tableView.isScrollEnabled = minHeight > (view.bounds.height - 360)
-        tableView.reloadData()
+    fileprivate func setDynamicHeightForTableView() {
+        let totalHeight = tableView.contentSize.height
+        let minHeight = min(totalHeight,self.view.frame.size.height*0.4)
+        self.tableViewHeightConst.constant = minHeight
+//        tableView.isScrollEnabled = totalHeight > minHeight
+        self.view.layoutIfNeeded()
     }
     
     fileprivate func configureDataSource() {
@@ -148,19 +136,11 @@ extension OfferDetailsPopupVC {
     
     private func configureOffers(with response: OfferDetailsResponse) {
         self.response = response
-        self.imgOfferDetail.setImageWithUrlString(viewModel.imageURL ?? "")
-        self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response,isDummy: false)
-        self.showHide(isDummy: false, view: imgOfferDetail)
-        self.showHide(isDummy: false, view: self.titleLabel)
-        self.titleLabel.numberOfLines = 0
-        self.titleLabel.text = response.offerTitle ?? ""
+        self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetailHeader(offers: response,isDummy: false)
+        self.dataSource?.dataSources?[1] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: false)
         self.configureDataSource()
-        let height = CGFloat(tableView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height)
-        print(height)
-        setDynamicHeightForTableView(response:response, height: height)
+        setDynamicHeightForTableView()
     }
-    
-    
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         dismiss(animated: true)
