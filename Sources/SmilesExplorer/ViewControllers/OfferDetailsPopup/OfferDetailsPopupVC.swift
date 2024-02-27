@@ -39,7 +39,7 @@ class OfferDetailsPopupVC: UIViewController {
             self.titleLabel.numberOfLines = 1
             self.titleLabel.text = response.offerTitle ?? ""
             showHide(isDummy: true, view: self.titleLabel)
-            self.tableViewHeightConst.constant = 80.0
+            self.tableViewHeightConst.constant = 90.0
             self.configureDataSource()
         }
         showHide(isDummy: true, view: self.imgOfferDetail)
@@ -70,8 +70,10 @@ class OfferDetailsPopupVC: UIViewController {
     
     // MARK: - SETUPUI -
     private func setupUI(){
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        self.panView.addGestureRecognizer(panGesture)
+        let dragToDismissGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        let tapToDismissGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.panView.addGestureRecognizer(dragToDismissGesture)
+        self.panView.addGestureRecognizer(tapToDismissGesture)
         self.titleLabel.fontTextStyle = .smilesHeadline2
         self.titleLabel.textColor = .black
         self.titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
@@ -132,8 +134,9 @@ extension OfferDetailsPopupVC {
     //MARK: - Setting Dynamic Height For TableView
     fileprivate func setDynamicHeightForTableView(response:OfferDetailsResponse, height:CGFloat) {
         let minHeight = min(view.bounds.height - view.safeAreaInsets.top - 320, (CGFloat(response.whatYouGetList?.count ?? 0) * height))
-        tableViewHeightConst.constant = minHeight
+        tableViewHeightConst.constant = minHeight-20
         tableView.isScrollEnabled = minHeight > (view.bounds.height - 360)
+        tableView.reloadData()
     }
     
     fileprivate func configureDataSource() {
@@ -145,7 +148,6 @@ extension OfferDetailsPopupVC {
     
     private func configureOffers(with response: OfferDetailsResponse) {
         self.response = response
-        setDynamicHeightForTableView(response:response, height: 28.0)
         self.imgOfferDetail.setImageWithUrlString(viewModel.imageURL ?? "")
         self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetail(offers: response,isDummy: false)
         self.showHide(isDummy: false, view: imgOfferDetail)
@@ -153,6 +155,15 @@ extension OfferDetailsPopupVC {
         self.titleLabel.numberOfLines = 0
         self.titleLabel.text = response.offerTitle ?? ""
         self.configureDataSource()
+        let height = CGFloat(tableView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height)
+        print(height)
+        setDynamicHeightForTableView(response:response, height: height)
+    }
+    
+    
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        dismiss(animated: true)
     }
     
 }

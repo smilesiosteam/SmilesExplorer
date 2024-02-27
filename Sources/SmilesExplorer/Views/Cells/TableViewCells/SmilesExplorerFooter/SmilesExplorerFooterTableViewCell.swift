@@ -56,7 +56,8 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
         titleLabel.text = title
         subscriptionImageView.setImageWithUrlString(footer.explorerSubBannerBgImage ?? "")
         priceLabel.text = footer.explorerSubBannerPrice
-        descriptionLabel.text = footer.explorerSubBannerDescription
+        let lblDesc = footer.explorerSubBannerDescription?.replacingOccurrences(of: "{NEWLINE}", with: "\n")
+        descriptionLabel.text = lblDesc
         setupGradient(colors: footer.explorerSubBannerBgColor ?? "#75428e|#424c99", direction: footer.explorerSubBannerColorDirection)
         
     }

@@ -43,7 +43,7 @@ class HomeOffersCollectionViewCell: UICollectionViewCell {
         priceStackView.isHidden = !isForTickets
         offerImageView.setImageWithUrlString(offer.imageURL ?? "")
         partnerImageView.setImageWithUrlString(offer.partnerImage ?? "")
-        contentBottomSpace.priority = isForTickets ? .defaultLow : .defaultHigh
+        contentBottomSpace.priority = .defaultLow
         contentBottomSpaceEqual.priority = isForTickets ? .defaultHigh : .defaultLow
         if isForTickets {
             let attributeString = NSMutableAttributedString(string: "\("AED".localizedString) 0.00")

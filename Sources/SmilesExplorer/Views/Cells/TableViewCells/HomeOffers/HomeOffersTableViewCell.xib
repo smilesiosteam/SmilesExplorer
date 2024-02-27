@@ -131,6 +131,11 @@
             <point key="canvasLocation" x="119.84732824427481" y="150.35211267605635"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="R8L-yS-oOi">
+            <size key="intrinsicContentSize" width="24" height="24.333333333333332"/>
+        </designable>
+    </designables>
     <resources>
         <image name="back_icon_ar" width="24" height="24.333333969116211"/>
         <image name="tickets" width="64" height="64"/>
