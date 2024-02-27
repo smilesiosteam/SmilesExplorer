@@ -14,7 +14,7 @@ import SmilesUtilities
 import SmilesSharedServices
 import SmilesOffers
 
-public enum SmilesTouristConfigrator {
+public enum SmilesTouristConfigurator {
     
     //MARK: -  Smiles Tourist UnSubscribed HomeVC
     public static func getSmilesTouristHomeVC(dependance: SmilesTouristDependance,navigationDelegate:SmilesExplorerHomeDelegate) -> SmilesExplorerHomeViewController {

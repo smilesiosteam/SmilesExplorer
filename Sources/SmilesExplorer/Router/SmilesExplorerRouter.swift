@@ -84,13 +84,13 @@ public final class SmilesExplorerRouter: NSObject {
     
     //MARK: - PUSH OFFER LISTING -
     func pushOffersListingVC(navVC: UINavigationController?, dependence: ExplorerOffersListingDependance, delegate:SmilesExplorerHomeDelegate?) {
-        let vc = SmilesTouristConfigrator.getExplorerListingVC(dependence: dependence, delegate: delegate)
+        let vc = SmilesTouristConfigurator.getExplorerListingVC(dependence: dependence, delegate: delegate)
         navVC?.pushViewController(vc, animated: true)
         
     }
     //MARK: - Show OffersDetail -
     public func showOfferDetailPopup(viewcontroller: UIViewController, dependence: OfferDO, delegate:SmilesExplorerHomeDelegate?)  {
-        let vc = SmilesTouristConfigrator.showOffersDetailVC(dependence: dependence, delegate: delegate)
+        let vc = SmilesTouristConfigurator.showOffersDetailVC(dependence: dependence, delegate: delegate)
         vc.modalPresentationStyle = .overFullScreen
         vc.navC = viewcontroller.navigationController
         viewcontroller.present(vc)
@@ -98,7 +98,7 @@ public final class SmilesExplorerRouter: NSObject {
     
     //MARK: - PUSH FAQs -
     func pushFAQsVC(navVC: UINavigationController?) {
-        let vc = SmilesTouristConfigrator.getFAQsVC()
+        let vc = SmilesTouristConfigurator.getFAQsVC()
         navVC?.pushViewController(vc, animated: true)
     }
 }

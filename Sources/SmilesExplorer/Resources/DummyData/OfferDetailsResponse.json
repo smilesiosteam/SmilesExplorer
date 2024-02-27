@@ -1,86 +1,86 @@
 {
- "dynamicDenomination" : false,
- "estimatedSavings" : 0.10000000000000001,
- "categoryId" : 973,
- "whatYouGet" : "What you get",
- "pointsValue" : 3750,
- "eligibleFlag" : "Y",
- "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/COUPONS\/BBST.jpg?1708343917688",
- "minVoucherDenomination" : {
-   "denominationAED" : 0
- },
- "dirhamValue" : 35,
- "originalDirhamValue" : 0,
- "voucherSharingFlag" : true,
- "voucherPromoText" : "Offer Details Mobile English",
- "offerPromotionText" : "Additional T&C",
- "description" : "brand description",
- "extTransactionId" : "3257750785087",
- "offerTitle" : "Offer Details Mobile English",
- "isBirthdayOffer" : false,
- "cinemaOfferFlag" : false,
- "lifestyleSubscriberFlag" : false,
- "paymentMethods" : [
-   {
-     "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullPoints.png",
-     "paymentMethodId" : "1",
-     "title" : "Smiles points",
-     "titleAr" : "نقاط الابتسامات",
-     "paymentType" : "ONLINE",
-     "paymentTypeText" : "Online Payment",
-     "description" : "fullPoints"
-   }
- ],
- "maximumQuantity" : 2,
- "termsAndConditions" : "T & C",
- "relatedOffers" : [
-   {
-     "categoryId" : "10",
-     "offerDescription" : "uat_test1",
-     "dirhamValue" : "0",
-     "categoryOrder" : 2,
-     "offerTypeAr" : "خصم",
-     "recommendationModel" : "offer",
-     "offerTitle" : "",
-     "partnerName" : "1847 Grooming for Men",
-     "voucherPromoText" : "t",
-     "imageURL" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_uat_test1_3655.jpg?1708343917722",
-     "offerId" : "OF_uat_test1_3655",
-     "offerType" : "Discount",
-     "isWishlisted" : false,
-     "recommendationModelEvent" : "RELATED_OFFERS",
-     "pointsValue" : "0"
-   }
- ],
- "isAccountDailyLimit" : true,
- "offerType" : "Discount",
- "partnerName" : "Big Bus Tours (Abu Dhabi)",
- "sharingBonus" : 0,
- "isRedeemedOffer" : false,
- "merchantLocation" : [
-   {
-     "locationName" : "Rayna Store",
-     "locationAddress" : "Rayna store location",
-     "locationLatitude" : 23.23,
-     "locationLongitude" : 56.560000000000002,
-     "locationPhoneNumber" : "+9711237676767"
-   }
- ],
- "isAccountTotalLimit" : true,
- "originalPointsValue" : 0,
- "isWishlisted" : false,
- "partnerPointRate" : 0,
- "offerId" : "OF_ExpFreeAttraction_3846",
- "offerDescription" : "Offer Description",
- "vatFactor" : 0,
- "whatYouGetList" : [
-     "Offer Details Mobile English",
-   "Offer Details Mobile English",
-   "Offer Details Mobile English"
- ],
- "showLocationFlag" : true,
- "offerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_ExpFreeAttraction_3846.jpg?1708343917688",
- "maxVoucherDenomination" : {
-   "denominationAED" : 0
- }
+    "dynamicDenomination" : false,
+    "estimatedSavings" : 0.10000000000000001,
+    "categoryId" : 973,
+    "whatYouGet" : "What you get",
+    "pointsValue" : 3750,
+    "eligibleFlag" : "Y",
+    "partnerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/PARTNERS\/COUPONS\/BBST.jpg?1708343917688",
+    "minVoucherDenomination" : {
+        "denominationAED" : 0
+    },
+    "dirhamValue" : 35,
+    "originalDirhamValue" : 0,
+    "voucherSharingFlag" : true,
+    "voucherPromoText" : "Offer Details Mobile English",
+    "offerPromotionText" : "Additional T&C",
+    "description" : "brand description",
+    "extTransactionId" : "3257750785087",
+    "offerTitle" : "Offer Details Mobile English",
+    "isBirthdayOffer" : false,
+    "cinemaOfferFlag" : false,
+    "lifestyleSubscriberFlag" : false,
+    "paymentMethods" : [
+        {
+            "iconUrl" : "https:\/\/smilesuae.ae\/images\/APP\/PAYMENT_ICONS\/fullPoints.png",
+            "paymentMethodId" : "1",
+            "title" : "Smiles points",
+            "titleAr" : "نقاط الابتسامات",
+            "paymentType" : "ONLINE",
+            "paymentTypeText" : "Online Payment",
+            "description" : "fullPoints"
+        }
+    ],
+    "maximumQuantity" : 2,
+    "termsAndConditions" : "T & C",
+    "relatedOffers" : [
+        {
+            "categoryId" : "10",
+            "offerDescription" : "uat_test1",
+            "dirhamValue" : "0",
+            "categoryOrder" : 2,
+            "offerTypeAr" : "خصم",
+            "recommendationModel" : "offer",
+            "offerTitle" : "",
+            "partnerName" : "1847 Grooming for Men",
+            "voucherPromoText" : "t",
+            "imageURL" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_uat_test1_3655.jpg?1708343917722",
+            "offerId" : "OF_uat_test1_3655",
+            "offerType" : "Discount",
+            "isWishlisted" : false,
+            "recommendationModelEvent" : "RELATED_OFFERS",
+            "pointsValue" : "0"
+        }
+    ],
+    "isAccountDailyLimit" : true,
+    "offerType" : "Discount",
+    "partnerName" : "Big Bus Tours (Abu Dhabi)",
+    "sharingBonus" : 0,
+    "isRedeemedOffer" : false,
+    "merchantLocation" : [
+        {
+            "locationName" : "Rayna Store",
+            "locationAddress" : "Rayna store location",
+            "locationLatitude" : 23.23,
+            "locationLongitude" : 56.560000000000002,
+            "locationPhoneNumber" : "+9711237676767"
+        }
+    ],
+    "isAccountTotalLimit" : true,
+    "originalPointsValue" : 0,
+    "isWishlisted" : false,
+    "partnerPointRate" : 0,
+    "offerId" : "OF_ExpFreeAttraction_3846",
+    "offerDescription" : "Offer Description",
+    "vatFactor" : 0,
+    "whatYouGetList" : [
+        "Offer Details Mobile English",
+        "Offer Details Mobile English",
+        "Offer Details Mobile English"
+    ],
+    "showLocationFlag" : true,
+    "offerImageUrl" : "https:\/\/www.SmilesUAE.ae\/images\/APP\/OFFERS\/DETAIL\/OF_ExpFreeAttraction_3846.jpg?1708343917688",
+    "maxVoucherDenomination" : {
+        "denominationAED" : 0
+    }
 }
