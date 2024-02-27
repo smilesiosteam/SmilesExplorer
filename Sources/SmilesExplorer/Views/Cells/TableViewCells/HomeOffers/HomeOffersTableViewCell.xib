@@ -23,7 +23,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpz-lj-LMz" customClass="UICustomView" customModule="SmilesUtilities">
-                        <rect key="frame" x="16" y="0.0" width="377" height="421"/>
+                        <rect key="frame" x="16" y="0.0" width="377" height="425"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickets" translatesAutoresizingMaskIntoConstraints="NO" id="RDO-JV-0dC">
                                 <rect key="frame" x="16" y="24" width="64" height="64"/>
@@ -67,10 +67,10 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hkf-IG-6aa">
-                                <rect key="frame" x="16" y="197" width="361" height="200"/>
+                                <rect key="frame" x="16" y="197" width="361" height="204"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="rz6-j7-exy"/>
+                                    <constraint firstAttribute="height" constant="204" id="rz6-j7-exy"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yvy-sB-Fol">
                                     <size key="itemSize" width="128" height="128"/>
