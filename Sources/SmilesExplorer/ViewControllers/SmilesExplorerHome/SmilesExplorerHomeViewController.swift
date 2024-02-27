@@ -222,10 +222,11 @@ extension SmilesExplorerHomeViewController {
                 guard let sectionIdentifier = element.sectionIdentifier, !sectionIdentifier.isEmpty else {
                     return
                 }
-                if let section = SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier), section != .topPlaceholder {
+                guard let section = SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) else { return }
+                if section != .topPlaceholder {
                     sections.append(SmilesExplorerSectionData(index: index, identifier: section))
                 }
-                switch SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) {
+                switch section {
                 case .header:
                     configureHeaderSection()
                 case .footer:
@@ -234,28 +235,13 @@ extension SmilesExplorerHomeViewController {
                         self.dataSource?.dataSources?[index] = TableViewDataSource.make(footer: footer, title: title, data: element.backgroundColor ?? "FFFFFF", isDummy: true)
                     }
                     viewModel.getSubscriptionBannerDetails()
-                case .tickets:
+                case .tickets, .exclusiveDeals, .bogoOffers:
                     if let response = OffersCategoryResponseModel.fromModuleFile() {
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .tickets)
+                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, title: element.title, subtitle: element.subTitle, offersIcon: response.iconImageUrl, section: section)
                     }
-                    self.viewModel.getOffers(tag: .tickets)
-                    break
-                case .exclusiveDeals:
-                    if let response = OffersCategoryResponseModel.fromModuleFile() {
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .exclusiveDeals)
-                    }
-                    self.viewModel.getOffers(tag: .exclusiveDeals)
-                    break
-                case .bogoOffers:
-                    if let response = OffersCategoryResponseModel.fromModuleFile() {
-                        self.dataSource?.dataSources?[index] = TableViewDataSource.make(forOffers: response.offers ?? [], data: "FFFFFF", isDummy: true, section: SmilesExplorerSectionIdentifier(rawValue: sectionIdentifier) ?? .bogoOffers)
-                    }
-                    self.viewModel.getOffers(tag: .bogoOffers)
-                    break
+                    self.viewModel.getOffers(tag: SectionTypeTag(rawValue: section.rawValue) ?? .tickets)
                 case .topPlaceholder:
                     break
-                    
-                default: break
                 }
             }
         }
