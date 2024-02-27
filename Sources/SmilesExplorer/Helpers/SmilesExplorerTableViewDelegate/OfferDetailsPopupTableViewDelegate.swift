@@ -14,7 +14,7 @@ import SmilesOffers
 extension OfferDetailsPopupVC: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return UITableView.automaticDimension
     }
     
 }

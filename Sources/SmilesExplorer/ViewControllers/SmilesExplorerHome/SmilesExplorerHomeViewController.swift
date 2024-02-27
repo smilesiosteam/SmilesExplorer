@@ -115,8 +115,11 @@ public class SmilesExplorerHomeViewController: UIViewController {
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor(hex: "ECEDF5")
+        appearance.shadowColor = .clear
+        appearance.shadowImage = UIImage()
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
+        
         guard let headerData = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue }) else { return }
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
@@ -151,7 +154,6 @@ public class SmilesExplorerHomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
     }
     
     @objc func onClickBack() {
