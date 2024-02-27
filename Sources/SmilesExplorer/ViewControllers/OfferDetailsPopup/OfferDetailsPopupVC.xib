@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OfferDetailsPopupVC" customModule="SmilesExplorer">
             <connections>
+                <outlet property="btnSubscribeNow" destination="dmM-Nx-eWD" id="QHZ-G2-rHF"/>
                 <outlet property="mainView" destination="yyo-b5-wiR" id="aKP-FR-f0b"/>
                 <outlet property="panView" destination="9DT-CA-Jb5" id="J8D-91-fte"/>
                 <outlet property="tableView" destination="7xC-M5-aeq" id="HNA-1G-hFx"/>

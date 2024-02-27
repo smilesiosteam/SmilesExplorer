@@ -18,6 +18,7 @@ class OfferDetailsPopupVC: UIViewController {
     @IBOutlet weak var tableViewHeightConst: NSLayoutConstraint!
     @IBOutlet weak var panView: UIView!
     
+    @IBOutlet weak var btnSubscribeNow: UICustomButton!
     // MARK: - PROPERTIES -
     private let viewModel: OffersDetailViewModel
     private var delegate: SmilesExplorerHomeDelegate? = nil
@@ -65,6 +66,7 @@ class OfferDetailsPopupVC: UIViewController {
         let tapToDismissGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.panView.addGestureRecognizer(dragToDismissGesture)
         self.panView.addGestureRecognizer(tapToDismissGesture)
+        btnSubscribeNow.setTitle("Subscribe now".localizedString, for: .normal)
         bindStatus()
         setupTableView()
     }

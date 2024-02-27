@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SmilesFontsManager
+import SmilesUtilities
 
 class OffersPopupTVC: UITableViewCell {
     
@@ -20,8 +22,14 @@ class OffersPopupTVC: UITableViewCell {
     // MARK: - Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupUI()
     }
     
+    func setupUI(){
+        self.titleLabel.fontTextStyle = .smilesBody2
+        self.titleLabel.textColor = UIColor(white: 0.0, alpha: 0.8)
+        self.titleLabel.semanticContentAttribute = AppCommonMethods.languageIsArabic() ? .forceRightToLeft : .forceLeftToRight
+    }
     // MARK: - Configuration
     func configure(title: String) {
         titleLabel.text = title
