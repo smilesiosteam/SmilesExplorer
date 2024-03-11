@@ -21,7 +21,7 @@ class OfferDetailsPopupVC: UIViewController {
     @IBOutlet weak var btnSubscribeNow: UICustomButton!
     // MARK: - PROPERTIES -
     private let viewModel: OffersDetailViewModel
-    private var delegate: SmilesExplorerHomeDelegate? = nil
+    private weak var delegate: SmilesExplorerHomeDelegate? = nil
     var dataSource: SectionedTableViewDataSource?
     lazy var response: OfferDetailsResponse? = nil
     private var cancellables = Set<AnyCancellable>()

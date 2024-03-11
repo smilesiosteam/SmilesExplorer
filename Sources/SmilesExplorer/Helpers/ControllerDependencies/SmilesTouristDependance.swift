@@ -19,7 +19,7 @@ public struct SmilesTouristDependance {
     public var isUserSubscribed: Bool?
     public var subscriptionType: ExplorerPackage?
     public var voucherCode: String?
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    public weak var delegate:SmilesExplorerHomeDelegate? = nil
     
 
     public init(categoryId: Int, isGuestUser: Bool, isUserSubscribed: Bool? = nil, subscriptionType: ExplorerPackage? = nil, voucherCode: String? = nil, delegate:SmilesExplorerHomeDelegate, rewardPoint: Int, rewardPointIcon: String,personalizationEventSource: String?,platinumLimiReached: Bool?) {

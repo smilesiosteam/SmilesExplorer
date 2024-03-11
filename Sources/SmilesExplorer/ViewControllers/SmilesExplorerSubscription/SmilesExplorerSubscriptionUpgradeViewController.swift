@@ -51,7 +51,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     
     private var offerFavoriteOperation = 0
     private var cancellables = Set<AnyCancellable>()
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    public weak var delegate:SmilesExplorerHomeDelegate? = nil
     private var selectedIndexPath: IndexPath?
     private var rewardPoint: Int?
     private var rewardPointIcon: String?

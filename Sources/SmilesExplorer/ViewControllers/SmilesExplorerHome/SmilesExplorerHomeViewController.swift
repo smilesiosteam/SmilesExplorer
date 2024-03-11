@@ -26,7 +26,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var sections = [SmilesExplorerSectionData]()
     
     private var viewModel: SmilesTouristHomeViewModel!
-    public var delegate: SmilesExplorerHomeDelegate? = nil
+    public weak var delegate: SmilesExplorerHomeDelegate? = nil
     var ticketsResponse: OffersCategoryResponseModel?
     var exclusiveDealsResponse: OffersCategoryResponseModel?
     var bogoOffersResponse: OffersCategoryResponseModel?

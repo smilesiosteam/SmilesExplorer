@@ -51,7 +51,7 @@ class SmilesExplorerOffersFiltersVC: UIViewController, UITableViewDataSource {
     var filterType: FilterType = .All
     var defaultQuickLinkFilter: RestaurantRequestWithNameFilter?
     
-    public var homeDelegate: SmilesExplorerHomeDelegate?
+    public weak var homeDelegate: SmilesExplorerHomeDelegate?
     
     init() {
         super.init(nibName: "SmilesExplorerOffersFiltersVC", bundle: .module)

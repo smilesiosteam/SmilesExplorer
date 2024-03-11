@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
-        "version" : "5.8.1"
+        "revision" : "723fa5a6c65812aec4a0d7cc432ee198883b6e00",
+        "version" : "5.9.0"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/smilesiosteam/NetworkingLayer.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c8b98037b148244ffb0347748e683b42e1badf1c"
+        "revision" : "1d69917fbd71570c307e326ae69cb2da2a3b7eec"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "59730af512c06fb569c119d737df4c1c499e001d",
-        "version" : "5.18.10"
+        "revision" : "73b9397cfbd902f606572964055464903b1d84c6",
+        "version" : "5.19.0"
       }
     },
     {
@@ -96,7 +96,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesAppHeader.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3554f5a9e3f7ede9f3baacc1d270e59eb52a8846"
+        "revision" : "561277ac0be8a1f4b61e59a00bd7cbce8c058256"
       }
     },
     {
@@ -114,7 +114,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesBaseMainRequest.git",
       "state" : {
         "branch" : "main",
-        "revision" : "196b65fd71c0b23ccb87c05161213fda752c1fe3"
+        "revision" : "7e2d5d880baf451931da03fc8f1e41055a1fee93"
       }
     },
     {
@@ -132,7 +132,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesFilterAndSort.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e2ab06cfa2da68cb3cef7d7fba379e0384935833"
+        "revision" : "efd9410d9f5e14495fd35cc41fe1f8f75b9eb9cc"
       }
     },
     {
@@ -168,7 +168,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesLocationHandler.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ff864e53cda91db6878aa0aa8af745ea98f7eb91"
+        "revision" : "a35d8cd7418d6a90ea04cf8f0db2e95efb874219"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/smilesiosteam/SmilesOffers.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ca9b62121ac9c15081c196fb9af4835a7b39cfd2"
+        "revision" : "cb0aef6c9351544a5b67d6ce336ed29971d57027"
       }
     },
     {
@@ -190,12 +190,21 @@
       }
     },
     {
+      "identity" : "smilesreusablecomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smilesiosteam/SmilesReusableComponents.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "94faf980800c1bf0b5eebeadaaeb5b2e7c023e67"
+      }
+    },
+    {
       "identity" : "smilessharedservices",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/smilesiosteam/SmilesSharedServices.git",
       "state" : {
         "branch" : "main",
-        "revision" : "b3e0bd53a4886814b90d7e35f67db5ede1bb44d5"
+        "revision" : "4dd7cfab83c2bd402486de8c29429edac50720a9"
       }
     },
     {
@@ -222,7 +231,16 @@
       "location" : "https://github.com/smilesiosteam/SmilesUtilities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "38dbf4e7154ea2619b3a1f24d324b57e2710b957"
+        "revision" : "fb68d5ab40481d32086fe457cae97b1316942f72"
+      }
+    },
+    {
+      "identity" : "swifttheme",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wxxsw/SwiftTheme.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f6a5442da8527f88e5b61b42131c003bd2d56803"
       }
     }
   ],

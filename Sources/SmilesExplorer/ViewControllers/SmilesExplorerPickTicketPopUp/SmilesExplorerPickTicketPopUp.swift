@@ -29,7 +29,7 @@ public class SmilesExplorerPickTicketPopUp: UIViewController {
         return SmilesExplorerPickTicketViewModel()
     }()
     private var response:OffersCategoryResponseModel?
-     var paymentDelegate: SmilesExplorerHomeDelegate?
+    weak var paymentDelegate: SmilesExplorerHomeDelegate?
 
     var currentPage = 1
     var isLoading = false
