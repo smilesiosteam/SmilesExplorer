@@ -46,7 +46,7 @@ public class SmilesExplorerSubscriptionUpgradeViewController: UIViewController {
     private var isUserSubscribed: Bool?
     var subscriptionType: ExplorerPackage?
     private var voucherCode: String?
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    public weak var delegate:SmilesExplorerHomeDelegate? = nil
     private var selectedIndexPath: IndexPath?
     var mutatingSectionDetails = [SectionDetailDO]()
     private var offerFavoriteOperation = 0

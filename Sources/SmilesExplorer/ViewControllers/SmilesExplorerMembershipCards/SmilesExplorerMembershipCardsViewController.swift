@@ -25,7 +25,7 @@ class SmilesExplorerMembershipCardsViewController: UIViewController {
     private lazy var viewModel: SmilesExplorerMembershipSelectionViewModel = {
         return SmilesExplorerMembershipSelectionViewModel()
     }()
-    public var delegate: SmilesExplorerHomeDelegate?
+    public weak var delegate: SmilesExplorerHomeDelegate?
     
     //MARK: IBoutlet
     @IBOutlet weak var totalValue: UILabel!

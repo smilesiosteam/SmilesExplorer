@@ -25,7 +25,7 @@ public class SmilesExplorerOffersViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var categoryId = 973 //TODO: init it -1
     
-    public var delegate: SmilesExplorerHomeDelegate?
+    public weak var delegate: SmilesExplorerHomeDelegate?
     // MARK: - PROPERTIES -
     private var input: PassthroughSubject<SmilesExplorerOffersViewModel.Input, Never> = .init()
     private var cancellables = Set<AnyCancellable>()

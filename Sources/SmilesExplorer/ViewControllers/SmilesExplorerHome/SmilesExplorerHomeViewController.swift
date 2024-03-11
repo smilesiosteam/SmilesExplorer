@@ -35,7 +35,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var smilesExplorerSections: GetSectionsResponseModel?
     var sections = [SmilesExplorerSectionData]()
     
-    public var delegate:SmilesExplorerHomeDelegate? = nil
+    public weak var delegate:SmilesExplorerHomeDelegate? = nil
     var offersListing: OffersCategoryResponseModel?
     var offersPage = 1 // For offers list pagination
     var dodOffersPage = 1 // For DOD offers list pagination
