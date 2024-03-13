@@ -73,6 +73,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
         contentTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: contentTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         contentTableView.sectionFooterHeight = 0.0
         contentTableView.delegate = self
+        contentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerHomeCellRegistration()
         smilesExplorerCellRegistrable.register(for: contentTableView)
         
