@@ -43,6 +43,11 @@ class ExplorerOffersListingViewController: UIViewController {
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpNavigationBar()
+    }
+    
     private func setupViews() {
         bindStatus()
         titleLabel.text = dependencies.title
