@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -176,7 +176,7 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="a4O-Bd-awL" secondAttribute="trailing" id="3kA-8t-Lxo"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hBo-pN-Mls" secondAttribute="bottom" id="4Mf-id-XkO"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hBo-pN-Mls" secondAttribute="bottom" constant="16" id="4Mf-id-XkO"/>
                     <constraint firstAttribute="trailing" secondItem="hBo-pN-Mls" secondAttribute="trailing" constant="16" id="aou-na-7bz"/>
                     <constraint firstItem="a4O-Bd-awL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="hvr-eI-DKA"/>
                     <constraint firstItem="a4O-Bd-awL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ig3-KC-nDO"/>
