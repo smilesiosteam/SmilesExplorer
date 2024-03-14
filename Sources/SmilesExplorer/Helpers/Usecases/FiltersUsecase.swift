@@ -12,7 +12,7 @@ import SmilesSharedServices
 import SmilesOffers
 import UIKit
 import NetworkingLayer
-
+import SmilesReusableComponents
 
 protocol FiltersUseCaseProtocol {
     func createFilters(filtersSavedList: [RestaurantRequestWithNameFilter]?, isFilterAllowed: Int?, isSortAllowed: Int?) -> AnyPublisher<FiltersUseCase.GetFiltersState, Never>

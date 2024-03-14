@@ -17,6 +17,7 @@ import SmilesStoriesManager
 import AnalyticsSmiles
 import SmilesBanners
 import SmilesFilterAndSort
+import SmilesReusableComponents
 
 enum OfferSort: String, CaseIterable {
     case discount = "Discounts"

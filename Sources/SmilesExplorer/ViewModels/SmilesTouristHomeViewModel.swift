@@ -12,6 +12,7 @@ import SmilesSharedServices
 import NetworkingLayer
 import SmilesOffers
 import SmilesBanners
+import SmilesReusableComponents
 
 final class SmilesTouristHomeViewModel {
     

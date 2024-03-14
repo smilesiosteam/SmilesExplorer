@@ -11,6 +11,7 @@ import SmilesUtilities
 import SmilesSharedServices
 import SmilesOffers
 import SmilesStoriesManager
+import SmilesReusableComponents
 
 extension SmilesExplorerSubscriptionUpgradeViewController: UITableViewDelegate {
     
