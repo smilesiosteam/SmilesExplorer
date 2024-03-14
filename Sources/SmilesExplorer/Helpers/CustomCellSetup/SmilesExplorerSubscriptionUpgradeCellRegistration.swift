@@ -9,6 +9,7 @@ import UIKit
 import SmilesUtilities
 import SmilesStoriesManager
 import SmilesOffers
+import SmilesReusableComponents
 
 struct SmilesExplorerSubscriptionUpgradeCellRegistration: CellRegisterable {
     

@@ -13,6 +13,7 @@ import SmilesOffers
 import SmilesBanners
 import SmilesLocationHandler
 import SmilesStoriesManager
+import SmilesReusableComponents
 
 public class SmilesExplorerHomeUpgradeViewModel: NSObject {
     

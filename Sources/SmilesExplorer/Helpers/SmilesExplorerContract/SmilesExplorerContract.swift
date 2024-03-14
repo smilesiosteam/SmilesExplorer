@@ -10,6 +10,7 @@ import SmilesSharedServices
 import SmilesUtilities
 import SmilesOffers
 import SmilesBanners
+import SmilesReusableComponents
 
 extension SmilesExplorerHomeViewModel {
     
