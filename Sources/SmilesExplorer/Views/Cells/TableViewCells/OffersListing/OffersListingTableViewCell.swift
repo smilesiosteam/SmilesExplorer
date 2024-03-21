@@ -49,7 +49,8 @@ class OffersListingTableViewCell: UITableViewCell {
         } else {
             typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
             typeLabel.isHidden = false
-            let attributeString = NSMutableAttributedString(string: "\("AED".localizedString) 0.00")
+            let dirhamValue = offer.originalDirhamValue ?? "0.00"
+            let attributeString = NSMutableAttributedString(string: "\("AED".localizedString) \(dirhamValue)")
             attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
             priceLabel.attributedText = attributeString
         }
