@@ -46,10 +46,15 @@ class HomeOffersCollectionViewCell: UICollectionViewCell {
         contentBottomSpace.priority = .defaultLow
         contentBottomSpaceEqual.priority = isForTickets ? .defaultHigh : .defaultLow
         if isForTickets {
-            let attributeString = NSMutableAttributedString(string: "\("AED".localizedString) 0.00")
+            let dirhamValue = offer.originalDirhamValue ?? "0.00"
+            let attributeString = NSMutableAttributedString(string: "\("AED".localizedString) \(dirhamValue)")
             attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
             amountLabel.attributedText = attributeString
-            typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
+            if let price = offer.dirhamValue, price != "0" && price != "0.00" {
+                self.typeLabel.text = "AED".localizedString + (offer.dirhamValue ?? "")
+            } else {
+                self.typeLabel.text = "Free".localizedString.capitalizingFirstLetter()
+            }
         }
         
     }
