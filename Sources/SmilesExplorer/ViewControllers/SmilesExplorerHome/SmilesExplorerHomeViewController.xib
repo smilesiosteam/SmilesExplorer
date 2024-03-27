@@ -24,27 +24,56 @@
                     <color key="backgroundColor" red="0.92549019607843142" green="0.92941176470588238" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jc6-93-c8g">
-                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="713"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cmh-Hb-Z5E" customClass="UICustomButton" customModule="SmilesUtilities">
+                    <rect key="frame" x="16" y="788" width="361" height="48"/>
+                    <color key="backgroundColor" red="0.45882352939999999" green="0.25882352939999997" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="9Cm-3Z-iXR"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Subscribe now"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="getMembershipPressed:" destination="-1" eventType="touchUpInside" id="QXn-ON-l6x"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="jc6-93-c8g" secondAttribute="bottom" id="57m-iS-egQ"/>
+                <constraint firstItem="Cmh-Hb-Z5E" firstAttribute="top" secondItem="jc6-93-c8g" secondAttribute="bottom" constant="16" id="1Qh-7T-oI7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8lo-Of-i27" secondAttribute="trailing" id="6nJ-at-Lne"/>
                 <constraint firstAttribute="trailing" secondItem="jc6-93-c8g" secondAttribute="trailing" id="9h2-li-mxg"/>
                 <constraint firstItem="jc6-93-c8g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EtH-HN-gmh"/>
                 <constraint firstItem="8lo-Of-i27" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HRG-SD-HMn"/>
+                <constraint firstItem="Cmh-Hb-Z5E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Kk8-8F-dbY"/>
                 <constraint firstItem="8lo-Of-i27" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QPa-Y3-z0J"/>
+                <constraint firstAttribute="bottom" secondItem="Cmh-Hb-Z5E" secondAttribute="bottom" constant="16" id="c7A-lL-GCO"/>
                 <constraint firstItem="jc6-93-c8g" firstAttribute="top" secondItem="8lo-Of-i27" secondAttribute="bottom" id="dZr-HT-fF6"/>
+                <constraint firstAttribute="trailing" secondItem="Cmh-Hb-Z5E" secondAttribute="trailing" constant="16" id="pS1-vu-fO1"/>
                 <constraint firstItem="jc6-93-c8g" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" priority="750" id="xuI-DS-0NP"/>
             </constraints>
             <point key="canvasLocation" x="46.564885496183201" y="0.0"/>
         </view>
     </objects>
+    <designables>
+        <designable name="Cmh-Hb-Z5E">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
 </document>

@@ -25,9 +25,6 @@ class SmilesExplorerFooterTableViewCell: UITableViewCell {
     weak var delegate: ExplorerHomeFooterDelegate?
     
     // MARK: - ACTIONS -
-    @IBAction func getMembershipPressed(_ sender: Any) {
-        delegate?.getMembershipPressed()
-    }
     
     @IBAction func faqPressed(_ sender: Any) {
         delegate?.faqsPressed()

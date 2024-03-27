@@ -17,29 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="466" height="679"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBo-pN-Mls" customClass="UICustomButton" customModule="SmilesUtilities">
-                        <rect key="frame" x="16" y="516" width="434" height="48"/>
-                        <color key="backgroundColor" red="0.45882352941176469" green="0.25882352941176467" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="48" id="kjb-fm-R1c"/>
-                        </constraints>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="24"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="string" keyPath="fontTextStyleName" value="smilesHeadline4"/>
-                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="Subscribe now"/>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="getMembershipPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jwq-hH-fgU"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4O-Bd-awL" customClass="UICustomView" customModule="SmilesUtilities">
-                        <rect key="frame" x="0.0" y="16" width="466" height="484"/>
+                        <rect key="frame" x="0.0" y="16" width="466" height="663"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r8P-wF-0uG">
                                 <rect key="frame" x="16" y="24" width="434.33333333333331" height="286"/>
@@ -116,10 +95,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DBr-oA-y6b">
-                                <rect key="frame" x="181.33333333333334" y="427" width="103.33333333333334" height="34"/>
+                                <rect key="frame" x="181.33333333333334" y="427" width="103.33333333333334" height="213"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJx-ch-qyJ" customClass="UILocalizableLabel" customModule="SmilesUtilities">
-                                        <rect key="frame" x="0.0" y="7" width="41.333333333333336" height="20"/>
+                                        <rect key="frame" x="0.0" y="96.666666666666629" width="41.333333333333336" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="LwZ-TO-sg8"/>
                                         </constraints>
@@ -132,7 +111,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxe-wv-KMW">
-                                        <rect key="frame" x="49.333333333333314" y="0.0" width="54" height="34"/>
+                                        <rect key="frame" x="49.333333333333314" y="89.666666666666629" width="54" height="34"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
                                         <userDefinedRuntimeAttributes>
@@ -175,13 +154,10 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="a4O-Bd-awL" secondAttribute="bottom" id="0Py-al-OwB"/>
                     <constraint firstAttribute="trailing" secondItem="a4O-Bd-awL" secondAttribute="trailing" id="3kA-8t-Lxo"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hBo-pN-Mls" secondAttribute="bottom" id="4Mf-id-XkO"/>
-                    <constraint firstAttribute="trailing" secondItem="hBo-pN-Mls" secondAttribute="trailing" constant="16" id="aou-na-7bz"/>
                     <constraint firstItem="a4O-Bd-awL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="hvr-eI-DKA"/>
                     <constraint firstItem="a4O-Bd-awL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ig3-KC-nDO"/>
-                    <constraint firstItem="hBo-pN-Mls" firstAttribute="top" secondItem="a4O-Bd-awL" secondAttribute="bottom" constant="16" id="kVw-QO-E3K"/>
-                    <constraint firstItem="hBo-pN-Mls" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sYv-RW-S7S"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -203,9 +179,6 @@
         </designable>
         <designable name="SUT-gq-99y">
             <size key="intrinsicContentSize" width="41.333333333333336" height="20.333333333333332"/>
-        </designable>
-        <designable name="hBo-pN-Mls">
-            <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
         <designable name="uJx-ch-qyJ">
             <size key="intrinsicContentSize" width="41.333333333333336" height="20.333333333333332"/>

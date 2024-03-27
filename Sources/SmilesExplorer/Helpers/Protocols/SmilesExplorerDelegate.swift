@@ -40,7 +40,6 @@ protocol HomeOffersDelegate: AnyObject {
 
 protocol ExplorerHomeFooterDelegate: AnyObject {
     
-    func getMembershipPressed()
     func faqsPressed()
     
 }

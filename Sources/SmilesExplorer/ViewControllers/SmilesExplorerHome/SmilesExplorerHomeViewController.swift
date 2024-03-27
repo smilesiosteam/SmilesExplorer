@@ -39,6 +39,11 @@ public class SmilesExplorerHomeViewController: UIViewController {
     var categoryDetailsSections: GetSectionsResponseModel?
     var mutatingSectionDetails = [SectionDetailDO]()
     
+    // MARK: - ACTIONS -
+    @IBAction func getMembershipPressed(_ sender: Any) {
+        SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: navigationController, delegate: delegate)
+    }
+    
     // MARK: - METHODS -
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +78,6 @@ public class SmilesExplorerHomeViewController: UIViewController {
         contentTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: contentTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         contentTableView.sectionFooterHeight = 0.0
         contentTableView.delegate = self
-        contentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         let smilesExplorerCellRegistrable: CellRegisterable = SmilesExplorerHomeCellRegistration()
         smilesExplorerCellRegistrable.register(for: contentTableView)
         
@@ -384,10 +388,6 @@ extension SmilesExplorerHomeViewController: HomeOffersDelegate {
 
 // MARK: - HOME FOOTER DELEGATE -
 extension SmilesExplorerHomeViewController: ExplorerHomeFooterDelegate {
-    
-    func getMembershipPressed() {
-        SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: navigationController, delegate: delegate)
-    }
     
     func faqsPressed() {
         SmilesExplorerRouter.shared.pushFAQsVC(navVC: navigationController)
