@@ -9,11 +9,11 @@ import UIKit
 import SmilesOffers
 import SmilesUtilities
 import Combine
+import SmilesFontsManager
 
 class ExplorerOffersListingViewController: UIViewController {
 
     // MARK: - OUTLETS -
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var offersTableView: UITableView!
     
     // MARK: - PROPERTIES -
@@ -49,7 +49,6 @@ class ExplorerOffersListingViewController: UIViewController {
     
     private func setupViews() {
         bindStatus()
-        titleLabel.text = dependencies.title
         setUpNavigationBar()
         setupTableView()
         self.dataSource = SectionedTableViewDataSource(dataSources: Array(repeating: [], count: 1))
@@ -62,6 +61,7 @@ class ExplorerOffersListingViewController: UIViewController {
         offersTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: offersTableView.bounds.size.width, height: CGFloat.leastNormalMagnitude))
         offersTableView.sectionHeaderHeight = 0.0
         offersTableView.delegate = self
+        offersTableView.contentInsetAdjustmentBehavior = .never
         let explorerOffersListingCellRegistrable: CellRegisterable = ExplorerOffersListingCellRegistration()
         explorerOffersListingCellRegistrable.register(for: offersTableView)
         
@@ -72,8 +72,19 @@ class ExplorerOffersListingViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .clear
         appearance.configureWithTransparentBackground()
+        appearance.largeTitleTextAttributes = [
+            NSAttributedString.Key.font: SmilesFontsManager.defaultAppFont.getFont(style: .medium, size: 24),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
+        appearance.titleTextAttributes = [
+            NSAttributedString.Key.font: SmilesFontsManager.defaultAppFont.getFont(style: .medium, size: 16),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.title = dependencies.title
         
         let btnBack: UIButton = UIButton(type: .custom)
         btnBack.setImage(UIImage(named: AppCommonMethods.languageIsArabic() ? "back_arrow_ar" : "back_arrow", in: .module, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -88,7 +99,6 @@ class ExplorerOffersListingViewController: UIViewController {
     
     // MARK: - ACTIONS -
     @IBAction func onClickSubscription(_ sender: Any) {
-        
         SmilesExplorerRouter.shared.pushSubscriptionVC(navVC: self.navigationController, delegate: self.delegate)
     }
     

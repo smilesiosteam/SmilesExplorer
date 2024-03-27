@@ -124,6 +124,7 @@ public class SmilesExplorerHomeViewController: UIViewController {
         appearance.shadowImage = UIImage()
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         
         guard let headerData = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue }) else { return }
         let imageView = UIImageView()
