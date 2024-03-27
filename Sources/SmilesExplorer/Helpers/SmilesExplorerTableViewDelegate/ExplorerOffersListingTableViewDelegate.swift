@@ -13,19 +13,20 @@ import SmilesLocationHandler
 
 extension ExplorerOffersListingViewController: UITableViewDelegate {
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let offer = dependencies.offersResponse.offers?[safe: indexPath.row] {
             SmilesExplorerRouter.shared.showOfferDetailPopup(viewcontroller: self, dependence: offer, delegate: delegate)
         }
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
+        let offers = dependencies.offersResponse.offers ?? []
         let lastItem = offers.endIndex - 1
         if indexPath.row == lastItem {
             if (dependencies.offersResponse.offersCount ?? 0) != offers.count {

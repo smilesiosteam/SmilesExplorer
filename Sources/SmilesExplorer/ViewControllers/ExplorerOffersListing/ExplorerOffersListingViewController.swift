@@ -20,7 +20,6 @@ class ExplorerOffersListingViewController: UIViewController {
     let viewModel: ExplorerOffersListingViewModel
     var dataSource: SectionedTableViewDataSource?
     var dependencies: ExplorerOffersListingDependance
-    var offers = [OfferDO]()
     var offersPage = 1
     private var cancellables = Set<AnyCancellable>()
     public weak var delegate: SmilesExplorerHomeDelegate? = nil
@@ -113,7 +112,7 @@ extension ExplorerOffersListingViewController {
         viewModel.offersListingPublisher.sink { [weak self] state in
             switch state {
             case .fetchOffersDidSucceed(response: let response):
-                self?.configureOffers(with: response)
+                self?.configureOffers(with: response, isFromPagination: true)
             case .offersDidFail(error: let error):
                 debugPrint(error)
             }
@@ -126,12 +125,13 @@ extension ExplorerOffersListingViewController {
 // MARK: - OFFERS CONFIGURATIONS -
 extension ExplorerOffersListingViewController {
     
-    private func configureOffers(with response: OffersCategoryResponseModel) {
+    private func configureOffers(with response: OffersCategoryResponseModel, isFromPagination: Bool = false) {
         offersTableView.tableFooterView = nil
-        dependencies.offersResponse = response
-        offers.append(contentsOf: response.offers ?? [])
-        if !offers.isEmpty {
-            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersListing(offers: offers)
+        if isFromPagination {
+            dependencies.offersResponse.offers?.append(contentsOf: response.offers ?? [])
+        }
+        if !(dependencies.offersResponse.offers?.isEmpty ?? true) {
+            self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersListing(offers: dependencies.offersResponse.offers ?? [])
             self.configureDataSource()
         }
     }
