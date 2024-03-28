@@ -48,7 +48,7 @@ class SectionsUseCase: SectionsUseCaseProtocol {
 extension SectionsUseCase {
     enum State {
         case sectionsDidSucceed(response: GetSectionsResponseModel)
-        case sectionsDidFail(error: Error)
+        case sectionsDidFail(error: NetworkError)
     }
 }
 

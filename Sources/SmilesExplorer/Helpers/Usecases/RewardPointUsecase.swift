@@ -47,6 +47,6 @@ class RewardPointUseCase: RewardPointUseCaseProtocol {
 extension RewardPointUseCase {
     enum State {
         case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel,shouldLogout:Bool)
-        case fetchRewardPointsDidFail(error: Error)
+        case fetchRewardPointsDidFail(error: NetworkError)
     }
 }

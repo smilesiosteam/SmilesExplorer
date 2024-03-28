@@ -7,7 +7,7 @@
 import Foundation
 import Combine
 import SmilesOffers
-
+import NetworkingLayer
 
 protocol SubscriptionBannerUseCaseProtocol {
     func getSubscriptionBannerDetails() -> AnyPublisher<SubscriptionBannerUseCase.State, Never>
@@ -33,7 +33,7 @@ public class SubscriptionBannerUseCase: SubscriptionBannerUseCaseProtocol {
             self.services.getSubscriptionBannerDetails()
                 .sink { completion in
                     if case .failure(let error) = completion {
-                        promise(.success(.fetchSubscriptionBannerDetailDidFail(error: error.localizedDescription)))
+                        promise(.success(.fetchSubscriptionBannerDetailDidFail(error: error)))
                     }
                 } receiveValue: { response in
                     promise(.success(.fetchSubscriptionBannerDetailDidSucceed(response:response)))
@@ -49,7 +49,7 @@ public class SubscriptionBannerUseCase: SubscriptionBannerUseCaseProtocol {
 extension SubscriptionBannerUseCase {
     enum State {
         case fetchSubscriptionBannerDetailDidSucceed(response: ExplorerSubscriptionBannerResponse)
-        case fetchSubscriptionBannerDetailDidFail(error: String)
+        case fetchSubscriptionBannerDetailDidFail(error: NetworkError)
     }
 }
 
