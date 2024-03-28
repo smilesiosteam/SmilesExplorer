@@ -19,27 +19,27 @@ final class SmilesTouristHomeViewModel {
     // MARK: - Output
     public enum Output {
         case fetchSectionsDidSucceed(response: GetSectionsResponseModel)
-        case fetchSectionsDidFail(error: Error)
+        case fetchSectionsDidFail(error: NetworkError)
         
         case fetchTopOffersDidSucceed(response: GetTopOffersResponseModel)
-        case fetchTopOffersDidFail(error: Error)
+        case fetchTopOffersDidFail(error: NetworkError)
         
         case fetchRewardPointsDidSucceed(response: RewardPointsResponseModel, shouldLogout: Bool?)
-        case fetchRewardPointsDidFail(error: Error)
+        case fetchRewardPointsDidFail(error: NetworkError)
         
         case fetchExclusiveOffersDidSucceed(response: OffersCategoryResponseModel)
-        case fetchExclusiveOffersDidFail(error: Error)
+        case fetchExclusiveOffersDidFail(error: NetworkError)
         
         case fetchTicketsDidSucceed(response: OffersCategoryResponseModel)
-        case fetchTicketDidFail(error: Error)
+        case fetchTicketDidFail(error: NetworkError)
         
         case fetchBogoOffersDidSucceed(response: OffersCategoryResponseModel)
-        case fetchBogoOffersDidFail(error: Error)
+        case fetchBogoOffersDidFail(error: NetworkError)
         
         case updateHeaderView
         
         case updateWishlistStatusDidSucceed(response: WishListResponseModel)
-        case updateWishlistStatusDidFail(error: Error)
+        case updateWishlistStatusDidFail(error: NetworkError)
         
         case emptyOffersListDidSucceed
         
@@ -47,7 +47,7 @@ final class SmilesTouristHomeViewModel {
         case fetchAllSavedFiltersSuccess(filtersList: [RestaurantRequestFilter], filtersSavedList: [RestaurantRequestWithNameFilter])
         
         case fetchSubscriptionBannerDetailsDidSucceed(response: ExplorerSubscriptionBannerResponse)
-        case fetchSubscriptionBannerDetailsDidFail(error: Error)
+        case fetchSubscriptionBannerDetailsDidFail(error: NetworkError)
         
     }
     
@@ -135,7 +135,7 @@ extension SmilesTouristHomeViewModel {
                     print(response)
                     self?.output.send(.fetchSectionsDidSucceed(response: response))
                 case .sectionsDidFail(error: let error):
-                    self?.output.send(.fetchTicketDidFail(error: error))
+                    self?.output.send(.fetchSectionsDidFail(error: error))
                     debugPrint(error.localizedDescription)
                 }
             }
@@ -154,7 +154,7 @@ extension SmilesTouristHomeViewModel {
                     print(response)
                     self?.output.send(.fetchSectionsDidSucceed(response: response))
                 case .sectionsDidFail(error: let error):
-                    self?.output.send(.fetchTicketDidFail(error: error))
+                    self?.output.send(.fetchSectionsDidFail(error: error))
                     debugPrint(error.localizedDescription)
                 }
             }

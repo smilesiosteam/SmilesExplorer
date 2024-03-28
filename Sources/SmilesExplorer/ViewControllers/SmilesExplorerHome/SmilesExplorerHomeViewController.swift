@@ -13,8 +13,9 @@ import SmilesSharedServices
 import SmilesLocationHandler
 import SmilesOffers
 import SmilesLoader
+import NetworkingLayer
 
-public class SmilesExplorerHomeViewController: UIViewController {
+public class SmilesExplorerHomeViewController: UIViewController, SmilesPresentableMessage {
     
     // MARK: - OUTLETS -
     @IBOutlet weak var contentTableView: UITableView!
@@ -126,19 +127,19 @@ public class SmilesExplorerHomeViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
         self.navigationController?.navigationBar.prefersLargeTitles = false
         
-        guard let headerData = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue }) else { return }
+        let headerData = smilesExplorerSections?.sectionDetails?.first(where: { $0.sectionIdentifier == SmilesExplorerSectionIdentifier.topPlaceholder.rawValue })
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 24),
             imageView.widthAnchor.constraint(equalToConstant: 24)
         ])
         imageView.tintColor = .black
-        imageView.sd_setImage(with: URL(string: headerData.iconUrl ?? "")) { image, _, _, _ in
+        imageView.sd_setImage(with: URL(string: headerData?.iconUrl ?? "")) { image, _, _, _ in
             imageView.image = image?.withRenderingMode(.alwaysTemplate)
         }
 
         let locationNavBarTitle = UILabel()
-        locationNavBarTitle.text = headerData.title
+        locationNavBarTitle.text = headerData?.title
         locationNavBarTitle.textColor = .black
         locationNavBarTitle.fontTextStyle = .smilesHeadline4
         let hStack = UIStackView(arrangedSubviews: [imageView, locationNavBarTitle])
@@ -183,6 +184,9 @@ extension SmilesExplorerHomeViewController {
                     debugPrint(error.localizedDescription)
                     self?.configureHideSection(for: .footer, dataSource: SectionDetailDO.self)
                     self?.configureHideSection(for: .header, dataSource: SectionDetailDO.self)
+                    if case NetworkError.networkNotReachable(_) = error {
+                        self?.showMessage(model: SmilesMessageModel(image: UIImage(named: "noSignal"), title: "No signal".localizedString, description: "NoInternetConnection".localizedString, presentationType: .fullScreen, showForRetry: true), delegate: self)
+                    }
                     
                 case .fetchRewardPointsDidSucceed(response: let response, _):
                     self?.viewModel.isUserSubscribed = response.explorerSubscriptionStatus
@@ -392,6 +396,15 @@ extension SmilesExplorerHomeViewController: ExplorerHomeFooterDelegate {
     
     func faqsPressed() {
         SmilesExplorerRouter.shared.pushFAQsVC(navVC: navigationController)
+    }
+    
+}
+
+// MARK: - MESSAGE VIEW DELEGATE -
+extension SmilesExplorerHomeViewController: SmilesMessageViewDelegate {
+    
+    public func primaryButtonPressed(isForRetry: Bool) {
+        viewModel.getSections()
     }
     
 }

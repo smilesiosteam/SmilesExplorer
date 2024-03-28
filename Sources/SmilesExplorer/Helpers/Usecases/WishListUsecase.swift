@@ -48,7 +48,7 @@ class WishListUseCase: WishListUseCaseProtocol {
 extension WishListUseCase {
     enum State {
         case updateWishlistStatusDidSucceed(response: WishListResponseModel)
-        case updateWishlistDidFail(error: Error)
+        case updateWishlistDidFail(error: NetworkError)
     }
 }
 
