@@ -37,14 +37,14 @@ class OfferDetailsPopupVC: UIViewController {
             self.dataSource?.dataSources?[0] = TableViewDataSource.makeForOffersDetailHeader(offers: response, isDummy: true)
             self.dataSource?.dataSources?[1] = TableViewDataSource.makeForOffersDetail(offers: response, isDummy: true)
             self.configureDataSource()
-            setDynamicHeightForTableView()
+            //setDynamicHeightForTableView()
         }
         self.viewModel.getOffers()
         
     }
     
     override func viewWillLayoutSubviews() {
-        super.updateViewConstraints()
+        super.viewWillLayoutSubviews()
         self.setDynamicHeightForTableView()
     }
     
@@ -122,7 +122,7 @@ extension OfferDetailsPopupVC {
 extension OfferDetailsPopupVC {
     //MARK: - Setting Dynamic Height For TableView
     fileprivate func setDynamicHeightForTableView() {
-        let totalHeight = tableView.contentSize.height
+        let totalHeight = tableView.contentSize.height + 14
         let minHeight = min(totalHeight,self.view.frame.size.height*0.7)
         self.tableViewHeightConst.constant = minHeight
         tableView.isScrollEnabled = totalHeight > minHeight
